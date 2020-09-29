@@ -6,7 +6,7 @@ export const BoxContent = styled.div`
   justify-content: center;
   align-items: center;
   width: 55%;
-  margin: 0 auto;
+  margin: 15vh auto;
   width: 52%;
   height:553px;
   justify-self:center;
@@ -20,6 +20,7 @@ export const BoxContent = styled.div`
   }
   @media (max-width: 992px) {
     width:93%;
+    margin: 50px auto;
   }
   @media (max-width: 768px) { 
     width:96%;
@@ -87,7 +88,7 @@ export const FieldWrapper = styled.div`
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color:#F5F5F5;
+  background-color:#fff;
 `;
 
 export const Button = styled.button`
