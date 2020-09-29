@@ -21,7 +21,7 @@ export const LoginBox = styled.div`
 export const Background = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: #A9A9A9;
+  background-color: #F5F5F5;
 
   @media (max-width: 480px) {
     background-color: #ffffff;

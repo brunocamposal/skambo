@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Grid, Form } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+
+import { login } from "../../redux/actions/session";
 
 import * as Styled from "./styles";
 
@@ -10,30 +13,29 @@ interface IFormInputs {
   username: string;
   password: string | number;
   email: string;
+  values: string;
 }
 
 const Login: React.FC = () => {
-  const [token, setToken] = useState("");
   const [requestError, setRequestError] = useState("");
-  console.log(token);
   console.log(requestError);
-  
-  
-  const { register, handleSubmit, setValue, errors } = useForm<IFormInputs>();
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit, errors } = useForm<IFormInputs>();
 
   const onSubmit = (values: IFormInputs) => {
-    axios.post("http://localhost:3001/login", values).then(({ data }) => {
-      console.log(data);
-      setRequestError('');
-      setToken(data.accessToken);
-      localStorage.setItem("token", data.accessToken);
-      //history.push('/users');
-    })
+    axios
+      .post("https://capstone-q2.herokuapp.com/login", values)
+      .then(({ data }) => {
+        dispatch(login(data.accessToken));
+        localStorage.setItem("token", data.accessToken);
+        //history.push('/users');
+      })
       .catch(({ response }) => {
-        if (response.status === 400) {
-          return setRequestError('Incorrect E-Mail or Password.');
+        if (response?.status === 400) {
+          return setRequestError("Incorrect E-Mail or Password.");
         }
-        return setRequestError('Server error. Try again!');
+        return setRequestError("Oops omething went wrong!");
       });
   };
 
@@ -69,7 +71,7 @@ const Login: React.FC = () => {
                           type="email"
                           placeholder="E-Mail"
                           ref={register({
-                            required: "precisa emal",
+                            required: "E-mail Required",
                           })}
                         />
                         {errors.email && (
@@ -96,12 +98,17 @@ const Login: React.FC = () => {
                             {errors.password.message}
                           </p>
                         )}
+
+                        <p style={{ color: "red" }}>{requestError}</p>
                       </Form.Field>
 
                       <Styled.ButtonForm type="submit" inverted color="red">
                         Entrar
                       </Styled.ButtonForm>
                     </Form>
+                    <Link to="/register">
+                      <h3> Não possui conta? Registrar-se </h3>
+                    </Link>
                   </Styled.LoginBox>
                 </Grid.Column>
               </Grid.Row>
@@ -109,10 +116,6 @@ const Login: React.FC = () => {
           </Styled.ContainerLogin>
         </Styled.Main>
       </Styled.Background>
-
-      <Link to="/register">
-        <h3> Não possui conta? Registrar-se </h3>
-      </Link>
     </>
   );
 };
