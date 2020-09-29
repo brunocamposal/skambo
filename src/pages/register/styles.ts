@@ -109,3 +109,8 @@ export const LinkWrapper = styled.div`
     font-size:14px;
   }
 `;
+
+export const Error = styled.div`
+  color:#f40909;
+
+`;

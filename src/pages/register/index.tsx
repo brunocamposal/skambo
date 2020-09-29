@@ -37,15 +37,20 @@ const Register: React.FC = () => {
                   name="email"
                   placeholder="Digite seu e-mail"
                   ref={register({
-                    required: "E-mail é obrigatório"
+                    required: "E-mail é obrigatório",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Isso não se parece com um e-mail!"
+                    }
                   })}
                 />
 
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && <Styled.Error>{errors.email.message}</Styled.Error>}
               </Styled.FieldWrapper>
               <Styled.FieldWrapper>
                 <label>Senha</label>
                 <input
+                  type="password"
                   name="password"
                   placeholder="Digite sua senha"
                   ref={register({
@@ -61,7 +66,7 @@ const Register: React.FC = () => {
                   })}
                 />
 
-                {errors.password && errors.password.message}
+                {errors.password && <Styled.Error>{errors.password.message}</Styled.Error>}
               </Styled.FieldWrapper>
 
               <div>
