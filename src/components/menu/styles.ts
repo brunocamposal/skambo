@@ -37,10 +37,9 @@ export const StyledIcons = styled.div`
 `
 
 export const StyledLogo = styled.img`
-  width: 50px;
   height: 50px;
   top: 5px;
-  margin-left:70%;
+  margin-left:50%;
 `;
 
 export const StyledSearch = styled(Search)`
