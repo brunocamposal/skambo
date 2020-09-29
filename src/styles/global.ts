@@ -22,5 +22,7 @@ export default createGlobalStyle`
     :root{
         --primary: #ffffff;
         --text-color: black;
+        --button-color: #8d70fb;
+        --input-color: #f4f4f6;
     }
 `;
