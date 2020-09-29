@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Grid, Form } from "semantic-ui-react";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import * as Styled from "./styles";
 
 interface IFormInputs {
@@ -12,9 +13,29 @@ interface IFormInputs {
 }
 
 const Login: React.FC = () => {
+  const [token, setToken] = useState("");
+  const [requestError, setRequestError] = useState("");
+  console.log(token);
+  console.log(requestError);
+  
+  
   const { register, handleSubmit, setValue, errors } = useForm<IFormInputs>();
 
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = (values: IFormInputs) => {
+    axios.post("http://localhost:3001/login", values).then(({ data }) => {
+      console.log(data);
+      setRequestError('');
+      setToken(data.accessToken);
+      localStorage.setItem("token", data.accessToken);
+      //history.push('/users');
+    })
+      .catch(({ response }) => {
+        if (response.status === 400) {
+          return setRequestError('Incorrect E-Mail or Password.');
+        }
+        return setRequestError('Server error. Try again!');
+      });
+  };
 
   return (
     <>
@@ -42,41 +63,13 @@ const Login: React.FC = () => {
                     <h1> Login </h1>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                       <Form.Field required>
-                        <label>Username</label>
-                        <input
-                          type="text"
-                          placeholder="Username"
-                          onChange={(e) => setValue("username", e.target.value)}
-                          name="username"
-                          ref={register({
-                            required: "username necessario",
-                            minLength: 6,
-                            pattern: {
-                              value: /[A-Za-z]/,
-                              message: "username invalido",
-                            },
-                          })}
-                        />
-                        {errors.username && (
-                          <p style={{ color: "red" }}>
-                            {errors.username.message}
-                          </p>
-                        )}
-                      </Form.Field>
-
-                      <Form.Field required>
                         <label>E-Mail</label>
                         <input
-                          type="text"
+                          name="email"
+                          type="email"
                           placeholder="E-Mail"
-                          onChange={(e) => setValue("email", e.target.value)}
-                          name="e-mail"
                           ref={register({
-                            required: "email necessario",
-                            pattern: {
-                              value: /[a-zA-Z]{2,} [a-zA-Z]{2,}( [a-zA-Z]{2,})*/,
-                              message: "email invalido",
-                            },
+                            required: "precisa emal",
                           })}
                         />
                         {errors.email && (
@@ -88,8 +81,8 @@ const Login: React.FC = () => {
                         <label>Password</label>
                         <input
                           name="password"
+                          type="password"
                           placeholder="Password"
-                          type="Password"
                           ref={register({
                             required: "Password Required",
                             minLength: {
