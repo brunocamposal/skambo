@@ -3,20 +3,21 @@ import { Input } from 'semantic-ui-react'
 
 export const StyledMenu = styled.div`
   width: 100%;
+  max-width: 1200px;
   height: 60px;
   position: fixed;
   z-index: 10;
   top: 0;
-  left: 0;
   display: flex;
-  margin-bottom: 150px;
+  justify-content: center;
 `;
 
 export const StyledMenuLeft = styled.div`
-  width: 20%;
+  width: 15%;
+  min-width: 123px;
 
   @media (max-width: 500px) {
-    width: 20%;
+    width: 15%;
     display: flex;
     align-items: center;
     font-size: 30px;
@@ -24,10 +25,10 @@ export const StyledMenuLeft = styled.div`
 `;
 
 export const StyledMenuCenter = styled.div`
-  width: 40%;
+  width: 55%;
 
   @media (max-width: 500px) {
-    width: 40%;
+    width: 65%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,13 +36,10 @@ export const StyledMenuCenter = styled.div`
 `;
 
 export const StyledMenuRight = styled.div`
-  width: 40%;
+  width: 30%;
   font-size: 32px;
+  color: var(--primary);
   display: flex;
-
-  @media (max-width: 1300px) {
-    font-size: 20px;
-  }
 
   @media (max-width: 500px) {
     width: 20%;
@@ -52,28 +50,20 @@ export const StyledMenuRight = styled.div`
 `;
 
 export const StyledIcons = styled.div`
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 30%;
-  padding-top: 2px;
+  margin: 10px;
+  width: 60%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around; 
-  
-  @media (max-width: 1300px) {
-    margin-top: 20px;
-  }
+  justify-content: space-between;
 `
 
 export const StyledLogo = styled.img`
   height: 50px;
   margin-top: 5px;
-  margin-left: 20%;
 
   @media (max-width: 1000px) {
-    margin-left: 5%;
     height: 40px;
-    margin-top: 5px;
+    margin-top: 10px;
   }
 
   @media (max-width: 500px) {
@@ -88,10 +78,14 @@ export const StyledSearch = styled(Input)`
   left: 5px;
 
   input {
-    background: var(--input-color) !important;
-    color: darkgrey !important;
+    background: var(--primary-light) !important;
+    color: var(--primary-dark) !important;
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;
+  }
+
+  @media (max-width: 700px) {
+    width: 95%
   }
 `;
 
@@ -99,9 +93,9 @@ export const StyledButton = styled.button`
   width: 140px;
   height: 40px;
   margin-top: 10px;
-  margin-left: 100px;
-  background: var(--button-color);
-  color: var(--primary);
+  margin-left: 10px;
+  background: var(--primary);
+  color: var(--primary-light);
   font-weight: bold;
   font-size: 14px;
   border: none;
@@ -122,8 +116,8 @@ export const StyledButton = styled.button`
 
 export const StyledReverseButton = styled(StyledButton)`
   margin-left: 5px;
-  background: var(--primary);
-  color: var(--button-color);
+  background: var(--secondary-light);
+  color: var(--primary);
 `;
 
 export const StyledUser = styled.img`
@@ -131,11 +125,6 @@ export const StyledUser = styled.img`
   width: 32px;
   height: 32px;
   border: 1px solid black;
-
-  @media (max-width: 1300px) {
-    width: 20px;
-    height: 20px;
-  }
 `;
 
 export const StyledMenuMobile = styled.div`

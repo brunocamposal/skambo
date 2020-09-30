@@ -14,8 +14,8 @@ import {
 } from "./styles";
 import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
-import Logo from "../../assets/img/logo.png"
-import UserDefault from '../../assets/img/userDefault.png'
+import Logo from "../../media/img/logotipo.png"
+import UserDefault from '../../media/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { VscSettingsGear } from 'react-icons/vsc'
@@ -82,12 +82,12 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {localStorage.length > 0 ?
+      {window.localStorage.length > 0 ?
       <StyledMenuRight>
         <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
         
         <StyledIcons>        
-          {localStorage.length > 0 ?
+          {window.localStorage.length > 0 ?
           (<Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item
