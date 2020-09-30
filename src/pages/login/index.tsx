@@ -35,9 +35,9 @@ const Login: React.FC = () => {
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
-          return setRequestError("Incorrect E-Mail or Password.");
+          return setRequestError("E-Mail ou Senha incorretos.");
         }
-        return setRequestError("Oops omething went wrong!");
+        return setRequestError("Ops, aconteceu algo de errado!");
       });
   };
 
@@ -64,14 +64,18 @@ const Login: React.FC = () => {
                       <Styled.LogoLogin src={""} />
                     </Styled.LogoCenter>
 
-                    <h1> Login </h1>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                       <FormField
                         required
                         name="email"
-                        label="E-Mail"
+                        label="Digite seu E-Mail"
+                        inputPlace="E-Mail"
                         inputRef={register({
-                          required: "E-mail Required",
+                          required: "E-mail Necessário",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: "Formato Inválido!",
+                          },
                         })}
                         error={errors.email}
                       />
@@ -80,19 +84,20 @@ const Login: React.FC = () => {
                         required
                         name="password"
                         type="password"
-                        label="Password"
+                        label="Digite sua Senha"
+                        inputPlace="Senha"
                         inputRef={register({
-                          required: "Password Required",
+                          required: "Senha Necessária",
                           minLength: {
                             value: 6,
-                            message: "Password too Short",
+                            message: "Senha muito curta!",
                           },
                         })}
                         error={errors.password}
                       />
                       {requestError}
-                      <Styled.ButtonForm type="submit" inverted color="red">
-                        Entrar
+                      <Styled.ButtonForm type="submit" inverted color="blue">
+                        Fazer Login
                       </Styled.ButtonForm>
                     </Form>
                     <Link to="/register">

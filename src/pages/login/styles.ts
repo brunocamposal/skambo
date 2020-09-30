@@ -16,12 +16,29 @@ export const Main = styled.div`
 
 export const LoginBox = styled.div`
   padding: 0vw 3vw;
+  background-color: #fff;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  .ui.form {
+    width: 100%;
+  }
+  .ui.inverted.button {
+    margin-top: 30px;
+  }
+  h3{
+    margin:30px 0 30px 0;
+  }
 `;
 
 export const Background = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 
   @media (max-width: 480px) {
     background-color: #ffffff;
@@ -42,12 +59,11 @@ export const ImageBox = styled.div`
 `;
 
 export const ButtonForm = styled(Button)`
-  margin-top: 5px;
   width: 100%;
 `;
 
 export const ContainerLogin = styled(Container)`
-  background-color: white;
+  background-color: var(--primary-dark);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.109);
   border-radius: 10px;
   padding: 5vw 2vw 5vw 2vw;
@@ -71,10 +87,14 @@ export const Title = styled.div`
 `;
 
 export const LogoCenter = styled.div`
+  background-color: #565656;
+  height: 100px;
+  width: 100px;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+  margin: 30px 0 30px 0;
 `;
 
 export const LogoLogin = styled.img`
