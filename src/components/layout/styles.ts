@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: var(--primary);
   height: 100%;
   max-width: 1200px;
   display: flex;
