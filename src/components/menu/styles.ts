@@ -14,7 +14,6 @@ export const StyledMenu = styled.div`
 
 export const StyledMenuLeft = styled.div`
   width: 20%;
-
   @media (max-width: 500px) {
     width: 20%;
     display: flex;
@@ -25,7 +24,6 @@ export const StyledMenuLeft = styled.div`
 
 export const StyledMenuCenter = styled.div`
   width: 40%;
-
   @media (max-width: 500px) {
     width: 40%;
     display: flex;
@@ -38,11 +36,9 @@ export const StyledMenuRight = styled.div`
   width: 40%;
   font-size: 32px;
   display: flex;
-
   @media (max-width: 1300px) {
     font-size: 20px;
   }
-
   @media (max-width: 500px) {
     width: 20%;
     display: flex;
@@ -69,13 +65,11 @@ export const StyledLogo = styled.img`
   height: 50px;
   margin-top: 5px;
   margin-left: 20%;
-
   @media (max-width: 1000px) {
     margin-left: 5%;
     height: 40px;
     margin-top: 5px;
   }
-
   @media (max-width: 500px) {
     margin: 0;
     height: 40px;
@@ -86,7 +80,6 @@ export const StyledSearch = styled(Input)`
   width: 80%;
   top: 10px;
   left: 5px;
-
   input {
     background: var(--input-color) !important;
     color: darkgrey !important;
@@ -106,11 +99,9 @@ export const StyledButton = styled.button`
   font-size: 14px;
   border: none;
   border-radius: 5px;
-
   @media (max-width: 1000px) {
     margin-left: 20px;
   }
-
   @media (max-width: 500px) {
     width: 50px;
     height: 30px;
@@ -131,7 +122,6 @@ export const StyledUser = styled.img`
   width: 32px;
   height: 32px;
   border: 1px solid black;
-
   @media (max-width: 1300px) {
     width: 20px;
     height: 20px;

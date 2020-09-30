@@ -33,11 +33,11 @@ const Register: React.FC = () => {
         {/* <Link to="/">
           <h3 style={{ marginLeft: "30px" }}> Voltar </h3>
         </Link> */}
-        <a onClick={() => history.push('/')}>Voltar</a>
+        <a href="/" onClick={() => history.push('/')}>Voltar</a>
         <Styled.BoxContent>
 
           <Styled.LogoContainer>
-            <img src={RegisterIcon} />
+            <img src={RegisterIcon} alt="Register" />
           </Styled.LogoContainer>
 
           <Styled.FormContainer>
@@ -86,7 +86,7 @@ const Register: React.FC = () => {
               <div>
                 <Styled.Button type="submit">Cadastrar!</Styled.Button>
                 <Styled.LinkWrapper>
-                  <a onClick={() => { history.push('/login') }}>
+                  <a href='/login' onClick={() => { history.push('/login') }}>
                     <h3> Já possui conta? Entrar! </h3>
                   </a>
                 </Styled.LinkWrapper>
