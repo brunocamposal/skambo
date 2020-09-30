@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
+import FormField from "../../components/form-field";
+
 import { login } from "../../redux/actions/session";
 
 import * as Styled from "./styles";
@@ -64,44 +66,31 @@ const Login: React.FC = () => {
 
                     <h1> Login </h1>
                     <Form onSubmit={handleSubmit(onSubmit)}>
-                      <Form.Field required>
-                        <label>E-Mail</label>
-                        <input
-                          name="email"
-                          type="email"
-                          placeholder="E-Mail"
-                          ref={register({
-                            required: "E-mail Required",
-                          })}
-                        />
-                        {errors.email && (
-                          <p style={{ color: "red" }}>{errors.email.message}</p>
-                        )}
-                      </Form.Field>
+                      <FormField
+                        required
+                        name="email"
+                        label="E-Mail"
+                        inputRef={register({
+                          required: "E-mail Required",
+                        })}
+                        error={errors.email}
+                      />
 
-                      <Form.Field required>
-                        <label>Password</label>
-                        <input
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          ref={register({
-                            required: "Password Required",
-                            minLength: {
-                              value: 6,
-                              message: "Password too Short",
-                            },
-                          })}
-                        />
-                        {errors.password && (
-                          <p style={{ color: "red" }}>
-                            {errors.password.message}
-                          </p>
-                        )}
-
-                        <p style={{ color: "red" }}>{requestError}</p>
-                      </Form.Field>
-
+                      <FormField
+                        required
+                        name="password"
+                        type="password"
+                        label="Password"
+                        inputRef={register({
+                          required: "Password Required",
+                          minLength: {
+                            value: 6,
+                            message: "Password too Short",
+                          },
+                        })}
+                        error={errors.password}
+                      />
+                      {requestError}
                       <Styled.ButtonForm type="submit" inverted color="red">
                         Entrar
                       </Styled.ButtonForm>
