@@ -1,0 +1,81 @@
+.icon-style {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+  
+  .games {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .games:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .books {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .books:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .clothes {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .clothes:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .bike {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .bike:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .sports {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .sports:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .instruments {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .instruments:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
+  
+  .furniture {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  .furniture:hover {
+    color: black;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.178);
+  }
