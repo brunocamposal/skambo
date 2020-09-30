@@ -16,11 +16,12 @@ export default createGlobalStyle`
 
     body {
         background-color: var(--primary);
-        color: var(--text-color);
+        color: var(--text-color);    
     }
 
     :root{
         --primary: #ffffff;
         --text-color: black;
+        --secundary: #8D70FB;
     }
 `;
