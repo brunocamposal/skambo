@@ -86,6 +86,7 @@ export const StyledSearch = styled(Input)`
   width: 80%;
   top: 10px;
   left: 5px;
+  cursor: pointer;
 
   input {
     background: var(--input-color) !important;

@@ -15,7 +15,7 @@ import {
 import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
 import Logo from "../../assets/img/logo.png"
-import UserDefault from '../../assets/img/userDefault.png'
+import UserDefault from '../../media/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { VscSettingsGear } from 'react-icons/vsc'
@@ -34,6 +34,7 @@ const TopBar: React.FC = () => {
 
   const handleSubmit = () => {
     
+    history.push(`/user-search/${value}`)
     // axios
     //  .get(`https://capstone-q2.herokuapp.com/product?=${value}`)
     //  .then((res) => {
