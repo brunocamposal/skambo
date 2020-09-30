@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useHistory } from "react-router-dom";
 
@@ -10,12 +10,21 @@ import axios from 'axios'
 const Register: React.FC = () => {
   const { register, errors, handleSubmit } = useForm()
   const history = useHistory()
+  const [errorMessage, setErrorMessage] = useState('')
 
   const onSubmit = (data: object): void => {
     console.log(data)
     axios.post(" https://capstone-q2.herokuapp.com/register", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then(res => {
+        setErrorMessage('')
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response.status)
+        if (err.response.status === 400) {
+          setErrorMessage('Email já cadastrado')
+        }
+      })
   }
 
   return (
@@ -37,6 +46,7 @@ const Register: React.FC = () => {
               <Styled.FieldWrapper>
                 <label>E-mail</label>
                 <input
+                  onChange={() => { setErrorMessage('') }}
                   name="email"
                   placeholder="Digite seu e-mail"
                   ref={register({
@@ -71,6 +81,7 @@ const Register: React.FC = () => {
 
                 {errors.password && <Styled.Error>{errors.password.message}</Styled.Error>}
               </Styled.FieldWrapper>
+              {errorMessage && <Styled.Error>{errorMessage}</Styled.Error>}
 
               <div>
                 <Styled.Button type="submit">Cadastrar!</Styled.Button>
