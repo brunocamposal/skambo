@@ -9,33 +9,59 @@ import {
   StyledButton,
   StyledReverseButton,
   StyledIcons,
-  StyledUser
+  StyledUser,
+  StyledMenuMobile
 } from "./styles";
-import {Dropdown} from "semantic-ui-react"
+import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
 import Logo from "../../assets/img/logo.png"
+import UserDefault from '../../assets/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { VscSettingsGear } from 'react-icons/vsc'
 import { BsPeopleCircle } from 'react-icons/bs'
+import { TiThMenu, TiTimes } from 'react-icons/ti'
 import Swal from 'sweetalert2';
 // import axios from "axios";
+import { setTimeout } from "timers";
 
-const TopBar = () => {
-  const [isLogged, setIsLogged] = useState(true)
+const TopBar: React.FC = () => {
+  const [isLogged] = useState(true)
+  const [visible, setVisible] = useState(false)
+  const [value, setValue] = useState('')
   const history = useHistory()
+  const trigger = <StyledUser src={UserDefault} alt='user' />
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
+  const handleSubmit = () => {
+    
+    // axios
+    //  .get(`https://capstone-q2.herokuapp.com/product?=${value}`)
+    //  .then((res) => {
+    //    console.log('Buscou')
+    //   })
 
-  //   axios
-  //     .get(`https://capstone-q2.herokuapp.com`)
-  //     .then((res) => {
-  //       console.log(res)
-  //     })
-  // }
+    setTimeout(() => {
+      setValue('')
+    }, 1000)
+  }
 
-  const trigger = <StyledUser src={Logo} alt='user' />
+  if (window.innerWidth <= 500) {
+    return (
+      <StyledMenuMobile>
+        <StyledMenuLeft>
+          {visible ? <TiTimes onClick={() => setVisible(false)} /> : (<TiThMenu onClick={() => setVisible(true)} />)}
+        </StyledMenuLeft>
+
+        <StyledMenuCenter>
+          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
+        </StyledMenuCenter>
+        
+        <StyledMenuRight>
+          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
+        </StyledMenuRight>
+      </StyledMenuMobile>
+    )
+  }
 
   return (
     <StyledMenu>
@@ -44,19 +70,24 @@ const TopBar = () => {
       </StyledMenuLeft>
       
       <StyledMenuCenter>
-        <StyledSearch 
-          input={{ icon: 'search', iconPosition: 'left' }}
-          placeholder="Buscar produtos para troca"
-          
-        />
+        <Form onSubmit={handleSubmit}>
+          <StyledSearch
+            icon='search'
+            iconPosition='left'
+            placeholder='Buscar produtos para troca'
+            value={value}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setValue(e.target.value)
+            }}
+          />
+        </Form>
       </StyledMenuCenter>
       
       {isLogged ?
       <StyledMenuRight>
-        <StyledButton onClick={() => history.push('/register-product')}>Anunciar</StyledButton>
+        <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
         
-        <StyledIcons>
-        
+        <StyledIcons>        
           {isLogged ?
           (<Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
