@@ -217,6 +217,7 @@ exports[`Register Should render register 1`] = `
           </label>
           <input
             name="email"
+            onChange={[Function]}
             placeholder="Digite seu e-mail"
           />
         </div>
@@ -232,6 +233,7 @@ exports[`Register Should render register 1`] = `
             type="password"
           />
         </div>
+        
         <div>
           <button
             className="c5"
