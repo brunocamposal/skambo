@@ -11,6 +11,7 @@ export const BoxContent = styled.div`
   height:553px;
   justify-self:center;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+  
   @media (max-width:1368px) {
     width:60%;
   }
@@ -89,6 +90,11 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color:#fff;
+  a {
+    &:hover {
+      cursor:pointer;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -109,6 +115,7 @@ export const LinkWrapper = styled.div`
     margin-top:14px;
     font-size:14px;
   }
+ 
 `;
 
 export const Error = styled.div`

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useForm } from 'react-hook-form'
 import RegisterIcon from '../../media/icons/register-icon.svg'
@@ -9,6 +9,7 @@ import axios from 'axios'
 
 const Register: React.FC = () => {
   const { register, errors, handleSubmit } = useForm()
+  const history = useHistory()
 
   const onSubmit = (data: object): void => {
     console.log(data)
@@ -20,9 +21,10 @@ const Register: React.FC = () => {
   return (
     <>
       <Styled.Container>
-        <Link to="/">
+        {/* <Link to="/">
           <h3 style={{ marginLeft: "30px" }}> Voltar </h3>
-        </Link>
+        </Link> */}
+        <a onClick={() => history.push('/')}>Voltar</a>
         <Styled.BoxContent>
 
           <Styled.LogoContainer>
@@ -73,9 +75,9 @@ const Register: React.FC = () => {
               <div>
                 <Styled.Button type="submit">Cadastrar!</Styled.Button>
                 <Styled.LinkWrapper>
-                  <Link to="/login">
+                  <a onClick={() => { history.push('/login') }}>
                     <h3> Já possui conta? Entrar! </h3>
-                  </Link>
+                  </a>
                 </Styled.LinkWrapper>
               </div>
             </form>
