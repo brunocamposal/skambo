@@ -26,7 +26,6 @@ import Swal from 'sweetalert2';
 import { setTimeout } from "timers";
 
 const TopBar: React.FC = () => {
-  const [isLogged] = useState(true)
   const [visible, setVisible] = useState(false)
   const [value, setValue] = useState('')
   const history = useHistory()
@@ -83,12 +82,12 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {isLogged ?
+      {localStorage.length > 0 ?
       <StyledMenuRight>
         <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
         
         <StyledIcons>        
-          {isLogged ?
+          {localStorage.length > 0 ?
           (<Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item
