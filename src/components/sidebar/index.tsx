@@ -1,15 +1,21 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Container, Categorie } from "./styles";
+import "./sidebar.css";
+import { categories } from "./helper";
 
 const Sidebar: React.FC = () => {
   return (
     <Container>
-      <h1> Categorias </h1>
-      <span> -Jogos </span>
-      <span> -Bicicleta </span>
-      <span> -Livros </span>
-      <span> -Roupas </span>
+      <h3> Categorias </h3>
+      {categories.map((item, index) => (
+        <Categorie className={item.classStyle} key={index}>
+          <item.icon className="icon-style" /> {item.name}
+        </Categorie>
+      ))}
+      <Categorie>
+        <h5> Ver todas as categorias </h5>
+      </Categorie>
     </Container>
   );
 };

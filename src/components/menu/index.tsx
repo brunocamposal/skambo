@@ -1,67 +1,7 @@
-import React, { useState } from "react";
-import {
-  StyledMenu, 
-  StyledMenuLeft, 
-  StyledMenuCenter, 
-  StyledMenuRight, 
-  StyledLogo, 
-  StyledSearch, 
-  StyledButton,
-  StyledReverseButton,
-  StyledIcons,
-  StyledUser,
-  StyledMenuMobile
-} from "./styles";
-import { Dropdown, Form } from "semantic-ui-react"
-import { useHistory } from "react-router-dom"
-import Logo from "../../assets/img/logo.png"
-import UserDefault from '../../assets/img/userDefault.png'
-import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
-import { HiOutlineShoppingBag } from 'react-icons/hi'
-import { VscSettingsGear } from 'react-icons/vsc'
-import { BsPeopleCircle } from 'react-icons/bs'
-import { TiThMenu, TiTimes } from 'react-icons/ti'
-import Swal from 'sweetalert2';
-// import axios from "axios";
-import { setTimeout } from "timers";
-
-const TopBar: React.FC = () => {
-  const [isLogged] = useState(true)
-  const [visible, setVisible] = useState(false)
-  const [value, setValue] = useState('')
-  const history = useHistory()
-  const trigger = <StyledUser src={UserDefault} alt='user' />
-
-  const handleSubmit = () => {
-    
-    // axios
-    //  .get(`https://capstone-q2.herokuapp.com/product?=${value}`)
-    //  .then((res) => {
-    //    console.log('Buscou')
-    //   })
-
-    setTimeout(() => {
-      setValue('')
-    }, 1000)
-  }
-
-  if (window.innerWidth <= 500) {
-    return (
-      <StyledMenuMobile>
-        <StyledMenuLeft>
-          {visible ? <TiTimes onClick={() => setVisible(false)} /> : (<TiThMenu onClick={() => setVisible(true)} />)}
-        </StyledMenuLeft>
-
-        <StyledMenuCenter>
-          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
-        </StyledMenuCenter>
-        
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
-        </StyledMenuRight>
-      </StyledMenuMobile>
-    )
-  }
+import React from "react";
+import { Link } from "react-router-dom";
+import MobileCategories from "../mobile/categories";
+import { Container } from "./styles";
 
   return (
     <StyledMenu>
