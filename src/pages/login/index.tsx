@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import FormField from "../../components/form-field";
 import { login } from "../../redux/actions/session";
 
+import { Link } from "react-router-dom";
+
 import FormContainer from "../../components/form-container";
-import logo_image from "../../media/icons/logo_image.png";
+import logo_image from "../../media/img/logo_image.png";
 
 import * as Styled from "./styles";
 
@@ -43,6 +45,7 @@ const Login: React.FC = () => {
 
   return (
     <>
+    
       <FormContainer
         props={
           <>

@@ -45,7 +45,7 @@ const Register: React.FC = () => {
                   name="email"
                   placeholder="Digite seu e-mail"
                   ref={register({
-                    required: "E-mail é obrigatório",
+                    required: 'E-mail é obrigatório',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: "Isso não se parece com um e-mail!",
