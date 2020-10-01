@@ -10,7 +10,6 @@ import {
   StyledReverseButton,
   StyledIcons,
   StyledUser,
-  StyledMenuMobile
 } from "./styles";
 import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
@@ -19,14 +18,12 @@ import UserDefault from '../../media/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { VscSettingsGear } from 'react-icons/vsc'
-import { BsPeopleCircle } from 'react-icons/bs'
-import { TiThMenu, TiTimes } from 'react-icons/ti'
 import Swal from 'sweetalert2';
 // import axios from "axios";
 import { setTimeout } from "timers";
+import MobileCategories from '../mobile/categories'
 
 const TopBar: React.FC = () => {
-  const [visible, setVisible] = useState(false)
   const [value, setValue] = useState('')
   const history = useHistory()
   const trigger = <StyledUser src={UserDefault} alt='user' />
@@ -45,25 +42,9 @@ const TopBar: React.FC = () => {
     }, 1000)
   }
 
-  if (window.innerWidth <= 500) {
-    return (
-      <StyledMenuMobile>
-        <StyledMenuLeft>
-          {visible ? <TiTimes onClick={() => setVisible(false)} /> : (<TiThMenu onClick={() => setVisible(true)} />)}
-        </StyledMenuLeft>
-
-        <StyledMenuCenter>
-          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
-        </StyledMenuCenter>
-        
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
-        </StyledMenuRight>
-      </StyledMenuMobile>
-    )
-  }
-
   return (
+    <>
+    {window.innerWidth < 501 && <MobileCategories />}
     <StyledMenu>
       <StyledMenuLeft>
         <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
@@ -83,13 +64,16 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {window.localStorage.length > 0 ?
+      {window.localStorage.length >= 0 ? // Condicional para quando o usuário estiver logado
       <StyledMenuRight>
-        <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
+
         
-        <StyledIcons>        
-          {window.localStorage.length > 0 ?
-          (<Dropdown trigger={trigger} icon={null}>
+        {window.innerWidth > 500 && // Condicional para só aparecer na tela Web
+        <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>}
+        
+        {window.innerWidth > 500 ? // Condicional para o que mostrar entre Web e Mobile, resposividade nesse caso só pega se já abrir no mobile
+        <StyledIcons>
+          <Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item
                       icon="edit"
@@ -107,9 +91,7 @@ const TopBar: React.FC = () => {
                         });
                       }} />
             </Dropdown.Menu>
-          </Dropdown>) 
-          :
-          (<BsPeopleCircle />)}
+          </Dropdown>
         
           <VscSettingsGear onClick={() => history.push('/')} />
         
@@ -120,6 +102,31 @@ const TopBar: React.FC = () => {
           <HiOutlineShoppingBag onClick={() => history.push('/')} />
         
         </StyledIcons>
+        :
+        <StyledIcons>
+          <Dropdown trigger={trigger} icon={null}>
+            <Dropdown.Menu>
+            <Dropdown.Item
+                      icon="edit"
+                      text="Alterar informações"
+                      onClick={() => history.push('/register')}
+                    />
+              <Dropdown.Item icon="sign-out" text="Sair" onClick={() => {
+                        Swal.fire({
+                          title: `Volte logo!`,
+                          confirmButtonText: `Sair`,
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            window.localStorage.clear();
+                          }
+                        });
+                      }} />
+            </Dropdown.Menu>
+          </Dropdown>
+        
+          <HiOutlineShoppingBag onClick={() => history.push('/')} />
+        
+        </StyledIcons>}
       
       </StyledMenuRight>      
       :
@@ -129,6 +136,7 @@ const TopBar: React.FC = () => {
         <StyledReverseButton onClick={() => history.push('/register')}>Registrar-se</StyledReverseButton>
       </StyledMenuRight>}
     </StyledMenu>
+    </>
   );
 };
 
