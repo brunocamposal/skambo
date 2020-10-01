@@ -4,11 +4,10 @@ import { Grid, Form } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-
 import FormField from "../../components/form-field";
-
 import { login } from "../../redux/actions/session";
 
+import RegisterIcon from '../../media/icons/register-icon.svg'
 import * as Styled from "./styles";
 
 interface IFormInputs {
@@ -54,7 +53,7 @@ const Login: React.FC = () => {
                 <Grid.Column>
                   <Styled.ImageBox>
                     <Styled.LoginIllustration
-                      src={"https://picsum.photos/200/300"}
+                      src={RegisterIcon}
                     />
                   </Styled.ImageBox>
                 </Grid.Column>
