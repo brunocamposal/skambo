@@ -35,7 +35,6 @@ const Register: React.FC = () => {
         </Link> */}
         <a href="/" onClick={() => history.push('/')}>Voltar</a>
         <Styled.BoxContent>
-
           <Styled.LogoContainer>
             <img src={RegisterIcon} alt="Register" />
           </Styled.LogoContainer>
@@ -46,15 +45,17 @@ const Register: React.FC = () => {
               <Styled.FieldWrapper>
                 <label>E-mail</label>
                 <input
-                  onChange={() => { setErrorMessage('') }}
+                  onChange={() => {
+                    setErrorMessage('');
+                  }}
                   name="email"
                   placeholder="Digite seu e-mail"
                   ref={register({
-                    required: "E-mail é obrigatório",
+                    required: 'E-mail é obrigatório',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Isso não se parece com um e-mail!"
-                    }
+                      message: 'Isso não se parece com um e-mail!',
+                    },
                   })}
                 />
 
@@ -70,12 +71,12 @@ const Register: React.FC = () => {
                     required: 'A senha é obrigatória',
                     minLength: {
                       value: 6,
-                      message: 'A senha precisa ter no minímo 6 caracteres'
+                      message: 'A senha precisa ter no minímo 6 caracteres',
                     },
                     pattern: {
                       value: /[+#?!@$%^&*-]{1,}/,
-                      message: 'A senha precisa ter ao menos um caracter especial'
-                    }
+                      message: 'A senha precisa ter ao menos um caracter especial',
+                    },
                   })}
                 />
 
@@ -86,7 +87,10 @@ const Register: React.FC = () => {
               <div>
                 <Styled.Button type="submit">Cadastrar!</Styled.Button>
                 <Styled.LinkWrapper>
-                  <a href='/login' onClick={() => { history.push('/login') }}>
+                  <a
+                    onClick={() => {
+                      history.push('/login');
+                    }}>
                     <h3> Já possui conta? Entrar! </h3>
                   </a>
                 </Styled.LinkWrapper>
@@ -97,6 +101,6 @@ const Register: React.FC = () => {
       </Styled.Container>
     </>
   );
-}
+};
 
 export default Register;

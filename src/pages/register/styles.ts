@@ -15,7 +15,6 @@ export const BoxContent = styled.div`
   @media (max-width:1368px) {
     width:60%;
   }
-
   @media (max-width: 1200px) { 
     width:75%;
   }
@@ -120,5 +119,4 @@ export const LinkWrapper = styled.div`
 
 export const Error = styled.div`
   color:#f40909;
-
 `;

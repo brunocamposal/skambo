@@ -33,6 +33,7 @@ const TopBar: React.FC = () => {
 
   const handleSubmit = () => {
     
+    history.push(`/user-search/${value}`)
     // axios
     //  .get(`https://capstone-q2.herokuapp.com/product?=${value}`)
     //  .then((res) => {
@@ -82,12 +83,12 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {localStorage.length > 0 ?
+      {window.localStorage.length > 0 ?
       <StyledMenuRight>
         <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
         
         <StyledIcons>        
-          {localStorage.length > 0 ?
+          {window.localStorage.length > 0 ?
           (<Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item
