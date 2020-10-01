@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "enzyme-adapter-react-16": "^1.15.5",
     "jest-styled-components": "^7.0.3"
   }
 }

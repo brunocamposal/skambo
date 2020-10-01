@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormField Snapshot test FormField Snapshot test Render 1`] = `
+<div
+  className="field"
+>
+  <label>
+    label
+  </label>
+  <input
+    name="name"
+    placeholder="label"
+    type="type"
+  />
+</div>
+`;
