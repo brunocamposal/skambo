@@ -1,91 +1,190 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { Link } from 'react-router-dom';
-import { Container, Form, Textarea } from './styles';
+import { Container, StyledButton } from './styles';
+import { Form, TextArea, Grid } from 'semantic-ui-react';
+import jwt_decode from 'jwt-decode';
+
+const token: string = localStorage.token
+  ? localStorage.token
+  : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbnRhdG9AYXRhdWEuY29tIiwiaWF0IjoxNjAxNTcyOTgwLCJleHAiOjE2MDE1NzY1ODAsInN1YiI6IjQifQ.nEQpXoCtC78ybYKp5SJxY_BL4o90GuYS7QNrycQB1iw';
+
+interface token_decoded {
+  user_id: number;
+  exp: Date;
+}
+
+const { user_id } = jwt_decode<token_decoded>(token);
+console.log(user_id);
+interface product {
+  user_id: number;
+  views: number;
+  usersAcess: number;
+  usability: number;
+  value: number;
+  boost: string;
+  name: string;
+  description: string;
+  thumbnail: string;
+  category: string;
+  images: string[];
+  interests: string[];
+}
 
 const NewProduct: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm();
-  const [outros, setOutros] = useState(false);
-  const onSubmit = (data: object) => console.log(data);
-  console.log(errors);
-
-  const categorias: object = {
-    Eletronicos: 'Eletrônicos',
-    Escritorio: 'Escritório',
-    Esportes: 'Esportes',
-    Instrumentos_Musicais: 'Instrumentos Musicais',
-    Jogos: 'Jogos',
-    Lazer: 'Lazer',
-    Livros: 'Livros',
-    Moveis: 'Móveis',
-    Saude: 'Saúde',
-    Servicos: 'Serviços',
-    Vestuario: 'Vestuário',
+  const defaultProduct: product = {
+    user_id: user_id,
+    views: 0,
+    usersAcess: 0,
+    usability: 0,
+    value: 0,
+    boost: '',
+    name: '',
+    description: '',
+    thumbnail: '',
+    category: '',
+    images: [''],
+    interests: [''],
   };
+  const [formValue, setFormValue] = useState(defaultProduct);
+  const { register: any, handleSubmit, errors } = useForm();
+  const onSubmit = () => {
+    console.table(formValue);
+  };
+  if (!!errors.length) console.log(errors);
+
+  interface categorias {
+    key: number;
+    value: string;
+    text: string;
+  }
+
+  const categorias: categorias[] = [
+    { key: 1, value: 'Eletronicos', text: 'Eletrônicos' },
+    { key: 2, value: 'Escritorio', text: 'Escritório' },
+    { key: 3, value: 'Esportes', text: 'Esportes' },
+    { key: 4, value: 'Instrumentos_Musicais', text: 'Instrumentos Musicais' },
+    { key: 5, value: 'Jogos', text: 'Jogos' },
+    { key: 6, value: 'Lazer', text: 'Lazer' },
+    { key: 7, value: 'Livros', text: 'Livros' },
+    { key: 8, value: 'Moveis', text: 'Móveis' },
+    { key: 9, value: 'Saude', text: 'Saúde' },
+    { key: 10, value: 'Servicos', text: 'Serviços' },
+    { key: 11, value: 'Vestuario', text: 'Vestuário' },
+    { key: 12, value: 'Outros', text: 'Outros' },
+  ];
 
   return (
     <>
-      <Link to="/">
-        <h3 style={{ marginLeft: '30px' }}> Voltar </h3>
-      </Link>
       <Container>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            <div>Produto</div>
-            <input
-              type="text"
-              name="product-name"
-              ref={register({ required: true, maxLength: 48 })}
-            />
-          </label>
-          <label>
-            <div>Categoria</div>
-            <select name="category" ref={register({ required: true })}>
-              {Object.entries(categorias).map(([key, val], k) => (
-                <option key={k} value={key} onSelect={() => setOutros(false)}>
-                  {val}
-                </option>
-              ))}
-              <option value="Outros" onSelect={() => setOutros(true)}>
-                Outros
-              </option>
-            </select>
-            {outros && (
-              <input
-                type="text"
-                placeholder="Nova categoria"
-                name="newCategory"
-                ref={register({ required: true, maxLength: 18 })}
-              />
-            )}
-          </label>
-          <label>
-            <div>Estado de conservação</div>
-            <input
-              type="range"
-              name="aspect"
-              id="aspect"
-              ref={register({ required: true, max: 5, min: 1 })}
-            />
-          </label>
-          <label>
-            <div>Detalhes</div>
-            <Textarea
-              name="details"
-              ref={register({ required: true })}
-              placeholder="Informe sobre possíveis sinais de uso como &#10;
-              manchas, partes faltantes / estragadas, etc, para que os &#10;
-              visitantes saibam exatamente o que esperar do seu produto."
-            />
-            <input
-              type="number"
-              name="valueSkambo"
-              ref={register({ required: true, max: 10000, min: 0 })}
-            />
-          </label>
-          <input type="submit" />
-        </Form>
+        <Link to="/">
+          <h3> Voltar </h3>
+        </Link>
+        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Form.Field>
+                <label>
+                  <div>Produto</div>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formValue.name}
+                  onChange={(e) => {
+                    setFormValue({ ...formValue, name: e.target.value });
+                  }}
+                  // ref={register({
+                  //   required: true,
+                  //   maxLength: 30,
+                  //   message: 'Insira um nome para seu produto',
+                  // })}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  <div>Imagens</div>
+                  <input
+                    type="file"
+                    name="file"
+                    // ref={register({
+                    //   required: true,
+                    //   message: 'Insira ao menos uma imagem',
+                    // })}
+                    multiple
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  <div>Categoria</div>
+                  <select
+                    name="category"
+                    // ref={register({
+                    //   required: true,
+                    //   message: 'Selecione uma categoria',
+                    // })}
+                    onChange={(g) => {
+                      setFormValue({ ...formValue, category: g.target.value });
+                      console.log(g.target);
+                    }}>
+                    {categorias.map(({ key, value, text }) => (
+                      <option value={value} key={key}>
+                        {text}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  <div>Estado de conservação</div>
+                  <input
+                    onChange={(f) => {
+                      setFormValue({ ...formValue, usability: parseInt(f.target.value) });
+                    }}
+                    type="range"
+                    name="aspect"
+                    id="aspect"
+                    // ref={register}
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  <div>Detalhes</div>
+                  <TextArea
+                    rows={4}
+                    name="description"
+                    // ref={register({
+                    //   required: true,
+                    //   minLength: 18,
+                    //   message: 'Preste algumas informações sibre seu produto',
+                    // })}
+                    placeholder="Informe sobre possíveis sinais de uso como &#10;
+          manchas, partes faltantes / estragadas, etc, para que os &#10;
+          visitantes saibam exatamente o que esperar do seu produto."
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  <div>Valor de referência para Skambo</div>
+                  <input
+                    type="number"
+                    name="valueSkambo"
+                    // ref={register({
+                    //   required: true,
+                    //   minLength: 2,
+                    //   message: 'Informe um valor aproximado para seu produto',
+                    // })}
+                  />
+                </label>
+              </Form.Field>
+              <StyledButton>Cadastrar</StyledButton>
+            </Form>
+          </Grid.Column>
+        </Grid>
       </Container>
     </>
   );

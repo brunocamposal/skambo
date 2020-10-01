@@ -8,11 +8,18 @@ export const Container = styled.div`
   align-items: center;
   align-content: center;
   flex-direction: column;
+  background-color: var(--secondary-light);
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-flow: column nowrap;
+export const StyledButton = styled.button`
+  background: var(--primary);
+  color: var(--secondary-light);
+  padding: 10px;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  :hover {
+    background: var(--primary-light);
+    color: var(--secondary-dark);
+  }
 `;
-
-export const Textarea = styled.textarea``;

@@ -2,18 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
-@font-face {
-    font-family: 'baloo_2regular';
-    src: url('../../fonts/baloo2-regular-webfont.woff2') format('woff2'),
-         url('../../fonts/baloo2-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
     *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        
     }
 
     html, body{
@@ -26,6 +19,7 @@ export default createGlobalStyle`
     body {
         background-color: var(--secondary-light);
         color: var(--primary-dark);
+        font-family: 'baloo_2regular', Arial, Helvetica, sans-serif !important;
     }
 
     :root{
@@ -35,6 +29,5 @@ export default createGlobalStyle`
         --secondary: #dafc19;
         --secondary-dark: #202d04;
         --secondary-light: #dcffbc;
-        font-family: 'baloo_2regular', Arial, Helvetica, sans-serif;
     }
 `;
