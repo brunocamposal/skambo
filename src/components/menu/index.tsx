@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
-import Logo from "../../assets/img/logo.png"
+import Logo from "../../media/img/logotipo.png"
 import UserDefault from '../../media/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
@@ -26,7 +26,6 @@ import Swal from 'sweetalert2';
 import { setTimeout } from "timers";
 
 const TopBar: React.FC = () => {
-  const [isLogged] = useState(true)
   const [visible, setVisible] = useState(false)
   const [value, setValue] = useState('')
   const history = useHistory()
@@ -84,12 +83,12 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {isLogged ?
+      {window.localStorage.length > 0 ?
       <StyledMenuRight>
         <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
         
         <StyledIcons>        
-          {isLogged ?
+          {window.localStorage.length > 0 ?
           (<Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item

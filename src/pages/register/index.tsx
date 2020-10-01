@@ -1,32 +1,31 @@
 import React, { useState } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import { useForm } from 'react-hook-form';
-import RegisterIcon from '../../media/icons/register-icon.svg';
-import * as Styled from './styles';
-import axios from 'axios';
+import { useForm } from 'react-hook-form'
+import RegisterIcon from '../../media/icons/register-icon.svg'
+import * as Styled from './styles'
+import axios from 'axios'
 
 const Register: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
-  const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState('');
+  const { register, errors, handleSubmit } = useForm()
+  const history = useHistory()
+  const [errorMessage, setErrorMessage] = useState('')
 
   const onSubmit = (data: object): void => {
-    console.log(data);
-    axios
-      .post('https://capstone-q2.herokuapp.com/register', data)
-      .then((res) => {
-        setErrorMessage('');
-        console.log(res);
+    console.log(data)
+    axios.post(" https://capstone-q2.herokuapp.com/register", data)
+      .then(res => {
+        setErrorMessage('')
+        console.log(res)
       })
-      .catch((err) => {
-        console.log(err.response.status);
+      .catch(err => {
+        console.log(err.response.status)
         if (err.response.status === 400) {
-          setErrorMessage('Email já cadastrado');
+          setErrorMessage('Email já cadastrado')
         }
-      });
-  };
+      })
+  }
 
   return (
     <>
