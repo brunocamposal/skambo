@@ -42,7 +42,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "universe/web",
+    "rules": {
+      "react/no-did-mount-set-state": "off"
+    }
   },
   "browserslist": {
     "production": [
