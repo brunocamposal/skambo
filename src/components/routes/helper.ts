@@ -1,9 +1,11 @@
-import { Home, Login, Register } from "../../pages";
+import { Home, Login, Register } from '../../pages';
+import UserSearch from '../../pages/user-search';
 
 export const routesNotAuth = [
-  { path: "/", name: "Home", page: Home },
-  { path: "/login", name: "Login", page: Login },
-  { path: "/register", name: "Register", page: Register },
+  { path: '/', name: 'Home', page: Home },
+  { path: '/login', name: 'Login', page: Login },
+  { path: '/register', name: 'Register', page: Register },
+  { path: '/user-search/:search', name: 'UserSearch', page: UserSearch },
 ];
 
 /*
