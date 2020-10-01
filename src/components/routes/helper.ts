@@ -1,10 +1,11 @@
-import { Home, Login, Register, NewProduct } from '../../pages';
+import { Home, Login, Register, NewProduct, UserSearch } from '../../pages';
 
 export const routesNotAuth = [
   { path: '/', name: 'Home', page: Home },
   { path: '/login', name: 'Login', page: Login },
   { path: '/register', name: 'Register', page: Register },
-  { path: '/new-product', name: 'New Product', page: NewProduct }, // on Auth for testing pirposes only
+  { path: '/new-product', name: 'New Product', page: NewProduct }, // on Auth for testing purposes only
+  { path: '/user-search/:search', name: 'UserSearch', page: UserSearch },
 ];
 
 /*
