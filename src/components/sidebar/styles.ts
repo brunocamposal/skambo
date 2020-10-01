@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   width: 300px;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 80px;
 
   h3 {
     text-align: left;

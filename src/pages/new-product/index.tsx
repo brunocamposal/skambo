@@ -1,21 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { Container, StyledButton } from './styles';
-import { Form, TextArea, Grid } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
-const token: string = localStorage.token
-  ? localStorage.token
-  : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbnRhdG9AYXRhdWEuY29tIiwiaWF0IjoxNjAxNTcyOTgwLCJleHAiOjE2MDE1NzY1ODAsInN1YiI6IjQifQ.nEQpXoCtC78ybYKp5SJxY_BL4o90GuYS7QNrycQB1iw';
-
-interface token_decoded {
-  user_id: number;
-  exp: Date;
-}
-
-const { user_id } = jwt_decode<token_decoded>(token);
-console.log(user_id);
 interface product {
   user_id: number;
   views: number;
@@ -31,27 +18,62 @@ interface product {
   interests: string[];
 }
 
+interface token_decoded {
+  user_id: number;
+  exp: Date;
+}
+
+const token: string = localStorage.token
+  ? localStorage.token
+  : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbnRhdG9AYXRhdWEuY29tIiwiaWF0IjoxNjAxNTgxNTg2LCJleHAiOjE2MDE1ODUxODYsInN1YiI6IjQifQ.OtwmlcIxnV5vY6JGSkPzMIrIfLz5odwoyRJWB6yGScs"
+  ;
+
+const { user_id } = jwt_decode<token_decoded>(token);
+
+const defaultProduct: product = {
+  user_id: user_id,
+  views: 0,
+  usersAcess: 0,
+  usability: 0,
+  value: 0,
+  boost: '',
+  name: '',
+  description: '',
+  thumbnail: '',
+  category: '',
+  images: [''],
+  interests: [''],
+};
+
 const NewProduct: React.FC = () => {
-  const defaultProduct: product = {
-    user_id: user_id,
-    views: 0,
-    usersAcess: 0,
-    usability: 0,
-    value: 0,
-    boost: '',
-    name: '',
-    description: '',
-    thumbnail: '',
-    category: '',
-    images: [''],
-    interests: [''],
-  };
   const [formValue, setFormValue] = useState(defaultProduct);
-  const { register: any, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm<product>(defaultProduct);
+  const [requestError, setRequestError] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!!errors.length) console.log(errors);
+    if (!!requestError !== '') console.log(requestError);
+  }, [errors, requestError]);
+
   const onSubmit = () => {
-    console.table(formValue);
+    const data = {
+      header: {
+        Authorization: token
+      },
+      data: {
+        user: {
+          user_id: user_id,
+        },
+        product: formValue
+      }
+    }
+    axios.post("https://capstone-q2.herokuapp.com/products", data).then({ data } => {
+  console.log(data)
+}).catch({response}=> {
+  setRequestError(response)
+    })
   };
-  if (!!errors.length) console.log(errors);
 
   interface categorias {
     key: number;
