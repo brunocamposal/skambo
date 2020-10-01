@@ -31,17 +31,6 @@ const Register: React.FC = () => {
 
   return (
     <>
-      <Styled.Container>
-        {/* <Link to="/">
-          <h3 style={{ marginLeft: "30px" }}> Voltar </h3>
-        </Link> */}
-        <a href="/" onClick={() => history.push('/')}>Voltar</a>
-        <Styled.BoxContent>
-          <Styled.LogoContainer>
-            <img src={RegisterIcon} alt="Register" />
-          </Styled.LogoContainer>
-
-          <Styled.FormContainer>
       <FormContainer
         props={
           <>
