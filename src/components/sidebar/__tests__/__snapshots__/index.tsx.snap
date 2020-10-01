@@ -10,7 +10,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .c0 h3 {
