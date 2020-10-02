@@ -11,7 +11,7 @@ export const StyledMenu = styled.div`
   display: flex;
   justify-content: center;
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     height: 100px;
     position: relative;
   }
@@ -21,7 +21,7 @@ export const StyledMenuLeft = styled.div`
   width: 15%;
   min-width: 123px;
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     width: 40%;
     height: 50px;
     position: absolute;
@@ -36,7 +36,7 @@ export const StyledMenuLeft = styled.div`
 export const StyledMenuCenter = styled.div`
   width: 55%;
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     width: 100%;
     height: 50px;
     position: absolute;
@@ -51,7 +51,11 @@ export const StyledMenuRight = styled.div`
   color: var(--primary);
   display: flex;
 
-  @media (max-width: 500px) {
+  @media (max-width: 880px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
     width: 30%;
     height: 50px;
     position: absolute;
@@ -60,6 +64,11 @@ export const StyledMenuRight = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 32px;
+
+    .web {
+      display: none;
+    }
   }
 `;
 
@@ -69,9 +78,14 @@ export const StyledIcons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (max-width: 880px) {
+    margin-top: 20px;
+  }
   
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     width: 80px;
+    margin-top: 10px;
   }
 `;
 
@@ -84,7 +98,7 @@ export const StyledLogo = styled.img`
     margin-top: 10px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     margin-top: 0;
   }
 `;
@@ -106,7 +120,7 @@ export const StyledSearch = styled(Input)`
     width: 95%;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     width: 90%;
     left: 5%;
     top: 5px;
@@ -130,7 +144,15 @@ export const StyledButton = styled.button`
     margin-left: 20px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 880px) {
+    width: 60px;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 0px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 480px) {
     margin: 0;
     width: 100px;
   }
@@ -142,10 +164,8 @@ export const StyledReverseButton = styled(StyledButton)`
   background: #ffffff;
   cursor: pointer;
 
-  @media (max-width: 500px) {
-    width: 0;
-    height: 0;
-    visibility: hidden;
+  @media (max-width: 480px) {
+    display: none;
   }
 `;
 
@@ -154,5 +174,15 @@ export const StyledUser = styled.img`
   width: 32px;
   height: 32px;
   border: 1px solid black;
+
+  @media (max-width: 880px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 

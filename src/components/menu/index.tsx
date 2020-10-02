@@ -44,7 +44,7 @@ const TopBar: React.FC = () => {
 
   return (
     <>
-    {window.innerWidth < 501 && <MobileCategories />}
+    <MobileCategories />
     <StyledMenu>
       <StyledMenuLeft>
         <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
@@ -66,12 +66,8 @@ const TopBar: React.FC = () => {
       
       {window.localStorage.length >= 0 ? // Condicional para quando o usuário estiver logado
       <StyledMenuRight>
-
-        
-        {window.innerWidth > 500 && // Condicional para só aparecer na tela Web
-        <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>}
-        
-        {window.innerWidth > 500 ? // Condicional para o que mostrar entre Web e Mobile, resposividade nesse caso só pega se já abrir no mobile
+        <StyledButton className='web' onClick={() => history.push('/')}>Anunciar</StyledButton>
+             
         <StyledIcons>
           <Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
@@ -92,43 +88,17 @@ const TopBar: React.FC = () => {
                       }} />
             </Dropdown.Menu>
           </Dropdown>
+          
+          <VscSettingsGear className='web' onClick={() => history.push('/user')} />
         
-          <VscSettingsGear onClick={() => history.push('/')} />
+          <AiOutlineHeart className='web' onClick={() => history.push('/user')} />
         
-          <AiOutlineHeart onClick={() => history.push('/')} />
-        
-          <AiOutlineMail onClick={() => history.push('/')} />
+          <AiOutlineMail className='web' onClick={() => history.push('/')} />
         
           <HiOutlineShoppingBag onClick={() => history.push('/')} />
-        
         </StyledIcons>
-        :
-        <StyledIcons>
-          <Dropdown trigger={trigger} icon={null}>
-            <Dropdown.Menu>
-            <Dropdown.Item
-                      icon="edit"
-                      text="Alterar informações"
-                      onClick={() => history.push('/register')}
-                    />
-              <Dropdown.Item icon="sign-out" text="Sair" onClick={() => {
-                        Swal.fire({
-                          title: `Volte logo!`,
-                          confirmButtonText: `Sair`,
-                        }).then((result) => {
-                          if (result.isConfirmed) {
-                            window.localStorage.clear();
-                          }
-                        });
-                      }} />
-            </Dropdown.Menu>
-          </Dropdown>
-        
-          <HiOutlineShoppingBag onClick={() => history.push('/')} />
-        
-        </StyledIcons>}
-      
       </StyledMenuRight>      
+      
       :
       
       <StyledMenuRight>
