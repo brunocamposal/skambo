@@ -1,28 +1,27 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const ButtonForm = styled.button`
   font-weight: 700;
-  margin-top: 54px;
+  margin-top: 20px;
   color: #fff;
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
   border-radius: 7px;
   height: 35px;
   width: 293px;
 `;
 
 export const LinkForm = styled(Link)`
-    h3 {
-    width:287px;
-    height:45px;
-    text-align:center;
-    margin-top:14px;
-    font-size:14px;
+  h3 {
+    width: 287px;
+    height: 45px;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 14px;
   }
 `;
 
 export const ImgForm = styled.img`
-  width: 130px;
-  height: 130px;
+  width: 250px;
   margin: 25px;
 `

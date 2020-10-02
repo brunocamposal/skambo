@@ -10,17 +10,17 @@ exports[`Form  Snapshot test Form  Snapshot test Render 1`] = `
     Voltar
   </a>
   <div
-    className="sc-gtssRu hXxwWn"
+    className="sc-gtssRu brhlVN"
   >
     <div
-      className="sc-hKFyIo csVIyD"
+      className="sc-hKFyIo dJqfuM"
     >
       <img
         src="register-icon.svg"
       />
     </div>
     <div
-      className="sc-dlnjPT eruTRv"
+      className="sc-dlnjPT euoBPG"
     />
   </div>
 </div>

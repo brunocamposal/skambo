@@ -7,7 +7,7 @@ import FormField from "../../components/form-field";
 import { login } from "../../redux/actions/session";
 
 import FormContainer from "../../components/form-container";
-import logo_image from "../../media/img/logo_image.png";
+import logo_image from "../../media/img/logotipo.png";
 
 import * as Styled from "./styles";
 

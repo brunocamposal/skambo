@@ -42,13 +42,14 @@ export const BoxContent = styled.div`
   @media (max-width: 415px){
     width: 90%;
     height: 553px;
+    box-shadow: 0px 0px 0px #ffffff;
   }
 `;
 
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: #ffffff;
   width: 45%;
   height: 100%;
   justify-content: center;
@@ -82,11 +83,15 @@ export const FormContainer = styled.div`
       margin-top: 30px;
     }
   }
+
+  @media (max-width: 480px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
   width: 55%;
   height: 100%;
   justify-content: center;
@@ -101,5 +106,4 @@ export const LogoContainer = styled.div`
   img {
     margin: 20px;
   }
-
 `;
