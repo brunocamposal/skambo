@@ -42,7 +42,7 @@ exports[`Register Should render register 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: #FFF;
+  background-color: #fff;
   width: 45%;
   height: 100%;
   -webkit-box-pack: center;
@@ -67,7 +67,7 @@ exports[`Register Should render register 1`] = `
 
 .c3 input {
   font-weight: 700;
-  background-color: #F4F4F6;
+  background-color: #f4f4f6;
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -126,7 +126,7 @@ exports[`Register Should render register 1`] = `
   font-weight: 700;
   margin-top: 54px;
   color: #fff;
-  background-color: #8D70FB;
+  background-color: var(--primary-dark);
   border-radius: 7px;
   height: 35px;
   width: 293px;
@@ -164,6 +164,14 @@ exports[`Register Should render register 1`] = `
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    height: 880px;
+  }
+}
+
+@media (max-width:415px) {
+  .c1 {
+    width: 90%;
+    height: 553px;
   }
 }
 
@@ -181,6 +189,12 @@ exports[`Register Should render register 1`] = `
   .c2 {
     width: 96%;
     margin-top: 64px;
+  }
+}
+
+@media (max-width:415px) {
+  .c2 {
+    display: none;
   }
 }
 

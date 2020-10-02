@@ -5,7 +5,7 @@ export const ButtonForm = styled.button`
   font-weight: 700;
   margin-top: 54px;
   color: #fff;
-  background-color: #8d70fb;
+  background-color: var(--primary-dark);
   border-radius: 7px;
   height: 35px;
   width: 293px;
@@ -22,7 +22,7 @@ export const LinkForm = styled(Link)`
 `;
 
 export const ImgForm = styled.img`
-  width: 100px;
-  height: 100px;
-  margin: 30px;
+  width: 130px;
+  height: 130px;
+  margin: 25px;
 `
