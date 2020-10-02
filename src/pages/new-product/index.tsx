@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
-
+import FormField from '../../components/form-field/index';
+  
 interface product {
   user_id: number;
   views: number;
@@ -105,7 +106,12 @@ const NewProduct: React.FC = () => {
         <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              <Form.Field>
+              
+            <FormField required={true} name='name' type='text' label='Produto' inputPlace='' inputRef={register} error='Insira um nome para seu produto' value={formValue.name} onChange={(e) => {
+              setFormValue({ ...formValue, name: e.target.value });
+            }}/>
+              {/*
+                <Form.Field>
                 <label>
                   <div>Produto</div>
                 </label>
@@ -116,36 +122,45 @@ const NewProduct: React.FC = () => {
                   onChange={(e) => {
                     setFormValue({ ...formValue, name: e.target.value });
                   }}
-                  // ref={register({
-                  //   required: true,
-                  //   maxLength: 30,
-                  //   message: 'Insira um nome para seu produto',
-                  // })}
+                  ref={register({
+                    required: true,
+                    maxLength: 30,
+                    message: 'Insira um nome para seu produto',
+                  })}
                 />
-              </Form.Field>
+                </Form.Field>
+              */}
+              <FormField required={true} name='file' type='file' label='Imagens' inputPlace='' inputRef={register({
+                required: true,
+                message: 'Insira ao menos uma imagem',
+              })} error='Insira pelo menos uma imagem' value={formValue.images} onChange={(e) => {
+                setFormValue({ ...formValue, images: [...formValues.images, e.target.images] });
+              }} multiple={true}/>
+              {/*
               <Form.Field>
                 <label>
                   <div>Imagens</div>
                   <input
                     type="file"
                     name="file"
-                    // ref={register({
-                    //   required: true,
-                    //   message: 'Insira ao menos uma imagem',
-                    // })}
+                    ref={register({
+                      required: true,
+                      message: 'Insira ao menos uma imagem',
+                    })}
                     multiple
                   />
                 </label>
               </Form.Field>
-              <Form.Field>
+                  */}
+              <Form.Field required={true}>
                 <label>
                   <div>Categoria</div>
                   <select
                     name="category"
-                    // ref={register({
-                    //   required: true,
-                    //   message: 'Selecione uma categoria',
-                    // })}
+                    ref={register({
+                      required: true,
+                      message: 'Selecione uma categoria',
+                    })}
                     onChange={(g) => {
                       setFormValue({ ...formValue, category: g.target.value });
                       console.log(g.target);
@@ -157,7 +172,14 @@ const NewProduct: React.FC = () => {
                     ))}
                   </select>
                 </label>
+
               </Form.Field>
+              <FormField required={true} name='file' type='range' label='Estado de conservação' inputPlace='' inputRef={register({
+                                message: {(e) => e.value},
+              })} value={formValue.images} onChange={(e) => {
+                setFormValue({ ...formValue, images: [...formValues.images, e.target.images] });
+              }} multiple={true}/>
+                   {/*
               <Form.Field>
                 <label>
                   <div>Estado de conservação</div>
@@ -172,6 +194,7 @@ const NewProduct: React.FC = () => {
                   />
                 </label>
               </Form.Field>
+                  */}
               <Form.Field>
                 <label>
                   <div>Detalhes</div>
