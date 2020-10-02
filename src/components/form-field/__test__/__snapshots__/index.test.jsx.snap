@@ -9,7 +9,6 @@ exports[`FormField Snapshot test FormField Snapshot test Render 1`] = `
   </label>
   <input
     name="name"
-    placeholder="label"
     type="type"
   />
 </div>
