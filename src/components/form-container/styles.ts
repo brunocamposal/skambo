@@ -81,7 +81,7 @@ export const FormContainer = styled.div`
 
 export const LogoContainer = styled.div`
   display:flex;
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
   width:55%;
   height: 100%;
   justify-content: center;
