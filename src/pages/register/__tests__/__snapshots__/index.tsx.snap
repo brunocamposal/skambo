@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Register Should render register 1`] = `
+.c0 {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.c0 a:hover {
+  cursor: pointer;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -19,7 +29,6 @@ exports[`Register Should render register 1`] = `
   align-items: center;
   width: 55%;
   margin: 15vh auto;
-  width: 52%;
   height: 553px;
   justify-self: center;
   box-shadow: 0px 2px 6px rgba(0,0,0,0.25);
@@ -86,7 +95,7 @@ exports[`Register Should render register 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background-color: #8D70FB;
+  background-color: var(--primary-dark);
   width: 55%;
   height: 100%;
   -webkit-box-pack: center;
@@ -99,6 +108,10 @@ exports[`Register Should render register 1`] = `
   align-items: center;
 }
 
+.c2 img {
+  margin: 20px;
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -107,16 +120,6 @@ exports[`Register Should render register 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-}
-
-.c0 {
-  width: 100vw;
-  height: 100vh;
-  background-color: #fff;
-}
-
-.c0 a:hover {
-  cursor: pointer;
 }
 
 .c5 {
@@ -152,7 +155,6 @@ exports[`Register Should render register 1`] = `
 @media (max-width:992px) {
   .c1 {
     width: 93%;
-    margin: 50px auto;
   }
 }
 

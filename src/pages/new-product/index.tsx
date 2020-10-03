@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import FormField from '../../components/form-field/index';
+import { login } from "../../redux/actions/session";
   
 interface product {
   user_id: number;
