@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import { Input } from 'semantic-ui-react';
 
 export const StyledMenu = styled.div`
-  width: 100%;
-  max-width: 1200px;
+  width: 1200px;
   height: 60px;
   position: fixed;
   z-index: 1;
   top: 0;
   display: flex;
   justify-content: center;
-
+  
   @media (max-width: 500px) {
     height: 100px;
     position: relative;
@@ -119,7 +118,7 @@ export const StyledButton = styled.button`
   margin-top: 10px;
   margin-left: 10px;
   background: var(--primary);
-  color: var(--primary-light);
+  color: #ffffff;
   font-weight: bold;
   font-size: 14px;
   border: none;
