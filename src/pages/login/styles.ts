@@ -22,6 +22,6 @@ export const LinkForm = styled(Link)`
 `;
 
 export const ImgForm = styled.img`
-  width: 220px;
-  margin: 30px;
-`;
+  width: 250px;
+  margin: 25px;
+`
