@@ -22,14 +22,14 @@ export default createGlobalStyle`
     body {
         background-color: #ffffff;
         color: var(--primary-dark);
+        font-family: 'baloo_2regular', Arial, Helvetica, sans-serif;
     }
     :root{
-        --primary: #201089;
+        --primary: #8D70FB;
         --primary-dark: #0c0a26;
         --primary-light: #dcd2ff;
         --secondary: #dafc19;
         --secondary-dark: #202d04;
         --secondary-light: #dcffbc;
-        font-family: 'baloo_2regular', Arial, Helvetica, sans-serif;
     }
 `;

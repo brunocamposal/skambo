@@ -133,7 +133,7 @@ export const StyledButton = styled.button`
   margin-top: 10px;
   margin-left: 10px;
   background: var(--primary);
-  color: var(--primary-light);
+  color: #ffffff;
   font-weight: bold;
   font-size: 14px;
   border: none;
