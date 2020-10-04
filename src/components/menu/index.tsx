@@ -37,9 +37,6 @@ const TopBar: React.FC = () => {
     //    console.log('Buscou')
     //   })
 
-    setTimeout(() => {
-      setValue('')
-    }, 1000)
   }
 
   return (

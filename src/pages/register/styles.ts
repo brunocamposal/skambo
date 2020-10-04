@@ -14,6 +14,7 @@ export const Button = styled.button`
   border-radius:7px;
   height:35px;
   width:293px;
+  cursor: pointer;
 `;
 
 export const LinkWrapper = styled.div`

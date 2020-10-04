@@ -9,7 +9,6 @@ const FormContainer = ({props}: any) => {
   return (
     <>
       <Styled.Container>
-        <a onClick={() => history.push("/")}>Voltar</a>
         <Styled.BoxContent>
           <Styled.LogoContainer>
             <img src={RegisterIcon} />

@@ -10,6 +10,8 @@ export const StyledMenu = styled.div`
   top: 0;
   display: flex;
   justify-content: center;
+  background: #ffffff;
+  padding-top: 15px;
 
   @media (max-width: 480px) {
     height: 100px;
@@ -48,7 +50,6 @@ export const StyledMenuCenter = styled.div`
 export const StyledMenuRight = styled.div`
   width: 30%;
   font-size: 32px;
-  color: var(--primary);
   display: flex;
 
   @media (max-width: 880px) {
@@ -73,7 +74,7 @@ export const StyledMenuRight = styled.div`
 `;
 
 export const StyledIcons = styled.div`
-  margin: 10px;
+  margin: 10px 12px;
   width: 60%;
   display: flex;
   flex-direction: row;
@@ -84,33 +85,28 @@ export const StyledIcons = styled.div`
   }
   
   @media (max-width: 480px) {
-    width: 80px;
-    margin-top: 10px;
+   margin: 10px 15px;
   }
 `;
 
 export const StyledLogo = styled.img`
-  height: 50px;
-  margin-top: 5px;
-
-  @media (max-width: 1000px) {
-    height: 40px;
-    margin-top: 10px;
-  }
+  width: 180px;
+  cursor: pointer;
 
   @media (max-width: 480px) {
+    width: 120px;
     margin-top: 0;
   }
 `;
 
 export const StyledSearch = styled(Input)`
-  width: 80%;
-  top: 10px;
-  left: 5px;
+  width: 70%;
+  top: 12px;
+  left: 70px;
   cursor: pointer;
 
   input {
-    background: #f4f4f6 !important;
+    background: #F4F4F6 !important;
     color: var(--primary-dark) !important;
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;
@@ -130,8 +126,7 @@ export const StyledSearch = styled(Input)`
 export const StyledButton = styled.button`
   width: 140px;
   height: 40px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 8px;
   background: var(--primary);
   color: #ffffff;
   font-weight: bold;
@@ -174,6 +169,7 @@ export const StyledUser = styled.img`
   width: 32px;
   height: 32px;
   border: 1px solid black;
+  cursor: pointer;
 
   @media (max-width: 880px) {
     width: 20px;

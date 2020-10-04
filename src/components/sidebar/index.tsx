@@ -7,7 +7,6 @@ import { categories } from "./helper";
 const Sidebar: React.FC = () => {
   return (
     <Container>
-      <h3> Categorias </h3>
       {categories.map((item, index) => (
         <Categorie className={item.classStyle} key={index}>
           <item.icon className="icon-style" /> {item.name}
