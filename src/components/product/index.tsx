@@ -36,7 +36,7 @@ const Product = () => {
     
     const id = 0
     const url = `https://capstone-q2.herokuapp.com/products/`
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhbmRvMTJAdGVzdDEyLmNvbSIsImlhdCI6MTYwMTkyODUxMSwiZXhwIjoxNjAxOTMyMTExLCJzdWIiOiI3In0.W_ITz0wRwYsFIY6Gpi58a5OYF0B163kHbh-PNGyyqtE'
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhbmRvMTJAdGVzdDEyLmNvbSIsImlhdCI6MTYwMTkzMjIzMiwiZXhwIjoxNjAxOTM1ODMyLCJzdWIiOiI3In0.jHNpG6pa36_O-ghhc0bh6MTIAGXRBibQq3BtssXtMSM'
 
     useEffect(() => {
       axios.

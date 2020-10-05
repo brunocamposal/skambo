@@ -7,16 +7,32 @@ export const ProductCard = styled.div`
     max-width: 950px;
     min-height: 500px;
     display: flex;
+
+    @media (max-width: 920px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `
 
 export const CardImg = styled.div`
     width: 50%;
     height: 500px;
     display: flex;
+
+    @media (max-width: 920px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `
 export const CardThumb = styled.div`
     width: 11%;
     height: 500px;
+
+    @media (max-width: 920px) {
+        display: flex;
+        flex-direction:row;
+        justify-content: center;
+    }
 `
 
 export const ProductThumb = styled.img`
@@ -44,17 +60,19 @@ export const ProductShow = styled.img`
     cursor: pointer;
     overflow: hidden;
 
-    .zoom {
-        max-width: 100%;
-        -moz-transition: all 0.3s;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
-    }
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
         
     &:hover {
         -moz-transform: scale(1.2);
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
+    }
+
+    @media (max-width: 920px) {
+        margin-top: 0;
     }
 `
 export const CardInfo = styled.div`
@@ -68,6 +86,11 @@ export const ProductInfoName = styled.h1`
     font-weight: bold;
     padding-top: 20px;
     margin-bottom: 10px;
+
+    @media (max-width: 920px) {
+        position: absolute;
+        top: 70px;
+    }
 `
 export const ProductInfoValue = styled.p`
     font-size: 16px;
