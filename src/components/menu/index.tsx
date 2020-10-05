@@ -10,7 +10,6 @@ import {
   StyledReverseButton,
   StyledIcons,
   StyledUser,
-  StyledMenuMobile
 } from "./styles";
 import { Dropdown, Form } from "semantic-ui-react"
 import { useHistory } from "react-router-dom"
@@ -19,14 +18,12 @@ import UserDefault from '../../media/img/userDefault.png'
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import { VscSettingsGear } from 'react-icons/vsc'
-import { BsPeopleCircle } from 'react-icons/bs'
-import { TiThMenu, TiTimes } from 'react-icons/ti'
 import Swal from 'sweetalert2';
 // import axios from "axios";
 import { setTimeout } from "timers";
+import MobileCategories from '../mobile/categories'
 
 const TopBar: React.FC = () => {
-  const [visible, setVisible] = useState(false)
   const [value, setValue] = useState('')
   const history = useHistory()
   const trigger = <StyledUser src={UserDefault} alt='user' />
@@ -40,30 +37,11 @@ const TopBar: React.FC = () => {
     //    console.log('Buscou')
     //   })
 
-    setTimeout(() => {
-      setValue('')
-    }, 1000)
-  }
-
-  if (window.innerWidth <= 500) {
-    return (
-      <StyledMenuMobile>
-        <StyledMenuLeft>
-          {visible ? <TiTimes onClick={() => setVisible(false)} /> : (<TiThMenu onClick={() => setVisible(true)} />)}
-        </StyledMenuLeft>
-
-        <StyledMenuCenter>
-          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
-        </StyledMenuCenter>
-        
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
-        </StyledMenuRight>
-      </StyledMenuMobile>
-    )
   }
 
   return (
+    <>
+    <MobileCategories />
     <StyledMenu>
       <StyledMenuLeft>
         <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
@@ -83,13 +61,12 @@ const TopBar: React.FC = () => {
         </Form>
       </StyledMenuCenter>
       
-      {window.localStorage.length > 0 ?
+      {window.localStorage.length >= 0 ? // Condicional para quando o usuário estiver logado
       <StyledMenuRight>
-        <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
-        
-        <StyledIcons>        
-          {window.localStorage.length > 0 ?
-          (<Dropdown trigger={trigger} icon={null}>
+        <StyledButton className='web' onClick={() => history.push('/')}>Anunciar</StyledButton>
+             
+        <StyledIcons>
+          <Dropdown trigger={trigger} icon={null}>
             <Dropdown.Menu>
             <Dropdown.Item
                       icon="edit"
@@ -107,21 +84,18 @@ const TopBar: React.FC = () => {
                         });
                       }} />
             </Dropdown.Menu>
-          </Dropdown>) 
-          :
-          (<BsPeopleCircle />)}
+          </Dropdown>
+          
+          <VscSettingsGear className='web' onClick={() => history.push('/user')} />
         
-          <VscSettingsGear onClick={() => history.push('/')} />
+          <AiOutlineHeart className='web' onClick={() => history.push('/user')} />
         
-          <AiOutlineHeart onClick={() => history.push('/')} />
-        
-          <AiOutlineMail onClick={() => history.push('/')} />
+          <AiOutlineMail className='web' onClick={() => history.push('/')} />
         
           <HiOutlineShoppingBag onClick={() => history.push('/')} />
-        
         </StyledIcons>
-      
       </StyledMenuRight>      
+      
       :
       
       <StyledMenuRight>
@@ -129,6 +103,7 @@ const TopBar: React.FC = () => {
         <StyledReverseButton onClick={() => history.push('/register')}>Registrar-se</StyledReverseButton>
       </StyledMenuRight>}
     </StyledMenu>
+    </>
   );
 };
 

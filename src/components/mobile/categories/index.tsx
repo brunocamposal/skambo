@@ -27,8 +27,6 @@ const MobileCategories = () => {
           >
             <IconClose onClick={() => setVisible(false)} />
             <Content>
-              <h4> Campo de busca </h4>
-              <h3> Categorias </h3>
               {categories.map((item, index) => (
                 <Categorie className={item.classStyle} key={index}>
                   <item.icon className="icon-style" /> {item.name}

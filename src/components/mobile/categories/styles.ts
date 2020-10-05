@@ -7,8 +7,9 @@ export const Container = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  margin: 20px;
+  margin: 10px;
   font-size: 30px;
+  z-index: 10;
   
   @media (max-width: 480px) {
     display: block;
