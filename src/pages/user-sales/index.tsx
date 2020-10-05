@@ -29,14 +29,31 @@ const UserSales: React.FC = () => {
   return (
     <Styled.Container>
       {userProducts && userProducts.map((product: any, key: number) =>
-        (<Card
-          key={key}
-          category={product.category}
-          imgUrl={product.thumbnail}
-          title={product.name}
+        (<Styled.CardWrapper key={key}>
+          <Card
 
-        />)
+            category={product.category}
+            imgUrl={product.thumbnail}
+            title={product.name}
+
+          />
+          <Styled.Button>Remover</Styled.Button>
+        </Styled.CardWrapper>
+        )
       )}
+      {userProducts && userProducts.map((product: any, key: number) =>
+        (<Styled.CardWrapper key={key}>
+          <Card
+
+            category={product.category}
+            imgUrl={product.thumbnail}
+            title={product.name}
+
+          />
+          <Styled.Button>Remover</Styled.Button>
+        </Styled.CardWrapper>)
+      )}
+
     </Styled.Container>
   )
 }
