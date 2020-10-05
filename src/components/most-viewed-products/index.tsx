@@ -49,7 +49,7 @@ import axios from 'axios'
 //     imgUrl: 'https://img.olx.com.br/images/32/320073567225211.jpg',
 //   },
 // ];
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNjAxOTIwMDgxLCJleHAiOjE2MDE5MjM2ODEsInN1YiI6IjQifQ.E66xPfmSue9ydnqlqHasWOt-qYznm0tXio80QqLzMk4"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEyQGdtYWlsLmNvbSIsImlhdCI6MTYwMTkyMzc2NSwiZXhwIjoxNjAxOTI3MzY1LCJzdWIiOiIxMiJ9.8b1XmJrkkH-qZP_7u6ynPH1AzJFp3O_dIuRvD27Q0CM"
 const MostViewedProducts = () => {
   const [products, setProducts] = useState([])
   console.log(products)
@@ -57,9 +57,16 @@ const MostViewedProducts = () => {
     axios.get('https://capstone-q2.herokuapp.com/products', {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then((res) => setProducts(res.data))
+      .then((res) => {
+        const sortedProducts = res.data.sort((a: any, b: any) => {
+          return parseInt(b.views) - parseInt(a.views)
+        })
+        setProducts(sortedProducts)
+      })
       .catch(err => console.log(err))
   }, [])
+
+
   const settings = {
     infinite: true,
     slidesToShow: 4,
@@ -105,7 +112,7 @@ const MostViewedProducts = () => {
         <Slider {...settings}>
           {products &&
             products.map((product: any) => {
-              return <Card title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return <Card views={product.views} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
             })}
         </Slider>
       </Styled.CarouselContainer>
@@ -113,7 +120,7 @@ const MostViewedProducts = () => {
         <Styled.MobileContainer>
           {products &&
             products.map((product: any) => {
-              return <Card title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return <Card views={product.views} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
             })}
         </Styled.MobileContainer>
       </Styled.Mobile>
