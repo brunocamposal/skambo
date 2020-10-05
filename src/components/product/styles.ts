@@ -7,7 +7,6 @@ export const ProductCard = styled.div`
     max-width: 950px;
     min-height: 500px;
     display: flex;
-    margin-left: 50px;
 `
 
 export const CardImg = styled.div`
@@ -41,20 +40,22 @@ export const CardProduct = styled.div`
 `
 export const ProductShow = styled.img`
     height: 400px;
+    max-width: 400px;
     cursor: pointer;
-
     overflow: hidden;
-    max-width: 100%;
-    -moz-transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    
+
+    .zoom {
+        max-width: 100%;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+        
     &:hover {
         -moz-transform: scale(1.2);
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
     }
-
 `
 export const CardInfo = styled.div`
     width: 50%;
@@ -63,19 +64,26 @@ export const CardInfo = styled.div`
     align-items: center;
 `
 export const ProductInfoName = styled.h1`
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
-    padding-top: 30px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+`
+export const ProductInfoValue = styled.p`
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;;
+    margin: 0;
+    color: var(--primary);
 `
 export const ProductInfoDesc = styled.p`
-    font-size: 20px;
-    margin-top: 20px;
+    font-size: 14px;
+    width: 100%;
 `
 export const ProductInfoIntr = styled.p`
-    font-size: 20px;
-    margin-top: 20px;
+    font-size: 14px;
+    width: 70%;
 `
-
 export const InterestButton = styled(StyledButton)`
     width: 300px;
     margin-top: 50px;
