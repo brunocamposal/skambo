@@ -12,7 +12,6 @@ interface stateProps {
   session: { token: string }
 }
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEyQGdtYWlsLmNvbSIsImlhdCI6MTYwMTkyOTYzNywiZXhwIjoxNjAxOTMzMjM3LCJzdWIiOiIxMiJ9.-hMZKStlQVtkyTx0ojIrNktK5SLiiEpbd9bkDyD_RwY"
 const MostViewedProducts = () => {
   const session = useSelector((state: stateProps) => state.session)
 
@@ -77,7 +76,7 @@ const MostViewedProducts = () => {
         <Slider {...settings}>
           {products &&
             products.map((product: any, key: number) => {
-              return <Card key={key} views={product.views} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
             })}
         </Slider>
       </Styled.CarouselContainer>
@@ -85,7 +84,7 @@ const MostViewedProducts = () => {
         <Styled.MobileContainer>
           {products &&
             products.map((product: any, key) => {
-              return <Card key={key} views={product.views} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
             })}
         </Styled.MobileContainer>
       </Styled.Mobile>
