@@ -56,7 +56,7 @@ export const FormContainer = styled.div`
   align-items: center;
 
   h1 {
-    margin-bottom: 35px;
+    margin: 35px;
   }
 
   label {
@@ -80,7 +80,7 @@ export const FormContainer = styled.div`
   @media (max-width: 768px) {
     width: 96%;
     h1 {
-      margin-top: 30px;
+      margin-top: 40px;
     }
   }
 

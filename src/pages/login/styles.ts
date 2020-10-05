@@ -26,3 +26,7 @@ export const ImgForm = styled.img`
   width: 250px;
   margin: 25px;
 `
+
+export const Error = styled.span`
+  color: #f40909;
+`;
