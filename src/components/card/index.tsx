@@ -1,6 +1,8 @@
 import React from 'react'
 import * as Styled from './styles'
 import { motion } from "framer-motion"
+import { Popup } from 'semantic-ui-react'
+
 
 interface PropTypes {
   title: string,
@@ -10,6 +12,7 @@ interface PropTypes {
 
 const Card = ({ title, category, imgUrl }: PropTypes) => {
   return (
+
     <motion.div
       whileHover={{
         scale: 1.2,
@@ -20,7 +23,10 @@ const Card = ({ title, category, imgUrl }: PropTypes) => {
       <Styled.Card>
         <img src={imgUrl} />
         <div>
-          <strong>{title}</strong>
+          <Popup content={title} trigger={
+            <strong>{title}</strong>
+          }
+          />
           <p>{category}</p>
         </div>
       </Styled.Card>
