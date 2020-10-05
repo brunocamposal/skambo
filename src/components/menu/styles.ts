@@ -60,6 +60,9 @@ export const StyledIcons = styled.div`
 export const StyledLogo = styled.img`
   height: 50px;
   margin-top: 5px;
+  :hover {
+    cursor: pointer;
+  }
 
   @media (max-width: 1000px) {
     height: 40px;

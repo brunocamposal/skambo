@@ -8,18 +8,49 @@ export const Container = styled.div`
   align-items: center;
   align-content: center;
   flex-direction: column;
-  background-color: var(--secondary-light);
 `;
 
-export const StyledButton = styled.button`
-  background: var(--primary);
-  color: var(--secondary-light);
-  padding: 10px;
-  border-radius: 3px;
-  display: grid;
+const Button = styled.button`
+  border-radius: 5px;
+  display: inline-grid;
+  height: 40px;
   place-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+`;
+
+export const ResetButton = styled(Button)`
+  background: var(--primary-light);
+  color: var(--primary-dark);
   :hover {
-    background: var(--primary-light);
+    background: var(--secondary-light);
     color: var(--secondary-dark);
   }
+`;
+
+export const SendButton = styled(Button)`
+  background: var(--primary);
+  color: var(--secondary-light);
+  margin-left: 12px;
+  :hover {
+    background: var(--secondary-light);
+    color: var(--secondary-dark);
+  }
+`;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 1.4285em;
+`;
+
+export const P = styled.p`
+  color: red;
+`;
+
+export const Money = styled.input`
+  content::before: '$ ';
 `;

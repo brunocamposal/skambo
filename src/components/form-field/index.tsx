@@ -6,12 +6,15 @@ interface Props {
   name: string;
   type?: string;
   label: string;
-  inputPlace: string;
-  inputRef: any;
+  inputPlace?: string;
+  inputRef?: any;
   error?: {
     message?: string;
   };
   multiple?: boolean;
+  step?: number | string;
+  min?: number;
+  max?: number;
 }
 
 const FormField = ({
@@ -23,6 +26,9 @@ const FormField = ({
   inputRef,
   error,
   multiple,
+  step,
+  min,
+  max,
 }: Props) => {
   return (
     <Form.Field required={required}>
@@ -34,6 +40,9 @@ const FormField = ({
           placeholder={inputPlace}
           ref={inputRef}
           multiple={multiple}
+          step={step}
+          min={min}
+          max={max}
         />
       </label>
       {error && <p style={{ color: 'red' }}>{error.message}</p>}

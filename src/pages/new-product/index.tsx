@@ -1,89 +1,75 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import axios from 'axios';
-import FormField from '../../components/form-field/index';
-import { login } from "../../redux/actions/session";
-  
-interface product {
-  user_id: number;
-  views: number;
-  usersAcess: number;
-  usability: number;
-  value: number;
-  boost: string;
-  name: string;
-  description: string;
-  thumbnail: string;
-  category: string;
-  images: string[];
-  interests: string[];
-}
-
-interface token_decoded {
-  user_id: number;
-  exp: Date;
-}
+// import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { Form, Message } from 'semantic-ui-react';
+import { Container, ResetButton, SendButton, ButtonsDiv, Money } from './styles';
+// import { useDispatch } from 'react-redux';
+import { product, token_decoded, categoria } from './types';
 
 const token: string = localStorage.token
   ? localStorage.token
-  : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbnRhdG9AYXRhdWEuY29tIiwiaWF0IjoxNjAxNTgxNTg2LCJleHAiOjE2MDE1ODUxODYsInN1YiI6IjQifQ.OtwmlcIxnV5vY6JGSkPzMIrIfLz5odwoyRJWB6yGScs"
-  ;
-
-const { user_id } = jwt_decode<token_decoded>(token);
+  : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbnRhdG9AYXRhdWEuY29tIiwiaWF0IjoxNjAxNTgxNTg2LCJleHAiOjE2MDE1ODUxODYsInN1YiI6IjQifQ.OtwmlcIxnV5vY6JGSkPzMIrIfLz5odwoyRJWB6yGScs';
 
 const defaultProduct: product = {
-  user_id: user_id,
+  user_id: jwt_decode<token_decoded>(token),
   views: 0,
-  usersAcess: 0,
-  usability: 0,
-  value: 0,
+  usersAccess: 0,
+  condition: '5',
+  val: '0.00',
   boost: '',
   name: '',
   description: '',
-  thumbnail: '',
-  category: '',
-  images: [''],
-  interests: [''],
+  thumbnail: null,
+  category: 'Outros',
+  images: [],
+  interests: [],
 };
 
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
-  const { register, handleSubmit, errors } = useForm<product>(defaultProduct);
+  const [formError, setFormError] = useState({});
   const [requestError, setRequestError] = useState('');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    if (!!errors.length) console.log(errors);
-    if (!!requestError !== '') console.log(requestError);
-  }, [errors, requestError]);
+    if (requestError !== '') console.log(JSON.stringify(requestError));
+  }, [requestError]);
 
   const onSubmit = () => {
-    const data = {
+    const sendData = {
       header: {
-        Authorization: token
+        Authorization: token,
       },
-      data: {
-        user: {
-          user_id: user_id,
-        },
-        product: formValue
-      }
-    }
-    axios.post("https://capstone-q2.herokuapp.com/products", data).then({ data } => {
-  console.log(data)
-}).catch({response}=> {
-  setRequestError(response)
-    })
+      data: formValue,
+    };
+    console.log(JSON.stringify(sendData));
+    // axios
+    //   .post('https://capstone-q2.herokuapp.com/products', sendData)
+    //   .then(({ data }) => {
+    //     console.log(data);
+
+    //     // mostra mensagem de sucesso
+    //     // limpa formulário
+    //   })
+    //   .catch(({ response }) => {
+    //     setRequestError(response);
+    //   });
   };
 
-  interface categorias {
-    key: number;
-    value: string;
-    text: string;
+  function formatNumber(n: string) {
+    return n
+      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d{2})/, '$1.$2'); // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+    // .replace(/(\d{3})(\d)/, "$1.$2")
+    // .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+    // .replace(/(-\d{2})\d+?$/, "$1")
+    // return n.replace(/\D/g, '').replace(/\d{2}(?!\B)/, (str) => {
+    //   return `,${str}`;
+    // });
   }
 
-  const categorias: categorias[] = [
+  const categorias: categoria[] = [
     { key: 1, value: 'Eletronicos', text: 'Eletrônicos' },
     { key: 2, value: 'Escritorio', text: 'Escritório' },
     { key: 3, value: 'Esportes', text: 'Esportes' },
@@ -99,140 +85,121 @@ const NewProduct: React.FC = () => {
   ];
 
   return (
-    <>
-      <Container>
-        <Link to="/">
-          <h3> Voltar </h3>
-        </Link>
-        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              
-            <FormField required={true} name='name' type='text' label='Produto' inputPlace='' inputRef={register} error='Insira um nome para seu produto' value={formValue.name} onChange={(e) => {
-              setFormValue({ ...formValue, name: e.target.value });
-            }}/>
-              {/*
-                <Form.Field>
-                <label>
-                  <div>Produto</div>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formValue.name}
-                  onChange={(e) => {
-                    setFormValue({ ...formValue, name: e.target.value });
-                  }}
-                  ref={register({
-                    required: true,
-                    maxLength: 30,
-                    message: 'Insira um nome para seu produto',
-                  })}
-                />
-                </Form.Field>
-              */}
-              <FormField required={true} name='file' type='file' label='Imagens' inputPlace='' inputRef={register({
-                required: true,
-                message: 'Insira ao menos uma imagem',
-              })} error='Insira pelo menos uma imagem' value={formValue.images} onChange={(e) => {
-                setFormValue({ ...formValue, images: [...formValues.images, e.target.images] });
-              }} multiple={true}/>
-              {/*
-              <Form.Field>
-                <label>
-                  <div>Imagens</div>
-                  <input
-                    type="file"
-                    name="file"
-                    ref={register({
-                      required: true,
-                      message: 'Insira ao menos uma imagem',
-                    })}
-                    multiple
-                  />
-                </label>
-              </Form.Field>
-                  */}
-              <Form.Field required={true}>
-                <label>
-                  <div>Categoria</div>
-                  <select
-                    name="category"
-                    ref={register({
-                      required: true,
-                      message: 'Selecione uma categoria',
-                    })}
-                    onChange={(g) => {
-                      setFormValue({ ...formValue, category: g.target.value });
-                      console.log(g.target);
-                    }}>
-                    {categorias.map(({ key, value, text }) => (
-                      <option value={value} key={key}>
-                        {text}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+    <Container>
+      <Link to="/">
+        <h3> Voltar </h3>
+      </Link>
 
-              </Form.Field>
-              <FormField required={true} name='file' type='range' label='Estado de conservação' inputPlace='' inputRef={register({
-                                message: {(e) => e.value},
-              })} value={formValue.images} onChange={(e) => {
-                setFormValue({ ...formValue, images: [...formValues.images, e.target.images] });
-              }} multiple={true}/>
-                   {/*
-              <Form.Field>
-                <label>
-                  <div>Estado de conservação</div>
-                  <input
-                    onChange={(f) => {
-                      setFormValue({ ...formValue, usability: parseInt(f.target.value) });
-                    }}
-                    type="range"
-                    name="aspect"
-                    id="aspect"
-                    // ref={register}
-                  />
-                </label>
-              </Form.Field>
-                  */}
-              <Form.Field>
-                <label>
-                  <div>Detalhes</div>
-                  <TextArea
-                    rows={4}
-                    name="description"
-                    // ref={register({
-                    //   required: true,
-                    //   minLength: 18,
-                    //   message: 'Preste algumas informações sibre seu produto',
-                    // })}
-                    placeholder="Informe sobre possíveis sinais de uso como &#10;
-          manchas, partes faltantes / estragadas, etc, para que os &#10;
-          visitantes saibam exatamente o que esperar do seu produto."
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label>
-                  <div>Valor de referência para Skambo</div>
-                  <input
-                    type="number"
-                    name="valueSkambo"
-                    // ref={register({
-                    //   required: true,
-                    //   minLength: 2,
-                    //   message: 'Informe um valor aproximado para seu produto',
-                    // })}
-                  />
-                </label>
-              </Form.Field>
-              <StyledButton>Cadastrar</StyledButton>
-            </Form>
-          </Grid.Column>
-        </Grid>
-      </Container>
-    </>
+      <Form onSubmit={() => onSubmit()}>
+        <Form.Field>
+          <label htmlFor="name">
+            <div>Produto</div>
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formValue.name}
+            onChange={({ target }) => setFormValue({ ...formValue, name: target.value })}
+            required
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <label htmlFor="category">
+            <div>Categoria</div>
+          </label>
+          <select
+            required
+            name="category"
+            placeholder="Escolha uma categoria"
+            value={formValue.category}
+            onChange={({ target }) => setFormValue({ ...formValue, category: target.value })}>
+            {categorias.map(({ key, value, text }) => (
+              <option key={key} value={value}>
+                {text}
+              </option>
+            ))}
+          </select>
+        </Form.Field>
+
+        <Form.Field>
+          <label htmlFor="file">
+            <div>Imagens</div>
+          </label>
+          <input
+            type="file"
+            name="file"
+            placeholder="Inserir imagem"
+            required
+            multiple
+            onChange={({ target }) =>
+              setFormValue({
+                ...formValue,
+                images: [...formValue.images, target.value],
+                thumbnail: formValue.images[0],
+              })
+            }
+          />
+          {formValue.images.map((img) => (
+            <p>{img}</p>
+          ))}
+        </Form.Field>
+
+        <Form.Field>
+          <label htmlFor="condition">
+            <div>Estado de conservação</div>
+          </label>
+          <input
+            name="condition"
+            type="range"
+            min={0}
+            max={10}
+            value={formValue.condition}
+            onChange={({ target }) => setFormValue({ ...formValue, condition: target.value })}
+          />
+          <span>{formValue.condition}</span>
+        </Form.Field>
+
+        <Form.Field>
+          <label htmlFor="description">
+            <div>Detalhes</div>
+          </label>
+          <textarea
+            name="description"
+            rows={4}
+            required
+            placeholder="Detalhes como possíveis sinais de uso, &#10;
+              manchas, partes faltantes ou estragadas, para que os &#10;
+              visitantes saibam o que esperar do seu produto."
+            onChange={({ target }) => setFormValue({ ...formValue, description: target.value })}
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <label htmlFor="val">
+            <div>Valor de referência para Skambo</div>
+          </label>
+          <Money
+            type="number"
+            name="val"
+            step="0.10"
+            min="1.00"
+            required
+            onChange={({ target }) => setFormValue({ ...formValue, val: target.value })}
+            value={formatNumber(formValue.val)}
+          />
+        </Form.Field>
+
+        <Form.Field>
+          <ButtonsDiv>
+            <ResetButton type="reset" onClick={() => setFormValue(defaultProduct)}>
+              Limpar
+            </ResetButton>
+            <SendButton>Cadastrar</SendButton>
+          </ButtonsDiv>
+        </Form.Field>
+      </Form>
+    </Container>
   );
 };
 

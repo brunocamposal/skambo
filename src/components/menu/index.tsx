@@ -12,6 +12,7 @@ import {
   StyledUser,
   StyledMenuMobile,
 } from './styles';
+import { Link } from 'react-router-dom';
 import { Dropdown, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Logo from '../../media/img/logotipo.png';
@@ -60,7 +61,7 @@ const TopBar: React.FC = () => {
         </StyledMenuCenter>
 
         <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
+          <StyledButton onClick={() => history.push('/new-product')}>Anunciar</StyledButton>
         </StyledMenuRight>
       </StyledMenuMobile>
     );
