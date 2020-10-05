@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import FormField from '../../components/form-field';
 import { login } from '../../redux/actions/session';
+import { useHistory } from 'react-router-dom';
 
 import FormContainer from '../../components/form-container';
 import logo_image from '../../media/img/logotipo.png';
@@ -21,6 +22,7 @@ interface IFormInputs {
 const Login: React.FC = () => {
   const [requestError, setRequestError] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm<IFormInputs>();
 
@@ -30,7 +32,7 @@ const Login: React.FC = () => {
       .then(({ data }) => {
         dispatch(login(data.accessToken));
         localStorage.setItem('token', data.accessToken);
-        //history.push('/users');
+        history.push('/');
       })
       .catch(({ response }) => {
         if (response?.status === 400) {

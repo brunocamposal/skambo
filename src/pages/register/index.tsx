@@ -1,30 +1,36 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
-import FormContainer from "../../components/form-container";
+import FormContainer from '../../components/form-container';
+import { useDispatch } from 'react-redux';
 
-import * as Styled from "./styles";
-import axios from "axios";
+import { login } from '../../redux/actions/session';
+
+import * as Styled from './styles';
+import axios from 'axios';
 
 const Register: React.FC = () => {
   const { register, errors, handleSubmit } = useForm();
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = (data: object): void => {
     console.log(data);
     axios
-      .post(" https://capstone-q2.herokuapp.com/register", data)
+      .post(' https://capstone-q2.herokuapp.com/register', data)
       .then((res) => {
-        setErrorMessage("");
-        console.log(res);
+        setErrorMessage('');
+        dispatch(login(res.data.accessToken));
+        localStorage.setItem('token', res.data.accessToken);
+        history.push('/');
       })
       .catch((err) => {
         console.log(err.response.status);
         if (err.response.status === 400) {
-          setErrorMessage("Email já cadastrado");
+          setErrorMessage('Email já cadastrado');
         }
       });
   };
@@ -40,7 +46,7 @@ const Register: React.FC = () => {
                 <label>E-mail</label>
                 <input
                   onChange={() => {
-                    setErrorMessage("");
+                    setErrorMessage('');
                   }}
                   name="email"
                   placeholder="Digite seu e-mail"
@@ -48,14 +54,12 @@ const Register: React.FC = () => {
                     required: 'E-mail é obrigatório',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Isso não se parece com um e-mail!",
+                      message: 'Isso não se parece com um e-mail!',
                     },
                   })}
                 />
 
-                {errors.email && (
-                  <Styled.Error>{errors.email.message}</Styled.Error>
-                )}
+                {errors.email && <Styled.Error>{errors.email.message}</Styled.Error>}
               </Styled.FieldWrapper>
               <Styled.FieldWrapper>
                 <label>Senha</label>
@@ -64,22 +68,19 @@ const Register: React.FC = () => {
                   name="password"
                   placeholder="Digite sua senha"
                   ref={register({
-                    required: "A senha é obrigatória",
+                    required: 'A senha é obrigatória',
                     minLength: {
                       value: 6,
-                      message: "A senha precisa ter no minímo 6 caracteres",
+                      message: 'A senha precisa ter no minímo 6 caracteres',
                     },
                     pattern: {
                       value: /[+#?!@$%^&*-]{1,}/,
-                      message:
-                        "A senha precisa ter ao menos um caracter especial",
+                      message: 'A senha precisa ter ao menos um caracter especial',
                     },
                   })}
                 />
 
-                {errors.password && (
-                  <Styled.Error>{errors.password.message}</Styled.Error>
-                )}
+                {errors.password && <Styled.Error>{errors.password.message}</Styled.Error>}
               </Styled.FieldWrapper>
               {errorMessage && <Styled.Error>{errorMessage}</Styled.Error>}
 
@@ -88,9 +89,8 @@ const Register: React.FC = () => {
                 <Styled.LinkWrapper>
                   <a
                     onClick={() => {
-                      history.push("/login")
-                    }}
-                  >
+                      history.push('/login');
+                    }}>
                     <h3> Já possui conta? Entrar! </h3>
                   </a>
                 </Styled.LinkWrapper>
