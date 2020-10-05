@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { useForm } from 'react-hook-form';
-
 import { Form } from 'semantic-ui-react';
 import FormField from '../../components/form-field';
-
 import FormContainer from '../../components/form-container';
+
+import Swal from 'sweetalert2';
 
 import * as Styled from './styles';
 import axios from 'axios';
@@ -29,6 +28,14 @@ const Register: React.FC = () => {
       .post(' https://capstone-q2.herokuapp.com/register', data)
       .then((res) => {
         setErrorMessage('');
+        history.push('/login');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Usuário cadastrado com sucesso!',
+          showConfirmButton: false,
+          timer: 1300,
+        });
       })
       .catch((err) => {
         if (err.response.status === 400) {
