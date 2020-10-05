@@ -1,10 +1,5 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-export const FieldWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 
 export const Button = styled.button`
   font-weight:700;
@@ -17,7 +12,7 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const LinkWrapper = styled.div`
+export const LinkWrapper = styled(Link)`
   h3 {
     width: 287px;
     height: 45px;

@@ -50,13 +50,13 @@ const Login: React.FC = () => {
               <FormField
                 required
                 name="email"
-                label="Digite seu E-Mail"
-                inputPlace="E-Mail"
+                label="E-Mail"
+                inputPlace="Digite seu E-Mail"
                 inputRef={register({
-                  required: 'E-mail Necessário',
+                  required: 'E-mail é obrigatório',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Formato Inválido!',
+                    message: 'Isso não se parece com um e-mail!',
                   },
                 })}
                 error={errors.email}
@@ -66,8 +66,8 @@ const Login: React.FC = () => {
                 required
                 name="password"
                 type="password"
-                label="Digite sua Senha"
-                inputPlace="Senha"
+                label="Senha"
+                inputPlace="Digite sua Senha"
                 inputRef={register({
                   required: 'Senha Necessária',
                   minLength: {
