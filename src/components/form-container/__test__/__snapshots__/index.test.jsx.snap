@@ -4,11 +4,6 @@ exports[`Form  Snapshot test Form  Snapshot test Render 1`] = `
 <div
   className="sc-bdnylx leTbsp"
 >
-  <a
-    onClick={[Function]}
-  >
-    Voltar
-  </a>
   <div
     className="sc-gtssRu brhlVN"
   >
@@ -20,7 +15,7 @@ exports[`Form  Snapshot test Form  Snapshot test Render 1`] = `
       />
     </div>
     <div
-      className="sc-dlnjPT euoBPG"
+      className="sc-dlnjPT cOIIvD"
     />
   </div>
 </div>

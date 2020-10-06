@@ -6,15 +6,16 @@ exports[`Sidebar Should render sidebar 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 300px;
+  width: 250px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 120px;
 }
 
 .c0 h3 {
   text-align: left;
+  font-weight: 800;
   padding: 10px;
   width: 200px;
 }
@@ -44,9 +45,6 @@ exports[`Sidebar Should render sidebar 1`] = `
 <div
   className="c0"
 >
-  <h3>
-     Categorias 
-  </h3>
   <div
     className="c1 games"
   >
