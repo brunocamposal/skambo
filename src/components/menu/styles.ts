@@ -25,7 +25,6 @@ export const StyledMenuLeft = styled.div`
 
   @media (max-width: 480px) {
     width: 40%;
-    height: 50px;
     position: absolute;
     top: 0;
     left: 30%;
@@ -51,6 +50,10 @@ export const StyledMenuRight = styled.div`
   width: 30%;
   font-size: 32px;
   display: flex;
+  @media (max-width: 1300px) {
+    font-size: 20px;
+  }
+
 
   @media (max-width: 880px) {
     font-size: 20px;

@@ -26,6 +26,7 @@ const MostViewedProducts = () => {
           return parseInt(b.views) - parseInt(a.views)
         })
         setProducts(sortedProducts)
+        console.log(res)
       })
       .catch(err => console.log(err))
   }, [])
