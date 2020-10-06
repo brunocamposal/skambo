@@ -1,24 +1,26 @@
-import React from "react";
-import Login from "../index";
-import { Form } from "semantic-ui-react";
+import React from 'react';
+import Login from '../index';
+import TestRenderer from 'react-test-renderer';
 
-import enzyme from 'enzyme'
-
-jest.mock("react-redux", () => ({
+jest.mock('react-redux', () => ({
   __esModule: true,
   useDispatch: () => jest.fn(),
 }));
 
-jest.mock("react-hook-form", () => ({
+jest.mock('react-router-dom', () => ({
   __esModule: true,
-  useForm: () => ( {register: jest.fn(), handleSubmit: jest.fn(), errors: jest.fn()} ),
+  useHistory: jest.fn(),
+  Link: () => <a></a>
 }));
 
-describe("teste do compoenente Login", () => {
+jest.mock('react-hook-form', () => ({
+  __esModule: true,
+  useForm: () => ({ register: jest.fn(), handleSubmit: jest.fn(), errors: jest.fn() }),
+}));
 
-  it("Render Form component", () => {
-    const tree = enzyme.shallow(<Login />)
-    
-    expect(tree.find(Form).length).toBe(0)
-  });
+test('Render Form component', () => {
+  const tree = TestRenderer.create(<Login />).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
+

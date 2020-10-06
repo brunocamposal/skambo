@@ -1,10 +1,10 @@
-import { LOGIN } from "./types";
+import { LOGIN } from './types';
 
 interface LoginProps {
-  token: string;
+  token?: string;
 }
 
-export const login = ({ token}: LoginProps) => ({
+export const login = ({ token }: LoginProps) => ({
   type: LOGIN,
-  token
+  token,
 });

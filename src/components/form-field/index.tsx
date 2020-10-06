@@ -5,7 +5,7 @@ interface Props {
   required?: boolean;
   name: string;
   type?: string;
-  label: string;
+  label?: string;
   inputPlace: string;
   inputRef: any;
   error?: {

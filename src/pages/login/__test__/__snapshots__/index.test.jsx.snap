@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form component 1`] = `
+<div
+  className="sc-bdnylx leTbsp"
+>
+  <a
+    onClick={[Function]}
+  >
+    Voltar
+  </a>
+  <div
+    className="sc-gtssRu brhlVN"
+  >
+    <div
+      className="sc-hKFyIo dJqfuM"
+    >
+      <img
+        src="register-icon.svg"
+      />
+    </div>
+    <div
+      className="sc-dlnjPT euoBPG"
+    >
+      <img
+        className="sc-gKAblj kwtwHG"
+        src="logotipo.png"
+      />
+      <form
+        className="ui form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="required field"
+        >
+          <label>
+            Digite seu E-Mail
+          </label>
+          <input
+            name="email"
+            placeholder="E-Mail"
+          />
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            Digite sua Senha
+          </label>
+          <input
+            name="password"
+            placeholder="Senha"
+            type="password"
+          />
+        </div>
+        
+        <button
+          className="sc-eCApGN lpjZUS"
+          type="submit"
+        >
+          Fazer Login
+        </button>
+      </form>
+      <a />
+    </div>
+  </div>
+</div>
+`;
