@@ -4,31 +4,31 @@ import axios from 'axios'
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 import Card from '../../components/card'
+import { fetchUserSales } from '../../redux/actions/user'
+import { useDispatch } from 'react-redux'
 
 interface stateProps {
   session: { token: string }
 }
 
-
-
 const UserSales: React.FC = () => {
-  const [userProducts, setUserProducts] = useState([])
-  console.log(userProducts)
-  const token = useSelector((state: stateProps) => state.session.token)
-  const decoded: { sub: string } = jwt_decode(token)
-  console.log('decoded', decoded)
+  const dispatch = useDispatch()
+  const session = useSelector((state: stateProps) => state.session)
+  const user = useSelector((state: { user: any }) => state.user)
+
+  const decoded: { sub: string } = jwt_decode(session.token)
+  // console.log('decoded', decoded)
+
+  useSelector((state: any) => state.user)
 
   useEffect(() => {
-    axios.get(`https://capstone-q2.herokuapp.com/products?userId=${2}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((res) => setUserProducts(res.data))
-      .catch(err => console.log(err))
+    dispatch(fetchUserSales(decoded.sub, session.token))
+
+
   }, [])
-  console.log('user')
   return (
     <Styled.Container>
-      {userProducts && userProducts.map((product: any, key: number) =>
+      {user.userSales && user.userSales.map((product: any, key: number) =>
         (<Styled.CardWrapper key={key}>
           <Card
 
@@ -41,19 +41,6 @@ const UserSales: React.FC = () => {
         </Styled.CardWrapper>
         )
       )}
-      {userProducts && userProducts.map((product: any, key: number) =>
-        (<Styled.CardWrapper key={key}>
-          <Card
-
-            category={product.category}
-            imgUrl={product.thumbnail}
-            title={product.name}
-
-          />
-          <Styled.Button>Remover</Styled.Button>
-        </Styled.CardWrapper>)
-      )}
-
     </Styled.Container>
   )
 }
