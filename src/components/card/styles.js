@@ -25,6 +25,8 @@ export const Card = styled.div`
     object-fit: cover;
   }
   div {
+    white-space: nowrap;
+    overflow: hidden;
     margin-top: 17px;
     margin-left: 8px;
   }
