@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Form } from 'semantic-ui-react';
-import FormField from '../../components/form-field';
-import FormContainer from '../../components/form-container';
 
-import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
+
+import FormContainer from '../../components/form-container';
+import { useDispatch } from 'react-redux';
+
+import { login } from '../../redux/actions/session';
 
 import * as Styled from './styles';
 import axios from 'axios';
+import { Form } from 'semantic-ui-react';
+import FormField from '../../components/form-field';
+
+import Swal from 'sweetalert2';
 
 interface IFormInputs {
   username: string;
@@ -22,13 +27,16 @@ const Register: React.FC = () => {
 
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = (data: object): void => {
     axios
       .post(' https://capstone-q2.herokuapp.com/register', data)
       .then((res) => {
         setErrorMessage('');
-        history.push('/login');
+        dispatch(login(res.data.accessToken));
+        localStorage.setItem('token', res.data.accessToken);
+        history.push('/');
         Swal.fire({
           position: 'top-end',
           icon: 'success',
