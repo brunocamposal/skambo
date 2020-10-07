@@ -5,3 +5,9 @@ export const Container = styled.div`
   flex-direction: column;
   margin-top: 125px;
 `;
+
+export const ResultSearch = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+

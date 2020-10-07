@@ -29,7 +29,6 @@ const TopBar: React.FC = () => {
   const history = useHistory();
   const token = useSelector(({ session }: RootState) => session.token);
 
-  console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
