@@ -1,17 +1,28 @@
-import { USER_SALES, REMOVE_SALE, FETCH_SUCESS } from './types'
+import { USER_SALES, REMOVE_SALE, FETCH_SUCCESS } from './types'
 import axios from 'axios'
 
 export const userSales = () => ({
   type: USER_SALES,
 })
 
-export const removeSale = (saleName: string) => ({
+export const removeSale = (saleId: string) => ({
   type: REMOVE_SALE,
-  saleName
+  saleId
 })
 
+
+export const requestRemoveSale = (saleId: string, token: string) => (dispatch: any) => {
+  axios.delete(`https://capstone-q2.herokuapp.com/products/${saleId}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+    .then((res) => {
+      dispatch(removeSale(saleId))
+    })
+    .catch((err) => console.log(err))
+}
+
 export const fetchSuccess = (userSales: any) => ({
-  type: FETCH_SUCESS,
+  type: FETCH_SUCCESS,
   userSales
 })
 

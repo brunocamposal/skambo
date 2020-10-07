@@ -4,7 +4,7 @@ import axios from 'axios'
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 import Card from '../../components/card'
-import { fetchUserSales } from '../../redux/actions/user'
+import { fetchUserSales, requestRemoveSale } from '../../redux/actions/user'
 import { useDispatch } from 'react-redux'
 import empty from '../../media/icons/empty.svg'
 
@@ -18,7 +18,9 @@ const UserSales: React.FC = () => {
   const user = useSelector((state: { user: any }) => state.user)
 
   const decoded: { sub: string } = jwt_decode(session.token)
-  // console.log('decoded', decoded)
+  console.log('%c Usefull information', 'color:orange; font-weight:bold')
+  console.log('decoded', decoded)
+  console.log(session.token)
 
   useSelector((state: any) => state.user)
 
@@ -27,6 +29,12 @@ const UserSales: React.FC = () => {
 
 
   }, [])
+
+  const handleRemove = (saleId: string) => {
+    console.log(saleId)
+    dispatch(requestRemoveSale(saleId, session.token))
+  }
+
   return (
     <Styled.Container>
       {user?.userSales?.length > 0 ? user.userSales.map((product: any, key: number) =>
@@ -38,7 +46,7 @@ const UserSales: React.FC = () => {
             title={product.name}
 
           />
-          <Styled.Button>Remover</Styled.Button>
+          <Styled.Button onClick={() => { handleRemove(product.id) }}>Remover</Styled.Button>
         </Styled.CardWrapper>
         )
       ) :
