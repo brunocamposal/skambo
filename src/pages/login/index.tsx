@@ -28,6 +28,8 @@ const Login: React.FC = () => {
 
 
   const onSubmit = (values: IFormInputs) => {
+    console.log(values);
+    
     axios
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {

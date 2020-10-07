@@ -1,96 +1,128 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Modal, Form, Image, Button, Icon } from 'semantic-ui-react';
 
-interface Props {}
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+
 //https://capstone-q2.herokuapp.com/users/5
-// "email": "cell@mail.com",
-// "password": "Cell11!"
+// "email": "picolo@mail.com",
+// "password": "Picolo11!"
 
 interface ChangeFormInputs {
-  name: string;
-  label: string;
+  firstName?: any;
+  lastName?: string;
+  cpf?: number | string;
+  email?: string;
+  phoneNumber?: number | string;
+  ownProducts?: string;
+  favorites?: string;
   userImage?: any;
+  adress?: any;
+  cep?: number | string;
+  state?: string;
+  city?: string;
+  neighborhood?: string;
+  street?: string;
+  number?: number;
+  referencePoint?: string;
+  complement?: string;
+  message?: any;
 }
 
 const ChangeProfile = ({ setOpenClose }: any) => {
   const { register, handleSubmit, errors } = useForm<ChangeFormInputs>();
   const [avatarImage, setAvatarImage] = useState('');
-  console.log(avatarImage);
+
+  const token = useSelector(({ session }: any) => session.token);
+  console.log(token);
+
+  let userId: any = jwt_decode(token);
+  console.log(userId);
 
   const onSubmit = (values: ChangeFormInputs) => {
     console.log(values);
-    setAvatarImage(values.userImage[0].name);
+    
+    // setAvatarImage(values.userImage[0].name);
 
-    // axios.put(
-    //   `https://capstone-q2.herokuapp.com/users/${5}`,
-    //   {
-    //     users: {
-    //       firstName: values.name,
-    //       lastName: 'lastName',
-    //       cpf: '000.000.000-00',
-    //       email: 'email@mail.com',
-    //       phoneNumber: '(41) 99999-9999',
-    //       ownProducts: ['product1', 'product2', 'product3'],
-    //       favorites: ['favProduct1', 'favProduct2', 'favProduct3'],
-    //       userImage: 'url_imagem',
-    //       adress: {
-    //         cep: '20300-060',
-    //         state: 'PR',
-    //         city: 'Curitiba',
-    //         neighborhood: 'Centro',
-    //         street: 'Rua dos Aphagalios',
-    //         number: '79',
-    //         referencePoint: 'Edificio Miranda',
-    //         complement: 'apt 81',
-    //       },
-    //     },
-    //   },
-    //   {
-    //     headers: { Authorization: 'token' },
-    //   }
-    // );
+    axios
+      .patch(
+        `https://capstone-q2.herokuapp.com/users/${userId.sub}`,
+        {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          cpf: values.cpf,
+          email: '',
+          phoneNumber: values.phoneNumber,
+          ownProducts: [''],
+          favorites: [''],
+          userImage: '',
+          adress: {
+            cep: values.cep,
+            state: values.state,
+            city: values.city,
+            neighborhood: values.neighborhood,
+            street: values.street,
+            number: values.number,
+            referencePoint: values.referencePoint,
+            complement: values.complement,
+          },
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => console.log(response))
+      .catch((response) => console.log(response));
   };
 
   return (
     <>
       <Modal.Header>Alterar informações</Modal.Header>
       <Modal.Content image>
-        <Image size="medium" src={avatarImage} wrapped />
+        <Image size="medium" src={'https://picsum.photos/200'} wrapped />
 
         <Modal.Description>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <label>Imagem</label>
-            <input name="userImage" type="file" placeholder="Insira uma imagem" ref={register} />
+            {/* <label>Imagem</label>
+            <input name="userImage" type="file" placeholder="Insira uma imagem" ref={register} /> */}
             <Form.Group>
               <Form.Field required>
                 <label>Nome</label>
                 <input
-                  name="name"
+                  name="firstName"
                   type="text"
                   placeholder="Nome"
                   ref={register({
                     required: 'Digite seu primeiro nome!',
+                    pattern: {
+                      value: /[A-Z]{2,}$/i,
+                      message: 'Isso não se parece com um e-mail!',
+                    },
                   })}
-                  // tratar erro
                 />
+                {errors.firstName && <p>{errors.firstName.message}</p>}
               </Form.Field>
               <Form.Field required>
                 <label>Sobrenome</label>
                 <input
-                  name="lastname"
+                  name="lastName"
                   type="text"
                   placeholder="Sobrenome"
                   ref={register({
                     required: 'Digite seu sobrenome!',
+                    pattern: {
+                      value: /[A-Z]{2,}$/i,
+                      message: 'Isso não se parece com um e-mail!',
+                    },
                   })}
-                  // tratar erro
                 />
+                {errors.lastName && <p>{errors.lastName.message}</p>}
               </Form.Field>
             </Form.Group>
 
-            <Form.Field required>
+            {/* <Form.Field required>
               <label>E-Mail</label>
               <input
                 name="email"
@@ -105,7 +137,7 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                 })}
                 // tratar erro
               />
-            </Form.Field>
+            </Form.Field> */}
 
             <Form.Group>
               <Form.Field>
@@ -115,25 +147,28 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                   type="text"
                   placeholder="000.000.000-00"
                   ref={register({
+                    required: 'Campo necessário!',
                     pattern: {
                       value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i,
                       message: 'Formato invalido!',
                     },
                   })}
-                  // tratar erro
                 />
+                {errors.cpf && <p>{errors.cpf.message}</p>}
               </Form.Field>
             </Form.Group>
 
             <Form.Field>
               <label>Telefone</label>
               <input
-                name="tel"
+                name="phoneNumber"
                 type="tel"
                 placeholder="(00) 00000-0000"
-                ref={register}
-                // tratar erro
+                ref={register({
+                  required: 'Campo necessário!',
+                })}
               />
+              {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
             </Form.Field>
 
             <Form.Group>
@@ -144,22 +179,47 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                   type="text"
                   placeholder="00000-000"
                   ref={register({
+                    required: 'Campo necessário!',
                     pattern: {
                       value: /^\d{5}\-\d{3}$/i,
                       message: 'Formato invalido!',
                     },
                   })}
-                  // tratar erro
                 />
+                {errors.cep && <p>{errors.cep.message}</p>}
               </Form.Field>
 
               <Form.Field>
                 <label>Estado</label>
                 <select name="state" ref={register}>
                   <optgroup label="Estados">
-                    <option value="PR">Parana</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
                     <option value="SP">São Paulo</option>
-                    <option value="SC">Santa catarina</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
                   </optgroup>
                 </select>
               </Form.Field>
@@ -172,9 +232,11 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                   name="city"
                   type="text"
                   placeholder="Cidade"
-                  ref={register}
-                  // tratar erro
+                  ref={register({
+                    required: 'Campo necessário!',
+                  })}
                 />
+                {errors.city && <p>{errors.city.message}</p>}
               </Form.Field>
               <Form.Field>
                 <label>Bairro</label>
@@ -182,9 +244,11 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                   name="neighborhood"
                   type="text"
                   placeholder="Bairro"
-                  ref={register}
-                  // tratar erro
+                  ref={register({
+                    required: 'Campo necessário!',
+                  })}
                 />
+                {errors.neighborhood && <p>{errors.neighborhood.message}</p>}
               </Form.Field>
             </Form.Group>
 
@@ -195,16 +259,18 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                   name="street"
                   type="text"
                   placeholder="Rua/Logradouro"
-                  ref={register}
-                  // tratar erro
+                  ref={register({
+                    required: 'Campo necessário!',
+                  })}
                 />
+                {errors.street && <p>{errors.street.message}</p>}
               </Form.Field>
               <Form.Field>
                 <label>Número</label>
                 <input
-                  name="neighborhood"
+                  name="number"
                   type="number"
-                  placeholder="S/N"
+                  placeholder="Número"
                   ref={register}
                   // tratar erro
                 />
@@ -239,7 +305,7 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                 <Icon name="remove" /> Cancelar
               </Button>
               <Button color="green" type="submit" onClick={handleSubmit(onSubmit)}>
-                <Icon name="checkmark" /> Tudo Certo!
+                <Icon name="checkmark" /> Salvar Alterações
               </Button>
             </Modal.Actions>
           </Form>
@@ -250,31 +316,3 @@ const ChangeProfile = ({ setOpenClose }: any) => {
 };
 
 export default ChangeProfile;
-
-//Acre (AC)
-// Alagoas (AL)
-// Amapá (AP)
-// Amazonas (AM)
-// Bahia (BA)
-// Ceará (CE)
-// Distrito Federal (DF)
-// Espírito Santo (ES)
-// Goiás (GO)
-// Maranhão (MA)
-// Mato Grosso (MT)
-// Mato Grosso do Sul (MS)
-// Minas Gerais (MG)
-// Pará (PA)
-// Paraíba (PB)
-// Paraná (PR)
-// Pernambuco (PE)
-// Piauí (PI)
-// Rio de Janeiro (RJ)
-// Rio Grande do Norte (RN)
-// Rio Grande do Sul (RS)
-// Rondônia (RO)
-// Roraima (RR)
-// Santa Catarina (SC)
-// São Paulo (SP)
-// Sergipe (SE)
-// Tocantins (TO)
