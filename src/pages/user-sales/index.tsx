@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/card'
 import { fetchUserSales } from '../../redux/actions/user'
 import { useDispatch } from 'react-redux'
+import empty from '../../media/icons/empty.svg'
 
 interface stateProps {
   session: { token: string }
@@ -28,7 +29,7 @@ const UserSales: React.FC = () => {
   }, [])
   return (
     <Styled.Container>
-      {user.userSales && user.userSales.map((product: any, key: number) =>
+      {user?.userSales?.length > 0 ? user.userSales.map((product: any, key: number) =>
         (<Styled.CardWrapper key={key}>
           <Card
 
@@ -40,7 +41,11 @@ const UserSales: React.FC = () => {
           <Styled.Button>Remover</Styled.Button>
         </Styled.CardWrapper>
         )
-      )}
+      ) :
+        <Styled.Empty>
+          <h2>Você ainda não tem nenhum anúncio!</h2>
+          <img src={empty} />
+        </Styled.Empty>}
     </Styled.Container>
   )
 }

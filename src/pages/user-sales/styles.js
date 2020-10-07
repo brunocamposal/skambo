@@ -25,3 +25,16 @@ export const CardWrapper = styled.div`
     align-items:center;
 `;
 
+export const Empty = styled.div`
+
+  padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+  img {
+    margin-top:20px;
+    width: 65%;
+    height: 65%;
+  }
+`;
