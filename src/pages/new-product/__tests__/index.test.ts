@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import testRenderer  from 'react-test-renderer';
-import NewProduct from '../';
+import NewProduct from '../index';
 
 jest.mock('react', ()=>{
     useState: [_, jest.fn()]

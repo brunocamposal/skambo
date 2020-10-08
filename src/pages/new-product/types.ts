@@ -4,7 +4,7 @@ export interface product {
   views: number;
   usersAccess: number;
   usability: string;
-  value: string;
+  value: number;
   boost: string;
   name: string;
   description: string;
@@ -24,4 +24,5 @@ export interface categoria {
   key: number;
   value: string;
   text: string;
+  selected: string;
 }
