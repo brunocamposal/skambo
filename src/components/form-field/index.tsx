@@ -5,9 +5,9 @@ interface Props {
   required?: boolean;
   name: string;
   type?: string;
-  label: string;
-  inputPlace?: string;
-  inputRef?: any;
+  label?: string;
+  inputPlace: string;
+  inputRef: any;
   error?: {
     message?: string;
   };

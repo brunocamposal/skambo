@@ -10,9 +10,7 @@ import {
   StyledReverseButton,
   StyledIcons,
   StyledUser,
-  StyledMenuMobile,
 } from './styles';
-import { Link } from 'react-router-dom';
 import { Dropdown, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Logo from '../../media/img/logotipo.png';
@@ -20,16 +18,17 @@ import UserDefault from '../../media/img/userDefault.png';
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { VscSettingsGear } from 'react-icons/vsc';
-import { BsPeopleCircle } from 'react-icons/bs';
-import { TiThMenu, TiTimes } from 'react-icons/ti';
 import Swal from 'sweetalert2';
-// import axios from "axios";
 import { setTimeout } from 'timers';
+import MobileCategories from '../mobile/categories';
+import { RootState } from '../../redux/reducers';
+import { useSelector } from 'react-redux';
 
 const TopBar: React.FC = () => {
-  const [visible, setVisible] = useState(false);
   const [value, setValue] = useState('');
   const history = useHistory();
+  const token = useSelector(({ session }: RootState) => session.token);
+
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
@@ -39,66 +38,48 @@ const TopBar: React.FC = () => {
     //  .then((res) => {
     //    console.log('Buscou')
     //   })
-
-    setTimeout(() => {
-      setValue('');
-    }, 1000);
   };
 
-  if (window.innerWidth <= 500) {
-    return (
-      <StyledMenuMobile>
+  return (
+    <>
+      <MobileCategories />
+      <StyledMenu>
         <StyledMenuLeft>
-          {visible ? (
-            <TiTimes onClick={() => setVisible(false)} />
-          ) : (
-            <TiThMenu onClick={() => setVisible(true)} />
-          )}
+          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
         </StyledMenuLeft>
 
         <StyledMenuCenter>
-          <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
+          <Form onSubmit={handleSubmit}>
+            <StyledSearch
+              icon="search"
+              iconPosition="left"
+              placeholder="Buscar produtos para troca"
+              value={value}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setValue(e.target.value);
+              }}
+            />
+          </Form>
         </StyledMenuCenter>
 
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/new-product')}>Anunciar</StyledButton>
-        </StyledMenuRight>
-      </StyledMenuMobile>
-    );
-  }
+        {token != '' ? ( // Condicional para quando o usuário estiver logado
+          <StyledMenuRight>
+            <StyledButton className="web" onClick={() => history.push('/')}>
+              Anunciar
+            </StyledButton>
 
-  return (
-    <StyledMenu>
-      <StyledMenuLeft>
-        <StyledLogo src={Logo} alt="logo" onClick={() => history.push('/')} />
-      </StyledMenuLeft>
-
-      <StyledMenuCenter>
-        <Form onSubmit={handleSubmit}>
-          <StyledSearch
-            icon="search"
-            iconPosition="left"
-            placeholder="Buscar produtos para troca"
-            value={value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setValue(e.target.value);
-            }}
-          />
-        </Form>
-      </StyledMenuCenter>
-
-      {window.localStorage.length > 0 ? (
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/')}>Anunciar</StyledButton>
-
-          <StyledIcons>
-            {window.localStorage.length > 0 ? (
+            <StyledIcons>
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
                     icon="edit"
                     text="Alterar informações"
                     onClick={() => history.push('/register')}
+                  />
+                  <Dropdown.Item
+                    icon="briefcase"
+                    text="Meus anúncios"
+                    onClick={() => history.push('/my-sales')}
                   />
                   <Dropdown.Item
                     icon="sign-out"
@@ -109,6 +90,7 @@ const TopBar: React.FC = () => {
                         confirmButtonText: `Sair`,
                       }).then((result) => {
                         if (result.isConfirmed) {
+                          document.location.reload();
                           window.localStorage.clear();
                         }
                       });
@@ -116,28 +98,26 @@ const TopBar: React.FC = () => {
                   />
                 </Dropdown.Menu>
               </Dropdown>
-            ) : (
-              <BsPeopleCircle />
-            )}
 
-            <VscSettingsGear onClick={() => history.push('/')} />
+              <VscSettingsGear className="web" onClick={() => history.push('/user')} />
 
-            <AiOutlineHeart onClick={() => history.push('/')} />
+              <AiOutlineHeart className="web" onClick={() => history.push('/user')} />
 
-            <AiOutlineMail onClick={() => history.push('/')} />
+              <AiOutlineMail className="web" onClick={() => history.push('/')} />
 
-            <HiOutlineShoppingBag onClick={() => history.push('/')} />
-          </StyledIcons>
-        </StyledMenuRight>
-      ) : (
-        <StyledMenuRight>
-          <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
-          <StyledReverseButton onClick={() => history.push('/register')}>
-            Registrar-se
-          </StyledReverseButton>
-        </StyledMenuRight>
-      )}
-    </StyledMenu>
+              <HiOutlineShoppingBag onClick={() => history.push('/')} />
+            </StyledIcons>
+          </StyledMenuRight>
+        ) : (
+            <StyledMenuRight>
+              <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
+              <StyledReverseButton onClick={() => history.push('/register')}>
+                Registrar-se
+            </StyledReverseButton>
+            </StyledMenuRight>
+          )}
+      </StyledMenu>
+    </>
   );
 };
 

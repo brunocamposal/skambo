@@ -1,5 +1,12 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import session from "./session";
+import session from './session';
+import user from './user'
 
-export default combineReducers({ session });
+export const rootReducer = combineReducers({
+  session, user
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default combineReducers({ session, user });

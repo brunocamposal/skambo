@@ -1,21 +1,18 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const FieldWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const Button = styled.button`
-  font-weight: 700;
-  margin-top: 20px;
-  color: #fff;
-  background-color: #8d70fb;
-  border-radius: 7px;
-  height: 35px;
-  width: 293px;
+  font-weight:700;
+  margin-top:54px;
+  color:#fff;
+  background-color: var(--primary);
+  border-radius:7px;
+  height:35px;
+  width:293px;
+  cursor: pointer;
 `;
 
-export const LinkWrapper = styled.div`
+export const LinkWrapper = styled(Link)`
   h3 {
     width: 287px;
     height: 45px;

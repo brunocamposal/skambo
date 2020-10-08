@@ -37,9 +37,11 @@ export const BoxContent = styled.div`
   @media (max-width: 768px) {
     width: 96%;
     flex-direction: column;
+    height: 880px;
   }
-
-  @media (max-width: 480px) {
+  @media (max-width: 415px){
+    width: 90%;
+    height: 553px;
     box-shadow: 0px 0px 0px #ffffff;
   }
 `;
@@ -54,7 +56,7 @@ export const FormContainer = styled.div`
   align-items: center;
 
   h1 {
-    margin-bottom: 35px;
+    margin: 35px;
   }
 
   label {
@@ -74,10 +76,11 @@ export const FormContainer = styled.div`
     }
   }
 
+
   @media (max-width: 768px) {
     width: 96%;
     h1 {
-      margin-top: 30px;
+      margin-top: 40px;
     }
   }
 
@@ -96,6 +99,8 @@ export const LogoContainer = styled.div`
   @media (max-width: 768px) {
     width: 96%;
     margin-top: 64px;
+  }
+  @media (max-width: 415px){
     display: none;
   }
   img {

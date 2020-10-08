@@ -9,9 +9,6 @@ const FormContainer = ({ props }: any) => {
   return (
     <>
       <Styled.Container>
-        <a href="#" onClick={() => history.push('/')}>
-          Voltar
-        </a>
         <Styled.BoxContent>
           <Styled.LogoContainer>
             <img src={RegisterIcon} alt="Logotipo Skambo" />
