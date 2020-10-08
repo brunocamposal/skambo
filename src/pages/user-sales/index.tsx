@@ -17,16 +17,10 @@ interface stateProps {
 }
 
 const UserSales: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  // const [user, setUser] = useState(null)
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
-  console.log('user', user)
   const decoded: { sub: string } = jwt_decode(session.token)
-  // console.log('%c Usefull information', 'color:orange; font-weight:bold')
-  // console.log('decoded', decoded)
-  // console.log(session.token)
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -35,15 +29,10 @@ const UserSales: React.FC = () => {
       preserveAspectRatio: 'xMidYMid slice'
     }
   };
-
-  useSelector((state: any) => state.user)
-
   useEffect(() => {
     setTimeout(() => {
       dispatch(fetchUserSales(decoded.sub, session.token))
     }, 1500)
-
-
   }, [])
 
   const handleRemove = (saleId: string) => {
@@ -67,7 +56,6 @@ const UserSales: React.FC = () => {
       }
     })
   }
-
   return (
     <Styled.Container>
       {Object.keys(user).length === 0 ?
@@ -83,11 +71,9 @@ const UserSales: React.FC = () => {
           {user?.userSales?.length > 0 ? user.userSales.map((product: any, key: number) =>
             (<Styled.CardWrapper key={key}>
               <Card
-
                 category={product.category}
                 imgUrl={product.thumbnail}
                 title={product.name}
-
               />
               <Styled.ButtonsWrapper>
                 <Styled.RemoveButton onClick={() => {
