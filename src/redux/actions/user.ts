@@ -10,7 +10,6 @@ export const removeSale = (saleId: string) => ({
   saleId
 })
 
-
 export const requestRemoveSale = (saleId: string, token: string) => (dispatch: any) => {
   axios.delete(`https://capstone-q2.herokuapp.com/products/${saleId}`, {
     headers: { Authorization: `Bearer ${token}` }

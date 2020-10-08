@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import * as Styled from './styles'
-import axios from 'axios'
+
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 import Card from '../../components/card'
 import { fetchUserSales, requestRemoveSale } from '../../redux/actions/user'
 import { useDispatch } from 'react-redux'
 import empty from '../../media/icons/empty.svg'
+import Swal from 'sweetalert2'
 
 interface stateProps {
   session: { token: string }
@@ -26,13 +27,29 @@ const UserSales: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchUserSales(decoded.sub, session.token))
-
-
   }, [])
 
+
   const handleRemove = (saleId: string) => {
-    console.log(saleId)
-    dispatch(requestRemoveSale(saleId, session.token))
+    Swal.fire({
+      title: 'Tem certeza que deseja deletar esse anúncio?',
+      text: "Você não podera reverter essa ação!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Deletar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(requestRemoveSale(saleId, session.token))
+        Swal.fire(
+          'Deletado!',
+          'Seu anúncio foi deletado',
+          'success'
+        )
+      }
+    })
   }
 
   return (
@@ -46,7 +63,11 @@ const UserSales: React.FC = () => {
             title={product.name}
 
           />
-          <Styled.Button onClick={() => { handleRemove(product.id) }}>Remover</Styled.Button>
+          <Styled.Button onClick={() => {
+
+            handleRemove(product.id)
+          }}>Remover</Styled.Button>
+
         </Styled.CardWrapper>
         )
       ) :
