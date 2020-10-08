@@ -1,9 +1,10 @@
 export interface product {
-  user_id: number;
+  productID: string;
+  userId: number;
   views: number;
   usersAccess: number;
-  condition: string;
-  val: string;
+  usability: string;
+  value: string;
   boost: string;
   name: string;
   description: string;
@@ -14,6 +15,7 @@ export interface product {
 }
 
 export interface token_decoded {
+  sub: number;
   user_id: number;
   exp: Date;
 }

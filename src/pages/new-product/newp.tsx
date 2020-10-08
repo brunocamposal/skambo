@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+
+import { useForm } from 'react-hook-form';
+
+import FormField from '../../components/form-field';
+import FormContainer from '../../components/form-container';
+import { Form } from 'semantic-ui-react';
+
 import { Link } from 'react-router-dom';
 import { Form, Message, Rating } from 'semantic-ui-react';
-import { Container, ResetButton, SendButton, ButtonsDiv, Money } from './styles';
+import { ResetButton, SendButton, ButtonsDiv, Money } from './styles';
 // import { useDispatch } from 'react-redux';
 import { product, token_decoded, categoria } from './types';
 import prettyMoney from "pretty-money"
@@ -14,7 +21,7 @@ const token: string = localStorage.token || eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
   userId: jwt_decode<token_decoded>(token).sub,
   views: 0,
   usersAccess: 0,
-  usability: "5",
+  usability: "3",
   value: "100",
   boost: "",
   name: "",
@@ -25,10 +32,11 @@ const token: string = localStorage.token || eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
   interests: [],
 };
 
-const NewProduct: React.FC = () => {
+const NewProduct1: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
   const [requestError, setRequestError] = useState();
   const [estado, setEstado] = useState('selecione');
+  const { register, handleSubmit, setValue, errors } = useForm<IFormInputs>();
 
   useEffect(() => {
     if (!!requestError) console.log(JSON.stringify(requestError));
@@ -56,15 +64,15 @@ const NewProduct: React.FC = () => {
         es = 'selecione';
         break;
     };
-    setEstado(es);
+    setValue(es);
   },[formValue.usability])  
 
-  const onSubmit = () => {
+  const onSubmit = (values: IFormInputs) => {
     const sendData = {
       header: {
         Authorization: token,
       },
-      data: formValue,
+      data: values,
     };
     console.log(JSON.stringify(sendData));
     axios
@@ -106,24 +114,23 @@ const NewProduct: React.FC = () => {
   ];
 
   return (
-    <Container>
+    <FormContainer props={
+    	<>
       <Link to="/">
         <h3> Voltar </h3>
       </Link>
 
-      <Form onSubmit={() => onSubmit()}>
-        <Form.Field>
-          <label htmlFor="name">
-            <div>Produto</div>
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formValue.name}
-            onChange={({ target }) => setFormValue({ ...formValue, name: target.value })}
-            required
-          />
-        </Form.Field>
+      <Form onSubmit={handleSubmit(onSubmit)} >
+        <FormField
+					required
+					name="name"
+					label="Produto"
+					inputPlace="Nome do Produto"
+					inputRef={register({
+						required: 'Nome necessário!',
+					})}
+					error={errors.email}
+				/>
 
         <Form.Field>
           <label htmlFor="category">
@@ -143,43 +150,26 @@ const NewProduct: React.FC = () => {
           </select>
         </Form.Field>
 
-        <Form.Field>
-          <label htmlFor="file">
-            <div>Imagens</div>
-          </label>
-          <input
+        <FormField
+          label="Imagens"
             type="file"
             name="file"
-            placeholder="Inserir imagem"
+            inputPlace="Inserir imagem"
             required
-            multiple
-            onChange={({ target }) =>
-              setFormValue({
-                ...formValue,
-                images: [...formValue.images, target.value],
-                thumbnail: formValue.images[0],
-              })
-            }
+						multiple
+						inputRef={register()}
           />
-          {formValue.images.map((img) => (
-            <p>{img}</p>
-          ))}
-        </Form.Field>
-
-        <Form.Field>
-          <label htmlFor="condition">
-            <div>Estado de conservação</div>
-          </label>
-          <input
-            name="usability"
-            type="range"
-            min={1}
-            max={5}
-            value={formValue.usability}
-            onChange={({ target }) => setFormValue({ ...formValue, usability: target.value })}
-          />
-          <div>{estado}</div>
-        </Form.Field>
+          {//apresentar as imagens}
+        
+				<FormField
+					label="Estado de conservação"
+					name="usability"
+					type="range"
+					min={1}
+					max={5}
+					inputRef={register()}						
+				/>
+				<div>{estado}</div>
 
         <Form.Field>
           <label htmlFor="description">
@@ -218,10 +208,11 @@ const NewProduct: React.FC = () => {
             <SendButton>Cadastrar</SendButton>
           </ButtonsDiv>
         </Form.Field>
-      </Form>
-    </Container>
-  );
-};
+			</Form>
+    	</>
+		} />
+	);
+}
 
-export default NewProduct;
+export default NewProduct1;
 
