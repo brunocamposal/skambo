@@ -32,7 +32,7 @@ const UserSales: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(fetchUserSales(decoded.sub, session.token))
-    }, 1500)
+    }, 1300)
   }, [])
 
   const handleRemove = (saleId: string) => {
