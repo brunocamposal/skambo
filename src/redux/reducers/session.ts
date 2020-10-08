@@ -5,6 +5,7 @@ interface ActionTypes {
     token: string;
 }
 
+
 const defaultState = {
   token: localStorage.getItem("token") || "",
 };

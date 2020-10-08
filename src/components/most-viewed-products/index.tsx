@@ -5,32 +5,45 @@ import Card from '../../components/card';
 import Slider from 'react-slick';
 import '../../../node_modules/slick-carousel/slick/slick.css';
 import '../../../node_modules/slick-carousel/slick/slick-theme.css';
-import axios from 'axios'
-import { useSelector } from 'react-redux'
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 
 interface stateProps {
-  session: { token: string }
+  session: { token: string };
 }
 
 const MostViewedProducts = () => {
-  const session = useSelector((state: stateProps) => state.session)
+  const session = useSelector((state: stateProps) => state.session);
+  const history = useHistory();
 
-  const [products, setProducts] = useState([])
-  console.log(products)
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get('https://capstone-q2.herokuapp.com/products', {
-      headers: { Authorization: `Bearer ${session.token}` }
-    })
+    axios
+      .get('https://capstone-q2.herokuapp.com/products', {
+        headers: { Authorization: `Bearer ${session.token}` },
+      })
       .then((res) => {
         const sortedProducts = res.data.sort((a: { views: string }, b: { views: string }) => {
-          return parseInt(b.views) - parseInt(a.views)
-        })
-        setProducts(sortedProducts)
-        console.log(res)
+          return parseInt(b.views) - parseInt(a.views);
+        });
+        setProducts(sortedProducts);
+        console.log(res);
       })
-      .catch(err => console.log(err))
-  }, [])
-
+      .catch(({ response }) => {
+        if (response?.status === 401 && session.token != "") {
+          Swal.fire({
+            title: `Você foi deslogado! Faça o Login novamnte.`,
+            confirmButtonText: `Ok`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.push('/login');
+            }
+          });
+        }
+      });
+  }, []);
 
   const settings = {
     infinite: true,
@@ -77,7 +90,14 @@ const MostViewedProducts = () => {
         <Slider {...settings}>
           {products &&
             products.map((product: any, key: number) => {
-              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return (
+                <Card
+                  key={key}
+                  title={product.name}
+                  category={product.category}
+                  imgUrl={product.thumbnail}
+                />
+              );
             })}
         </Slider>
       </Styled.CarouselContainer>
@@ -85,7 +105,14 @@ const MostViewedProducts = () => {
         <Styled.MobileContainer>
           {products &&
             products.map((product: any, key) => {
-              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return (
+                <Card
+                  key={key}
+                  title={product.name}
+                  category={product.category}
+                  imgUrl={product.thumbnail}
+                />
+              );
             })}
         </Styled.MobileContainer>
       </Styled.Mobile>

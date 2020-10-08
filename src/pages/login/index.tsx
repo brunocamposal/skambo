@@ -34,6 +34,7 @@ const Login: React.FC = () => {
         dispatch(login(data.accessToken));
         localStorage.setItem('token', data.accessToken);
         history.push('/');
+        document.location.reload();
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
