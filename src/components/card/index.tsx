@@ -18,7 +18,7 @@ const Card = ({ title, category, imgUrl }: PropTypes) => {
       }}
       whileTap={{ scale: 0.9 }}>
       <Styled.Card>
-        <img src={imgUrl} />
+        <img src={imgUrl} alt="card" />
         <div>
           <Popup content={title} trigger={<strong>{title}</strong>} />
           <p>{category}</p>
