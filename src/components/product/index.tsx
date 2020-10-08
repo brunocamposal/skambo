@@ -17,6 +17,8 @@ import {
 import { Icon } from 'semantic-ui-react'
 import { useHistory } from "react-router-dom"
 import axios from 'axios'
+import { RootState } from '../../redux/reducers'
+import { useSelector } from 'react-redux'
 
 const Product = () => {
     const history = useHistory()
@@ -36,7 +38,7 @@ const Product = () => {
     
     const id = 0
     const url = `https://capstone-q2.herokuapp.com/products/`
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhbmRvMTJAdGVzdDEyLmNvbSIsImlhdCI6MTYwMTkyODUxMSwiZXhwIjoxNjAxOTMyMTExLCJzdWIiOiI3In0.W_ITz0wRwYsFIY6Gpi58a5OYF0B163kHbh-PNGyyqtE'
+    const token = useSelector(({ session }: RootState) => session.token)
 
     useEffect(() => {
       axios.
