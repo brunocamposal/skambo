@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StyledButton } from '../menu/styles'
+import { Image } from 'semantic-ui-react'
 
 export const ProductCard = styled.div`
     width: 100%;
@@ -57,15 +58,7 @@ export const ProductShow = styled.img`
     cursor: pointer;
     overflow: hidden;
     max-width: 100%;
-    -moz-transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-        
-    &:hover {
-        -moz-transform: scale(1.2);
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-    }
+    
     @media (max-width: 920px) {
         margin-top: 0;
     }
@@ -111,3 +104,7 @@ export const FavButton = styled(InterestButton)`
     background: red;
     margin-top: 10px;
 `
+export const ImageLoading = styled(Image)`
+  width: 100vw;
+  height: 500px;
+`;
