@@ -11,6 +11,7 @@ import empty from '../../media/icons/empty.svg'
 import Swal from 'sweetalert2'
 import Lootie from 'react-lottie'
 import animationData from '../../media/animations/10800-retail-exchange.json'
+import { Table } from 'semantic-ui-react'
 
 interface stateProps {
   session: { token: string }
@@ -20,6 +21,7 @@ const UserSales: React.FC = () => {
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
+  console.log(user)
   const decoded: { sub: string } = jwt_decode(session.token)
   const defaultOptions = {
     loop: true,
@@ -31,7 +33,7 @@ const UserSales: React.FC = () => {
   };
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchUserSales(decoded.sub, session.token))
+      dispatch(fetchUserSales("2", session.token))
     }, 1300)
   }, [])
 
@@ -57,6 +59,7 @@ const UserSales: React.FC = () => {
     })
   }
   return (
+
     <Styled.Container>
       {Object.keys(user).length === 0 ?
         <Styled.LoadingContainer>
@@ -68,31 +71,40 @@ const UserSales: React.FC = () => {
         </Styled.LoadingContainer>
         :
         <>
-          {user?.userSales?.length > 0 ? user.userSales.map((product: any, key: number) =>
-            (<Styled.CardWrapper key={key}>
-              <Card
-                category={product.category}
-                imgUrl={product.thumbnail}
-                title={product.name}
-              />
-              <Styled.ButtonsWrapper>
-                <Styled.RemoveButton onClick={() => {
-                  handleRemove(product.id)
-                }}><AiFillDelete /> Remover
-          </Styled.RemoveButton>
-                <Styled.EditButton>
-                  <MdModeEdit /> Editar
-          </Styled.EditButton>
-              </Styled.ButtonsWrapper>
-            </Styled.CardWrapper>
-            )
-          ) :
+          {user?.userSales?.length > 0 ?
+            <Styled.Table stackable>
+              <Table.Body>
+                <Table.Row >
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell>Nome</Table.Cell>
+                  <Table.Cell>Categoria</Table.Cell>
+                  <Table.Cell>Condição</Table.Cell>
+                  <Table.Cell>Valor aprox</Table.Cell>
+                </Table.Row>
+                {user.userSales && user.userSales.map((product: any) => {
+                  return (
+                    <Table.Row>
+                      <Table.Cell><img src={product.thumbnail} alt="" /></Table.Cell>
+                      <Table.Cell>{product.name}</Table.Cell>
+                      <Table.Cell>{product.category[0]}</Table.Cell>
+                      <Table.Cell>{product.usability}</Table.Cell>
+                      <Table.Cell>R$ {product.value},00</Table.Cell>
+                      <Table.Cell><Styled.EditButton>Alterar</Styled.EditButton> </Table.Cell>
+                      <Table.Cell><Styled.RemoveButton onClick={() => { handleRemove(product.id) }}>Apagar</Styled.RemoveButton></Table.Cell>
+                    </Table.Row>
+                  )
+                })}
+
+              </Table.Body>
+            </Styled.Table>
+            :
             <Styled.Empty>
               <h2>Você ainda não tem nenhum anúncio!</h2>
               <img src={empty} />
             </Styled.Empty>}
         </>
       }
+
     </Styled.Container>
   )
 }
