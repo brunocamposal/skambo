@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Modal, Form, Image, Button, Icon } from 'semantic-ui-react';
+import { Card, Form, Image, Button, Icon } from 'semantic-ui-react';
+import Swal from 'sweetalert2';
+
+import { estados } from './helper';
+
+import * as Styled from './styles';
 
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-//https://capstone-q2.herokuapp.com/users/5
+import styled from 'styled-components';
 // "email": "picolo@mail.com",
 // "password": "Picolo11!"
 
@@ -32,18 +37,31 @@ interface ChangeFormInputs {
 }
 
 const ChangeProfile = ({ setOpenClose }: any) => {
-  const { register, handleSubmit, errors } = useForm<ChangeFormInputs>();
-  const [avatarImage, setAvatarImage] = useState('');
+  const { register, handleSubmit, setValue, errors } = useForm<ChangeFormInputs>();
+  const [errorMessage, setErrorMessage] = useState('');
+  //const [avatarImage, setAvatarImage] = useState('');
+
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [street, setStreet] = useState('');
+
+  const autoFillCep = (cepUser: number | string) => {
+    axios.get(`https://viacep.com.br/ws/${cepUser}/json/`).then(({ data }) => {
+      setState(data.uf);
+      setCity(data.localidade);
+      setNeighborhood(data.bairro);
+      setStreet(data.logradouro);
+    });
+  };
+
 
   const token = useSelector(({ session }: any) => session.token);
-  console.log(token);
 
   let userId: any = jwt_decode(token);
-  console.log(userId);
 
   const onSubmit = (values: ChangeFormInputs) => {
     console.log(values);
-    
     // setAvatarImage(values.userImage[0].name);
 
     axios
@@ -53,10 +71,10 @@ const ChangeProfile = ({ setOpenClose }: any) => {
           firstName: values.firstName,
           lastName: values.lastName,
           cpf: values.cpf,
-          email: '',
+          // email: '',
           phoneNumber: values.phoneNumber,
-          ownProducts: [''],
-          favorites: [''],
+          // ownProducts: [''],
+          // favorites: [''],
           userImage: '',
           adress: {
             cep: values.cep,
@@ -73,246 +91,249 @@ const ChangeProfile = ({ setOpenClose }: any) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((response) => console.log(response))
-      .catch((response) => console.log(response));
+      .catch((error) => {
+        if (error.response.status === 400) {
+          setErrorMessage('Ops! Aconteceu um erro inesperado!');
+        }
+      });
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Mudanças Salvas!',
+        showConfirmButton: false,
+        timer: 1300,
+      })
   };
 
   return (
     <>
-      <Modal.Header>Alterar informações</Modal.Header>
-      <Modal.Content image>
-        <Image size="medium" src={'https://picsum.photos/200'} wrapped />
+      <Styled.Container>
+        <Styled.BoxContent>
+          <Styled.FormContainer>
+            
+              {/* <Card>
+                <Image size="medium" src={'https://picsum.photos/300'} wrapped />
+                <Card.Header>
+                  AKSUHUKSA
+                </Card.Header>
+                <Card.Meta>
+                  kkkkkk
+                </Card.Meta>
+              </Card> */}
+              
+            
 
-        <Modal.Description>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            {/* <label>Imagem</label>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {/* <label>Imagem</label>
             <input name="userImage" type="file" placeholder="Insira uma imagem" ref={register} /> */}
-            <Form.Group>
+              <Form.Group>
+                <Form.Field required>
+                  <label>Nome</label>
+                  <input
+                    name="firstName"
+                    type="text"
+                    placeholder="Nome"
+                    ref={register({
+                      required: 'Digite seu primeiro nome!',
+                      pattern: {
+                        value: /[A-Z]{2,}$/i,
+                        message: 'Isso não se parece com um e-mail!',
+                      },
+                    })}
+                  />
+                  {errors.firstName && <MsgError>{errors.firstName.message}</MsgError>}
+                </Form.Field>
+                <Form.Field required>
+                  <label>Sobrenome</label>
+                  <input
+                    name="lastName"
+                    type="text"
+                    placeholder="Sobrenome"
+                    ref={register({
+                      required: 'Digite seu sobrenome!',
+                      pattern: {
+                        value: /[A-Z]{2,}$/i,
+                        message: 'Isso não se parece com um e-mail!',
+                      },
+                    })}
+                  />
+                  {errors.lastName && <MsgError>{errors.lastName.message}</MsgError>}
+                </Form.Field>
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Field required>
+                  <label>CPF</label>
+                  <input
+                    name="cpf"
+                    type="text"
+                    placeholder="000.000.000-00"
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                      pattern: {
+                        value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i,
+                        message: 'Formato invalido!',
+                      },
+                    })}
+                  />
+                  {errors.cpf && <MsgError>{errors.cpf.message}</MsgError>}
+                </Form.Field>
+              </Form.Group>
+
               <Form.Field required>
-                <label>Nome</label>
+                <label>Telefone</label>
                 <input
-                  name="firstName"
-                  type="text"
-                  placeholder="Nome"
+                  name="phoneNumber"
+                  type="tel"
+                  placeholder="(00) 00000-0000"
                   ref={register({
-                    required: 'Digite seu primeiro nome!',
-                    pattern: {
-                      value: /[A-Z]{2,}$/i,
-                      message: 'Isso não se parece com um e-mail!',
-                    },
+                    required: 'Campo obrigatório!',
                   })}
                 />
-                {errors.firstName && <p>{errors.firstName.message}</p>}
-              </Form.Field>
-              <Form.Field required>
-                <label>Sobrenome</label>
-                <input
-                  name="lastName"
-                  type="text"
-                  placeholder="Sobrenome"
-                  ref={register({
-                    required: 'Digite seu sobrenome!',
-                    pattern: {
-                      value: /[A-Z]{2,}$/i,
-                      message: 'Isso não se parece com um e-mail!',
-                    },
-                  })}
-                />
-                {errors.lastName && <p>{errors.lastName.message}</p>}
-              </Form.Field>
-            </Form.Group>
-
-            {/* <Form.Field required>
-              <label>E-Mail</label>
-              <input
-                name="email"
-                type="text"
-                placeholder="Digite seu E-Mail"
-                ref={register({
-                  required: 'E-mail é obrigatório',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Isso não se parece com um e-mail!',
-                  },
-                })}
-                // tratar erro
-              />
-            </Form.Field> */}
-
-            <Form.Group>
-              <Form.Field>
-                <label>CPF</label>
-                <input
-                  name="cpf"
-                  type="text"
-                  placeholder="000.000.000-00"
-                  ref={register({
-                    required: 'Campo necessário!',
-                    pattern: {
-                      value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i,
-                      message: 'Formato invalido!',
-                    },
-                  })}
-                />
-                {errors.cpf && <p>{errors.cpf.message}</p>}
-              </Form.Field>
-            </Form.Group>
-
-            <Form.Field>
-              <label>Telefone</label>
-              <input
-                name="phoneNumber"
-                type="tel"
-                placeholder="(00) 00000-0000"
-                ref={register({
-                  required: 'Campo necessário!',
-                })}
-              />
-              {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
-            </Form.Field>
-
-            <Form.Group>
-              <Form.Field>
-                <label>CEP</label>
-                <input
-                  name="cep"
-                  type="text"
-                  placeholder="00000-000"
-                  ref={register({
-                    required: 'Campo necessário!',
-                    pattern: {
-                      value: /^\d{5}\-\d{3}$/i,
-                      message: 'Formato invalido!',
-                    },
-                  })}
-                />
-                {errors.cep && <p>{errors.cep.message}</p>}
+                {errors.phoneNumber && <MsgError>{errors.phoneNumber.message}</MsgError>}
               </Form.Field>
 
-              <Form.Field>
-                <label>Estado</label>
-                <select name="state" ref={register}>
-                  <optgroup label="Estados">
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                  </optgroup>
-                </select>
-              </Form.Field>
-            </Form.Group>
+              <Form.Group>
+                <Form.Field required>
+                  <label>CEP</label>
+                  <input
+                    name="cep"
+                    type="text"
+                    placeholder="Digite seu CEP"
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                      pattern: {
+                        value: /^[0-9]{8}$/,
+                        message: 'Digite somente números',
+                      },
+                    })}
+                    onBlur={({ target }) => autoFillCep(target.value)}
+                  />
+                  {errors.cep && <MsgError>{errors.cep.message}</MsgError>}
+                </Form.Field>
 
-            <Form.Group>
-              <Form.Field>
-                <label>Cidade</label>
-                <input
-                  name="city"
-                  type="text"
-                  placeholder="Cidade"
-                  ref={register({
-                    required: 'Campo necessário!',
-                  })}
-                />
-                {errors.city && <p>{errors.city.message}</p>}
-              </Form.Field>
-              <Form.Field>
-                <label>Bairro</label>
-                <input
-                  name="neighborhood"
-                  type="text"
-                  placeholder="Bairro"
-                  ref={register({
-                    required: 'Campo necessário!',
-                  })}
-                />
-                {errors.neighborhood && <p>{errors.neighborhood.message}</p>}
-              </Form.Field>
-            </Form.Group>
+                <Form.Field required>
+                  <label>Estado</label>
+                  <select name="state" ref={register}>
+                    <optgroup label="Estados" defaultValue={state}>
+                      <option value="AC">Acre</option>
+                      <option value="AL">Alagoas</option>
+                      <option value="AP">Amapá</option>
+                      <option value="AM">Amazonas</option>
+                      <option value="BA">Bahia</option>
+                      <option value="CE">Ceará</option>
+                      <option value="DF">Distrito Federal</option>
+                      <option value="ES">Espírito Santo</option>
+                      <option value="GO">Goiás</option>
+                      <option value="MA">Maranhão</option>
+                      <option value="MT">Mato Grosso</option>
+                      <option value="MS">Mato Grosso do Sul</option>
+                      <option value="MG">Minas Gerais</option>
+                      <option value="PA">Pará</option>
+                      <option value="PB">Paraíba</option>
+                      <option value="PR">Paraná</option>
+                      <option value="PE">Pernambuco</option>
+                      <option value="PI">Piauí</option>
+                      <option value="RJ">Rio de Janeiro</option>
+                      <option value="RN">Rio Grande do Norte</option>
+                      <option value="RS">Rio Grande do Sul</option>
+                      <option value="RO">Rondônia</option>
+                      <option value="RR">Roraima</option>
+                      <option value="SC">Santa Catarina</option>
+                      <option value="SP">São Paulo</option>
+                      <option value="SE">Sergipe</option>
+                      <option value="TO">Tocantins</option>
+                    </optgroup>
+                  </select>
+                </Form.Field>
+              </Form.Group>
 
-            <Form.Group>
-              <Form.Field>
-                <label>Rua</label>
-                <input
-                  name="street"
-                  type="text"
-                  placeholder="Rua/Logradouro"
-                  ref={register({
-                    required: 'Campo necessário!',
-                  })}
-                />
-                {errors.street && <p>{errors.street.message}</p>}
-              </Form.Field>
-              <Form.Field>
-                <label>Número</label>
-                <input
-                  name="number"
-                  type="number"
-                  placeholder="Número"
-                  ref={register}
-                  // tratar erro
-                />
-              </Form.Field>
-            </Form.Group>
+              <Form.Group>
+                <Form.Field required>
+                  <label>Cidade</label>
+                  <input
+                    name="city"
+                    type="text"
+                    defaultValue={city}
+                    placeholder="Cidade"
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                    })}
+                  />
+                  {errors.city && <MsgError>{errors.city.message}</MsgError>}
+                </Form.Field>
+                <Form.Field required>
+                  <label>Bairro</label>
+                  <input
+                    name="neighborhood"
+                    type="text"
+                    placeholder="Bairro"
+                    defaultValue={neighborhood}
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                    })}
+                  />
+                  {errors.neighborhood && <MsgError>{errors.neighborhood.message}</MsgError>}
+                </Form.Field>
+              </Form.Group>
 
-            <Form.Group>
-              <Form.Field>
-                <label>Referência</label>
-                <input
-                  name="referencePoint"
-                  type="text"
-                  placeholder="Ex: Ao lado do mercado."
-                  ref={register}
-                  // tratar erro
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>Complemento</label>
-                <input
-                  name="complement"
-                  type="textArea"
-                  placeholder="Ex: Edifício Miranda - apartamento 81"
-                  ref={register}
-                  // tratar erro
-                />
-              </Form.Field>
-            </Form.Group>
+              <Form.Group>
+                <Form.Field required>
+                  <label>Rua</label>
+                  <input
+                    name="street"
+                    type="text"
+                    placeholder="Rua/Logradouro"
+                    defaultValue={street}
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                    })}
+                  />
+                  {errors.street && <MsgError>{errors.street.message}</MsgError>}
+                </Form.Field>
+                <Form.Field required>
+                  <label>Número</label>
+                  <input name="number" type="text" placeholder="Número" ref={register} />
+                </Form.Field>
+              </Form.Group>
 
-            <Modal.Actions>
-              <Button basic color="red">
-                <Icon name="remove" /> Cancelar
-              </Button>
+              <Form.Group>
+                <Form.Field>
+                  <label>Referência</label>
+                  <input
+                    name="referencePoint"
+                    type="text"
+                    placeholder="Ex: Ao lado do mercado."
+                    ref={register}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Complemento</label>
+                  <input
+                    name="complement"
+                    type="text"
+                    placeholder="Ex: Edifício Miranda - Apt 81"
+                    ref={register}
+                  />
+                </Form.Field>
+              </Form.Group>
+
               <Button color="green" type="submit" onClick={handleSubmit(onSubmit)}>
                 <Icon name="checkmark" /> Salvar Alterações
               </Button>
-            </Modal.Actions>
-          </Form>
-        </Modal.Description>
-      </Modal.Content>
+
+              {errorMessage && <MsgError>{errorMessage}</MsgError>}
+            </Form>
+          </Styled.FormContainer>
+        </Styled.BoxContent>
+      </Styled.Container>
     </>
   );
 };
 
 export default ChangeProfile;
+
+const MsgError = styled.p`
+  color: red;
+`;

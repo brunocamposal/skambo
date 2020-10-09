@@ -88,6 +88,11 @@ const TopBar: React.FC = () => {
                   />
 
                   <Dropdown.Item
+                    icon="briefcase"
+                    text="Meus anúncios"
+                    onClick={() => history.push('/my-sales')}
+                  />
+                  <Dropdown.Item
                     icon="sign-out"
                     text="Sair"
                     onClick={() => {
@@ -115,13 +120,13 @@ const TopBar: React.FC = () => {
             </StyledIcons>
           </StyledMenuRight>
         ) : (
-          <StyledMenuRight>
-            <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
-            <StyledReverseButton onClick={() => history.push('/register')}>
-              Registrar-se
+            <StyledMenuRight>
+              <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
+              <StyledReverseButton onClick={() => history.push('/register')}>
+                Registrar-se
             </StyledReverseButton>
-          </StyledMenuRight>
-        )}
+            </StyledMenuRight>
+          )}
       </StyledMenu>
     </>
   );
