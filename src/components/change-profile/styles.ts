@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
@@ -13,51 +13,20 @@ export const Container = styled.div`
 
 export const BoxContent = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 55%;
-  margin: 15vh auto;
-  height: 600px;
-  justify-self: center;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+  margin: 10vh auto;
 
-  @media (max-width: 1368px) {
-    width: 60%;
-  }
-
-  @media (max-width: 1200px) {
-    width: 75%;
-  }
-
-  @media (max-width: 992px) {
-    width: 93%;
-  }
-
-  @media (max-width: 768px) {
-    width: 96%;
-    flex-direction: column;
-    height: 880px;
-  }
-  @media (max-width: 415px){
-    width: 90%;
-    height: 553px;
-    box-shadow: 0px 0px 0px #ffffff;
-  }
+  @media (max-width: 480px){
+    margin: 0;
+  } 
 `;
 
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  width: 45%;
-  height: 100%;
-  justify-content: center;
   align-items: center;
-
-  h1 {
-    margin: 35px;
-  }
+  width: 96%;
 
   label {
     font-weight: 700;
@@ -76,34 +45,46 @@ export const FormContainer = styled.div`
     }
   }
 
-
-  @media (max-width: 768px) {
-    width: 96%;
-    h1 {
-      margin-top: 40px;
-    }
+  .ui.form {
+    width: 70%;
+    margin-top: 40px;
   }
 
-  @media (max-width: 480px) {
-    justify-content: flex-start;
-  }
 `;
 
-export const ImgContainer = styled.div`
+export const Header = styled.div`
   display: flex;
-  background-color: var(--primary);
-  width: 55%;
-  height: 100%;
   justify-content: center;
   align-items: center;
-  @media (max-width: 768px) {
-    width: 96%;
-    margin-top: 64px;
+  margin-top: 50px;
+  height: 100px;
+  width: 70%;
+  background-color: var(--primary);
+  border-radius: 7px;
+
+  h1 {
+    color: #fff;
   }
-  @media (max-width: 415px){
-    display: none;
-  }
-  img {
-    margin: 20px;
-  }
+
+  @media (max-width: 480px){
+    margin-top:40px;
+    height: 60px;
+  } 
+`;
+
+export const MsgError = styled.p`
+  color: red;
+  font-size: 0.9rem;
+`;
+
+export const ButtonForm = styled.button`
+  font-weight: 700;
+  margin-top: 20px;
+  color: #fff;
+  background-color: var(--primary);
+  border-radius: 7px;
+  height: 35px;
+  width: 275px;
+  float: right;
+  cursor: pointer;
 `;

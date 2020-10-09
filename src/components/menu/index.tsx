@@ -24,16 +24,13 @@ import MobileCategories from '../mobile/categories';
 import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 
-import ChangeProfile from '../change-profile'
+import ChangeProfile from '../change-profile';
 
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
   const token = useSelector(({ session }: RootState) => session.token);
 
-  // state para abrir o modal de info do user - edu
-  const [openModalProfile, setOpenModalProfile] = useState(false);
-  
   console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
@@ -48,9 +45,6 @@ const TopBar: React.FC = () => {
 
   return (
     <>
-      <Modal open={openModalProfile} size="large">
-        <ChangeProfile setOpenClose={setOpenModalProfile} />
-      </Modal>
       <MobileCategories />
       <StyledMenu>
         <StyledMenuLeft>
@@ -83,8 +77,7 @@ const TopBar: React.FC = () => {
                   <Dropdown.Item
                     icon="edit"
                     text="Alterar informações"
-                    onClick={() => setOpenModalProfile(true)}
-                    // onClick={() => history.push('/register')}
+                    onClick={() => history.push('/change-profile')}
                   />
 
                   <Dropdown.Item
@@ -105,6 +98,7 @@ const TopBar: React.FC = () => {
                           window.localStorage.clear();
                         }
                       });
+                      history.push('/')
                     }}
                   />
                 </Dropdown.Menu>
@@ -120,13 +114,13 @@ const TopBar: React.FC = () => {
             </StyledIcons>
           </StyledMenuRight>
         ) : (
-            <StyledMenuRight>
-              <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
-              <StyledReverseButton onClick={() => history.push('/register')}>
-                Registrar-se
+          <StyledMenuRight>
+            <StyledButton onClick={() => history.push('/login')}>Entrar</StyledButton>
+            <StyledReverseButton onClick={() => history.push('/register')}>
+              Registrar-se
             </StyledReverseButton>
-            </StyledMenuRight>
-          )}
+          </StyledMenuRight>
+        )}
       </StyledMenu>
     </>
   );

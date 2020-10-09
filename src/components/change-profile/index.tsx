@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Card, Form, Image, Button, Icon } from 'semantic-ui-react';
+import { Form, Icon} from 'semantic-ui-react';
 import Swal from 'sweetalert2';
-
-import { estados } from './helper';
 
 import * as Styled from './styles';
 
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-
-import styled from 'styled-components';
-// "email": "picolo@mail.com",
-// "password": "Picolo11!"
 
 interface ChangeFormInputs {
   firstName?: any;
@@ -36,15 +30,17 @@ interface ChangeFormInputs {
   message?: any;
 }
 
-const ChangeProfile = ({ setOpenClose }: any) => {
-  const { register, handleSubmit, setValue, errors } = useForm<ChangeFormInputs>();
+const ChangeProfile = () => {
+  const { register, handleSubmit, errors } = useForm<ChangeFormInputs>();
   const [errorMessage, setErrorMessage] = useState('');
-  //const [avatarImage, setAvatarImage] = useState('');
 
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [street, setStreet] = useState('');
+
+  const token = useSelector(({ session }: any) => session.token);
+  let userId: any = jwt_decode(token);
 
   const autoFillCep = (cepUser: number | string) => {
     axios.get(`https://viacep.com.br/ws/${cepUser}/json/`).then(({ data }) => {
@@ -55,15 +51,7 @@ const ChangeProfile = ({ setOpenClose }: any) => {
     });
   };
 
-
-  const token = useSelector(({ session }: any) => session.token);
-
-  let userId: any = jwt_decode(token);
-
   const onSubmit = (values: ChangeFormInputs) => {
-    console.log(values);
-    // setAvatarImage(values.userImage[0].name);
-
     axios
       .patch(
         `https://capstone-q2.herokuapp.com/users/${userId.sub}`,
@@ -71,7 +59,6 @@ const ChangeProfile = ({ setOpenClose }: any) => {
           firstName: values.firstName,
           lastName: values.lastName,
           cpf: values.cpf,
-          // email: '',
           phoneNumber: values.phoneNumber,
           // ownProducts: [''],
           // favorites: [''],
@@ -97,13 +84,13 @@ const ChangeProfile = ({ setOpenClose }: any) => {
         }
       });
 
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Mudanças Salvas!',
-        showConfirmButton: false,
-        timer: 1300,
-      })
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Mudanças Salvas!',
+      showConfirmButton: false,
+      timer: 1300,
+    });
   };
 
   return (
@@ -111,23 +98,11 @@ const ChangeProfile = ({ setOpenClose }: any) => {
       <Styled.Container>
         <Styled.BoxContent>
           <Styled.FormContainer>
-            
-              {/* <Card>
-                <Image size="medium" src={'https://picsum.photos/300'} wrapped />
-                <Card.Header>
-                  AKSUHUKSA
-                </Card.Header>
-                <Card.Meta>
-                  kkkkkk
-                </Card.Meta>
-              </Card> */}
-              
-            
-
+            <Styled.Header>
+              <h1>Cadastro</h1>
+            </Styled.Header>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              {/* <label>Imagem</label>
-            <input name="userImage" type="file" placeholder="Insira uma imagem" ref={register} /> */}
-              <Form.Group>
+              <Form.Group widths={2}>
                 <Form.Field required>
                   <label>Nome</label>
                   <input
@@ -142,7 +117,9 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                       },
                     })}
                   />
-                  {errors.firstName && <MsgError>{errors.firstName.message}</MsgError>}
+                  {errors.firstName && (
+                    <Styled.MsgError>{errors.firstName.message}</Styled.MsgError>
+                  )}
                 </Form.Field>
                 <Form.Field required>
                   <label>Sobrenome</label>
@@ -158,11 +135,11 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                       },
                     })}
                   />
-                  {errors.lastName && <MsgError>{errors.lastName.message}</MsgError>}
+                  {errors.lastName && <Styled.MsgError>{errors.lastName.message}</Styled.MsgError>}
                 </Form.Field>
               </Form.Group>
 
-              <Form.Group>
+              <Form.Group widths={2}>
                 <Form.Field required>
                   <label>CPF</label>
                   <input
@@ -177,25 +154,26 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                       },
                     })}
                   />
-                  {errors.cpf && <MsgError>{errors.cpf.message}</MsgError>}
+                  {errors.cpf && <Styled.MsgError>{errors.cpf.message}</Styled.MsgError>}
+                </Form.Field>
+                <Form.Field required>
+                  <label>Telefone</label>
+                  <input
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder="(00) 00000-0000"
+                    ref={register({
+                      required: 'Campo obrigatório!',
+                    })}
+                  />
+                  {errors.phoneNumber && (
+                    <Styled.MsgError>{errors.phoneNumber.message}</Styled.MsgError>
+                  )}
                 </Form.Field>
               </Form.Group>
 
-              <Form.Field required>
-                <label>Telefone</label>
-                <input
-                  name="phoneNumber"
-                  type="tel"
-                  placeholder="(00) 00000-0000"
-                  ref={register({
-                    required: 'Campo obrigatório!',
-                  })}
-                />
-                {errors.phoneNumber && <MsgError>{errors.phoneNumber.message}</MsgError>}
-              </Form.Field>
-
-              <Form.Group>
-                <Form.Field required>
+              <Form.Group widths={2}>
+                <Form.Field required width={10}>
                   <label>CEP</label>
                   <input
                     name="cep"
@@ -210,76 +188,130 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                     })}
                     onBlur={({ target }) => autoFillCep(target.value)}
                   />
-                  {errors.cep && <MsgError>{errors.cep.message}</MsgError>}
+                  {errors.cep && <Styled.MsgError>{errors.cep.message}</Styled.MsgError>}
                 </Form.Field>
 
-                <Form.Field required>
+                <Form.Field required width={6}>
                   <label>Estado</label>
                   <select name="state" ref={register}>
-                    <optgroup label="Estados" defaultValue={state}>
-                      <option value="AC">Acre</option>
-                      <option value="AL">Alagoas</option>
-                      <option value="AP">Amapá</option>
-                      <option value="AM">Amazonas</option>
-                      <option value="BA">Bahia</option>
-                      <option value="CE">Ceará</option>
-                      <option value="DF">Distrito Federal</option>
-                      <option value="ES">Espírito Santo</option>
-                      <option value="GO">Goiás</option>
-                      <option value="MA">Maranhão</option>
-                      <option value="MT">Mato Grosso</option>
-                      <option value="MS">Mato Grosso do Sul</option>
-                      <option value="MG">Minas Gerais</option>
-                      <option value="PA">Pará</option>
-                      <option value="PB">Paraíba</option>
-                      <option value="PR">Paraná</option>
-                      <option value="PE">Pernambuco</option>
-                      <option value="PI">Piauí</option>
-                      <option value="RJ">Rio de Janeiro</option>
-                      <option value="RN">Rio Grande do Norte</option>
-                      <option value="RS">Rio Grande do Sul</option>
-                      <option value="RO">Rondônia</option>
-                      <option value="RR">Roraima</option>
-                      <option value="SC">Santa Catarina</option>
-                      <option value="SP">São Paulo</option>
-                      <option value="SE">Sergipe</option>
-                      <option value="TO">Tocantins</option>
+                    <optgroup label="Estados">
+                      <option value="AC" selected={state === 'AC' && true}>
+                        Acre
+                      </option>
+                      <option value="AL" selected={state === 'AL' && true}>
+                        Alagoas
+                      </option>
+                      <option value="AP" selected={state === 'AP' && true}>
+                        Amapá
+                      </option>
+                      <option value="AM" selected={state === 'AM' && true}>
+                        Amazonas
+                      </option>
+                      <option value="BA" selected={state === 'BA' && true}>
+                        Bahia
+                      </option>
+                      <option value="CE" selected={state === 'CE' && true}>
+                        Ceará
+                      </option>
+                      <option value="DF" selected={state === 'DF' && true}>
+                        Distrito Federal
+                      </option>
+                      <option value="ES" selected={state === 'ES' && true}>
+                        Espírito Santo
+                      </option>
+                      <option value="GO" selected={state === 'GO' && true}>
+                        Goiás
+                      </option>
+                      <option value="MA" selected={state === 'MA' && true}>
+                        Maranhão
+                      </option>
+                      <option value="MT" selected={state === 'MT' && true}>
+                        Mato Grosso
+                      </option>
+                      <option value="MS" selected={state === 'MS' && true}>
+                        Mato Grosso do Sul
+                      </option>
+                      <option value="MG" selected={state === 'MG' && true}>
+                        Minas Gerais
+                      </option>
+                      <option value="PA" selected={state === 'PA' && true}>
+                        Pará
+                      </option>
+                      <option value="PB" selected={state === 'PB' && true}>
+                        Paraíba
+                      </option>
+                      <option value="PR" selected={state === 'PR' && true}>
+                        Paraná
+                      </option>
+                      <option value="PE" selected={state === 'PE' && true}>
+                        Pernambuco
+                      </option>
+                      <option value="PI" selected={state === 'PI' && true}>
+                        Piauí
+                      </option>
+                      <option value="RJ" selected={state === 'RJ' && true}>
+                        Rio de Janeiro
+                      </option>
+                      <option value="RN" selected={state === 'RN' && true}>
+                        Rio Grande do Norte
+                      </option>
+                      <option value="RS" selected={state === 'RS' && true}>
+                        Rio Grande do Sul
+                      </option>
+                      <option value="RO" selected={state === 'RO' && true}>
+                        Rondônia
+                      </option>
+                      <option value="RR" selected={state === 'RR' && true}>
+                        Roraima
+                      </option>
+                      <option value="SC" selected={state === 'SC' && true}>
+                        Santa Catarina
+                      </option>
+                      <option value="SP" selected={state === 'SP' && true}>
+                        São Paulo
+                      </option>
+                      <option value="SE" selected={state === 'SE' && true}>
+                        Sergipe
+                      </option>
+                      <option value="TO" selected={state === 'TO' && true}>
+                        Tocantins
+                      </option>
                     </optgroup>
                   </select>
                 </Form.Field>
               </Form.Group>
 
-              <Form.Group>
-                <Form.Field required>
-                  <label>Cidade</label>
-                  <input
-                    name="city"
-                    type="text"
-                    defaultValue={city}
-                    placeholder="Cidade"
-                    ref={register({
-                      required: 'Campo obrigatório!',
-                    })}
-                  />
-                  {errors.city && <MsgError>{errors.city.message}</MsgError>}
-                </Form.Field>
-                <Form.Field required>
-                  <label>Bairro</label>
-                  <input
-                    name="neighborhood"
-                    type="text"
-                    placeholder="Bairro"
-                    defaultValue={neighborhood}
-                    ref={register({
-                      required: 'Campo obrigatório!',
-                    })}
-                  />
-                  {errors.neighborhood && <MsgError>{errors.neighborhood.message}</MsgError>}
-                </Form.Field>
-              </Form.Group>
+              <Form.Field required>
+                <label>Cidade</label>
+                <input
+                  name="city"
+                  type="text"
+                  defaultValue={city}
+                  placeholder="Cidade"
+                  ref={register({
+                    required: 'Campo obrigatório!',
+                  })}
+                />
+                {errors.city && <Styled.MsgError>{errors.city.message}</Styled.MsgError>}
+              </Form.Field>
+              <Form.Field required>
+                <label>Bairro</label>
+                <input
+                  name="neighborhood"
+                  type="text"
+                  placeholder="Bairro"
+                  defaultValue={neighborhood}
+                  ref={register({
+                    required: 'Campo obrigatório!',
+                  })}
+                />
+                {errors.neighborhood && (
+                  <Styled.MsgError>{errors.neighborhood.message}</Styled.MsgError>
+                )}
+              </Form.Field>
 
-              <Form.Group>
-                <Form.Field required>
+              <Form.Group widths={2}> 
+                <Form.Field required width={10} >
                   <label>Rua</label>
                   <input
                     name="street"
@@ -290,40 +322,38 @@ const ChangeProfile = ({ setOpenClose }: any) => {
                       required: 'Campo obrigatório!',
                     })}
                   />
-                  {errors.street && <MsgError>{errors.street.message}</MsgError>}
+                  {errors.street && <Styled.MsgError>{errors.street.message}</Styled.MsgError>}
                 </Form.Field>
-                <Form.Field required>
+                <Form.Field required width={6}>
                   <label>Número</label>
                   <input name="number" type="text" placeholder="Número" ref={register} />
                 </Form.Field>
               </Form.Group>
 
-              <Form.Group>
-                <Form.Field>
-                  <label>Referência</label>
-                  <input
-                    name="referencePoint"
-                    type="text"
-                    placeholder="Ex: Ao lado do mercado."
-                    ref={register}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Complemento</label>
-                  <input
-                    name="complement"
-                    type="text"
-                    placeholder="Ex: Edifício Miranda - Apt 81"
-                    ref={register}
-                  />
-                </Form.Field>
-              </Form.Group>
+              <Form.Field >
+                <label>Referência</label>
+                <input
+                  name="referencePoint"
+                  type="text"
+                  placeholder="Ex: Ao lado do mercado."
+                  ref={register}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Complemento</label>
+                <input
+                  name="complement"
+                  type="text"
+                  placeholder="Ex: Edifício Miranda - Apt 81"
+                  ref={register}
+                />
+              </Form.Field>
 
-              <Button color="green" type="submit" onClick={handleSubmit(onSubmit)}>
+              <Styled.ButtonForm type="submit" onClick={handleSubmit(onSubmit)}>
                 <Icon name="checkmark" /> Salvar Alterações
-              </Button>
+              </Styled.ButtonForm>
 
-              {errorMessage && <MsgError>{errorMessage}</MsgError>}
+              {errorMessage && <Styled.MsgError>{errorMessage}</Styled.MsgError>}
             </Form>
           </Styled.FormContainer>
         </Styled.BoxContent>
@@ -333,7 +363,3 @@ const ChangeProfile = ({ setOpenClose }: any) => {
 };
 
 export default ChangeProfile;
-
-const MsgError = styled.p`
-  color: red;
-`;
