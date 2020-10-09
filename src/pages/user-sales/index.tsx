@@ -76,10 +76,11 @@ const UserSales: React.FC = () => {
               <Table.Body>
                 <Table.Row >
                   <Table.Cell></Table.Cell>
-                  <Table.Cell>Nome</Table.Cell>
-                  <Table.Cell>Categoria</Table.Cell>
-                  <Table.Cell>Condição</Table.Cell>
-                  <Table.Cell>Valor aprox</Table.Cell>
+                  <Table.Cell><strong>Nome</strong></Table.Cell>
+                  <Table.Cell><strong>Categoria</strong></Table.Cell>
+                  <Table.Cell><strong>Condição</strong></Table.Cell>
+                  <Table.Cell><strong>Valor aprox</strong></Table.Cell>
+                  <Table.Cell><strong></strong></Table.Cell>
                 </Table.Row>
                 {user.userSales && user.userSales.map((product: any) => {
                   return (

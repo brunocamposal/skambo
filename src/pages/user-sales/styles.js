@@ -70,7 +70,8 @@ export const LoadingContainer = styled.div`
 `;
 
 
-export const Table = styled(SemanticTable)`
+export const Table = styled(SemanticTable)`    
+ border:none !important;
    img {
      width:50px;
      height:50px;
