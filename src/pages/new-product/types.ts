@@ -1,5 +1,4 @@
 export interface Product {
-  productID?: string;
   userId?: number;
   views?: number;
   usersAccess?: number;

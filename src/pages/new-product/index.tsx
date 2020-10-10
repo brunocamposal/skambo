@@ -3,24 +3,23 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error } from './styles';
-import {defaultProduct, formatNumber, categorias} from './helper'
-import {FormContainer} from '../../components/form-container/styles'
+import { defaultProduct, formatNumber, categorias } from './helper'
+import { FormContainer } from '../../components/form-container/styles'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { Product, TokenDecoded, Session } from './types';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
   const [estado, setEstado] = useState('selecione');
-  const history = useHistory();
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: defaultProduct
   });
-  
-  const token = useSelector((state: Session) => state.session.token)
-  const userId= jwtDecode<TokenDecoded>(token).sub
+  const history = useHistory();
+    const token = useSelector((state: Session) => state.session.token)
+  const userId= parseInt(jwtDecode<TokenDecoded>(token).sub)
 
   useEffect (()=>{
       if (token.length < 1) history.push('/login');
@@ -55,24 +54,24 @@ const NewProduct: React.FC = () => {
 
   const onSubmit = (data: Product): void => {
     const sendData = {
+      userId,
+      views: 0,
+      usersAccess: 0,
+      boost: "",
+      ...data,
+      images: formValue.images,
+      thumbnail: formValue.images[0],
+    };
+    const headers = {
       headers: {
-        Authorization: 'Bearer ' + token,
-      },
-      data: {
-        userId,
-        views: 0,
-        usersAccess: 0,
-        boost: "",
-        ...data,
-        images: formValue.images,
-        thumbnail: formValue.images[0],
+        Authorization: `Bearer ${token}`,
       },
     };
     console.log(sendData);
     axios
-      .post('https://capstone-q2.herokuapp.com/products', sendData)
-      .then(({ data }) => {
-        console.log(data);
+      .post('https://capstone-q2.herokuapp.com/products', sendData, headers)
+      .then((res) => {
+        console.log(res);
         Swal.fire({
           icon: 'success',
           title: 'Sucesso!',
