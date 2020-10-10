@@ -1,28 +1,31 @@
-export interface product {
-  productID: string;
-  userId: number;
-  views: number;
-  usersAccess: number;
+export interface Product {
+  productID?: string;
+  userId?: number;
+  views?: number;
+  usersAccess?: number;
   usability: string;
-  value: number;
-  boost: string;
+  value: string;
+  boost?: string;
   name: string;
   description: string;
-  thumbnail: null | string;
-  category: any;
   images: string[];
+  thumbnail: null | string;
+  category: string;
   interests: string[];
 }
 
-export interface token_decoded {
+export interface TokenDecoded {
   sub: number;
-  user_id: number;
+  userId: number;
   exp: Date;
 }
 
-export interface categoria {
+export interface Categoria {
   key: number;
   value: string;
   text: string;
-  selected: string;
+}
+
+export interface Session {
+  session: { token: string };
 }

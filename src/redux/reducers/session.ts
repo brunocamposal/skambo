@@ -9,7 +9,7 @@ const defaultState = {
   token: localStorage.getItem("token") || "",
 };
 
-const session = (state = defaultState, action: ActionTypes) => {
+const session = (state = defaultState, action: ActionTypes): {token: string} => {
   switch (action.type) {
     case LOGIN:
       return { ...state, token: action.token};

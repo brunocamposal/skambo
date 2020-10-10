@@ -8,9 +8,53 @@ import {FormContainer} from '../../components/form-container/styles'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import { Product, TokenDecoded, Session } from './types';
+import { Product, TokenDecoded } from './types';
 import {useSelector} from 'react-redux'
 
+const onSubmit = (formValue: Product, values): void => {
+  console.log('values.target:', values.target, 'formValue:', formValue)
+  const newProduct = {
+    userId: jwtDecode<TokenDecoded>(token).sub,
+    views: 0,
+    usersAccess: 0,
+    boost: "",
+    usability: values.usability,
+    value: values.value,
+    name: values.name,
+    description: values.description,
+    category: values.category,
+    images: formValue.images,
+    thumbnail: formValue.images?[0] : '',
+    interests: typeof values.interests === 'string' ? values.interests.split(',').map(val => val.trim()) : values.interests ,
+  }
+  const sendData = {
+    header: {
+      Authorization: token,
+    },
+    data: newProduct,
+  };
+  console.log(sendData);
+  // axios
+  //   .post('https://capstone-q2.herokuapp.com/products', sendData)
+  //   .then(({ data }) => {
+  //     console.log(data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Produto cadastrado.',
+      });
+  //   })
+  //   .catch(({ err }) => {
+  //     if (!!err) {
+  //       console.log(err);
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Erro',
+  //         text: 'Não foi possível enviar os dados.',
+  //       });
+  //     };
+  //   });
+};
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
   const [estado, setEstado] = useState('selecione');
@@ -18,13 +62,9 @@ const NewProduct: React.FC = () => {
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: defaultProduct
   });
-  
-  const token = useSelector((state: Session) => state.session.token)
-  const userId= jwtDecode<TokenDecoded>(token).sub
 
-  useEffect (()=>{
-      if (token.length < 1) history.push('/login');
-  },[token, history])
+  const token: string = useSelector(state => state.token);
+  if (token === '') history.push('/login');
 
   useEffect(()=>{
     let es;
@@ -53,56 +93,12 @@ const NewProduct: React.FC = () => {
 
   !!errors?.entries?.length && console.log(errors)
 
-  const onSubmit = (data: Product): void => {
-    const sendData = {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-      data: {
-        userId,
-        views: 0,
-        usersAccess: 0,
-        boost: "",
-        ...data,
-        images: formValue.images,
-        thumbnail: formValue.images[0],
-      },
-    };
-    console.log(sendData);
-    axios
-      .post('https://capstone-q2.herokuapp.com/products', sendData)
-      .then(({ data }) => {
-        console.log(data);
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: 'Produto cadastrado.',
-        });
-        reset(defaultProduct);
-        setFormValue(defaultProduct);
-      })
-      .catch(({ response }) => {
-        if (!!response) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Erro',
-            text: 'Não foi possível enviar os dados.',
-          });
-          console.log(response); 
-            reset(defaultProduct);
-            setFormValue(defaultProduct);
-        };
-      });
-  };
-
 return (
-    <FormContainer  style={{ marginTop: 80 }}>
-      <h1>Novo Produto</h1>
-      <Link to="/">
+        <FormContainer>
+      <Link to="/" style={{ marginTop: 100 }}>
         <h3> Voltar </h3>
       </Link>
       <Form onSubmit={handleSubmit(onSubmit)} >
-
         <Form.Field required>
             <label htmlFor='name'>Produto</label>
             <input
@@ -146,12 +142,12 @@ return (
             accept="image/x-png,image/gif,image/jpeg"
             placeholder="Inserir imagem"
             multiple
-            // ref={register({
-            //   required: 'Insira ao menos uma imagem!',
-            // })}
+            ref={register({
+                required: 'Insira ao menos uma imagem!',
+            })}
             onChange={({target}): void => setFormValue({
                 ...formValue,
-                images: [...formValue.images, target.value]
+                images: [...formValue.images, JSON.stringify(target.value)]
             })}
           />
             {errors.images && <Error>{errors.images.message}</Error>}
@@ -208,9 +204,9 @@ return (
             maxLength={11}
             ref={register({
                 required: 'Informe o valor',
-                validate: {
-                  bigger: (value: string): boolean | string => parseInt(value.replace(/\D/g, ''), 10) > 100 || 'Valor mínimo: R$ 1,00',
-                }
+                // validate: {
+                //     minimo: (value): string | boolean => parseInt(value.replace(/\D/g, '')) < 100 || 'Valor mínimo: 1,00',
+                // },
             }            )}
             onChange={
               ({ target }): void => setFormValue({
