@@ -27,13 +27,13 @@ const Login: React.FC = () => {
   const [requestError, setRequestError] = useState('');
   const history = useHistory();
 
-
   const onSubmit = (values: IFormInputs) => {
+    //console.log(values);
+
     axios
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
         dispatch(login(data.accessToken));
-        localStorage.setItem('token', data.accessToken);
         history.push('/');
       })
       .catch(({ response }) => {
