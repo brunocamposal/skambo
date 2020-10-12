@@ -12,77 +12,106 @@ import {
   ProductInfoDesc,
   ProductInfoIntr,
   InterestButton,
-  FavButton
-} from './styles'
-import { Icon } from 'semantic-ui-react'
-import { useHistory } from "react-router-dom"
-import axios from 'axios'
+  FavButton,
+} from './styles';
+import { Icon } from 'semantic-ui-react';
+import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { RootState } from '../../redux/reducers';
+import { useSelector } from 'react-redux';
+import { Loading } from './loading';
 
-const Product = () => {
-    const history = useHistory()
-    const [products, setProducts] = useState({
-      productID: "",
-      name: "",
-      description: "",
-      usability: "",
-      value: "",
-      userId: "",
-      thumbnail: "",
-      images: [],
-      views: "",
-      boost: "",
-      interests: []
-  })
-    
-    const id = 0
-    const url = `https://capstone-q2.herokuapp.com/products/`
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhbmRvMTJAdGVzdDEyLmNvbSIsImlhdCI6MTYwMTkzMjIzMiwiZXhwIjoxNjAxOTM1ODMyLCJzdWIiOiI3In0.jHNpG6pa36_O-ghhc0bh6MTIAGXRBibQq3BtssXtMSM'
 
-    useEffect(() => {
-      axios.
-      get(url, {
+const Product: React.FC = () => {
+  const history = useHistory();
+  const [products, setProducts] = useState({
+    name: '',
+    description: '',
+    usability: '',
+    value: '',
+    thumbnail: '',
+    images: [],
+    interests: [],
+  });
+
+  const { id }:any = useParams();
+  const url = `https://capstone-q2.herokuapp.com/products/`;
+  const token = useSelector(({ session }: RootState) => session.token);
+  const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState('');
+
+  useEffect(() => {
+    axios
+      .get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        const product = res.data[id]
-        setProducts(product)
-        setImage(product.images[0])
+        const product = res.data[id - 1];
+        setProducts(product);
+        setLoading(false);
+
+        setImage(product.thumbnail);
       })
-      .catch((err) => console.log(err))
-    }, [setProducts])
+      .catch((err) => console.log(err));
+  }, [setProducts]);
 
-    const [image, setImage] = useState('')
 
-    return (
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
         <ProductCard>
-            <CardImg>
-              <CardThumb>
-                {products.images.map((image, index) => {
-                  return <ProductThumb key={index} src={image} alt='thumbnail' onMouseOver={() => setImage(products.images[index])} />
-                })}
-              </CardThumb>
-              <CardProduct>
-                <ProductShow src={image} alt='destak' />
-              </CardProduct>
-            </CardImg>
-            <CardInfo>
-                <ProductInfoName>{products.name}</ProductInfoName>
-                <ProductInfoValue>R$ {products.value}</ProductInfoValue>
-                <ProductInfoDesc>{products.description}</ProductInfoDesc>
-                <ProductInfoDesc><b>CONDIÇÃO: </b>{products.usability}</ProductInfoDesc>
-                <ProductInfoIntr>
-                    Interesses:
-                    {products.interests.map((interest, index) => {
-                        return <li key={index}>{interest}</li>
-                    })}
-                </ProductInfoIntr>
-                <InterestButton onClick={() => history.push('/user/interest')}>Tenho Interesse</InterestButton>
-                <FavButton onClick={() => 'add favotites'}><Icon name='heart' />Adicionar aos favoritos</FavButton>
-            </CardInfo>
+          <CardImg>
+            <CardThumb>
+              <ProductThumb
+                src={products.thumbnail}
+                alt="thumb"
+                onMouseOver={() => setImage(products.thumbnail)}
+              />
+              {products.images.map((image, index) => {
+                return (
+                  <ProductThumb
+                    key={index}
+                    src={image}
+                    alt="thumbnail"
+                    onMouseOver={() => setImage(products.images[index])}
+                  />
+                );
+              })}
+            </CardThumb>
+            <CardProduct>
+              <ProductShow src={image} alt="destak" />
+            </CardProduct>
+          </CardImg>
+          <CardInfo>
+            <ProductInfoName>{products.name}</ProductInfoName>
+            <ProductInfoValue>R$ {products.value}</ProductInfoValue>
+            <ProductInfoDesc>{products.description}</ProductInfoDesc>
+            <ProductInfoDesc>
+              <b>CONDIÇÃO: </b>
+              {products.usability}
+            </ProductInfoDesc>
+            <ProductInfoIntr>
+              Interesses:
+              {products.interests.map((interest, index) => {
+                return <li key={index}>{interest}</li>;
+              })}
+            </ProductInfoIntr>
+            <InterestButton onClick={() => history.push('/user/interest')}>
+              Tenho Interesse
+            </InterestButton>
+            <FavButton onClick={() => 'add favotites'}>
+              <Icon name="heart" />
+              Adicionar aos favoritos
+            </FavButton>
+          </CardInfo>
         </ProductCard>
-    )
-}
+      )}
+    </>
+  );
+};
 
-export default Product
+export default Product;

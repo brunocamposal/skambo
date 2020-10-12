@@ -11,7 +11,7 @@ import {
   StyledIcons,
   StyledUser,
 } from './styles';
-import { Dropdown, Form } from 'semantic-ui-react';
+import { Dropdown, Form, Modal } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Logo from '../../media/img/logotipo.png';
 import UserDefault from '../../media/img/userDefault.png';
@@ -19,16 +19,18 @@ import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { VscSettingsGear } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
-import { setTimeout } from 'timers';
 import MobileCategories from '../mobile/categories';
 import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
+
+import ChangeProfile from '../change-profile';
 
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
   const token = useSelector(({ session }: RootState) => session.token);
 
+  console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
@@ -57,7 +59,7 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {token != '' ? ( // Condicional para quando o usuário estiver logado
+        {token !== '' ? ( // Condicional para quando o usuário estiver logado
           <StyledMenuRight>
             <StyledButton className="web" onClick={() => history.push('/')}>
               Anunciar
@@ -69,7 +71,13 @@ const TopBar: React.FC = () => {
                   <Dropdown.Item
                     icon="edit"
                     text="Alterar informações"
-                    onClick={() => history.push('/register')}
+                    onClick={() => history.push('/change-profile')}
+                  />
+
+                  <Dropdown.Item
+                    icon="briefcase"
+                    text="Meus anúncios"
+                    onClick={() => history.push('/my-sales')}
                   />
                   <Dropdown.Item
                     icon="sign-out"
@@ -84,6 +92,7 @@ const TopBar: React.FC = () => {
                           window.localStorage.clear();
                         }
                       });
+                      history.push('/')
                     }}
                   />
                 </Dropdown.Menu>

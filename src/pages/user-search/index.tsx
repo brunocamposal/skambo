@@ -14,6 +14,7 @@ interface ProductsProps {
   category: string;
   thumbnail: string;
   search: string;
+  id: string;
 }
 
 interface stateProps {
@@ -26,10 +27,10 @@ const UserSearch: React.FC = () => {
   const [messageSearch, setMessageSearch] = useState('');
   const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
-  const { search } = useParams<ProductsProps>();
   const history = useHistory();
 
   const session = useSelector((state: stateProps) => state.session);
+  const { search } = useParams<ProductsProps>();
 
   useEffect(() => {
     axios
@@ -76,6 +77,10 @@ const UserSearch: React.FC = () => {
     setFilterProducts(filterSearch);
   }, [productsList, search]);
 
+  const goProductPage = (id: string) => {
+    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+  }
+
   return (
     <div>
       <Container>
@@ -89,6 +94,7 @@ const UserSearch: React.FC = () => {
                   title="teste"
                   category={product.category.join('/ ')}
                   imgUrl={product.thumbnail}
+                  onClick={() => goProductPage(product.id)}
                 />
               );
             })}

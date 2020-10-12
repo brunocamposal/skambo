@@ -26,10 +26,9 @@ const MostViewedProducts = () => {
       })
       .then((res) => {
         const sortedProducts = res.data.sort((a: { views: string }, b: { views: string }) => {
-          return parseInt(b.views) - parseInt(a.views);
-        });
-        setProducts(sortedProducts);
-        console.log(res);
+          return parseInt(b.views) - parseInt(a.views)
+        })
+        setProducts(sortedProducts)
       })
       .catch(({ response }) => {
         if (response?.status === 401 && session.token != "") {
@@ -79,6 +78,12 @@ const MostViewedProducts = () => {
       },
     ],
   };
+
+  
+
+  const goProductPage = (id: string) => {
+    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+  }
 
   return (
     <div>

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card  Snapshot test Card Snapshot test Render 1`] = `
+<div
+  style={Object {}}
+>
+  <div
+    className="sc-bdnylx fIxnGt"
+  >
+    <img
+      alt="card"
+    />
+    <div>
+      <strong
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      />
+      <p />
+    </div>
+  </div>
+</div>
+`;
