@@ -34,6 +34,7 @@ const Login: React.FC = () => {
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
         dispatch(login(data.accessToken));
+        localStorage.setItem('token', data.accessToken);
         history.push('/');
       })
       .catch(({ response }) => {
