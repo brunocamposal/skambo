@@ -19,7 +19,6 @@ import { useHistory, useParams } from "react-router-dom"
 import axios from 'axios'
 import { RootState } from '../../redux/reducers'
 import { useSelector } from 'react-redux'
-import { motion } from 'framer-motion'
 import { Loading } from './loading'
 
 const Product: React.FC = () => {
@@ -70,14 +69,7 @@ const Product: React.FC = () => {
               })}
             </CardThumb>
             <CardProduct>
-            <motion.div
-              whileHover={{
-                scale: 1.2,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{ scale: 0.9 }}>
                 <ProductShow src={image} alt='destak' />
-              </motion.div>
             </CardProduct>
           </CardImg>
           <CardInfo>

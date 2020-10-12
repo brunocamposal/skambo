@@ -82,13 +82,13 @@ export const ProductInfoName = styled.h1`
 export const ProductInfoValue = styled.p`
     font-size: 16px;
     font-weight: bold;
-    width: 100%;;
+    width: 70%;
     margin: 0;
     color: var(--primary);
 `
 export const ProductInfoDesc = styled.p`
     font-size: 14px;
-    width: 100%;
+    width: 70%;
 `
 export const ProductInfoIntr = styled.p`
     font-size: 14px;
