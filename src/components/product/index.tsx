@@ -34,7 +34,7 @@ const Product: React.FC = () => {
     interests: [],
   });
 
-  const { id }:any = useParams();
+  const { id } = useParams();
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
   const [loading, setLoading] = useState(true);

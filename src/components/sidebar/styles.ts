@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 250px;
   flex-direction: column;
   margin-top: 120px;
+  background: #ffffff;
 
   h3 {
     text-align: left;

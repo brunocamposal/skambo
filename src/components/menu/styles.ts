@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react';
 export const StyledMenu = styled.div`
   width: 100%;
   max-width: 1200px;
-  height: 60px;
+  height: 85px;
   position: fixed;
   z-index: 1;
   top: 0;

@@ -94,6 +94,10 @@ const CategorieSearch: React.FC = () => {
     return { key, text: product.category[1], value: product.category[1] };
   });
 
+  const goProductPage = (id: string) => {
+    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+  }
+
   return (
     <div>
       <Container>
@@ -120,6 +124,7 @@ const CategorieSearch: React.FC = () => {
                     title="teste"
                     category={product.category.join('/ ')}
                     imgUrl={product.thumbnail}
+                    onClick={() => goProductPage(product.id)}
                   />
                 );
               }
@@ -130,6 +135,7 @@ const CategorieSearch: React.FC = () => {
                     title="teste"
                     category={product.category.join('/ ')}
                     imgUrl={product.thumbnail}
+                    onClick={() => goProductPage(product.id)}
                   />
                 );
               }

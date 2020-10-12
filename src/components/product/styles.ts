@@ -8,6 +8,8 @@ export const ProductCard = styled.div`
     max-width: 950px;
     min-height: 500px;
     display: flex;
+    margin-top: 10px;
+    
     @media (max-width: 920px) {
         flex-direction: column;
         align-items: center;

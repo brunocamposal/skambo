@@ -101,6 +101,7 @@ const MostViewedProducts = () => {
                   title={product.name}
                   category={product.category.join("/ ")}
                   imgUrl={product.thumbnail}
+                  onClick={() => goProductPage(product.id)}
                 />
               );
             })}
@@ -116,6 +117,7 @@ const MostViewedProducts = () => {
                   title={product.name}
                   category={product.category.join("/ ")}
                   imgUrl={product.thumbnail}
+                  onClick={() => goProductPage(product.id)}
                 />
               );
             })}
