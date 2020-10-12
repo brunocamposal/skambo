@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Container, SidebarSize, IconClose, Content } from "./styles";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { Container, SidebarSize, IconClose, Content } from './styles';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
-import { Grid, Sidebar } from "semantic-ui-react";
-import { Categorie } from "../../sidebar/styles";
-import { categories } from "../../sidebar/helper";
+import { Grid, Sidebar } from 'semantic-ui-react';
+import { Categorie } from '../../sidebar/styles';
+import { categories } from '../../sidebar/helper';
+
+import { useHistory } from 'react-router-dom';
 
 const MobileCategories = () => {
   const [visible, setVisible] = useState(false);
+
+  const history = useHistory();
+
   return (
     <Container>
       <Grid columns={1}>
@@ -23,12 +28,14 @@ const MobileCategories = () => {
             icon="labeled"
             onHide={() => setVisible(false)}
             vertical
-            visible={visible}
-          >
+            visible={visible}>
             <IconClose onClick={() => setVisible(false)} />
             <Content>
               {categories.map((item, index) => (
-                <Categorie className={item.classStyle} key={index}>
+                <Categorie
+                  className={item.classStyle}
+                  key={index}
+                  onClick={() => history.push(`/category/${item.name.toLocaleLowerCase()}`)}>
                   <item.icon className="icon-style" /> {item.name}
                 </Categorie>
               ))}

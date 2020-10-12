@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, ResultSearch } from './styles';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import Card from '../../components/card';
+import Swal from 'sweetalert2';
 
 import axios from 'axios';
 
@@ -15,6 +16,10 @@ interface ProductsProps {
   search: string;
 }
 
+interface stateProps {
+  session: { token: string };
+}
+
 const UserSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterProducts, setFilterProducts] = useState<ProductsProps[]>([]);
@@ -22,6 +27,9 @@ const UserSearch: React.FC = () => {
   const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { search } = useParams<ProductsProps>();
+  const history = useHistory();
+
+  const session = useSelector((state: stateProps) => state.session);
 
   useEffect(() => {
     axios
@@ -32,6 +40,18 @@ const UserSearch: React.FC = () => {
       })
       .then(({ data }) => {
         setProductsList(data);
+      })
+      .catch(({ response }) => {
+        if (response?.status === 401 && session.token != '') {
+          Swal.fire({
+            title: `Você foi deslogado! Faça o Login novamnte.`,
+            confirmButtonText: `Ok`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.push('/login');
+            }
+          });
+        }
       });
   }, []);
 
@@ -62,12 +82,12 @@ const UserSearch: React.FC = () => {
         <h3> {messageSearch} </h3>
         <ResultSearch>
           {filterProducts &&
-            filterProducts.map((product, key) => {
+            filterProducts.map((product: any, key) => {
               return (
                 <Card
                   key={key}
-                  title={product.name}
-                  category={product.category}
+                  title="teste"
+                  category={product.category.join('/ ')}
                   imgUrl={product.thumbnail}
                 />
               );

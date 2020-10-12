@@ -33,11 +33,6 @@ const TopBar: React.FC = () => {
 
   const handleSubmit = () => {
     history.push(`/user-search/${value}`);
-    // axios
-    //  .get(`https://capstone-q2.herokuapp.com/product?=${value}`)
-    //  .then((res) => {
-    //    console.log('Buscou')
-    //   })
   };
 
   return (

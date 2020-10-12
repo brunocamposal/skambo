@@ -94,7 +94,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category}
+                  category={product.category.join("/ ")}
                   imgUrl={product.thumbnail}
                 />
               );
@@ -109,7 +109,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category}
+                  category={product.category.join("/ ")}
                   imgUrl={product.thumbnail}
                 />
               );

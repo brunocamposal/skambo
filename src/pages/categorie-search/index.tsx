@@ -1,29 +1,37 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, ResultSearch } from './styles';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import Card from '../../components/card';
+import Swal from 'sweetalert2';
 
 import axios from 'axios';
 
 interface ProductsProps {
   name: string;
-  category: string;
+  category: any;
   thumbnail: string;
   search: string;
 }
 
+interface stateProps {
+  session: { token: string };
+}
+
 const CategorieSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
-  const [filterProducts, setFilterProducts] = useState<ProductsProps[]>([]);
-  const [messageSearch, setMessageSearch] = useState('');
+  const [filterCategory, setFilterCategory] = useState<ProductsProps[]>([]);
+  const [messageCategory, setMessageCategory] = useState('');
   const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { name } = useParams<ProductsProps>();
+  const history = useHistory();
 
-  console.log(name);
+  const session = useSelector((state: stateProps) => state.session);
+
+  const categoryProducts = name;
 
   useEffect(() => {
     axios
@@ -34,21 +42,56 @@ const CategorieSearch: React.FC = () => {
       })
       .then(({ data }) => {
         setProductsList(data);
+      })
+      .catch(({ response }) => {
+        if (response?.status === 401 && session.token != '') {
+          Swal.fire({
+            title: `Você foi deslogado! Faça o Login novamnte.`,
+            confirmButtonText: `Ok`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.push('/login');
+            }
+          });
+        }
       });
   }, []);
+
+  useEffect(() => {
+    const filterRes = productsList.filter(({ category }) => {
+      const arrCategory = category.map((value: any) => value.toLocaleLowerCase());
+
+      for (let i = 0; i <= arrCategory.length; i++) {
+        if (arrCategory.includes(String(categoryProducts))) {
+          return category;
+        }
+      }
+    });
+
+    if (filterRes.length === 0) {
+      setMessageCategory(`Nenhum resultado para ${categoryProducts}`);
+    } else {
+      setMessageCategory(`${categoryProducts}`);
+    }
+
+    setFilterCategory(filterRes);
+  }, [productsList, categoryProducts]);
 
   return (
     <div>
       <Container>
-        <h3> {messageSearch} </h3>
+        <h3>
+          {' '}
+          {messageCategory.charAt(0).toUpperCase() + messageCategory.substr(1).toLowerCase()}{' '}
+        </h3>
         <ResultSearch>
-          {productsList &&
-            productsList.map((product, key) => {
+          {filterCategory &&
+            filterCategory.map((product: any, key) => {
               return (
                 <Card
                   key={key}
-                  title={product.name}
-                  category={product.category}
+                  title="teste"
+                  category={product.category.join('/ ')}
                   imgUrl={product.thumbnail}
                 />
               );

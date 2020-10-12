@@ -24,4 +24,9 @@ export const Categorie = styled.div`
   font-size: 16px;
   padding: 10px;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+    justify-content: flex-start;
+  }
 `;
