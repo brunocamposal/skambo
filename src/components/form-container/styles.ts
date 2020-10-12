@@ -39,7 +39,7 @@ export const BoxContent = styled.div`
     flex-direction: column;
     height: 880px;
   }
-  @media (max-width: 415px){
+  @media (max-width: 480px){
     width: 90%;
     height: 553px;
     box-shadow: 0px 0px 0px #ffffff;
@@ -100,7 +100,7 @@ export const LogoContainer = styled.div`
     width: 96%;
     margin-top: 64px;
   }
-  @media (max-width: 415px){
+  @media (max-width: 480px){
     display: none;
   }
   img {

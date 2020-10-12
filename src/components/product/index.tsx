@@ -15,28 +15,29 @@ import {
   FavButton
 } from './styles'
 import { Icon } from 'semantic-ui-react'
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import axios from 'axios'
+import { RootState } from '../../redux/reducers'
+import { useSelector } from 'react-redux'
+import { motion } from 'framer-motion'
+import { Loading } from './loading'
 
-const Product = () => {
+const Product: React.FC = () => {
     const history = useHistory()
     const [products, setProducts] = useState({
-      productID: "",
       name: "",
       description: "",
       usability: "",
       value: "",
-      userId: "",
       thumbnail: "",
       images: [],
-      views: "",
-      boost: "",
       interests: []
   })
     
-    const id = 0
+    const { id } = useParams()
     const url = `https://capstone-q2.herokuapp.com/products/`
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhbmRvMTJAdGVzdDEyLmNvbSIsImlhdCI6MTYwMTkzMjIzMiwiZXhwIjoxNjAxOTM1ODMyLCJzdWIiOiI3In0.jHNpG6pa36_O-ghhc0bh6MTIAGXRBibQq3BtssXtMSM'
+    const token = useSelector(({ session }: RootState) => session.token)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       axios.
@@ -46,9 +47,11 @@ const Product = () => {
         },
       })
       .then((res) => {
-        const product = res.data[id]
+        const product = res.data[id -1]
         setProducts(product)
-        setImage(product.images[0])
+        setLoading(false)
+
+        setImage(product.thumbnail)
       })
       .catch((err) => console.log(err))
     }, [setProducts])
@@ -56,32 +59,43 @@ const Product = () => {
     const [image, setImage] = useState('')
 
     return (
+      <>
+      {loading ? <Loading /> :
         <ProductCard>
-            <CardImg>
-              <CardThumb>
-                {products.images.map((image, index) => {
-                  return <ProductThumb key={index} src={image} alt='thumbnail' onMouseOver={() => setImage(products.images[index])} />
-                })}
-              </CardThumb>
-              <CardProduct>
+          <CardImg>
+            <CardThumb>
+              <ProductThumb src={products.thumbnail} alt='thumb' onMouseOver={() => setImage(products.thumbnail)} />
+              {products.images.map((image, index) => {
+                return <ProductThumb key={index} src={image} alt='thumbnail' onMouseOver={() => setImage(products.images[index])} />
+              })}
+            </CardThumb>
+            <CardProduct>
+            <motion.div
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.9 }}>
                 <ProductShow src={image} alt='destak' />
-              </CardProduct>
-            </CardImg>
-            <CardInfo>
-                <ProductInfoName>{products.name}</ProductInfoName>
-                <ProductInfoValue>R$ {products.value}</ProductInfoValue>
-                <ProductInfoDesc>{products.description}</ProductInfoDesc>
-                <ProductInfoDesc><b>CONDIÇÃO: </b>{products.usability}</ProductInfoDesc>
-                <ProductInfoIntr>
-                    Interesses:
-                    {products.interests.map((interest, index) => {
-                        return <li key={index}>{interest}</li>
-                    })}
-                </ProductInfoIntr>
-                <InterestButton onClick={() => history.push('/user/interest')}>Tenho Interesse</InterestButton>
-                <FavButton onClick={() => 'add favotites'}><Icon name='heart' />Adicionar aos favoritos</FavButton>
-            </CardInfo>
-        </ProductCard>
+              </motion.div>
+            </CardProduct>
+          </CardImg>
+          <CardInfo>
+              <ProductInfoName>{products.name}</ProductInfoName>
+              <ProductInfoValue>R$ {products.value}</ProductInfoValue>
+              <ProductInfoDesc>{products.description}</ProductInfoDesc>
+              <ProductInfoDesc><b>CONDIÇÃO: </b>{products.usability}</ProductInfoDesc>
+              <ProductInfoIntr>
+                  Interesses:
+                  {products.interests.map((interest, index) => {
+                      return <li key={index}>{interest}</li>
+                  })}
+              </ProductInfoIntr>
+              <InterestButton onClick={() => history.push('/user/interest')}>Tenho Interesse</InterestButton>
+              <FavButton onClick={() => 'add favotites'}><Icon name='heart' />Adicionar aos favoritos</FavButton>
+          </CardInfo>
+        </ProductCard>}
+      </>
     )
 }
 

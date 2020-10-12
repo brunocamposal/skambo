@@ -19,7 +19,6 @@ import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { VscSettingsGear } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
-import { setTimeout } from 'timers';
 import MobileCategories from '../mobile/categories';
 import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
@@ -65,7 +64,7 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {token != '' ? ( // Condicional para quando o usuário estiver logado
+        {token !== '' ? ( // Condicional para quando o usuário estiver logado
           <StyledMenuRight>
             <StyledButton className="web" onClick={() => history.push('/')}>
               Anunciar

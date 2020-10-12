@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, ResultSearch } from './styles';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import Card from '../../components/card';
@@ -13,13 +13,15 @@ interface ProductsProps {
   category: string;
   thumbnail: string;
   search: string;
+  id: string;
 }
 
 const UserSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
-  const { search } = useParams<ProductsProps>();
+  const { search, id } = useParams<ProductsProps>();
+  const history = useHistory()
 
   useEffect(() => {
     axios
@@ -43,6 +45,10 @@ const UserSearch: React.FC = () => {
     }
   });
 
+  const goProductPage = (id: string) => {
+    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+  }
+
   return (
     <div>
       <Container>
@@ -60,6 +66,7 @@ const UserSearch: React.FC = () => {
                   title={product.name}
                   category={product.category}
                   imgUrl={product.thumbnail}
+                  onClick={() => goProductPage(product.id)}
                 />
               );
             })}

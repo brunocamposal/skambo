@@ -7,6 +7,7 @@ import '../../../node_modules/slick-carousel/slick/slick.css';
 import '../../../node_modules/slick-carousel/slick/slick-theme.css';
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 
 interface stateProps {
   session: { token: string }
@@ -14,9 +15,9 @@ interface stateProps {
 
 const MostViewedProducts = () => {
   const session = useSelector((state: stateProps) => state.session)
-
   const [products, setProducts] = useState([])
-  console.log(products)
+  const history = useHistory()
+  
   useEffect(() => {
     axios.get('https://capstone-q2.herokuapp.com/products', {
       headers: { Authorization: `Bearer ${session.token}` }
@@ -26,7 +27,6 @@ const MostViewedProducts = () => {
           return parseInt(b.views) - parseInt(a.views)
         })
         setProducts(sortedProducts)
-        console.log(res)
       })
       .catch(err => console.log(err))
   }, [])
@@ -67,6 +67,12 @@ const MostViewedProducts = () => {
     ],
   };
 
+  
+
+  const goProductPage = (id: string) => {
+    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+  }
+
   return (
     <div>
       <Styled.Title>
@@ -77,15 +83,15 @@ const MostViewedProducts = () => {
         <Slider {...settings}>
           {products &&
             products.map((product: any, key: number) => {
-              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} onClick={() => goProductPage(product.id)} />;
             })}
         </Slider>
       </Styled.CarouselContainer>
       <Styled.Mobile>
         <Styled.MobileContainer>
           {products &&
-            products.map((product: any, key) => {
-              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} />;
+            products.map((product: any, key: number) => {
+              return <Card key={key} title={product.name} category={product.category} imgUrl={product.thumbnail} onClick={() => goProductPage(product.id)} />;
             })}
         </Styled.MobileContainer>
       </Styled.Mobile>

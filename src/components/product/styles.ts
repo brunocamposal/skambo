@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StyledButton } from '../menu/styles'
+import { Image } from 'semantic-ui-react'
 
 export const ProductCard = styled.div`
     width: 100%;
@@ -7,7 +8,6 @@ export const ProductCard = styled.div`
     max-width: 950px;
     min-height: 500px;
     display: flex;
-
     @media (max-width: 920px) {
         flex-direction: column;
         align-items: center;
@@ -18,7 +18,6 @@ export const CardImg = styled.div`
     width: 50%;
     height: 500px;
     display: flex;
-
     @media (max-width: 920px) {
         flex-direction: column;
         align-items: center;
@@ -27,7 +26,6 @@ export const CardImg = styled.div`
 export const CardThumb = styled.div`
     width: 11%;
     height: 500px;
-
     @media (max-width: 920px) {
         display: flex;
         flex-direction:row;
@@ -59,18 +57,8 @@ export const ProductShow = styled.img`
     max-width: 400px;
     cursor: pointer;
     overflow: hidden;
-
     max-width: 100%;
-    -moz-transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-        
-    &:hover {
-        -moz-transform: scale(1.2);
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-
+    
     @media (max-width: 920px) {
         margin-top: 0;
     }
@@ -86,7 +74,6 @@ export const ProductInfoName = styled.h1`
     font-weight: bold;
     padding-top: 20px;
     margin-bottom: 10px;
-
     @media (max-width: 920px) {
         position: absolute;
         top: 70px;
@@ -117,3 +104,7 @@ export const FavButton = styled(InterestButton)`
     background: red;
     margin-top: 10px;
 `
+export const ImageLoading = styled(Image)`
+  width: 100vw;
+  height: 500px;
+`;
