@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { Table as SemanticTable } from 'semantic-ui-react'
 
 export const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 135px;
+  margin-left: 50px;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -16,29 +18,29 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const RemoveButton = styled.button`
-white-space: break-spaces;
-    background-color: #ff1919;
-    padding:10px;
+  white-space: break-spaces;
+    justify-content:center;
+    width:91px;
+    height:23px;
+    font-weight:700;
+    background-color: #EA4326;
+    padding:4px;
     color:white;
     border: none;
-    border-radius:5px;
+    border-radius:7px;
     display: flex;
+    transition:background-color 0.3s;
     &:hover {
+      
       background-color: #c60000;
       cursor:pointer;
     }
 `;
 
-export const EditButton = styled.button`
-white-space: break-spaces;
-    background-color: var(--primary);
-    padding:10px;
-    color:white;
-    border: none;
-    border-radius:5px;
-    display: flex;
+export const EditButton = styled(RemoveButton)`
+    background-color: #818085;
     &:hover {
-      background-color: #c60000;
+      background-color: #727272;
       cursor:pointer;
     }
 `;
@@ -66,4 +68,12 @@ export const Empty = styled.div`
 
 export const LoadingContainer = styled.div`
   margin-top:15%;
+`;
+
+
+export const Table = styled(SemanticTable)`
+   img {
+     width:50px;
+     height:50px;
+   }
 `;

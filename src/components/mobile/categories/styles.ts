@@ -32,6 +32,6 @@ export const IconClose = styled(AiOutlineClose)`
   top: 0px;
   left: 0px;
   margin: 20px;
-  font-size: 35px;
+  font-size: 32px;
   cursor: pointer;
 `;
