@@ -22,6 +22,10 @@ import { useSelector } from 'react-redux';
 import { Loading } from './loading';
 
 
+interface Params {
+  id: any;
+}
+
 const Product: React.FC = () => {
   const history = useHistory();
   const [products, setProducts] = useState({
@@ -34,7 +38,7 @@ const Product: React.FC = () => {
     interests: [],
   });
 
-  const { id } = useParams();
+  const { id } = useParams<Params>();
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
   const [loading, setLoading] = useState(true);
