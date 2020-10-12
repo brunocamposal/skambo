@@ -4,11 +4,6 @@ exports[`Render Form component 1`] = `
 <div
   className="sc-bdnylx leTbsp"
 >
-  <a
-    onClick={[Function]}
-  >
-    Voltar
-  </a>
   <div
     className="sc-gtssRu brhlVN"
   >
@@ -16,11 +11,12 @@ exports[`Render Form component 1`] = `
       className="sc-hKFyIo dJqfuM"
     >
       <img
+        alt="Logotipo Skambo"
         src="register-icon.svg"
       />
     </div>
     <div
-      className="sc-dlnjPT euoBPG"
+      className="sc-dlnjPT cOIIvD"
     >
       <img
         className="sc-gKAblj kwtwHG"
@@ -34,34 +30,42 @@ exports[`Render Form component 1`] = `
           className="required field"
         >
           <label>
-            Digite seu E-Mail
+            <div>
+              E-Mail
+            </div>
+            <input
+              name="email"
+              placeholder="Digite seu E-Mail"
+            />
           </label>
-          <input
-            name="email"
-            placeholder="E-Mail"
-          />
         </div>
         <div
           className="required field"
         >
           <label>
-            Digite sua Senha
+            <div>
+              Senha
+            </div>
+            <input
+              name="password"
+              placeholder="Digite sua Senha"
+              type="password"
+            />
           </label>
-          <input
-            name="password"
-            placeholder="Senha"
-            type="password"
-          />
         </div>
-        
         <button
-          className="sc-eCApGN lpjZUS"
+          className="sc-eCApGN bqMDhY"
           type="submit"
         >
           Fazer Login
         </button>
       </form>
       <a />
+      <span
+        className="sc-iCoHVE ccpwEu"
+      >
+        
+      </span>
     </div>
   </div>
 </div>

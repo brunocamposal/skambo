@@ -18,11 +18,11 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct
   });
   const history = useHistory();
-    const token = useSelector((state: Session) => state.session.token)
-  const userId= parseInt(jwtDecode<TokenDecoded>(token).sub)
+  const token = useSelector((state: Session) => state.session.token)
+  const userId= ~~(jwtDecode<TokenDecoded>(token).sub, 10)
 
   useEffect (()=>{
-      if (token.length < 1) history.push('/login');
+      if (token.length < 1) history.push('/');
   },[token, history])
 
   useEffect(()=>{
@@ -94,7 +94,7 @@ const NewProduct: React.FC = () => {
       });
   };
 
-return (
+  return (
     <FormContainer  style={{ marginTop: 80 }}>
       <h1>Novo Produto</h1>
       <Link to="/">
@@ -135,7 +135,7 @@ return (
           </select>
 
         </Form.Field>
- 
+
         <Form.Field required>
           <label htmlFor='images'>Imagens</label>
           <input
@@ -243,9 +243,9 @@ return (
             <SendButton>Cadastrar</SendButton>
           </ButtonsDiv>
         </Form.Field>
-			</Form>
-        </FormContainer>
-	);
+      </Form>
+    </FormContainer>
+  );
 }
 
 export default NewProduct;

@@ -5,11 +5,13 @@ exports[`FormField Snapshot test FormField Snapshot test Render 1`] = `
   className="field"
 >
   <label>
-    label
+    <div>
+      label
+    </div>
+    <input
+      name="name"
+      type="type"
+    />
   </label>
-  <input
-    name="name"
-    type="type"
-  />
 </div>
 `;
