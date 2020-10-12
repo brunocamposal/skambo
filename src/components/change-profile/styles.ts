@@ -80,6 +80,7 @@ export const MsgError = styled.p`
 export const ButtonForm = styled.button`
   font-weight: 700;
   margin-top: 20px;
+  margin-bottom: 75px;
   color: #fff;
   background-color: var(--primary);
   border-radius: 7px;

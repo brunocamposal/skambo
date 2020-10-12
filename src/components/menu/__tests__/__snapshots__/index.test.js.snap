@@ -60,6 +60,10 @@ Array [
 
 }
 
+@media (max-width:1300px) {
+
+}
+
 @media (max-width:880px) {
 
 }
@@ -496,7 +500,6 @@ Array [
 @media (max-width:480px) {
   .c1 {
     width: 40%;
-    height: 50px;
     position: absolute;
     top: 0;
     left: 30%;
@@ -522,6 +525,12 @@ Array [
     position: absolute;
     top: 50px;
     left: 0;
+  }
+}
+
+@media (max-width:1300px) {
+  .c5 {
+    font-size: 20px;
   }
 }
 
@@ -715,6 +724,22 @@ Array [
                 className="text"
               >
                 Alterar informações
+              </span>
+            </div>
+            <div
+              className="item"
+              onClick={[Function]}
+              role="option"
+            >
+              <i
+                aria-hidden="true"
+                className="briefcase icon"
+                onClick={[Function]}
+              />
+              <span
+                className="text"
+              >
+                Meus anúncios
               </span>
             </div>
             <div
