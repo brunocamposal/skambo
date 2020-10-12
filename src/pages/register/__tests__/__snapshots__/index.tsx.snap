@@ -56,7 +56,7 @@ exports[`Register Should render register 1`] = `
 }
 
 .c3 h1 {
-  margin-bottom: 35px;
+  margin: 35px;
 }
 
 .c3 label {
@@ -113,16 +113,6 @@ exports[`Register Should render register 1`] = `
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c5 {
   font-weight: 700;
   margin-top: 54px;
   color: #fff;
@@ -130,14 +120,7 @@ exports[`Register Should render register 1`] = `
   border-radius: 7px;
   height: 35px;
   width: 293px;
-}
-
-.c6 h3 {
-  width: 287px;
-  height: 45px;
-  text-align: center;
-  margin-top: 14px;
-  font-size: 14px;
+  cursor: pointer;
 }
 
 @media (max-width:1368px) {
@@ -182,7 +165,7 @@ exports[`Register Should render register 1`] = `
   }
 
   .c3 h1 {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 }
 
@@ -211,11 +194,6 @@ exports[`Register Should render register 1`] = `
 <div
   className="c0"
 >
-  <a
-    onClick={[Function]}
-  >
-    Voltar
-  </a>
   <div
     className="c1"
   >
@@ -233,51 +211,53 @@ exports[`Register Should render register 1`] = `
         Cadastrar-se
       </h1>
       <form
+        className="ui form"
         onSubmit={[Function]}
       >
         <div
-          className="c4"
+          className="required field"
         >
           <label>
             E-mail
           </label>
           <input
             name="email"
-            onChange={[Function]}
             placeholder="Digite seu e-mail"
           />
         </div>
         <div
-          className="c4"
+          className="required field"
         >
           <label>
             Senha
           </label>
           <input
             name="password"
-            placeholder="Digite sua senha"
+            placeholder="Digite sua Senha"
+            type="password"
+          />
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            Confirme sua senha
+          </label>
+          <input
+            name="passwordRepeat"
+            placeholder="Digite sua Senha"
             type="password"
           />
         </div>
         
         <div>
           <button
-            className="c5"
+            className="c4"
             type="submit"
           >
             Cadastrar!
           </button>
-          <div
-            className="c6"
-          >
-            <a
-              onClick={[Function]}
-            >
-              <h3>
-                 Já possui conta? Entrar! 
-              </h3>
-            </a>
-          </div>
+          <a />
         </div>
       </form>
     </div>

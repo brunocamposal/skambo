@@ -4,7 +4,4 @@ interface LoginProps {
   token?: string;
 }
 
-export const login = ({ token }: LoginProps) => ({
-  type: LOGIN,
-  token,
-});
+export const login = (token: LoginProps) => ({ type: LOGIN, token });
