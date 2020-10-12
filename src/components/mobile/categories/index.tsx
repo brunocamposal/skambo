@@ -35,7 +35,10 @@ const MobileCategories = () => {
                 <Categorie
                   className={item.classStyle}
                   key={index}
-                  onClick={() => history.push(`/category/${item.name.toLocaleLowerCase()}`)}>
+                  onClick={() => {
+                    history.push(`/category/${item.name.toLocaleLowerCase()}`);
+                    setVisible(!visible);
+                  }}>
                   <item.icon className="icon-style" /> {item.name}
                 </Categorie>
               ))}

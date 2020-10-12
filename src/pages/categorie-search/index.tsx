@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Container, ResultSearch } from './styles';
+import { Container, ResultSearch, StyledDropdown } from './styles';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
@@ -20,10 +20,17 @@ interface stateProps {
   session: { token: string };
 }
 
+const options = [
+  { key: 1, text: 'Choice 1', value: 1 },
+  { key: 2, text: 'Choice 2', value: 2 },
+];
+
 const CategorieSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterCategory, setFilterCategory] = useState<ProductsProps[]>([]);
+  const [dropdownCategory, setDropdownCategory] = useState(false);
   const [messageCategory, setMessageCategory] = useState('');
+  const [selected, setSelected] = useState<ProductsProps[]>([]);
   const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { name } = useParams<ProductsProps>();
@@ -70,31 +77,62 @@ const CategorieSearch: React.FC = () => {
 
     if (filterRes.length === 0) {
       setMessageCategory(`Nenhum resultado para ${categoryProducts}`);
+      setDropdownCategory(false);
     } else {
       setMessageCategory(`${categoryProducts}`);
+      setDropdownCategory(true);
     }
 
     setFilterCategory(filterRes);
   }, [productsList, categoryProducts]);
 
+  const handleChange = (e: any, { value }: any) => {
+    setSelected(value);
+  };
+
+  const subcategorias = filterCategory.map((product: any, key) => {
+    return { key, text: product.category[1], value: product.category[1] };
+  });
+
   return (
     <div>
       <Container>
         <h3>
-          {' '}
           {messageCategory.charAt(0).toUpperCase() + messageCategory.substr(1).toLowerCase()}{' '}
         </h3>
+        {dropdownCategory && (
+          <StyledDropdown
+            text="Filtrar por subcategoria"
+            multiple
+            selection
+            fluid
+            options={subcategorias}
+            onChange={handleChange}
+          />
+        )}
         <ResultSearch>
           {filterCategory &&
             filterCategory.map((product: any, key) => {
-              return (
-                <Card
-                  key={key}
-                  title="teste"
-                  category={product.category.join('/ ')}
-                  imgUrl={product.thumbnail}
-                />
-              );
+              if (selected.length == 0) {
+                return (
+                  <Card
+                    key={key}
+                    title="teste"
+                    category={product.category.join('/ ')}
+                    imgUrl={product.thumbnail}
+                  />
+                );
+              }
+              if (selected.includes(product.category[1])) {
+                return (
+                  <Card
+                    key={key}
+                    title="teste"
+                    category={product.category.join('/ ')}
+                    imgUrl={product.thumbnail}
+                  />
+                );
+              }
             })}
         </ResultSearch>
       </Container>
