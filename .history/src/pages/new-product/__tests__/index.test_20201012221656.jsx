@@ -12,11 +12,11 @@ jest.mock('react-redux', () => ({
 	useSelector: () => jest.fn(),
 }));
 
-jest.mock('react-router-dom', () => ({
-	__esModule: true,
-	useHistory: jest.fn(),
-	Link: () => <a></a>
-}));
+// jest.mock('react-router-dom', () => ({
+// 	__esModule: true,
+// 	useHistory: jest.fn(),
+// 	Link: () => <a></a>
+// }));
 
 // jest.mock('react-hook-form', () => ({
 // 	__esModule: true,

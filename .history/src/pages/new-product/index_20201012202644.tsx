@@ -5,9 +5,9 @@ import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error } from './styles';
 import { defaultProduct, formatNumber, categorias } from './helper'
 import { FormContainer } from '../../components/form-container/styles'
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session } from './types';
 import { useSelector } from 'react-redux'
 
@@ -18,8 +18,7 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct
   });
   const history = useHistory();
-  const session = useSelector((state: Session) => state.session)
-  const token = session? useSelector((state: Session) => state.session.token) : ''
+  const token = useSelector((state: Session) => state.session.token)
   const userId= ~~(jwtDecode<TokenDecoded>(token).sub, 10)
 
   useEffect (()=>{

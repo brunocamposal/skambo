@@ -5,9 +5,9 @@ import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error } from './styles';
 import { defaultProduct, formatNumber, categorias } from './helper'
 import { FormContainer } from '../../components/form-container/styles'
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session } from './types';
 import { useSelector } from 'react-redux'
 
