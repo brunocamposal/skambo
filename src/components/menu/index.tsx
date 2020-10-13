@@ -65,7 +65,9 @@ const TopBar: React.FC = () => {
               Anunciar
             </StyledButton>
 
+
             <StyledIcons>
+
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -97,14 +99,11 @@ const TopBar: React.FC = () => {
                   />
                 </Dropdown.Menu>
               </Dropdown>
+              
+              <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
 
-              <VscSettingsGear className="web" onClick={() => history.push('/user')} />
+              <AiOutlineMail className="message" onClick={() => history.push('/')} />
 
-              <AiOutlineHeart className="web" onClick={() => history.push('/user')} />
-
-              <AiOutlineMail className="web" onClick={() => history.push('/')} />
-
-              <HiOutlineShoppingBag onClick={() => history.push('/')} />
             </StyledIcons>
           </StyledMenuRight>
         ) : (
