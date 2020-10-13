@@ -10,11 +10,9 @@ import Card from '../../components/card';
 
 const UserFavorites: React.FC = () => {
   const [productsList, setProductsList] = useState([]);
+  const [message, setMessage] = useState(false);
   const user = useSelector(({ session }: RootState) => session.currentUser);
   const history = useHistory();
-
-  console.log("usuario:");
-  console.log(user)
 
   const goProductPage = (id: string) => {
     {
@@ -22,23 +20,30 @@ const UserFavorites: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (productsList.length == 0) {
+      setMessage(true);
+    }
+  }, [productsList]);
+
   return (
     <Container>
       <h3> Favoritos </h3>
+      {message && <h4> Não possui produtos favoritados </h4>}
       <ResultSearch>
-      {productsList &&
-        productsList.map((product: any, key) => {
-          return (
-            <Card
-              key={key}
-              title="teste"
-              category={product.category.join('/ ')}
-              imgUrl={product.thumbnail}
-              onClick={() => goProductPage(product.id)}
-            />
-          );
-        })}
-         </ResultSearch>
+        {productsList &&
+          productsList.map((product: any, key) => {
+            return (
+              <Card
+                key={key}
+                title="teste"
+                category={product.category.join('/ ')}
+                imgUrl={product.thumbnail}
+                onClick={() => goProductPage(product.id)}
+              />
+            );
+          })}
+      </ResultSearch>
     </Container>
   );
 };

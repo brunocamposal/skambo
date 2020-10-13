@@ -21,7 +21,6 @@ import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { Loading } from './loading';
 
-
 const Product: React.FC = () => {
   const history = useHistory();
   const [products, setProducts] = useState({
@@ -58,8 +57,22 @@ const Product: React.FC = () => {
   }, [setProducts]);
 
   const handleFavorite = () => {
-    history.push("/favorites")
-  }
+    const url = `https://capstone-q2.herokuapp.com/products/`;
+    axios
+    .get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      const product = res.data[id - 1];
+      setProducts(product);
+      setLoading(false);
+
+      setImage(product.thumbnail);
+    })
+    .catch((err) => console.log(err));
+  };
 
   return (
     <>
