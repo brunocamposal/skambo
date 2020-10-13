@@ -6,6 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { login } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
 
+import { userIdJwt } from '../../redux/actions/user-id-jwt';
+import jwt_decode from 'jwt-decode';
+
 import FormField from '../../components/form-field';
 import FormContainer from '../../components/form-container';
 
@@ -34,8 +37,9 @@ const Login: React.FC = () => {
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
         dispatch(login(data.accessToken));
-        localStorage.setItem('token', data.accessToken);
+        let userId: any = jwt_decode(data.accessToken);
         history.push('/');
+        dispatch(userIdJwt(userId.sub));
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
@@ -43,6 +47,8 @@ const Login: React.FC = () => {
         }
         return setRequestError('Ops, aconteceu algo de errado!');
       });
+
+
   };
 
   return (

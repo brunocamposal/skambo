@@ -21,6 +21,8 @@ import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { Loading } from './loading';
 
+import OfferExchange from '../offer-exchange'
+
 
 const Product: React.FC = () => {
   const history = useHistory();
@@ -34,11 +36,13 @@ const Product: React.FC = () => {
     interests: [],
   });
 
-  const { id } = useParams();
+  const { id }: any = useParams();
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+
+  const [modalExchange, setModalExchange] = useState(false)
 
   useEffect(() => {
     axios
@@ -100,9 +104,11 @@ const Product: React.FC = () => {
                 return <li key={index}>{interest}</li>;
               })}
             </ProductInfoIntr>
-            <InterestButton onClick={() => history.push('/user/interest')}>
+            <InterestButton onClick={() => setModalExchange(true)}>
               Tenho Interesse
             </InterestButton>
+            <OfferExchange props={modalExchange}/> 
+             
             <FavButton onClick={() => 'add favotites'}>
               <Icon name="heart" />
               Adicionar aos favoritos
