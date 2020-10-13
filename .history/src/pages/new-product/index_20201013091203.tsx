@@ -18,6 +18,7 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct
   });
   const history = useHistory();
+  const session = useSelector((state: Session) => state.session)
   const token = useSelector((state: Session) => state.session.token)
   const userId= ~~(jwtDecode<TokenDecoded>(token).sub, 10)
 

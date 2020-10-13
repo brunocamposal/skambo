@@ -18,6 +18,7 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct
   });
   const history = useHistory();
+  const session = useSelector((state: Session) => state.session)
   const token = useSelector((state: Session) => state.session.token)
   const userId= ~~(jwtDecode<TokenDecoded>(token).sub, 10)
 
@@ -52,7 +53,7 @@ const NewProduct: React.FC = () => {
 
   !!errors?.entries?.length && console.log(errors)
 
-  const onSubmit = (data: Product): void => {
+  const onSubmit = (data: Product) => {
     const sendData = {
       userId,
       views: 0,
