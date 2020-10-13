@@ -50,12 +50,6 @@ const NewProduct: React.FC = () => {
     setEstado(es);
   },[formValue.usability])  
 
-useEffect(()=>{
-  if (formValue.images.length > 0) {
-    setFormValue({...formValue, thumbnail: formValue.images[0]})
-  }
-},[formValue.images])
-
   if (JSON.stringify(errors) !== '{}') console.log(errors)
 
   const onSubmit = (data: Data): void=> {
@@ -72,7 +66,7 @@ useEffect(()=>{
       description,
       category,
       images: formValue.images,
-      thumbnail: formValue.thumbnail,
+      thumbnail: formValue.images[0],
     };
     const headers = {
       headers: {
@@ -157,7 +151,6 @@ useEffect(()=>{
             accept="image/x-png,image/gif,image/jpeg"
             placeholder="Inserir imagem"
             multiple
-            defaultValue={[]}
             onChange={({target}): void => setFormValue({
                 ...formValue,
                 images: [...formValue.images, target.value]

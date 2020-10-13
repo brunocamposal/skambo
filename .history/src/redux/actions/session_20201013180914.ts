@@ -2,11 +2,6 @@ import { LOGIN } from './types';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-const login = (token: string, currentUser: any) => ({
-  type: LOGIN,
-  token,
-  currentUser,
-});
 
 export const requestLogin = (token: string) => (dispatch: any) => {
   const decoded: { sub: string } = jwt_decode(token);
@@ -22,3 +17,9 @@ export const requestLogin = (token: string) => (dispatch: any) => {
       localStorage.setItem('currentUser', JSON.stringify(res.data));
     });
 };
+
+const login = (token: string, currentUser: any) => ({
+  type: LOGIN,
+  token,
+  currentUser,
+});

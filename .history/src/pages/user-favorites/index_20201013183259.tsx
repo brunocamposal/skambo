@@ -16,7 +16,7 @@ const UserFavorites: React.FC = () => {
   const history = useHistory();
 
   console.log("usuario:");
-  // console.log(user)
+  console.log(user)
 
   const goProductPage = (id: string) => {
     {

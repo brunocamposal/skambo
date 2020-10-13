@@ -1,19 +1,19 @@
 import { Product, Categoria } from './types';
 
 export const defaultProduct: Product = {
-  userId: 0,
+  userId,
   views: 0,
   usersAccess: 0,
   boost: '',
-  usability: "3",
-  value: '0',
-  name: "",
-  description: "",
-  category: "Outros",
-  images: [],
-  thumbnail: '',
-  interests: '',
-};
+    usability: "3",
+    value: '0',
+    name: "",
+    description: "",
+    category: "Outros",
+    images: [],
+    thumbnail: '',
+    interests: '',
+  };
   
 export const formatNumber = (n: string): string => {
     return n

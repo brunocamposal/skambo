@@ -52,7 +52,7 @@ const NewProduct: React.FC = () => {
 
 useEffect(()=>{
   if (formValue.images.length > 0) {
-    setFormValue({...formValue, thumbnail: formValue.images[0]})
+    setFormValue({...formValue, thumbnail: formValue.images[1]})
   }
 },[formValue.images])
 

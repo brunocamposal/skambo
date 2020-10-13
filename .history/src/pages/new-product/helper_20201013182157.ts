@@ -1,7 +1,7 @@
 import { Product, Categoria } from './types';
 
 export const defaultProduct: Product = {
-  userId: 0,
+  userId,
   views: 0,
   usersAccess: 0,
   boost: '',

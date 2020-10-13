@@ -13,7 +13,7 @@ const defaultState = {
   currentUser: userInfo != null ? JSON.parse(userInfo) : {},
 };
 
-const session = (state = defaultState, action: ActionTypes): any => {
+const session = (state = defaultState, action: ActionTypes): {state: {token: string; user: any}} => {
   switch (action.type) {
     case LOGIN:
       localStorage.setItem('token', action.token);

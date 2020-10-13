@@ -50,12 +50,6 @@ const NewProduct: React.FC = () => {
     setEstado(es);
   },[formValue.usability])  
 
-useEffect(()=>{
-  if (formValue.images.length > 0) {
-    setFormValue({...formValue, thumbnail: formValue.images[0]})
-  }
-},[formValue.images])
-
   if (JSON.stringify(errors) !== '{}') console.log(errors)
 
   const onSubmit = (data: Data): void=> {

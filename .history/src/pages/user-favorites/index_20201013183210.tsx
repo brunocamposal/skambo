@@ -11,12 +11,12 @@ import Card from '../../components/card';
 const UserFavorites: React.FC = () => {
   const [productsList, setProductsList] = useState([]);
   const token = useSelector((session: any) => session.token);
-  const currentUser = useSelector(({ session }: any) => session.currentUser);
+  const currentUser = useSelector(({ session }: {token: string; currentUser: any}) => session.currentUser);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const history = useHistory();
 
   console.log("usuario:");
-  // console.log(user)
+  console.log(user)
 
   const goProductPage = (id: string) => {
     {
