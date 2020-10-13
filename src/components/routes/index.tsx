@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { routesNotAuth } from "./helper";
 import Layout from "../layout";
+import { UserSales } from "../../pages";
 
 const Routes = () => {
   const routesRender = routesNotAuth;
@@ -13,12 +14,15 @@ const Routes = () => {
           {item.path === "/login" || item.path === "/register" ? (
             <item.page />
           ) : (
-            <Layout>
-              <item.page />
-            </Layout>
-          )}
+              <Layout>
+                <item.page />
+              </Layout>
+            )}
         </Route>
       ))}
+      <Route path="/my-sales">
+        <UserSales />
+      </Route>
       <Route path="*">
         <Redirect to="/" />
       </Route>

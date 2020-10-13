@@ -6,7 +6,6 @@ export const routesNotAuth = [
   { path: '/login', name: 'Login', page: Login },
   { path: '/register', name: 'Register', page: Register },
   { path: '/user-search/:search', name: 'UserSearch', page: UserSearch },
-  { path: '/my-sales', name: 'UserSales', page: UserSales }
 ];
 
 /*
