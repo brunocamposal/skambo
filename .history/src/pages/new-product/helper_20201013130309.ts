@@ -30,4 +30,8 @@ export const formatNumber = (n: string): string => {
     { key: 6, value: 'Livros', text: 'Livros' },
     { key: 7, value: 'Moveis', text: 'Móveis' },
     { key: 8, value: 'Outros', text: 'Outros'},
+    Jogos
+
+
+Móveis
   ];

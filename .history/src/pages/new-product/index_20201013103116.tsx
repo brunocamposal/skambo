@@ -8,7 +8,7 @@ import { FormContainer } from '../../components/form-container/styles'
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import jwtDecode from 'jwt-decode';
-import { Product, TokenDecoded, Session, Data } from './types';
+import { Product, TokenDecoded, Session } from './types';
 import { useSelector } from 'react-redux'
 
 const NewProduct: React.FC = () => {
@@ -19,7 +19,7 @@ const NewProduct: React.FC = () => {
   });
   const history = useHistory();
   const token = useSelector((state: Session) => state.session.token)
-  const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10)
+  const userId= ~~(jwtDecode<TokenDecoded>(token).sub, 10)
 
   useEffect (()=>{
       if (token.length < 1) history.push('/');
@@ -50,21 +50,15 @@ const NewProduct: React.FC = () => {
     setEstado(es);
   },[formValue.usability])  
 
-  if (JSON.stringify(errors) !== '{}') console.log(errors)
+  !!errors?.entries?.length && console.log(errors)
 
-  const onSubmit = (data: Data): void=> {
-    console.log(data)
-    const {boost, usability, value, name, description, category} = data;
+  const onSubmit = (datas): void => {
     const sendData: Product = {
       userId,
       views: 0,
       usersAccess: 0,
-      boost,
-      usability,
-      value,
-      name,
-      description,
-      category,
+      boost: "",
+      ...datas,
       images: formValue.images,
       thumbnail: formValue.images[0],
     };
@@ -102,10 +96,10 @@ const NewProduct: React.FC = () => {
 
   return (
     <FormContainer  style={{ marginTop: 80 }}>
+      <h1>Novo Produto</h1>
       <Link to="/">
         <h3> Voltar </h3>
       </Link>
-      <h1>Novo Produto</h1>
       <Form onSubmit={handleSubmit(onSubmit)} >
 
         <Form.Field required>
@@ -122,7 +116,7 @@ const NewProduct: React.FC = () => {
             {errors.name && <Error>{errors.name.message}</Error>}
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='category'>
             Categoria
           </label>
@@ -159,13 +153,13 @@ const NewProduct: React.FC = () => {
                 images: [...formValue.images, target.value]
             })}
           />
-          {errors.images && <Error>{errors.images.message}</Error>}
-          {formValue?.images?.map((img: string, idx: number) => (
+            {errors.images && <Error>{errors.images.message}</Error>}
+        {formValue?.images?.map((img, idx) => (
           <div key={idx} style={{display: 'flex'}}>
             <p>{img}&nbsp;
               <DeleteImg
                 onClick={  (): void => setFormValue({
-                  ...formValue, images: formValue.images.filter((_: string, i: number) => i !== idx)
+                  ...formValue, images: formValue.images.filter((_, i) => i !== idx)
                 })  }
               >x</DeleteImg>
             </p>
@@ -236,25 +230,6 @@ const NewProduct: React.FC = () => {
             placeholder='Interesses para troca, separados por vírgula'
             ref={register}
             />
-        </Form.Field>
-
-        <Form.Field>
-          <label htmlFor='boost'>
-            Plano de Impulsinamento
-          </label>
-          <select
-            defaultValue='None'
-            name="boost"
-            id="boost"
-            ref={register}
-            placeholder="Plano de impulsionamento"
-            >
-              <option value='None' >Nenhum</option>
-              <option value='Plan1' >1 Semana = R$ 15,00</option>
-              <option value='Plan2' >2 Semanas = R$ 22,00</option>
-              <option value='Plan3' >1 Mês = R$ 30,00</option>
-            </select>
-
         </Form.Field>
 
         <Form.Field>

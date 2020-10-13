@@ -54,12 +54,12 @@ const NewProduct: React.FC = () => {
 
   const onSubmit = (data: Data): void=> {
     console.log(data)
-    const {boost, usability, value, name, description, category} = data;
+    const {usability, value, name, description, category} = data;
     const sendData: Product = {
       userId,
       views: 0,
       usersAccess: 0,
-      boost,
+      boost: "",
       usability,
       value,
       name,
@@ -102,10 +102,10 @@ const NewProduct: React.FC = () => {
 
   return (
     <FormContainer  style={{ marginTop: 80 }}>
+      <h1>Novo Produto</h1>
       <Link to="/">
         <h3> Voltar </h3>
       </Link>
-      <h1>Novo Produto</h1>
       <Form onSubmit={handleSubmit(onSubmit)} >
 
         <Form.Field required>
@@ -122,7 +122,7 @@ const NewProduct: React.FC = () => {
             {errors.name && <Error>{errors.name.message}</Error>}
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='category'>
             Categoria
           </label>
@@ -236,25 +236,6 @@ const NewProduct: React.FC = () => {
             placeholder='Interesses para troca, separados por vírgula'
             ref={register}
             />
-        </Form.Field>
-
-        <Form.Field>
-          <label htmlFor='boost'>
-            Plano de Impulsinamento
-          </label>
-          <select
-            defaultValue='None'
-            name="boost"
-            id="boost"
-            ref={register}
-            placeholder="Plano de impulsionamento"
-            >
-              <option value='None' >Nenhum</option>
-              <option value='Plan1' >1 Semana = R$ 15,00</option>
-              <option value='Plan2' >2 Semanas = R$ 22,00</option>
-              <option value='Plan3' >1 Mês = R$ 30,00</option>
-            </select>
-
         </Form.Field>
 
         <Form.Field>

@@ -1,5 +1,5 @@
-export interface Product {
-  // [x: string]: number | string ;
+export interface Product extends Data {
+  // [x?: string]: number | string | string[];
   userId?: number | string;
   views?: number;
   usersAccess?: number;
@@ -8,13 +8,13 @@ export interface Product {
   boost?: string;
   name: string;
   description: string;
-  images: string[];
-  thumbnail?: string;
+  images?: string[];
+  thumbnail?: null | string;
   category: string;
   interests?: string;
 }
 export interface Data {
-  [x: string]: string ;
+  [x: string]: string | string[];
   // usability: string;
   // value: string;
   // name: string;

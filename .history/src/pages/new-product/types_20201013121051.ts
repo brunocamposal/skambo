@@ -1,27 +1,29 @@
 export interface Product {
-  // [x: string]: number | string ;
-  userId?: number | string;
+  // [x: string]: any;
+  userId?: number;
   views?: number;
   usersAccess?: number;
-  usability: string | string[];
+  usability: string;
   value: string;
   boost?: string;
   name: string;
   description: string;
   images: string[];
-  thumbnail?: string;
+  thumbnail: null | string;
   category: string;
   interests?: string;
 }
 export interface Data {
-  [x: string]: string ;
-  // usability: string;
-  // value: string;
-  // name: string;
-  // description: string;
-  // category: string;
-  // interests?: string;
-}
+  [x: string]: any;
+//   usability: string;
+//   value: string;
+//   boost?: string;
+//   name: string;
+//   description: string;
+//   images: string;
+//   category: string;
+//   interests?: string;
+// }
 
 export interface TokenDecoded {
   sub: number;

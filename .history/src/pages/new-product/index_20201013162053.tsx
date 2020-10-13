@@ -122,7 +122,7 @@ const NewProduct: React.FC = () => {
             {errors.name && <Error>{errors.name.message}</Error>}
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='category'>
             Categoria
           </label>
@@ -238,7 +238,7 @@ const NewProduct: React.FC = () => {
             />
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='boost'>
             Plano de Impulsinamento
           </label>

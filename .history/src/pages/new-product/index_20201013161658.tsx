@@ -54,12 +54,12 @@ const NewProduct: React.FC = () => {
 
   const onSubmit = (data: Data): void=> {
     console.log(data)
-    const {boost, usability, value, name, description, category} = data;
+    const {usability, value, name, description, category} = data;
     const sendData: Product = {
       userId,
       views: 0,
       usersAccess: 0,
-      boost,
+      boost: "",
       usability,
       value,
       name,
@@ -102,10 +102,10 @@ const NewProduct: React.FC = () => {
 
   return (
     <FormContainer  style={{ marginTop: 80 }}>
+      <h1>Novo Produto</h1>
       <Link to="/">
         <h3> Voltar </h3>
       </Link>
-      <h1>Novo Produto</h1>
       <Form onSubmit={handleSubmit(onSubmit)} >
 
         <Form.Field required>
@@ -122,7 +122,7 @@ const NewProduct: React.FC = () => {
             {errors.name && <Error>{errors.name.message}</Error>}
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='category'>
             Categoria
           </label>
@@ -238,7 +238,7 @@ const NewProduct: React.FC = () => {
             />
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field required>
           <label htmlFor='boost'>
             Plano de Impulsinamento
           </label>

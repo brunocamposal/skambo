@@ -8,7 +8,7 @@ export const defaultProduct: Product = {
     category: "Outros",
     images: [],
     thumbnail: '',
-    interests: '',
+    interests: [],
   };
   
 export const formatNumber = (n: string): string => {
@@ -22,12 +22,16 @@ export const formatNumber = (n: string): string => {
 }
     
   export const categorias: Categoria[] = [
-    { key: 1, value: 'Vestuarios', text: 'Vestuário' },
-    { key: 2, value: 'Bicicletas', text: 'Bicicletas' },
+    { key: 1, value: 'Eletronicos', text: 'Eletrônicos' },
+    { key: 2, value: 'Escritorio', text: 'Escritório' },
     { key: 3, value: 'Esportes', text: 'Esportes' },
     { key: 4, value: 'Instrumentos_Musicais', text: 'Instrumentos Musicais' },
     { key: 5, value: 'Jogos', text: 'Jogos' },
-    { key: 6, value: 'Livros', text: 'Livros' },
-    { key: 7, value: 'Moveis', text: 'Móveis' },
-    { key: 8, value: 'Outros', text: 'Outros'},
+    { key: 6, value: 'Lazer', text: 'Lazer' },
+    { key: 7, value: 'Livros', text: 'Livros' },
+    { key: 8, value: 'Moveis', text: 'Móveis' },
+    { key: 9, value: 'Saude', text: 'Saúde' },
+    { key: 10, value: 'Servicos', text: 'Serviços' },
+    { key: 11, value: 'Vestuario', text: 'Vestuário' },
+    { key: 12, value: 'Outros', text: 'Outros'},
   ];
