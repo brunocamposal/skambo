@@ -11,6 +11,7 @@ exports[`Render Form component 1`] = `
       className="sc-hKFyIo dJqfuM"
     >
       <img
+        alt="card"
         src="register-icon.svg"
       />
     </div>

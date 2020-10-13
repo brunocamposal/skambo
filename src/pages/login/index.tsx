@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Form } from 'semantic-ui-react';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import FormField from '../../components/form-field';
-import { login } from '../../redux/actions/session';
 import { useHistory } from 'react-router-dom';
+import { login } from '../../redux/actions/session';
+import { Form } from 'semantic-ui-react';
 
+import FormField from '../../components/form-field';
 import FormContainer from '../../components/form-container';
+
 import logo_image from '../../media/img/logotipo.png';
 
 import * as Styled from './styles';
@@ -33,6 +34,7 @@ const Login: React.FC = () => {
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
         dispatch(login(data.accessToken));
+        localStorage.setItem('token', data.accessToken);
         history.push('/');
       })
       .catch(({ response }) => {
