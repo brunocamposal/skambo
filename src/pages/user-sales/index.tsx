@@ -113,7 +113,7 @@ const UserSales: React.FC = () => {
                         <Table.Cell>{product.category[0]}</Table.Cell>
                         <Table.Cell>{product.usability}</Table.Cell>
                         <Table.Cell>R$ {product.value},00</Table.Cell>
-                        <Table.Cell> <EditModal saleId="2" /> </Table.Cell>
+                        <Table.Cell> <EditModal saleId={product.id} /> </Table.Cell>
                         <Table.Cell><Styled.RemoveButton onClick={() => { handleRemove(product.id) }}>Apagar</Styled.RemoveButton></Table.Cell>
 
                       </Table.Row>

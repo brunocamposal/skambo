@@ -12,24 +12,17 @@ const EditModal = (saleId: any) => {
       open={open}
       trigger={<Styled.EditButton>Editar</Styled.EditButton>}
     >
-      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Header>Editar informações</Modal.Header>
       <Modal.Content image>
-        <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
+
         <Modal.Description>
-          <Header>Default Profile Image</Header>
-          <p>
-            We've found the following gravatar image associated with your e-mail
-            address.
-          </p>
-          <p>Is it okay to use this photo?</p>
+          <Header>Mude as informações desejadas</Header>
+
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Nope
-        </Button>
         <Button
-          content="Yep, that's me"
+          content="Confirmar Mudanças"
           labelPosition='right'
           icon='checkmark'
           onClick={() => setOpen(false)}
