@@ -1,7 +1,5 @@
 import { FETCH_SUCCESS, REMOVE_SALE } from '../actions/types'
 
-
-
 const defaultState: any = {}
 
 const user = (state = defaultState, action: any) => {

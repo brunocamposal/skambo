@@ -57,6 +57,9 @@ const Product: React.FC = () => {
       .catch((err) => console.log(err));
   }, [setProducts]);
 
+  const handleFavorite = () => {
+    history.push("/favorites")
+  }
 
   return (
     <>
@@ -103,7 +106,7 @@ const Product: React.FC = () => {
             <InterestButton onClick={() => history.push('/user/interest')}>
               Tenho Interesse
             </InterestButton>
-            <FavButton onClick={() => 'add favotites'}>
+            <FavButton onClick={handleFavorite}>
               <Icon name="heart" />
               Adicionar aos favoritos
             </FavButton>

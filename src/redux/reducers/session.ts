@@ -16,7 +16,7 @@ const defaultState = {
 const session = (state = defaultState, action: ActionTypes): {token: string} => {
   switch (action.type) {
     case LOGIN:
-      return { ...state, token: action.token, user: action.currentUser };
+      return { ...state, token: action.token, currentUser: action.currentUser };
     default:
       return state;
   }

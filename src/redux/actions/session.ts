@@ -18,8 +18,8 @@ export const requestLogin = (token: string) => (dispatch: any) => {
     });
 };
 
-const login = (token: string, user: any) => ({
+const login = (token: string, currentUser: any) => ({
   type: LOGIN,
   token,
-  user,
+  currentUser,
 });
