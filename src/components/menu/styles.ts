@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react';
 export const StyledMenu = styled.div`
   width: 100%;
   max-width: 1200px;
-  height: 60px;
+  height: 85px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -78,9 +78,9 @@ export const StyledIcons = styled.div`
   @media (max-width: 880px) {
     margin-top: 20px;
   }
-  
+
   @media (max-width: 480px) {
-   margin: 10px 15px;
+    margin: 10px 15px;
   }
 `;
 
@@ -99,7 +99,7 @@ export const StyledSearch = styled(Input)`
   left: 70px;
   cursor: pointer;
   input {
-    background: #F4F4F6 !important;
+    background: #f4f4f6 !important;
     color: var(--primary-dark) !important;
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;

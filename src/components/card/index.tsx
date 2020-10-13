@@ -7,9 +7,10 @@ interface PropTypes {
   title: string;
   category: string;
   imgUrl: string;
+  onClick?: () => void
 }
 
-const Card = ({ title, category, imgUrl }: PropTypes) => {
+const Card = ({ title, category, imgUrl, onClick }: PropTypes) => {
   return (
     <motion.div
       whileHover={{
@@ -17,8 +18,8 @@ const Card = ({ title, category, imgUrl }: PropTypes) => {
         transition: { duration: 0.2 },
       }}
       whileTap={{ scale: 0.9 }}>
-      <Styled.Card>
-        <img src={imgUrl} />
+      <Styled.Card onClick={onClick}>
+        <img src={imgUrl} alt="card" />
         <div>
           <Popup content={title} trigger={<strong>{title}</strong>} />
           <p>{category}</p>
