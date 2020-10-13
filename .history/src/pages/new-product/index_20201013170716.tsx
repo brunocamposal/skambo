@@ -151,19 +151,22 @@ const NewProduct: React.FC = () => {
             accept="image/x-png,image/gif,image/jpeg"
             placeholder="Inserir imagem"
             multiple
+            // ref={register({
+            //   required: 'Insira ao menos uma imagem!',
+            // })}
             onChange={({target}): void => setFormValue({
                 ...formValue,
                 images: [...formValue.images, target.value]
             })}
           />
           {formValue.images?.length < 1 && <Error>Insira ao menos uma imagem!</Error>}
-          {formValue.images?.map((img: string, idx: number) => (
+          {formValue?.images?.map((img: string, idx: number) => (
           <div key={idx} style={{display: 'flex'}}>
             <p>{img}&nbsp;
               <DeleteImg
-                onClick={ (): void => setFormValue({
+                onClick={  (): void => setFormValue({
                   ...formValue, images: formValue.images.filter((_: string, i: number) => i !== idx)
-                }) }
+                })  }
               >x</DeleteImg>
             </p>
           </div>

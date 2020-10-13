@@ -16,7 +16,6 @@ const defaultState = {
 const session = (state = defaultState, action: ActionTypes): {token: string} => {
   switch (action.type) {
     case LOGIN:
-      localStorage.setItem('token', token);
       return { ...state, token: action.token, user: action.currentUser };
     default:
       return state;

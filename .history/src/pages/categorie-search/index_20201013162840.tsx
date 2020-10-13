@@ -26,7 +26,7 @@ const CategorieSearch: React.FC = () => {
   const [dropdownCategory, setDropdownCategory] = useState(false);
   const [messageCategory, setMessageCategory] = useState('');
   const [selected, setSelected] = useState<ProductsProps[]>([]);
-  const token = useSelector((session: any) => session.token);
+  const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { name } = useParams<ProductsProps>();
   const history = useHistory();

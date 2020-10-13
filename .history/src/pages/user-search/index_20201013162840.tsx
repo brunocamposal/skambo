@@ -21,7 +21,7 @@ const UserSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterProducts, setFilterProducts] = useState<ProductsProps[]>([]);
   const [messageSearch, setMessageSearch] = useState('');
-  const token = useSelector((session: any) => session.token);
+  const token = useSelector(({ session }: RootState) => session.token);
   const url = 'https://capstone-q2.herokuapp.com/products';
   const history = useHistory();
 

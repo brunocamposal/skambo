@@ -28,7 +28,7 @@ import ChangeProfile from '../change-profile';
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
-  const token = useSelector((state: any) => state.token);
+  const token = useSelector(state => state.token);
 
   // console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
