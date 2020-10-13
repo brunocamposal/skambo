@@ -3,11 +3,8 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { login } from '../../redux/actions/session';
+import { requestLogin  } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
-
-import { userIdJwt } from '../../redux/actions/user-id-jwt';
-import jwt_decode from 'jwt-decode';
 
 import FormField from '../../components/form-field';
 import FormContainer from '../../components/form-container';
@@ -31,15 +28,14 @@ const Login: React.FC = () => {
   const history = useHistory();
 
   const onSubmit = (values: IFormInputs) => {
-    //console.log(values);
 
     axios
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
-        dispatch(login(data.accessToken));
-        let userId: any = jwt_decode(data.accessToken);
+        dispatch(requestLogin(data.accessToken));
+        localStorage.setItem('token', data.accessToken);
         history.push('/');
-        dispatch(userIdJwt(userId.sub));
+       
       })
       .catch(({ response }) => {
         if (response?.status === 400) {

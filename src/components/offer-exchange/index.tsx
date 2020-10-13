@@ -6,15 +6,15 @@ import * as Styled from './styles';
 import axios from "axios"
 
 const OfferExchange = ({ props }: any) => {
-  const userIdJwt = useSelector(({userIdJwt}: any) => userIdJwt.userId);
+  const userIdJwt = useSelector((data) => console.log(data));
   const token = useSelector(({session}: any) => session.token
    );
 
   const onSubmit = () => {
-    axios.get(`https://capstone-q2.herokuapp.com/products?userId=${userIdJwt}`,{
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(({data}) => console.log(data))
+    // axios.get(`https://capstone-q2.herokuapp.com/products?userId=${userIdJwt}`,{
+    //   headers: { Authorization: `Bearer ${token}` }
+    // })
+    // .then(({data}) => console.log(data))
 
   }
 
