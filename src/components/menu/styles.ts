@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react';
 export const StyledMenu = styled.div`
   width: 100%;
   max-width: 1200px;
-  height: 60px;
+  height: 85px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -12,7 +12,6 @@ export const StyledMenu = styled.div`
   justify-content: center;
   background: #ffffff;
   padding-top: 15px;
-
   @media (max-width: 480px) {
     height: 100px;
     position: relative;
@@ -22,7 +21,6 @@ export const StyledMenu = styled.div`
 export const StyledMenuLeft = styled.div`
   width: 15%;
   min-width: 123px;
-
   @media (max-width: 480px) {
     width: 40%;
     position: absolute;
@@ -36,7 +34,6 @@ export const StyledMenuLeft = styled.div`
 
 export const StyledMenuCenter = styled.div`
   width: 55%;
-
   @media (max-width: 480px) {
     width: 100%;
     height: 50px;
@@ -53,12 +50,9 @@ export const StyledMenuRight = styled.div`
   @media (max-width: 1300px) {
     font-size: 20px;
   }
-
-
   @media (max-width: 880px) {
     font-size: 20px;
   }
-
   @media (max-width: 480px) {
     width: 30%;
     height: 50px;
@@ -69,7 +63,6 @@ export const StyledMenuRight = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 32px;
-
     .web {
       display: none;
     }
@@ -82,20 +75,18 @@ export const StyledIcons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   @media (max-width: 880px) {
     margin-top: 20px;
   }
-  
+
   @media (max-width: 480px) {
-   margin: 10px 15px;
+    margin: 10px 15px;
   }
 `;
 
 export const StyledLogo = styled.img`
   width: 180px;
   cursor: pointer;
-
   @media (max-width: 480px) {
     width: 120px;
     margin-top: 0;
@@ -107,18 +98,15 @@ export const StyledSearch = styled(Input)`
   top: 12px;
   left: 70px;
   cursor: pointer;
-
   input {
-    background: #F4F4F6 !important;
+    background: #f4f4f6 !important;
     color: var(--primary-dark) !important;
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;
   }
-
   @media (max-width: 700px) {
     width: 95%;
   }
-
   @media (max-width: 480px) {
     width: 90%;
     left: 5%;
@@ -137,11 +125,9 @@ export const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
   @media (max-width: 1000px) {
     margin-left: 20px;
   }
-
   @media (max-width: 880px) {
     width: 60px;
     height: 30px;
@@ -149,7 +135,6 @@ export const StyledButton = styled.button`
     margin-left: 0px;
     font-size: 10px;
   }
-
   @media (max-width: 480px) {
     margin: 0;
     width: 100px;
@@ -161,7 +146,6 @@ export const StyledReverseButton = styled(StyledButton)`
   color: var(--primary);
   background: #ffffff;
   cursor: pointer;
-
   @media (max-width: 480px) {
     display: none;
   }
@@ -173,15 +157,12 @@ export const StyledUser = styled.img`
   height: 32px;
   border: 1px solid black;
   cursor: pointer;
-
   @media (max-width: 880px) {
     width: 20px;
     height: 20px;
   }
-
   @media (max-width: 480px) {
     width: 32px;
     height: 32px;
   }
 `;
-

@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { Table as SemanticTable } from 'semantic-ui-react'
 
 export const Container = styled.div`
-  margin-top: 100px;
-  margin-right:10px;
+  margin-top: 135px;
+  margin-left: 50px;
   display: flex;
   flex-direction:row;
   width: 100%;

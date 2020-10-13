@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
 import { useHistory } from 'react-router-dom';
-
 import { useForm } from 'react-hook-form';
-
-import FormContainer from '../../components/form-container';
 import { useDispatch } from 'react-redux';
-
 import { login } from '../../redux/actions/session';
+import { Form } from 'semantic-ui-react';
+
+import FormField from '../../components/form-field';
+import FormContainer from '../../components/form-container';
 
 import * as Styled from './styles';
-import axios from 'axios';
-import { Form } from 'semantic-ui-react';
-import FormField from '../../components/form-field';
-
-import Swal from 'sweetalert2';
 
 interface IFormInputs {
   username: string;
