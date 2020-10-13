@@ -47,6 +47,25 @@ export const StyledMenuRight = styled.div`
   width: 30%;
   font-size: 32px;
   display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+
+  .favorite {
+      width: 30px;
+      height: 30px;
+      margin-top: 2px;
+      margin-left: 5px;
+      cursor: pointer;
+  }
+
+  .message {
+      width: 30px;
+      height: 30px;
+      margin-top: 2px;
+      margin-left: 5px;
+      cursor: pointer;
+  }
+
   @media (max-width: 1300px) {
     font-size: 20px;
   }
@@ -63,6 +82,8 @@ export const StyledMenuRight = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 32px;
+    margin-right: 0px;
+
     .web {
       display: none;
     }
@@ -71,10 +92,8 @@ export const StyledMenuRight = styled.div`
 
 export const StyledIcons = styled.div`
   margin: 10px 12px;
-  width: 60%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   @media (max-width: 880px) {
     margin-top: 20px;
   }
@@ -153,8 +172,8 @@ export const StyledReverseButton = styled(StyledButton)`
 
 export const StyledUser = styled.img`
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
   border: 1px solid black;
   cursor: pointer;
   @media (max-width: 880px) {

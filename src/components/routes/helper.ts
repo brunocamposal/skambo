@@ -1,4 +1,4 @@
-import { Home, Login, Register, UserSearch, ProductPage, UserSales, CategorieSearch} from '../../pages';
+import { Home, Login, Register, UserSearch, ProductPage, UserSales, CategorieSearch, UserFavorites} from '../../pages';
 import ChangeProfile from '../change-profile';
 
 export const routesNotAuth = [
@@ -10,9 +10,6 @@ export const routesNotAuth = [
   { path: '/products/:id', name: 'ProductPage', page: ProductPage },
   { path: '/my-sales', name: 'UserSales', page: UserSales },
   { path: '/change-profile', name: 'ChangeProfile', page: ChangeProfile },
+  { path: '/favorites', name: 'UserFavorites', page: UserFavorites },
 ];
 
-/*
-export const routesAuth = [
-  { path: '/', name: 'Timeline', page: Timeline },
-]; */
