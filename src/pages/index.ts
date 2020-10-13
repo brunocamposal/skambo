@@ -5,6 +5,8 @@ import CategorieSearch from "./categorie-search";
 import UserSearch from "./user-search";
 import ProductPage from "./product-page";
 import UserSales from './user-sales'
+import UserFavorites from './user-favorites'
 
-export { Home, Login, Register, UserSearch, CategorieSearch, ProductPage, UserSales};
+
+export { Home, Login, Register, UserSearch, CategorieSearch, ProductPage, UserSales, UserFavorites};
 
