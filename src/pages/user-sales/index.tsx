@@ -14,12 +14,13 @@ import animationData from '../../media/animations/10800-retail-exchange.json'
 import { Table } from 'semantic-ui-react'
 import { Container as LayoutContainer } from '../../components/layout/styles';
 import Menu from '../../components/menu'
-import axios from 'axios'
+import EditModal from '../../components/edit-modal';
 interface stateProps {
   session: { token: string }
 }
 
 const UserSales: React.FC = () => {
+
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
@@ -42,6 +43,9 @@ const UserSales: React.FC = () => {
   const handleEdit = (saleId: string) => {
 
   }
+
+
+
 
   const handleRemove = (saleId: string) => {
     Swal.fire({
@@ -66,6 +70,7 @@ const UserSales: React.FC = () => {
   }
   return (
     <LayoutContainer>
+
       <Menu></Menu>
       <Styled.Container>
         <Styled.UserInfo>
@@ -108,8 +113,9 @@ const UserSales: React.FC = () => {
                         <Table.Cell>{product.category[0]}</Table.Cell>
                         <Table.Cell>{product.usability}</Table.Cell>
                         <Table.Cell>R$ {product.value},00</Table.Cell>
-                        <Table.Cell><Styled.EditButton onClick={() => { handleEdit(product.id) }}>Alterar</Styled.EditButton> </Table.Cell>
+                        <Table.Cell> <EditModal saleId="2" /> </Table.Cell>
                         <Table.Cell><Styled.RemoveButton onClick={() => { handleRemove(product.id) }}>Apagar</Styled.RemoveButton></Table.Cell>
+
                       </Table.Row>
                     )
                   })}
@@ -125,6 +131,10 @@ const UserSales: React.FC = () => {
         }
 
       </Styled.Container>
+
+
+
+
     </LayoutContainer>
 
   )

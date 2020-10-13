@@ -70,7 +70,7 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const RemoveButton = styled.button`
-  white-space: break-spaces;
+    white-space: break-spaces;
     justify-content:center;
     width:91px;
     height:23px;
@@ -89,14 +89,7 @@ export const RemoveButton = styled.button`
     }
 `;
 
-export const EditButton = styled(RemoveButton)`
-    background-color: #818085;
-   
-    &:hover {
-      background-color: #727272;
-      cursor:pointer;
-    }
-`;
+
 
 
 export const CardWrapper = styled.div`
