@@ -11,6 +11,6 @@ export const categories = [
   { classStyle: "clothes", name: "Vestuários", icon: RiTShirt2Line },
   { classStyle: "bike", name: "Bicicletas", icon: GiDutchBike },
   { classStyle: "sports", name: "Esportes", icon: BiFootball },
-  { classStyle: "instruments", name: "Instrumentos Musicais", icon: FaGuitar },
+  { classStyle: "instruments", name: "Intrumentos Musicais", icon: FaGuitar },
   { classStyle: "furniture", name: "Móveis", icon: GiSofa },
 ];

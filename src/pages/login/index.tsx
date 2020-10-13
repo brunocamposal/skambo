@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Form } from "semantic-ui-react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import FormField from "../../components/form-field";
-import { login } from "../../redux/actions/session";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { login } from '../../redux/actions/session';
+import { Form } from 'semantic-ui-react';
 
-import { Link } from "react-router-dom";
+import FormField from '../../components/form-field';
+import FormContainer from '../../components/form-container';
 
-import FormContainer from "../../components/form-container";
-import logo_image from "../../media/img/logo_image.png";
+import logo_image from '../../media/img/logotipo.png';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 interface IFormInputs {
   username: string;
@@ -21,31 +21,32 @@ interface IFormInputs {
 }
 
 const Login: React.FC = () => {
-  const [requestError, setRequestError] = useState("");
-  console.log(requestError);
+  const { register, handleSubmit, errors } = useForm<IFormInputs>();
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, errors } = useForm<IFormInputs>();
+  const [requestError, setRequestError] = useState('');
+  const history = useHistory();
 
   const onSubmit = (values: IFormInputs) => {
+    //console.log(values);
+
     axios
-      .post("https://capstone-q2.herokuapp.com/login", values)
+      .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
         dispatch(login(data.accessToken));
-        localStorage.setItem("token", data.accessToken);
-        //history.push('/users');
+        localStorage.setItem('token', data.accessToken);
+        history.push('/');
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
-          return setRequestError("E-Mail ou Senha incorretos.");
+          return setRequestError('E-Mail ou Senha incorretos.');
         }
-        return setRequestError("Ops, aconteceu algo de errado!");
+        return setRequestError('Ops, aconteceu algo de errado!');
       });
   };
 
   return (
     <>
-    
       <FormContainer
         props={
           <>
@@ -54,13 +55,13 @@ const Login: React.FC = () => {
               <FormField
                 required
                 name="email"
-                label="Digite seu E-Mail"
-                inputPlace="E-Mail"
+                label="E-Mail"
+                inputPlace="Digite seu E-Mail"
                 inputRef={register({
-                  required: "E-mail Necessário",
+                  required: 'E-mail é obrigatório',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Formato Inválido!",
+                    message: 'Isso não se parece com um e-mail!',
                   },
                 })}
                 error={errors.email}
@@ -70,23 +71,23 @@ const Login: React.FC = () => {
                 required
                 name="password"
                 type="password"
-                label="Digite sua Senha"
-                inputPlace="Senha"
+                label="Senha"
+                inputPlace="Digite sua Senha"
                 inputRef={register({
-                  required: "Senha Necessária",
+                  required: 'Senha Necessária',
                   minLength: {
                     value: 6,
-                    message: "Senha muito curta!",
+                    message: 'Senha muito curta!',
                   },
                 })}
                 error={errors.password}
               />
-              {requestError}
               <Styled.ButtonForm type="submit">Fazer Login</Styled.ButtonForm>
             </Form>
             <Styled.LinkForm to="/register">
               <h3> Não possui conta? Registrar-se </h3>
             </Styled.LinkForm>
+            <Styled.Error>{requestError}</Styled.Error>
           </>
         }
       />

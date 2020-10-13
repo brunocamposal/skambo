@@ -42,7 +42,7 @@ exports[`Register Should render register 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: #FFF;
+  background-color: #ffffff;
   width: 45%;
   height: 100%;
   -webkit-box-pack: center;
@@ -56,7 +56,7 @@ exports[`Register Should render register 1`] = `
 }
 
 .c3 h1 {
-  margin-bottom: 35px;
+  margin: 35px;
 }
 
 .c3 label {
@@ -67,7 +67,7 @@ exports[`Register Should render register 1`] = `
 
 .c3 input {
   font-weight: 700;
-  background-color: #F4F4F6;
+  background-color: #f4f4f6;
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -95,7 +95,7 @@ exports[`Register Should render register 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
   width: 55%;
   height: 100%;
   -webkit-box-pack: center;
@@ -113,31 +113,14 @@ exports[`Register Should render register 1`] = `
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c5 {
   font-weight: 700;
   margin-top: 54px;
   color: #fff;
-  background-color: #8D70FB;
+  background-color: var(--primary);
   border-radius: 7px;
   height: 35px;
   width: 293px;
-}
-
-.c6 h3 {
-  width: 287px;
-  height: 45px;
-  text-align: center;
-  margin-top: 14px;
-  font-size: 14px;
+  cursor: pointer;
 }
 
 @media (max-width:1368px) {
@@ -164,6 +147,15 @@ exports[`Register Should render register 1`] = `
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    height: 880px;
+  }
+}
+
+@media (max-width:415px) {
+  .c1 {
+    width: 90%;
+    height: 553px;
+    box-shadow: 0px 0px 0px #ffffff;
   }
 }
 
@@ -173,7 +165,16 @@ exports[`Register Should render register 1`] = `
   }
 
   .c3 h1 {
-    margin-top: 30px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width:480px) {
+  .c3 {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
 }
 
@@ -184,14 +185,15 @@ exports[`Register Should render register 1`] = `
   }
 }
 
+@media (max-width:415px) {
+  .c2 {
+    display: none;
+  }
+}
+
 <div
   className="c0"
 >
-  <a
-    onClick={[Function]}
-  >
-    Voltar
-  </a>
   <div
     className="c1"
   >
@@ -209,51 +211,53 @@ exports[`Register Should render register 1`] = `
         Cadastrar-se
       </h1>
       <form
+        className="ui form"
         onSubmit={[Function]}
       >
         <div
-          className="c4"
+          className="required field"
         >
           <label>
             E-mail
           </label>
           <input
             name="email"
-            onChange={[Function]}
             placeholder="Digite seu e-mail"
           />
         </div>
         <div
-          className="c4"
+          className="required field"
         >
           <label>
             Senha
           </label>
           <input
             name="password"
-            placeholder="Digite sua senha"
+            placeholder="Digite sua Senha"
+            type="password"
+          />
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            Confirme sua senha
+          </label>
+          <input
+            name="passwordRepeat"
+            placeholder="Digite sua Senha"
             type="password"
           />
         </div>
         
         <div>
           <button
-            className="c5"
+            className="c4"
             type="submit"
           >
             Cadastrar!
           </button>
-          <div
-            className="c6"
-          >
-            <a
-              onClick={[Function]}
-            >
-              <h3>
-                 Já possui conta? Entrar! 
-              </h3>
-            </a>
-          </div>
+          <a />
         </div>
       </form>
     </div>

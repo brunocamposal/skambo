@@ -1,30 +1,51 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-import { useForm } from "react-hook-form";
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/actions/session';
+import { Form } from 'semantic-ui-react';
 
-import FormContainer from "../../components/form-container";
+import FormField from '../../components/form-field';
+import FormContainer from '../../components/form-container';
 
-import * as Styled from "./styles";
-import axios from "axios";
+import * as Styled from './styles';
+
+interface IFormInputs {
+  username: string;
+  password: string | number;
+  passwordRepeat: string | number;
+  email: string;
+}
 
 const Register: React.FC = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, watch, handleSubmit, errors } = useForm<IFormInputs>();
+
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = (data: object): void => {
-    console.log(data);
     axios
-      .post(" https://capstone-q2.herokuapp.com/register", data)
+      .post(' https://capstone-q2.herokuapp.com/register', data)
       .then((res) => {
-        setErrorMessage("");
-        console.log(res);
+        setErrorMessage('');
+        dispatch(login(res.data.accessToken));
+        localStorage.setItem('token', res.data.accessToken);
+        history.push('/');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Usuário cadastrado com sucesso!',
+          showConfirmButton: false,
+          timer: 1300,
+        });
       })
       .catch((err) => {
-        console.log(err.response.status);
         if (err.response.status === 400) {
-          setErrorMessage("Email já cadastrado");
+          setErrorMessage('Email já cadastrado');
         }
       });
   };
@@ -35,67 +56,60 @@ const Register: React.FC = () => {
         props={
           <>
             <h1>Cadastrar-se</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Styled.FieldWrapper>
-                <label>E-mail</label>
-                <input
-                  onChange={() => {
-                    setErrorMessage("");
-                  }}
-                  name="email"
-                  placeholder="Digite seu e-mail"
-                  ref={register({
-                    required: 'E-mail é obrigatório',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Isso não se parece com um e-mail!",
-                    },
-                  })}
-                />
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <FormField
+                required
+                name="email"
+                label="E-mail"
+                inputPlace="Digite seu e-mail"
+                inputRef={register({
+                  required: 'E-mail é obrigatório',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Isso não se parece com um e-mail!',
+                  },
+                })}
+                error={errors.email}
+              />
 
-                {errors.email && (
-                  <Styled.Error>{errors.email.message}</Styled.Error>
-                )}
-              </Styled.FieldWrapper>
-              <Styled.FieldWrapper>
-                <label>Senha</label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Digite sua senha"
-                  ref={register({
-                    required: "A senha é obrigatória",
-                    minLength: {
-                      value: 6,
-                      message: "A senha precisa ter no minímo 6 caracteres",
-                    },
-                    pattern: {
-                      value: /[+#?!@$%^&*-]{1,}/,
-                      message:
-                        "A senha precisa ter ao menos um caracter especial",
-                    },
-                  })}
-                />
+              <FormField
+                required
+                name="password"
+                type="password"
+                label="Senha"
+                inputPlace="Digite sua Senha"
+                inputRef={register({
+                  required: 'Senha Necessária',
+                  minLength: {
+                    value: 6,
+                    message: 'Senha muito curta!',
+                  },
+                })}
+                error={errors.password}
+              />
 
-                {errors.password && (
-                  <Styled.Error>{errors.password.message}</Styled.Error>
-                )}
-              </Styled.FieldWrapper>
+              <FormField
+                required
+                name="passwordRepeat"
+                type="password"
+                label="Confirme sua senha"
+                inputPlace="Digite sua Senha"
+                inputRef={register({
+                  validate: (value) =>
+                    value === watch('password', '') || 'As senhas não coincidem!',
+                  required: 'Senha Necessária',
+                })}
+                error={errors.passwordRepeat}
+              />
               {errorMessage && <Styled.Error>{errorMessage}</Styled.Error>}
 
               <div>
                 <Styled.Button type="submit">Cadastrar!</Styled.Button>
-                <Styled.LinkWrapper>
-                  <a
-                    onClick={() => {
-                      history.push("/login")
-                    }}
-                  >
-                    <h3> Já possui conta? Entrar! </h3>
-                  </a>
+                <Styled.LinkWrapper to="/login">
+                  <h3> Já possui conta? Entrar! </h3>
                 </Styled.LinkWrapper>
               </div>
-            </form>
+            </Form>
           </>
         }
       />
