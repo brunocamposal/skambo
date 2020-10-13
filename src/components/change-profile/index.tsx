@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Form, Icon} from 'semantic-ui-react';
+import { Form, Icon } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 
 import * as Styled from './styles';
@@ -112,8 +112,8 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Digite seu primeiro nome!',
                       pattern: {
-                        value: /[A-Z]{2,}$/i,
-                        message: 'Isso não se parece com um e-mail!',
+                        value: /[A-Za-zÀ-ü]{2,}$/i,
+                        message: 'Isso não se parece com um nome!',
                       },
                     })}
                   />
@@ -130,8 +130,8 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Digite seu sobrenome!',
                       pattern: {
-                        value: /[A-Z]{2,}$/i,
-                        message: 'Isso não se parece com um e-mail!',
+                        value: /[A-Za-zÀ-ü]{2,} [A-Za-zÀ-ü]{2,}$/i,
+                        message: 'Isso não se parece com um sobrenome!',
                       },
                     })}
                   />
@@ -149,8 +149,8 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Campo obrigatório!',
                       pattern: {
-                        value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i,
-                        message: 'Formato invalido!',
+                        value: /^[0-9]{11}$/,
+                        message: 'Digite somente números',
                       },
                     })}
                   />
@@ -310,8 +310,8 @@ const ChangeProfile = () => {
                 )}
               </Form.Field>
 
-              <Form.Group widths={2}> 
-                <Form.Field required width={10} >
+              <Form.Group widths={2}>
+                <Form.Field required width={10}>
                   <label>Rua</label>
                   <input
                     name="street"
@@ -330,7 +330,7 @@ const ChangeProfile = () => {
                 </Form.Field>
               </Form.Group>
 
-              <Form.Field >
+              <Form.Field>
                 <label>Referência</label>
                 <input
                   name="referencePoint"
