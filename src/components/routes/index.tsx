@@ -4,11 +4,6 @@ import { routesNotAuth } from "./helper";
 import Layout from "../layout";
 import { UserSales } from "../../pages";
 
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { routesNotAuth } from './helper';
-import Layout from '../layout';
-
 const Routes = () => {
   const routesRender = routesNotAuth;
 
