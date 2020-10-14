@@ -1,7 +1,7 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { routesNotAuth } from "./helper";
-import Layout from "../layout";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { routesNotAuth } from './helper';
+import Layout from '../layout';
 
 const Routes = () => {
   const routesRender = routesNotAuth;
@@ -10,7 +10,7 @@ const Routes = () => {
     <Switch>
       {routesRender.map((item, index) => (
         <Route key={index} exact path={item.path}>
-          {item.path === "/login" || item.path === "/register" ? (
+          {item.path === '/login' || item.path === '/register' ? (
             <item.page />
           ) : (
             <Layout>
