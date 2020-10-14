@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import * as Styled from './styles';
@@ -7,31 +7,42 @@ import axios from 'axios';
 
 const OfferExchange = ({ props }: any) => {
   const [userProducts, setUserProduct] = useState([]);
+  console.log(userProducts);
 
-  const userIdJwt = useSelector((data) => console.log(data));
+  const userId = useSelector(({ session }: any) => session.currentUser.id);
   const token = useSelector(({ session }: any) => session.token);
 
-  const onSubmit = () => {
+  useEffect(() => {
     axios
-      .get(`https://capstone-q2.herokuapp.com/products?userId=6`, {
+      .get(`https://capstone-q2.herokuapp.com/products?userId=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then(({ data }) => console.log(data)
-      //setUserProduct()
-      );
-  };
+      .then(({ data }) => setUserProduct(data));
+  }, []);
 
   return (
     <>
-      <Modal open={props}>
-        <Modal.Header> Oferecer Produtos para Troca </Modal.Header>
+      <Modal open={props} closeOnEscape >
+        <>
+          {localStorage.length === 0 ? ( <>
+            <Modal.Header > Você não está logado </Modal.Header> </>
+          ) : (
+            <>
+              <Modal.Header> Oferecer Produtos para Troca </Modal.Header>
 
-        {userProducts.map((produtos, index) => (
-          <Modal.Content key={index}>
-            {produtos}
-            <Styled.ButtonOffer onClick={() => ""}>Ofertar</Styled.ButtonOffer>
-          </Modal.Content>
-        ))}
+              {userProducts.length === 0 ? (
+                <Styled.MsgError> Você não tem produtos cadastrados</Styled.MsgError>
+              ) : (
+                userProducts.map(({ name }, index) => (
+                  <Modal.Content key={index} >
+                    {name}
+                    <Styled.ButtonOffer onClick={() => ''}>Ofertar</Styled.ButtonOffer>
+                  </Modal.Content>
+                ))
+              )}
+            </>
+          )}
+        </>
       </Modal>
     </>
   );

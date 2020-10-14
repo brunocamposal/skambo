@@ -130,7 +130,7 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Digite seu sobrenome!',
                       pattern: {
-                        value: /[A-Za-zÀ-ü]{2,} [A-Za-zÀ-ü]{2,}$/i,
+                        value: /[A-Za-zÀ-ü]{2,}$/i,
                         message: 'Isso não se parece com um sobrenome!',
                       },
                     })}
@@ -150,7 +150,7 @@ const ChangeProfile = () => {
                       required: 'Campo obrigatório!',
                       pattern: {
                         value: /^[0-9]{11}$/,
-                        message: 'Digite somente números',
+                        message: 'Digite somente os 11 números de seu CPF',
                       },
                     })}
                   />
