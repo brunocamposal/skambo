@@ -19,12 +19,19 @@ interface stateProps {
   session: { token: string }
 }
 
+interface productProps {
+  name: string,
+  category: string,
+  usability: string,
+  value: string,
+  id: number,
+  thumbnail: string
+}
 const UserSales: React.FC = () => {
 
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
-  console.log(user)
   const decoded: { sub: string } = jwt_decode(session.token)
   const defaultOptions = {
     loop: true,
@@ -36,15 +43,13 @@ const UserSales: React.FC = () => {
   };
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchUserSales("2", session.token))
+      dispatch(fetchUserSales(decoded.sub, session.token))
     }, 1300)
   }, [])
 
   const handleEdit = (saleId: string) => {
 
   }
-
-
 
 
   const handleRemove = (saleId: string) => {
