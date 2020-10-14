@@ -9,10 +9,14 @@ export const Container = styled.div`
   width: 100%;
   flex-wrap: wrap;
   justify-content:center;
-  
+  @media(max-width: 601px ) {
+    margin-top: 30px;
+    margin-left:0;
+  }
 `;
 
 export const UserInfo = styled.div`
+  text-align: center;
   width:17%;
   display: flex;
   flex-direction: column;
@@ -113,11 +117,13 @@ export const Empty = styled.div`
 `;
 
 export const LoadingContainer = styled.div`
-  /* margin-top:15%; */
-  margin-left: 65%;
+
 `;
 
 
+export const TableContainer = styled.div`
+  overflow-x:scroll;
+`;
 export const Table = styled(SemanticTable)`    
  border:none !important;
  width:65% !important;
