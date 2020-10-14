@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const MainBanner = styled.div`
+  background: rgb(236, 232, 189);
+  background: radial-gradient(
+    circle,
+    rgba(236, 232, 189, 1) 0%,
+    rgba(235, 56, 209, 1) 100%
+  );
   background: rgb(251, 237, 186);
   background: linear-gradient(
     180deg,

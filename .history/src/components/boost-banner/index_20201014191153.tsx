@@ -31,5 +31,3 @@ const BoostBanner = ({ image, textHeader, subheader, info }: BoostBanner) => {
 };
 
 export default BoostBanner;
-
-// demo: https://codesandbox.io/s/hardcore-allen-k1h9q?file=/src/App.js

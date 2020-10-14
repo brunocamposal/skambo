@@ -3,22 +3,21 @@ import React from 'react';
 import { MainBanner, Infos, Img } from './style';
 
 interface BoostBanner {
+  color: string;
   image: string;
   textHeader: string;
-  subheader: string;
   info: string;
 }
 
-const BoostBanner = ({ image, textHeader, subheader, info }: BoostBanner) => {
-  const infos = info.split('-');
+const BoostBanner = ({ color, image, textHeader, info }: BoostBanner) => {
+  const infos = info.split(/\n/);
   const headInfo = infos.shift();
 
   return (
-    <MainBanner>
-      <Infos>
+    <MainBanner color={color}>
+      <div>
         <h2>{textHeader}</h2>
-        <h3>{subheader}</h3>
-      </Infos>
+      </div>
       <Img alt="Banner Image" src={image} />
       <Infos>
         <h3>{headInfo}</h3>
@@ -31,5 +30,3 @@ const BoostBanner = ({ image, textHeader, subheader, info }: BoostBanner) => {
 };
 
 export default BoostBanner;
-
-// demo: https://codesandbox.io/s/hardcore-allen-k1h9q?file=/src/App.js

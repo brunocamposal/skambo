@@ -1,17 +1,11 @@
 import styled from "styled-components";
 
 export const MainBanner = styled.div`
-  background: rgb(251, 237, 186);
-  background: linear-gradient(
-    180deg,
-    rgba(251, 237, 186, 1) 0%,
-    rgba(146, 110, 193, 1) 100%
-  );
+  background-color: (props) => props.color;
   display: grid;
   width: 900px;
   height: 300px;
   grid-template-columns: repeat(3, 1fr);
-  place-items: center;
 `;
 
 export const Img = styled.img`
@@ -28,17 +22,5 @@ export const Img = styled.img`
 
 export const Infos = styled.div`
   display: grid;
-  h2 {
-    color: transparent;
-    background: #7779;
-    font-weight: 900;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
-  }
-  h3 {
-    color: white;
-    text-shadow: 2px 2px 2px #200d;
-  }
 `;
+
