@@ -15,9 +15,6 @@ const UserFavorites: React.FC = () => {
   const url = 'https://capstone-q2.herokuapp.com/products';
   const history = useHistory();
 
-  console.log("usuario:");
-  // console.log(user)
-
   const goProductPage = (id: string) => {
     {
       id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`);
