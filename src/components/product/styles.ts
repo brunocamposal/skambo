@@ -110,3 +110,14 @@ export const ImageLoading = styled(Image)`
   width: 100vw;
   height: 500px;
 `;
+export const SharePoint =styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: #3d847c;
+    font-size: 24px;
+
+    a { 
+        margin-left: 10px;
+    }
+`
