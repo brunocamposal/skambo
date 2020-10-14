@@ -20,6 +20,7 @@ import axios from 'axios';
 import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { Loading } from './loading';
+import Swal from 'sweetalert2';
 
 const Product: React.FC = () => {
   const history = useHistory();
@@ -36,8 +37,11 @@ const Product: React.FC = () => {
   const { id } = useParams();
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
+  const user = useSelector(({ session }: RootState) => session.currentUser);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+
+  console.log(user.id);
 
   useEffect(() => {
     axios
@@ -50,28 +54,31 @@ const Product: React.FC = () => {
         const product = res.data[id - 1];
         setProducts(product);
         setLoading(false);
-
         setImage(product.thumbnail);
       })
       .catch((err) => console.log(err));
   }, [setProducts]);
 
-  const handleFavorite = () => {
-    const url = `https://capstone-q2.herokuapp.com/products/`;
-    axios
-    .get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((res) => {
-      const product = res.data[id - 1];
-      setProducts(product);
-      setLoading(false);
+  const favoritesJSON = { favorites: products };
 
-      setImage(product.thumbnail);
-    })
-    .catch((err) => console.log(err));
+  const handleFavorite = () => {
+    const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
+    axios
+      .patch(url, favoritesJSON, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Produto adicionado aos favoritos!',
+          showConfirmButton: false,
+          timer: 1300,
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
