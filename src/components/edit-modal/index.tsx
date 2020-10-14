@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Header, Input, Modal, Form } from 'semantic-ui-react'
 import * as Styled from './styles'
 import axios from 'axios'
+import { changeProductInfo as changeProductInfoAction } from '../../redux/actions/user'
+
 interface stateProps {
   session: { token: string }
 }
 
 const EditModal = (saleId: any) => {
+  const dispatch = useDispatch()
   const token = useSelector((state: stateProps) => state.session.token)
   const [values, setValues]: any = useState({
     name: "",
@@ -82,6 +85,7 @@ const EditModal = (saleId: any) => {
 
             setOpen(false)
             changeProductInfo()
+            dispatch(changeProductInfoAction(saleId, values))
 
           }}
           positive
