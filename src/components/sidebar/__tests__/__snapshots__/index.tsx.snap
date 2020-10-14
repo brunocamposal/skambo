@@ -11,6 +11,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   margin-top: 120px;
+  background: #ffffff;
 }
 
 .c0 h3 {
@@ -30,9 +31,8 @@ exports[`Sidebar Should render sidebar 1`] = `
   -ms-flex-align: center;
   align-items: center;
   width: 200px;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px;
-  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -42,11 +42,22 @@ exports[`Sidebar Should render sidebar 1`] = `
   }
 }
 
+@media (max-width:480px) {
+  .c1 {
+    font-size: 20px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+
 <div
   className="c0"
 >
   <div
     className="c1 games"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -95,6 +106,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   </div>
   <div
     className="c1 books"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -125,6 +137,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   </div>
   <div
     className="c1 clothes"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -157,6 +170,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   </div>
   <div
     className="c1 bike"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -182,6 +196,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   </div>
   <div
     className="c1 sports"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -210,6 +225,7 @@ exports[`Sidebar Should render sidebar 1`] = `
   </div>
   <div
     className="c1 instruments"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"
@@ -231,10 +247,11 @@ exports[`Sidebar Should render sidebar 1`] = `
       />
     </svg>
      
-    Instrumentos Musicais
+    Intrumentos Musicais
   </div>
   <div
     className="c1 furniture"
+    onClick={[Function]}
   >
     <svg
       className="icon-style"

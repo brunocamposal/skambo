@@ -5,11 +5,67 @@ export const Container = styled.div`
   margin-top: 135px;
   margin-left: 50px;
   display: flex;
+  flex-direction:row;
   width: 100%;
   flex-wrap: wrap;
   justify-content:center;
-  
+  @media(max-width: 601px ) {
+    margin-top: 30px;
+    margin-left:0;
+  }
 `;
+
+export const UserInfo = styled.div`
+  text-align: center;
+  width:17%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  img {
+    width: 124px;
+    height: 118px;
+    display:block;
+    margin: 10px;
+    border:4px solid black;
+    border-radius: 500px;
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+  }
+
+  section {
+    margin:12px 0 15px 0;
+    font-size:13px;
+  }
+`;
+export const ProfileButton = styled.button`
+    background: var(--primary);
+    display: block;
+    width: 100%;
+    border: none;
+    height: 34px;
+    color: white;
+    font-weight: 700;
+    font-size:13px;    /* margin-top:35px; */
+    &:hover {
+      box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.75);
+      transition:background-color 0.3s;
+      background-color: var(--primary-dark);
+    }
+`;
+
+export const SettingsButton = styled(ProfileButton)`
+background-color:#fff;
+/* margin-top:0; */
+color:#000;
+    &:hover {
+      border:1px solid #f7f7f7;
+      background-color: #efeded;
+
+    }
+`;
+
+
 
 export const ButtonsWrapper = styled.div`
     display:flex;
@@ -18,7 +74,7 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const RemoveButton = styled.button`
-  white-space: break-spaces;
+    white-space: break-spaces;
     justify-content:center;
     width:91px;
     height:23px;
@@ -37,13 +93,7 @@ export const RemoveButton = styled.button`
     }
 `;
 
-export const EditButton = styled(RemoveButton)`
-    background-color: #818085;
-    &:hover {
-      background-color: #727272;
-      cursor:pointer;
-    }
-`;
+
 
 
 export const CardWrapper = styled.div`
@@ -67,11 +117,17 @@ export const Empty = styled.div`
 `;
 
 export const LoadingContainer = styled.div`
-  margin-top:15%;
+
 `;
 
 
-export const Table = styled(SemanticTable)`
+export const TableContainer = styled.div`
+  overflow-x:scroll;
+`;
+export const Table = styled(SemanticTable)`    
+ border:none !important;
+ width:65% !important;
+ margin-left: 20px!important;
    img {
      width:50px;
      height:50px;
