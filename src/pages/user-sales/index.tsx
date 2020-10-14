@@ -47,11 +47,6 @@ const UserSales: React.FC = () => {
     }, 1300)
   }, [])
 
-  const handleEdit = (saleId: string) => {
-
-  }
-
-
   const handleRemove = (saleId: string) => {
     Swal.fire({
       title: 'Tem certeza que deseja deletar esse anúncio?',
