@@ -36,7 +36,7 @@ const Product: React.FC = () => {
 
   const { id } = useParams();
   const url = `https://capstone-q2.herokuapp.com/products/`;
-  const token = useSelector(({ session }: RootState) => session.token);
+  const token = useSelector((session: any) => session.token);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
 
