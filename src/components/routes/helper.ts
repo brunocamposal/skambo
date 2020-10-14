@@ -9,7 +9,7 @@ export const routesNotAuth = [
   { path: '/user-search/:search', name: 'UserSearch', page: UserSearch },
   { path: '/category/:name', name: 'CaregorieSearch', page: CategorieSearch },
   { path: '/products/:id', name: 'ProductPage', page: ProductPage },
-  { path: '/my-sales', name: 'UserSales', page: UserSales },
+  // { path: '/my-sales', name: 'UserSales', page: UserSales },
   { path: '/change-profile', name: 'ChangeProfile', page: ChangeProfile },
   { path: '/favorites', name: 'UserFavorites', page: UserFavorites },
 ];
