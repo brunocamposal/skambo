@@ -40,7 +40,7 @@ const Product: React.FC = () => {
 
   const { id } = useParams<Params>();
   const url = `https://capstone-q2.herokuapp.com/products/`;
-  const token = useSelector(({ session }: RootState) => session.token);
+  const token = useSelector((session: any) => session.token);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
 
@@ -61,6 +61,9 @@ const Product: React.FC = () => {
       .catch((err) => console.log(err));
   }, [setProducts]);
 
+  const handleFavorite = () => {
+    history.push("/favorites")
+  }
 
   return (
     <>
@@ -107,7 +110,7 @@ const Product: React.FC = () => {
             <InterestButton onClick={() => history.push('/user/interest')}>
               Tenho Interesse
             </InterestButton>
-            <FavButton onClick={() => 'add favotites'}>
+            <FavButton onClick={handleFavorite}>
               <Icon name="heart" />
               Adicionar aos favoritos
             </FavButton>
