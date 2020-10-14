@@ -5,10 +5,10 @@ exports[`Render Form component 1`] = `
   className="sc-bdnylx leTbsp"
 >
   <div
-    className="sc-gtssRu brhlVN"
+    className="sc-gtssRu dBdfbl"
   >
     <div
-      className="sc-hKFyIo dJqfuM"
+      className="sc-hKFyIo fBBRYs"
     >
       <img
         alt="card"
@@ -30,24 +30,28 @@ exports[`Render Form component 1`] = `
           className="required field"
         >
           <label>
-            E-Mail
+            <div>
+              E-Mail
+            </div>
+            <input
+              name="email"
+              placeholder="Digite seu E-Mail"
+            />
           </label>
-          <input
-            name="email"
-            placeholder="Digite seu E-Mail"
-          />
         </div>
         <div
           className="required field"
         >
           <label>
-            Senha
+            <div>
+              Senha
+            </div>
+            <input
+              name="password"
+              placeholder="Digite sua Senha"
+              type="password"
+            />
           </label>
-          <input
-            name="password"
-            placeholder="Digite sua Senha"
-            type="password"
-          />
         </div>
         <button
           className="sc-eCApGN bqMDhY"

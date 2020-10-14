@@ -28,9 +28,9 @@ import {
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
-  const token = useSelector(({ session }: RootState) => session.token);
+  const token = useSelector((state: any) => state.token);
 
-  console.log(token);
+  // console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
