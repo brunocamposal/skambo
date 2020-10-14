@@ -1,17 +1,8 @@
 import React from 'react';
 
-import { MainBanner, Infos, Img } from './style';
+import MainBanner from './style';
 
-interface BoostBanner {
-  // props: {
-  color: string;
-  image: string;
-  textHeader: string;
-  info: string;
-  // };
-}
-
-const BoostBanner = ({ color, image, textHeader, info }: BoostBanner) => {
+const BoostBanner = ({ color, image, textHeader, info }) => {
   const infos = info.split(/\n/);
   const headInfo = infos.shift();
 
@@ -20,11 +11,11 @@ const BoostBanner = ({ color, image, textHeader, info }: BoostBanner) => {
       <div>
         <h2>{textHeader}</h2>
       </div>
-      <Img alt="Banner Image" src={image} />
+      <Img alt="Banner Image" href={image} />
       <Infos>
         <h3>{headInfo}</h3>
         {infos.map((p, i) => (
-          <p key={i}>{p}</p>
+          <p>{p}</p>
         ))}
       </Infos>
     </MainBanner>

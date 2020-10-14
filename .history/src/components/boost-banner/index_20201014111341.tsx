@@ -20,7 +20,7 @@ const BoostBanner = ({ color, image, textHeader, info }: BoostBanner) => {
       <div>
         <h2>{textHeader}</h2>
       </div>
-      <Img alt="Banner Image" src={image} />
+      <Img alt="Banner Image" href={image} />
       <Infos>
         <h3>{headInfo}</h3>
         {infos.map((p, i) => (

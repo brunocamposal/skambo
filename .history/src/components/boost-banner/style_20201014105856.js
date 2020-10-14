@@ -15,11 +15,6 @@ export const Infos = styled.div`
 export const Img = styled.img`
   border-radius: 8px;
   box-shadow: 4px 4px 0 0 #336;
-  max-width: 290px;
-  max-height: 190px;
-  trasform: rotate(-12deg);
-  transition: transform 0.5s ease;
-  :hover: {
-    transform: scale(1.1);
-  }
+  max-width: 296px;
+  max-height: 196px;
 `;
