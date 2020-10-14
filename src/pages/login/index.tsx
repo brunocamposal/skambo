@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { login } from '../../redux/actions/session';
+import { requestLogin  } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
 
 import FormField from '../../components/form-field';
@@ -28,12 +28,11 @@ const Login: React.FC = () => {
   const history = useHistory();
 
   const onSubmit = (values: IFormInputs) => {
-    //console.log(values);
 
     axios
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
-        dispatch(login(data.accessToken));
+        dispatch(requestLogin(data.accessToken));
         localStorage.setItem('token', data.accessToken);
         history.push('/');
       })

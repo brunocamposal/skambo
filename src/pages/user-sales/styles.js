@@ -127,6 +127,7 @@ export const TableContainer = styled.div`
 export const Table = styled(SemanticTable)`    
  border:none !important;
  width:65% !important;
+ margin-left: 20px!important;
    img {
      width:50px;
      height:50px;

@@ -20,11 +20,6 @@ interface stateProps {
   session: { token: string };
 }
 
-const options = [
-  { key: 1, text: 'Choice 1', value: 1 },
-  { key: 2, text: 'Choice 2', value: 2 },
-];
-
 const CategorieSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterCategory, setFilterCategory] = useState<ProductsProps[]>([]);
@@ -36,7 +31,6 @@ const CategorieSearch: React.FC = () => {
   const { name } = useParams<ProductsProps>();
   const history = useHistory();
 
-  const session = useSelector((state: stateProps) => state.session);
 
   const categoryProducts = name;
 
@@ -51,7 +45,7 @@ const CategorieSearch: React.FC = () => {
         setProductsList(data);
       })
       .catch(({ response }) => {
-        if (response?.status === 401 && session.token != '') {
+        if (response?.status === 401 && token != '') {
           Swal.fire({
             title: `Você foi deslogado! Faça o Login novamnte.`,
             confirmButtonText: `Ok`,

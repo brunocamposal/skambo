@@ -75,7 +75,6 @@ const UserSales: React.FC = () => {
       <Menu></Menu>
       <Styled.Container>
 
-
         {Object.keys(user).length === 0 ?
           <Styled.LoadingContainer>
             <Lootie

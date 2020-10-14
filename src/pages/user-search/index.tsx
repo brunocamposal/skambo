@@ -17,10 +17,6 @@ interface ProductsProps {
   id: string;
 }
 
-interface stateProps {
-  session: { token: string };
-}
-
 const UserSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterProducts, setFilterProducts] = useState<ProductsProps[]>([]);
@@ -29,7 +25,6 @@ const UserSearch: React.FC = () => {
   const url = 'https://capstone-q2.herokuapp.com/products';
   const history = useHistory();
 
-  const session = useSelector((state: stateProps) => state.session);
   const { search } = useParams<ProductsProps>();
 
   useEffect(() => {
@@ -43,7 +38,7 @@ const UserSearch: React.FC = () => {
         setProductsList(data);
       })
       .catch(({ response }) => {
-        if (response?.status === 401 && session.token != '') {
+        if (response?.status === 401 && token != '') {
           Swal.fire({
             title: `Você foi deslogado! Faça o Login novamnte.`,
             confirmButtonText: `Ok`,
