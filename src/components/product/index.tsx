@@ -17,9 +17,9 @@ import {
 import { Icon } from 'semantic-ui-react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { Loading } from './loading';
+
 
 
 interface Params {
@@ -70,53 +70,53 @@ const Product: React.FC = () => {
       {loading ? (
         <Loading />
       ) : (
-        <ProductCard>
-          <CardImg>
-            <CardThumb>
-              <ProductThumb
-                src={products.thumbnail}
-                alt="thumb"
-                onMouseOver={() => setImage(products.thumbnail)}
-              />
-              {products.images.map((image, index) => {
-                return (
-                  <ProductThumb
-                    key={index}
-                    src={image}
-                    alt="thumbnail"
-                    onMouseOver={() => setImage(products.images[index])}
-                  />
-                );
-              })}
-            </CardThumb>
-            <CardProduct>
-              <ProductShow src={image} alt="destak" />
-            </CardProduct>
-          </CardImg>
-          <CardInfo>
-            <ProductInfoName>{products.name}</ProductInfoName>
-            <ProductInfoValue>R$ {products.value}</ProductInfoValue>
-            <ProductInfoDesc>{products.description}</ProductInfoDesc>
-            <ProductInfoDesc>
-              <b>CONDIÇÃO: </b>
-              {products.usability}
-            </ProductInfoDesc>
-            <ProductInfoIntr>
-              Interesses:
+          <ProductCard>
+            <CardImg>
+              <CardThumb>
+                <ProductThumb
+                  src={products.thumbnail}
+                  alt="thumb"
+                  onMouseOver={() => setImage(products.thumbnail)}
+                />
+                {products.images.map((image, index) => {
+                  return (
+                    <ProductThumb
+                      key={index}
+                      src={image}
+                      alt="thumbnail"
+                      onMouseOver={() => setImage(products.images[index])}
+                    />
+                  );
+                })}
+              </CardThumb>
+              <CardProduct>
+                <ProductShow src={image} alt="destak" />
+              </CardProduct>
+            </CardImg>
+            <CardInfo>
+              <ProductInfoName>{products.name}</ProductInfoName>
+              <ProductInfoValue>R$ {products.value}</ProductInfoValue>
+              <ProductInfoDesc>{products.description}</ProductInfoDesc>
+              <ProductInfoDesc>
+                <b>CONDIÇÃO: </b>
+                {products.usability}
+              </ProductInfoDesc>
+              <ProductInfoIntr>
+                Interesses:
               {products.interests.map((interest, index) => {
                 return <li key={index}>{interest}</li>;
               })}
-            </ProductInfoIntr>
-            <InterestButton onClick={() => history.push('/user/interest')}>
-              Tenho Interesse
+              </ProductInfoIntr>
+              <InterestButton onClick={() => history.push('/user/interest')}>
+                Tenho Interesse
             </InterestButton>
-            <FavButton onClick={handleFavorite}>
-              <Icon name="heart" />
+              <FavButton onClick={handleFavorite}>
+                <Icon name="heart" />
               Adicionar aos favoritos
             </FavButton>
-          </CardInfo>
-        </ProductCard>
-      )}
+            </CardInfo>
+          </ProductCard>
+        )}
     </>
   );
 };

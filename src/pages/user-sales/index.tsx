@@ -107,9 +107,9 @@ const UserSales: React.FC = () => {
                       <Table.Cell><strong>Valor aprox</strong></Table.Cell>
                       <Table.Cell><strong></strong></Table.Cell>
                     </Table.Row>
-                    {user.userSales && user.userSales.map((product: any) => {
+                    {user.userSales && user.userSales.map((product: any, key: any) => {
                       return (
-                        <Table.Row>
+                        <Table.Row key={key}>
                           <Table.Cell><img src={product.thumbnail} alt="" /></Table.Cell>
                           <Table.Cell>{product.name}</Table.Cell>
                           <Table.Cell>{product.category[0]}</Table.Cell>

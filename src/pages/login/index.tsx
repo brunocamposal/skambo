@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { requestLogin  } from '../../redux/actions/session';
+import { requestLogin } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
 
 import FormField from '../../components/form-field';
