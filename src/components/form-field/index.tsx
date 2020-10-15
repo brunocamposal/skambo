@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
+import React from "react";
+import { Form } from "semantic-ui-react";
 
 interface Props {
   required?: boolean;
@@ -11,41 +11,14 @@ interface Props {
   error?: {
     message?: string;
   };
-  multiple?: boolean;
-  step?: number | string;
-  min?: number;
-  max?: number;
 }
 
-const FormField = ({
-  required,
-  name,
-  type,
-  label,
-  inputPlace,
-  inputRef,
-  error,
-  multiple,
-  step,
-  min,
-  max,
-}: Props) => {
+const FormField = ({ required, name, type, label, inputPlace,inputRef, error }: Props) => {
   return (
     <Form.Field required={required}>
-      <label>
-        <div>{label}</div>
-        <input
-          name={name}
-          type={type}
-          placeholder={inputPlace}
-          ref={inputRef}
-          multiple={multiple}
-          step={step}
-          min={min}
-          max={max}
-        />
-      </label>
-      {error && <p style={{ color: 'red' }}>{error.message}</p>}
+      <label>{label}</label>
+      <input name={name} type={type} placeholder={inputPlace} ref={inputRef} />
+      {error && <p style={{ color: "red" }}>{error.message}</p>}
     </Form.Field>
   );
 };

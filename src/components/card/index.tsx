@@ -1,12 +1,12 @@
 import React from 'react';
-import * as Styled from './styles.js';
+import * as Styled from './styles';
 import { motion } from 'framer-motion';
 import { Popup } from 'semantic-ui-react';
 
 interface PropTypes {
   title: string;
   category: string;
-  imgUrl: string;
+  imgUrl?: string;
   onClick?: () => void;
 }
 

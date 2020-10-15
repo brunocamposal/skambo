@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import * as Styled from './styles.js';
+import * as Styled from './styles';
 import Card from '../../components/card';
 import Slider from 'react-slick';
 import '../../../node_modules/slick-carousel/slick/slick.css';
@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
+import { settings } from './helper';
 
 interface stateProps {
   session: { token: string };
@@ -18,6 +19,8 @@ const MostViewedProducts = () => {
   const session = useSelector((state: stateProps) => state.session);
   const history = useHistory();
 
+  console.log(session);
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
@@ -26,12 +29,12 @@ const MostViewedProducts = () => {
       })
       .then((res) => {
         const sortedProducts = res.data.sort((a: { views: string }, b: { views: string }) => {
-          return parseInt(b.views) - parseInt(a.views)
-        })
-        setProducts(sortedProducts)
+          return parseInt(b.views) - parseInt(a.views);
+        });
+        setProducts(sortedProducts);
       })
       .catch(({ response }) => {
-        if (response?.status === 401 && session.token != "") {
+        if (response?.status === 401 && session.token != '') {
           Swal.fire({
             title: `Você foi deslogado! Faça o Login novamnte.`,
             confirmButtonText: `Ok`,
@@ -44,46 +47,11 @@ const MostViewedProducts = () => {
       });
   }, []);
 
-  const settings = {
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    centerPadding: '10px',
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  };
-
-
-
   const goProductPage = (id: string) => {
-    { id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`) }
-  }
+    {
+      id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`);
+    }
+  };
 
   return (
     <div>
@@ -99,7 +67,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join("/ ")}
+                  category={`${product.category} / ${product.subCategory}`}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />
@@ -115,7 +83,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join("/ ")}
+                  category={`${product.category} / ${product.subCategory}`}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />

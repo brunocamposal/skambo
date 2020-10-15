@@ -30,28 +30,24 @@ exports[`Render Form component 1`] = `
           className="required field"
         >
           <label>
-            <div>
-              E-Mail
-            </div>
-            <input
-              name="email"
-              placeholder="Digite seu E-Mail"
-            />
+            E-Mail
           </label>
+          <input
+            name="email"
+            placeholder="Digite seu E-Mail"
+          />
         </div>
         <div
           className="required field"
         >
           <label>
-            <div>
-              Senha
-            </div>
-            <input
-              name="password"
-              placeholder="Digite sua Senha"
-              type="password"
-            />
+            Senha
           </label>
+          <input
+            name="password"
+            placeholder="Digite sua Senha"
+            type="password"
+          />
         </div>
         <button
           className="sc-eCApGN bqMDhY"

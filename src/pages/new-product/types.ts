@@ -13,8 +13,8 @@ export interface TokenDecoded {
 
 export interface Categoria {
   key: number;
-  value: any;
-  text: any;
+  value: string;
+  text: string;
 }
 
 export interface Session {

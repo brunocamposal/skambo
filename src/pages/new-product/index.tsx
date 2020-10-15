@@ -19,9 +19,10 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct,
   });
   const token = useSelector((state: Session) => state.session.token);
-  const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
   const user = useSelector(({ session }: RootState) => session.currentUser);
   const history = useHistory();
+
+
 
   console.log({ user });
 
@@ -56,11 +57,10 @@ const NewProduct: React.FC = () => {
     }
   }, [formValue.images]);
 
-  if (JSON.stringify(errors) !== '{}') console.log(errors);
-
   const onSubmit = (data: Data): void => {
     console.log({ data });
-    const { boost, usability, value, name, description, category, subCategory } = data;
+    const interestArr = data.interests.split(",").map(interest => interest.trim());
+    const { boost, usability, value, name, description, category, subCategory, interests } = data;
     const sendData: Product = {
       userId: user.id,
       views: 0,
@@ -69,8 +69,9 @@ const NewProduct: React.FC = () => {
       value,
       name,
       description,
-      subCategory:
-        category,
+      subCategory,
+      category,
+      interests,
       images: formValue.images,
       thumbnail: formValue.thumbnail,
     };
@@ -93,11 +94,11 @@ const NewProduct: React.FC = () => {
         setFormValue(defaultProduct);
       })
       .catch(({ response }) => {
-        if (response.data === "jwt_expired") {
+        if (response.data === "jwt expired") {
           Swal.fire({
-            icon: 'error',
-            title: 'Erro',
-            text: 'Não foi possível enviar os dados.',
+            icon: 'info',
+            title: 'Que pena',
+            text: 'Sua sessão expirou',
           }).then(res => {
             if (res.isConfirmed) {
               history.push('/login');
