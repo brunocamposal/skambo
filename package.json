@@ -77,9 +77,9 @@
   },
   "devDependencies": {
     "enzyme-adapter-react-16": "^1.15.5",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-config-universe": "^5.0.0",
     "jest-styled-components": "^7.0.3",
-    "prettier": "^2.1.2",
-    "eslint-plugin-cypress": "^2.11.2"
+    "prettier": "^2.1.2"
   }
 }

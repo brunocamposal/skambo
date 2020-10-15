@@ -219,42 +219,36 @@ exports[`Register Should render register 1`] = `
           className="required field"
         >
           <label>
-            <div>
-              E-mail
-            </div>
-            <input
-              name="email"
-              placeholder="Digite seu e-mail"
-            />
+            E-mail
           </label>
+          <input
+            name="email"
+            placeholder="Digite seu e-mail"
+          />
         </div>
         <div
           className="required field"
         >
           <label>
-            <div>
-              Senha
-            </div>
-            <input
-              name="password"
-              placeholder="Digite sua Senha"
-              type="password"
-            />
+            Senha
           </label>
+          <input
+            name="password"
+            placeholder="Digite sua Senha"
+            type="password"
+          />
         </div>
         <div
           className="required field"
         >
           <label>
-            <div>
-              Confirme sua senha
-            </div>
-            <input
-              name="passwordRepeat"
-              placeholder="Digite sua Senha"
-              type="password"
-            />
+            Confirme sua senha
           </label>
+          <input
+            name="passwordRepeat"
+            placeholder="Digite sua Senha"
+            type="password"
+          />
         </div>
         
         <div>

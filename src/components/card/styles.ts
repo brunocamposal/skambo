@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Card = styled.div`
   margin-top: 20px;
   padding: 25px;
-  cursor: pointer;
+  
 
   strong {
     font-size: 14px;
@@ -23,12 +23,14 @@ export const Card = styled.div`
     border-radius: 10px;
     object-position: top;
     object-fit: cover;
+    cursor: pointer;
   }
   div {
     white-space: nowrap;
     overflow: hidden;
     margin-top: 17px;
     margin-left: 8px;
+    cursor: pointer;
   }
 
   @media (max-width: 480px) {

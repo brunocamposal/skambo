@@ -48,22 +48,6 @@ Array [
 }
 
 @media (max-width:480px) {
-  .c0 {
-    display: block;
-  }
-}
-
-@media (max-width:480px) {
-  .c4 {
-    font-size: 20px;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width:480px) {
 
 }
 
@@ -113,6 +97,22 @@ Array [
 
 @media (max-width:480px) {
 
+}
+
+@media (max-width:480px) {
+  .c0 {
+    display: block;
+  }
+}
+
+@media (max-width:480px) {
+  .c4 {
+    font-size: 20px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
 }
 
 <div
@@ -365,7 +365,7 @@ Array [
                 />
               </svg>
                
-              Intrumentos Musicais
+              Instrumentos Musicais
             </div>
             <div
               className="c4 furniture"
@@ -499,14 +499,6 @@ Array [
 }
 
 @media (max-width:480px) {
-
-}
-
-@media (max-width:480px) {
-
-}
-
-@media (max-width:480px) {
   .c0 {
     height: 100px;
     position: relative;
@@ -632,6 +624,14 @@ Array [
   .c7 {
     display: none;
   }
+}
+
+@media (max-width:480px) {
+
+}
+
+@media (max-width:480px) {
+
 }
 
 <div
