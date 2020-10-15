@@ -8,10 +8,9 @@ interface PropTypes {
   category: string;
   imgUrl?: string;
   onClick?: () => void
-  children?: any;
 }
 
-const Card = ({ title, category, imgUrl, onClick, children }: PropTypes) => {
+const Card = ({ title, category, imgUrl, onClick }: PropTypes) => {
   return (
     <motion.div
       whileHover={{

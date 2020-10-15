@@ -13,15 +13,17 @@ import {
   ProductInfoIntr,
   InterestButton,
   FavButton,
+  SharePoint
 } from './styles';
 import { Icon } from 'semantic-ui-react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { RootState } from '../../redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from './loading';
 import Swal from 'sweetalert2';
 import { requestUserInfo } from '../../redux/actions/session';
+import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa'
 
 
 const Product: React.FC = () => {
@@ -38,6 +40,7 @@ const Product: React.FC = () => {
   });
 
   const { id } = useParams();
+  const location = useLocation()
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
   const user = useSelector(({ session }: RootState) => session.currentUser);
@@ -55,6 +58,7 @@ const Product: React.FC = () => {
       })
       .then((res) => {
         const product = res.data[id - 1];
+        console.log(res.data)
         setProducts(product);
         setLoading(false);
         setImage(product.thumbnail);
@@ -64,6 +68,8 @@ const Product: React.FC = () => {
 
   const favoritesJSON: any = [...userFavorites, products];
 
+  const actualUrl = `http://localhost:3000${location.pathname}`
+  console.log(actualUrl)
   const handleFavorite = () => {
     const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
 
@@ -153,6 +159,21 @@ const Product: React.FC = () => {
               <Icon name="heart" />
               Adicionar aos favoritos
             </FavButton>
+
+            <SharePoint>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${actualUrl}`} target='_blank' rel='noopener noreferrer'>
+                <FaFacebook />
+              </a>
+              
+              <a href={`https://twitter.com/intent/tweet?url=${actualUrl}&text=${products.name}`} target='_blank' rel='noopener noreferrer'>
+                <FaTwitter />
+              </a>
+                          
+              <a href={`https://api.whatsapp.com/send?text=${products.name}-${actualUrl}`} target='_blank' rel='noopener noreferrer'>
+                <FaWhatsapp />
+              </a>
+            </SharePoint>
+
           </CardInfo>
         </ProductCard>
       )}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   StyledMenu,
   StyledMenuLeft,
@@ -26,9 +27,8 @@ import ChangeProfile from '../change-profile';
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
-  const token = useSelector(({ session }: RootState) => session.token);
+  const token = useSelector((state: any) => state.token);
 
-  console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
@@ -57,15 +57,13 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {token !== '' ? ( // Condicional para quando o usuário estiver logado
+        {localStorage.length !== 0 ? ( // Condicional para quando o usuário estiver logado
           <StyledMenuRight>
-            <StyledButton className="web" onClick={() => history.push('/')}>
+            <StyledButton className="web" onClick={() => history.push('/new-product')}>
               Anunciar
             </StyledButton>
 
-
             <StyledIcons>
-
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -92,16 +90,15 @@ const TopBar: React.FC = () => {
                           window.localStorage.clear();
                         }
                       });
-                      history.push('/')
+                      history.push('/');
                     }}
                   />
                 </Dropdown.Menu>
               </Dropdown>
-              
+
               <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
 
               <AiOutlineMail className="message" onClick={() => history.push('/')} />
-
             </StyledIcons>
           </StyledMenuRight>
         ) : (
