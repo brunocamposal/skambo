@@ -10,36 +10,40 @@ import Swal from 'sweetalert2';
 import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session, Data } from './types';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
 
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
-  const [estado, setEstado] = useState('selecione');
+  const [estado, setEstado] = useState('Marcas de Uso');
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: defaultProduct,
   });
   const token = useSelector((state: Session) => state.session.token);
   const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
+  const user = useSelector(({ session }: RootState) => session.currentUser);
+
+  console.log({ user });
 
   useEffect(() => {
     let es;
     switch (formValue.usability) {
       case '1':
-        es = 'não funciona / quebrado / necessita reforma';
+        es = 'Com defeito';
         break;
       case '2':
-        es = 'usado, danificado, mas ainda útil ';
+        es = 'Bem Usado';
         break;
       case '3':
-        es = 'bastante usado, mas ok';
+        es = 'Marcas de Uso';
         break;
       case '4':
-        es = 'algumas marcas de uso';
+        es = 'Semi Novo';
         break;
       case '5':
-        es = 'como novo';
+        es = 'Novo';
         break;
       default:
-        es = 'selecione';
+        es = 'Semi Novo';
         break;
     }
     setEstado(es);
@@ -54,14 +58,13 @@ const NewProduct: React.FC = () => {
   if (JSON.stringify(errors) !== '{}') console.log(errors);
 
   const onSubmit = (data: Data): void => {
-    console.log(data);
+    console.log({ data });
     const { boost, usability, value, name, description, category } = data;
     const sendData: Product = {
-      userId,
+      userId: user.id,
       views: 0,
-      usersAccess: 0,
-      boost,
-      usability,
+      boostPlan: boost,
+      usability: estado,
       value,
       name,
       description,
@@ -74,8 +77,8 @@ const NewProduct: React.FC = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(sendData);
-    axios
+    console.log({ sendData });
+    /* axios
       .post('https://capstone-q2.herokuapp.com/products', sendData, headers)
       .then((res) => {
         console.log(res);
@@ -98,14 +101,11 @@ const NewProduct: React.FC = () => {
           reset(defaultProduct);
           setFormValue(defaultProduct);
         }
-      });
+      }); */
   };
 
   return (
     <FormContainer style={{ width: '100%', marginTop: 80 }}>
-      <Link to="/">
-        <h3> Voltar </h3>
-      </Link>
       <h1>Novo Produto</h1>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
