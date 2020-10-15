@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import * as Styled from './styles'
-import { AiFillDelete } from 'react-icons/ai';
-import { MdModeEdit } from 'react-icons/md';
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
-import Card from '../../components/card'
 import { fetchUserSales, requestRemoveSale } from '../../redux/actions/user'
 import { useDispatch } from 'react-redux'
 import empty from '../../media/icons/empty.svg'
@@ -107,14 +104,14 @@ const UserSales: React.FC = () => {
                       <Table.Cell><strong>Valor aprox</strong></Table.Cell>
                       <Table.Cell><strong></strong></Table.Cell>
                     </Table.Row>
-                    {user.userSales && user.userSales.map((product: any) => {
+                    {user.userSales && user.userSales.map((product: any, index: number) => {
                       return (
-                        <Table.Row>
+                        <Table.Row key={index}>
                           <Table.Cell><img src={product.thumbnail} alt="" /></Table.Cell>
                           <Table.Cell>{product.name}</Table.Cell>
                           <Table.Cell>{product.category[0]}</Table.Cell>
                           <Table.Cell>{product.usability}</Table.Cell>
-                          <Table.Cell>R$ {product.value},00</Table.Cell>
+                          <Table.Cell>R$ {product.value}</Table.Cell>
                           <Table.Cell> <EditModal saleId={product.id} /> </Table.Cell>
                           <Table.Cell><Styled.RemoveButton onClick={() => { handleRemove(product.id) }}>Apagar</Styled.RemoveButton></Table.Cell>
 
