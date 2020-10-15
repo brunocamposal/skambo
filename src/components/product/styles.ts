@@ -60,6 +60,7 @@ export const ProductShow = styled.img`
     cursor: pointer;
     overflow: hidden;
     max-width: 100%;
+    border-radius: 15px;
     
     @media (max-width: 920px) {
         margin-top: 0;
@@ -82,11 +83,15 @@ export const ProductInfoName = styled.h1`
     }
 `
 export const ProductInfoValue = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     width: 70%;
     margin: 0;
-    color: var(--primary);
+    margin-bottom: 10px;
+    padding: 2px 0px 0px 15px;
+    background-image: linear-gradient(to right, #8D70FB, white);
+    color: #fff;
+    border-radius: 15px 0 0 15px;
 `
 export const ProductInfoDesc = styled.p`
     font-size: 14px;

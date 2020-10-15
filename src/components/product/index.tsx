@@ -91,7 +91,7 @@ const Product: React.FC = () => {
           </CardImg>
           <CardInfo>
             <ProductInfoName>{products.name}</ProductInfoName>
-            <ProductInfoValue>R$ {products.value}</ProductInfoValue>
+            <ProductInfoValue> R$ {products.value}</ProductInfoValue>
             <ProductInfoDesc>{products.description}</ProductInfoDesc>
             <ProductInfoDesc>
               <b>CONDIÇÃO: </b>
