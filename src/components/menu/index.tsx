@@ -20,13 +20,14 @@ import {
   StyledIcons,
   StyledUser,
 } from './styles';
+import { Dropdown, Form } from 'semantic-ui-react';
+import Logo from '../../media/img/logotipo.png';
 
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
   const token = useSelector((state: any) => state.token);
 
-  console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {
@@ -94,9 +95,9 @@ const TopBar: React.FC = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
+              <AiOutlineHeart className="favorite" onClick={() => history.push('/favorites')} />
 
-              <AiOutlineMail className="message" onClick={() => history.push('/')} />
+              <AiOutlineMail className="web message" onClick={() => history.push('/')} />
             </StyledIcons>
           </StyledMenuRight>
         ) : (

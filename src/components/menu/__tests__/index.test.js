@@ -7,6 +7,10 @@ import "mutationobserver-shim";
 
 global.MutationObserver = window.MutationObserver;
 
+jest.mock("react-redux", () => ({
+  useSelector: () => jest.fn()
+}))
+
 describe("TopBar", () => {
   it("Should render menu", () => {
     const tree = renderer.create(<TopBar />).toJSON();
