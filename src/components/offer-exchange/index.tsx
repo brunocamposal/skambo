@@ -16,18 +16,21 @@ const OfferExchange = () => {
   const { register, handleSubmit } = useForm<IFormInputs>();
   const [openModal, setOpenModal] = useState(false);
 
-  console.log(userProducts);
-
-  const userId = useSelector(({ session }: any) => session.currentUser.id);
   const token = useSelector(({ session }: any) => session.token);
 
   useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    let user: any;
+    if (typeof currentUser === 'string') {
+      user = JSON.parse(currentUser);
+    }
+
     axios
-      .get(`https://capstone-q2.herokuapp.com/products?userId=${userId}`, {
+      .get(`https://capstone-q2.herokuapp.com/products?userId=${user.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(({ data }) => setUserProduct(data));
-  }, []);
+  }, [openModal]);
 
   const onSubmit = (values: IFormInputs) => {
     setOpenModal(false);

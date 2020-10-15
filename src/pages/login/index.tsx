@@ -35,6 +35,7 @@ const Login: React.FC = () => {
         dispatch(requestLogin(data.accessToken));
         localStorage.setItem('token', data.accessToken);
         history.push('/');
+       
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
@@ -42,6 +43,8 @@ const Login: React.FC = () => {
         }
         return setRequestError('Ops, aconteceu algo de errado!');
       });
+
+
   };
 
   return (

@@ -1,0 +1,369 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Change-Profile Snapshot test Change Profile Snapshot test Render 1`] = `
+<div
+  className="sc-bdnylx leTbsp"
+>
+  <div
+    className="sc-gtssRu huCaOt"
+  >
+    <div
+      className="sc-dlnjPT kcqOwA"
+    >
+      <div
+        className="sc-hKFyIo iOlwro"
+      >
+        <h1>
+          Cadastro
+        </h1>
+      </div>
+      <form
+        className="ui form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="two fields"
+        >
+          <div
+            className="required field"
+          >
+            <label>
+              Nome
+            </label>
+            <input
+              name="firstName"
+              placeholder="Nome"
+              type="text"
+            />
+          </div>
+          <div
+            className="required field"
+          >
+            <label>
+              Sobrenome
+            </label>
+            <input
+              name="lastName"
+              placeholder="Sobrenome"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="two fields"
+        >
+          <div
+            className="required field"
+          >
+            <label>
+              CPF
+            </label>
+            <input
+              name="cpf"
+              placeholder="000.000.000-00"
+              type="text"
+            />
+          </div>
+          <div
+            className="required field"
+          >
+            <label>
+              Telefone
+            </label>
+            <input
+              name="phoneNumber"
+              placeholder="(00) 00000-0000"
+              type="tel"
+            />
+          </div>
+        </div>
+        <div
+          className="two fields"
+        >
+          <div
+            className="required ten wide field"
+          >
+            <label>
+              CEP
+            </label>
+            <input
+              name="cep"
+              onBlur={[Function]}
+              placeholder="Digite seu CEP"
+              type="text"
+            />
+          </div>
+          <div
+            className="required six wide field"
+          >
+            <label>
+              Estado
+            </label>
+            <select
+              name="state"
+            >
+              <optgroup
+                label="Estados"
+              >
+                <option
+                  selected={false}
+                  value="AC"
+                >
+                  Acre
+                </option>
+                <option
+                  selected={false}
+                  value="AL"
+                >
+                  Alagoas
+                </option>
+                <option
+                  selected={false}
+                  value="AP"
+                >
+                  Amapá
+                </option>
+                <option
+                  selected={false}
+                  value="AM"
+                >
+                  Amazonas
+                </option>
+                <option
+                  selected={false}
+                  value="BA"
+                >
+                  Bahia
+                </option>
+                <option
+                  selected={false}
+                  value="CE"
+                >
+                  Ceará
+                </option>
+                <option
+                  selected={false}
+                  value="DF"
+                >
+                  Distrito Federal
+                </option>
+                <option
+                  selected={false}
+                  value="ES"
+                >
+                  Espírito Santo
+                </option>
+                <option
+                  selected={false}
+                  value="GO"
+                >
+                  Goiás
+                </option>
+                <option
+                  selected={false}
+                  value="MA"
+                >
+                  Maranhão
+                </option>
+                <option
+                  selected={false}
+                  value="MT"
+                >
+                  Mato Grosso
+                </option>
+                <option
+                  selected={false}
+                  value="MS"
+                >
+                  Mato Grosso do Sul
+                </option>
+                <option
+                  selected={false}
+                  value="MG"
+                >
+                  Minas Gerais
+                </option>
+                <option
+                  selected={false}
+                  value="PA"
+                >
+                  Pará
+                </option>
+                <option
+                  selected={false}
+                  value="PB"
+                >
+                  Paraíba
+                </option>
+                <option
+                  selected={false}
+                  value="PR"
+                >
+                  Paraná
+                </option>
+                <option
+                  selected={false}
+                  value="PE"
+                >
+                  Pernambuco
+                </option>
+                <option
+                  selected={false}
+                  value="PI"
+                >
+                  Piauí
+                </option>
+                <option
+                  selected={false}
+                  value="RJ"
+                >
+                  Rio de Janeiro
+                </option>
+                <option
+                  selected={false}
+                  value="RN"
+                >
+                  Rio Grande do Norte
+                </option>
+                <option
+                  selected={false}
+                  value="RS"
+                >
+                  Rio Grande do Sul
+                </option>
+                <option
+                  selected={false}
+                  value="RO"
+                >
+                  Rondônia
+                </option>
+                <option
+                  selected={false}
+                  value="RR"
+                >
+                  Roraima
+                </option>
+                <option
+                  selected={false}
+                  value="SC"
+                >
+                  Santa Catarina
+                </option>
+                <option
+                  selected={false}
+                  value="SP"
+                >
+                  São Paulo
+                </option>
+                <option
+                  selected={false}
+                  value="SE"
+                >
+                  Sergipe
+                </option>
+                <option
+                  selected={false}
+                  value="TO"
+                >
+                  Tocantins
+                </option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            Cidade
+          </label>
+          <input
+            defaultValue=""
+            name="city"
+            placeholder="Cidade"
+            type="text"
+          />
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            Bairro
+          </label>
+          <input
+            defaultValue=""
+            name="neighborhood"
+            placeholder="Bairro"
+            type="text"
+          />
+        </div>
+        <div
+          className="two fields"
+        >
+          <div
+            className="required ten wide field"
+          >
+            <label>
+              Rua
+            </label>
+            <input
+              defaultValue=""
+              name="street"
+              placeholder="Rua/Logradouro"
+              type="text"
+            />
+          </div>
+          <div
+            className="required six wide field"
+          >
+            <label>
+              Número
+            </label>
+            <input
+              name="number"
+              placeholder="Número"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <label>
+            Referência
+          </label>
+          <input
+            name="referencePoint"
+            placeholder="Ex: Ao lado do mercado."
+            type="text"
+          />
+        </div>
+        <div
+          className="field"
+        >
+          <label>
+            Complemento
+          </label>
+          <input
+            name="complement"
+            placeholder="Ex: Edifício Miranda - Apt 81"
+            type="text"
+          />
+        </div>
+        <button
+          className="sc-jSFkmK hlxrBG"
+          type="submit"
+        >
+          <i
+            aria-hidden="true"
+            className="checkmark icon"
+            onClick={[Function]}
+          />
+           Salvar Alterações
+        </button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+`;
