@@ -22,8 +22,6 @@ const NewProduct: React.FC = () => {
   const user = useSelector(({ session }: RootState) => session.currentUser);
   const history = useHistory();
 
-
-
   console.log({ user });
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const NewProduct: React.FC = () => {
       description,
       subCategory,
       category,
-      interests,
+      interests: interestArr,
       images: formValue.images,
       thumbnail: formValue.thumbnail,
     };
