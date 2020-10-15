@@ -69,12 +69,6 @@ const TopBar: React.FC = () => {
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    icon="edit"
-                    text="Alterar informações"
-                    onClick={() => history.push('/change-profile')}
-                  />
-
-                  <Dropdown.Item
                     icon="briefcase"
                     text="Meus anúncios"
                     onClick={() => history.push('/my-sales')}

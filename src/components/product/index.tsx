@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import { Loading } from './loading';
 import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa'
 
+import OfferExchange from '../offer-exchange';
 
 const Product: React.FC = () => {
   const history = useHistory();
@@ -64,8 +65,8 @@ const Product: React.FC = () => {
   const actualUrl = `http://localhost:3000${location.pathname}`
   console.log(actualUrl)
   const handleFavorite = () => {
-    history.push("/favorites")
-  }
+    history.push('/favorites');
+  };
 
   return (
     <>
@@ -109,9 +110,7 @@ const Product: React.FC = () => {
                 return <li key={index}>{interest}</li>;
               })}
             </ProductInfoIntr>
-            <InterestButton onClick={() => history.push('/user/interest')}>
-              Tenho Interesse
-            </InterestButton>
+            <OfferExchange />
             <FavButton onClick={handleFavorite}>
               <Icon name="heart" />
               Adicionar aos favoritos
