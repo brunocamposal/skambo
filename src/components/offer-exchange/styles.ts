@@ -39,6 +39,20 @@ export const ButtonCancel = styled.button`
 
 `;
 
+export const ButtonConfirm = styled.button`
+  margin: 20px 20px 20px 0px;
+  float: right;
+  font-weight: 700;
+  color: #fff;
+  background-color: #8D70FB;
+  border-radius: 7px;
+  height: 35px;
+  width: 133px;
+  cursor: pointer;
+  border: none;
+
+`;
+
 export const ProdBox = styled.div`
     border: 1px solid #8080801a;
     box-shadow: 0px 9px 10px -6px #c9c9c9b5;

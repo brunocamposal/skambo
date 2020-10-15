@@ -67,8 +67,8 @@ const TopBar: React.FC = () => {
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    icon="briefcase"
-                    text="Meus anúncios"
+                    icon="user"
+                    text="Meu Perfil"
                     onClick={() => history.push('/my-sales')}
                   />
                   <Dropdown.Item
@@ -90,9 +90,9 @@ const TopBar: React.FC = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
+              <AiOutlineHeart className="favorite" onClick={() => history.push('/favorites')} />
 
-              <AiOutlineMail className="message" onClick={() => history.push('/')} />
+              <AiOutlineMail className="web message" onClick={() => history.push('/')} />
             </StyledIcons>
           </StyledMenuRight>
         ) : (

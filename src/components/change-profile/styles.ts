@@ -52,21 +52,17 @@ export const FormContainer = styled.div`
   .ui.form select {
     height: 38px;
   }
+
+  .ui.card {
+    width: 200px;
+  }
 `;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  height: 70px;
+  margin-top: 40px;
   width: 70%;
-  /* background-color: var(--primary); */
-  border-radius: 7px;
-
-  h1 {
-    /* color: #fff; */
-  }
 
   @media (max-width: 480px) {
     margin-top: 40px;

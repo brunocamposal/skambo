@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Header, Form } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import * as Styled from './styles';
 import { InterestButton } from '../product/styles';
 
@@ -16,6 +17,9 @@ const OfferExchange = () => {
   const { register, handleSubmit } = useForm<IFormInputs>();
   const [openModal, setOpenModal] = useState(false);
 
+  const history = useHistory();
+
+  const userId = useSelector(({ session }: any) => session.currentUser.id);
   const token = useSelector(({ session }: any) => session.token);
 
   useEffect(() => {
@@ -44,9 +48,18 @@ const OfferExchange = () => {
         onClose={() => setOpenModal(false)}
         onOpen={() => setOpenModal(true)}>
         {localStorage.length === 0 ? (
-          <Header as="h2" textAlign="center">
-            Você não está logado
-          </Header>
+          <>
+            <Header as="h2" textAlign="center">
+              Você não está logado
+            </Header>
+            <Styled.ButtonConfirm
+              onClick={() => {
+                setOpenModal(false);
+                history.push('/login');
+              }}>
+              Entrar
+            </Styled.ButtonConfirm>
+          </>
         ) : (
           <>
             <Header as="h2" textAlign="center">
