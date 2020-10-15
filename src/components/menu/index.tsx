@@ -1,4 +1,17 @@
 import React, { useState } from 'react';
+import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
+import { VscSettingsGear } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { Dropdown, Form, Modal } from 'semantic-ui-react';
+import Swal from 'sweetalert2';
+
+import Logo from '../../media/img/logotipo.png';
+import UserDefault from '../../media/img/userDefault.png';
+import { RootState } from '../../redux/reducers';
+import ChangeProfile from '../change-profile';
+import MobileCategories from '../mobile/categories';
 import {
   StyledMenu,
   StyledMenuLeft,
@@ -11,19 +24,6 @@ import {
   StyledIcons,
   StyledUser,
 } from './styles';
-import { Dropdown, Form, Modal } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
-import Logo from '../../media/img/logotipo.png';
-import UserDefault from '../../media/img/userDefault.png';
-import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { VscSettingsGear } from 'react-icons/vsc';
-import Swal from 'sweetalert2';
-import MobileCategories from '../mobile/categories';
-import { RootState } from '../../redux/reducers';
-import { useSelector } from 'react-redux';
-
-import ChangeProfile from '../change-profile';
 
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
@@ -59,15 +59,13 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {token !== '' ? ( // Condicional para quando o usuário estiver logado
+        {localStorage.length !== 0 ? ( // Condicional para quando o usuário estiver logado
           <StyledMenuRight>
             <StyledButton className="web" onClick={() => history.push('/new-product')}>
               Anunciar
             </StyledButton>
 
-
             <StyledIcons>
-
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -94,16 +92,15 @@ const TopBar: React.FC = () => {
                           window.localStorage.clear();
                         }
                       });
-                      history.push('/')
+                      history.push('/');
                     }}
                   />
                 </Dropdown.Menu>
               </Dropdown>
-              
+
               <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
 
               <AiOutlineMail className="message" onClick={() => history.push('/')} />
-
             </StyledIcons>
           </StyledMenuRight>
         ) : (
