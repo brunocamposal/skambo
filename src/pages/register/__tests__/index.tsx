@@ -13,6 +13,11 @@ jest.mock('react-router-dom', () => ({
   Link: () => <a></a>
 }));
 
+jest.mock('react-redux', () => ({
+  __esModule: true,
+  useDispatch: () => jest.fn(),
+}));
+
 describe('Register', () => {
   it("Should render register", () => {
     const tree = renderer

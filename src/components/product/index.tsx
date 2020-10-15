@@ -25,6 +25,7 @@ import Swal from 'sweetalert2';
 import { requestUserInfo } from '../../redux/actions/session';
 import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa'
 
+import OfferExchange from '../offer-exchange';
 
 const Product: React.FC = () => {
   const history = useHistory();
@@ -39,7 +40,9 @@ const Product: React.FC = () => {
     interests: [],
   });
 
-  const { id } = useParams();
+
+  const { id }: any = useParams();
+
   const location = useLocation()
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
@@ -152,9 +155,7 @@ const Product: React.FC = () => {
                 return <li key={index}>{interest}</li>;
               })}
             </ProductInfoIntr>
-            <InterestButton onClick={() => history.push('/user/interest')}>
-              Tenho Interesse
-            </InterestButton>
+            <OfferExchange />
             <FavButton onClick={handleFavorite}>
               <Icon name="heart" />
               Adicionar aos favoritos
