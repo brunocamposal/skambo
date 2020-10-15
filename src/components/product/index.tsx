@@ -41,21 +41,22 @@ const Product: React.FC = () => {
     interests: [],
   });
 
+  const location = useLocation()
+  const token = useSelector(({session}: any) => session.token);
   const { id }: any = useParams();
 
-  const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
-  const url = `https://capstone-q2.herokuapp.com/products/${id}`;
-  const token = useSelector(({ session }: RootState) => session.token);
   const user = useSelector(({ session }: RootState) => session.currentUser);
   const userFavorites = useSelector(({ session }: RootState) => session.currentUser.favorites);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
 
-  console.log(id)
+ 
 
   useEffect(() => {
+    const url = `https://capstone-q2.herokuapp.com/products/${id}`;
+
     axios
       .get(url, {
         headers: {
@@ -64,7 +65,6 @@ const Product: React.FC = () => {
       })
       .then((res) => {
         const product = res.data;
-        console.log(product)
         setProducts(product);
         setLoading(false);
         setImage(product.thumbnail);
@@ -74,10 +74,14 @@ const Product: React.FC = () => {
 
   const favoritesJSON: any = userFavorites != undefined && [...userFavorites, products];
 
+  console.log(favoritesJSON);
+
   const actualUrl = `http://localhost:3000${location.pathname}`;
-  console.log(actualUrl);
+
   const handleFavorite = () => {
     const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
+
+    console.log(url)
 
     const alreadyAdd = Object.values(userFavorites).some(
       (favorite: any) => favorite.id === products.id
