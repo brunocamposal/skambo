@@ -114,7 +114,7 @@ const UserSales: React.FC = () => {
                 <div>0 Trocas</div>
               </section>
               <Styled.ProfileButton >Meus anúncios</Styled.ProfileButton>
-              <Styled.SettingsButton>Configurações</Styled.SettingsButton>
+              <Styled.SettingsButton>Alterar informações</Styled.SettingsButton>
             </Styled.UserInfo>
             {user?.userSales?.length > 0 ?
               <Styled.TableContainer>
