@@ -96,9 +96,9 @@ const TopBar: React.FC = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
+              <AiOutlineHeart className="favorite" onClick={() => history.push('/favorites')} />
 
-              <AiOutlineMail className="message" onClick={() => history.push('/')} />
+              <AiOutlineMail className="web message" onClick={() => history.push('/')} />
             </StyledIcons>
           </StyledMenuRight>
         ) : (
