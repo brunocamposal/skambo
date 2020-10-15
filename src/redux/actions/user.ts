@@ -1,4 +1,4 @@
-import { USER_SALES, REMOVE_SALE, FETCH_SUCCESS } from './types'
+import { USER_SALES, REMOVE_SALE, FETCH_SUCCESS, CHANGE_PRODUCT_INFO } from './types'
 import axios from 'axios'
 
 export const userSales = () => ({
@@ -34,3 +34,9 @@ export const fetchUserSales = (userId: string, token: string) => (dispatch: any)
     })
     .catch(err => console.log(err))
 }
+
+export const changeProductInfo = (saleId: any, values: any) => ({
+  type: CHANGE_PRODUCT_INFO,
+  saleId,
+  values
+})

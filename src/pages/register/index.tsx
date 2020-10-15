@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions/session';
+import { requestUserInfo  } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
 
 import FormField from '../../components/form-field';
@@ -32,7 +32,7 @@ const Register: React.FC = () => {
       .post(' https://capstone-q2.herokuapp.com/register', data)
       .then((res) => {
         setErrorMessage('');
-        dispatch(login(res.data.accessToken));
+        dispatch(requestUserInfo(res.data.accessToken));
         localStorage.setItem('token', res.data.accessToken);
         history.push('/');
         Swal.fire({
