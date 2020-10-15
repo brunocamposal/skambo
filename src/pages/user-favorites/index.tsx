@@ -79,7 +79,7 @@ const UserFavorites: React.FC = () => {
                     />
                     <div>
                       <Popup content={product.name} trigger={<strong>{product.name}</strong>} />
-                      <p>{product.category.join('/ ')}</p>
+                      <p>{`${product.category} / ${product.subCategory}`}</p>
                     </div>
                   </Styled.Card>
                   <StyledHeart>
