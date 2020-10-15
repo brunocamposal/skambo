@@ -1,4 +1,4 @@
-import { LOGIN } from '../actions/types';
+import { USER_INFO } from '../actions/types';
 
 interface ActionTypes {
   type: string;
@@ -15,9 +15,8 @@ const defaultState = {
 
 const session = (state = defaultState, action: ActionTypes): any => {
   switch (action.type) {
-    case LOGIN:
-      localStorage.setItem('token', action.token);
-      return { ...state, token: action.token, user: action.currentUser };
+    case USER_INFO:
+      return { ...state, token: action.token, currentUser: action.currentUser };
     default:
       return state;
   }
