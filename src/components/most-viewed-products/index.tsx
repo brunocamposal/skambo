@@ -29,6 +29,7 @@ const MostViewedProducts = () => {
           return parseInt(b.views) - parseInt(a.views)
         })
         setProducts(sortedProducts)
+        console.log(sortedProducts)
       })
       .catch(({ response }) => {
         if (response?.status === 401 && session.token != "") {

@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { VscSettingsGear } from 'react-icons/vsc';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Dropdown, Form, Modal } from 'semantic-ui-react';
+import { Dropdown, Form } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 
 import Logo from '../../media/img/logotipo.png';
 import UserDefault from '../../media/img/userDefault.png';
-import { RootState } from '../../redux/reducers';
-import ChangeProfile from '../change-profile';
 import MobileCategories from '../mobile/categories';
 import {
   StyledMenu,
@@ -30,7 +26,7 @@ const TopBar: React.FC = () => {
   const history = useHistory();
   const token = useSelector((state: any) => state.token);
 
-  // console.log(token);
+  console.log(token);
   const trigger = <StyledUser src={UserDefault} alt="user" />;
 
   const handleSubmit = () => {

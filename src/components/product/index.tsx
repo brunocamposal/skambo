@@ -18,7 +18,6 @@ import {
 import { Icon } from 'semantic-ui-react';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { Loading } from './loading';
 import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa'
@@ -38,10 +37,12 @@ const Product: React.FC = () => {
 
   const { id } = useParams();
   const location = useLocation()
-  const url = `https://capstone-q2.herokuapp.com/products/`;
+  const url = `https://capstone-q2.herokuapp.com/products/${id}`;
   const token = useSelector((session: any) => session.token);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+
+  console.log(id)
 
   useEffect(() => {
     axios
@@ -51,8 +52,8 @@ const Product: React.FC = () => {
         },
       })
       .then((res) => {
-        const product = res.data[id - 1];
-        console.log(res.data)
+        const product = res.data;
+        console.log(product)
         setProducts(product);
         setLoading(false);
 
