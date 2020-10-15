@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Image, Header } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 export const Container = styled.div`
 

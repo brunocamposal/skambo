@@ -86,8 +86,8 @@ const UserSearch: React.FC = () => {
               return (
                 <Card
                   key={key}
-                  title="teste"
-                  category={product.category.join('/ ')}
+                  title={product.name}
+                  category={`${product.category} / ${product.subCategory}`}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />

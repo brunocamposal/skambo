@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {
   StyledMenu,
   StyledMenuLeft,
@@ -12,24 +11,23 @@ import {
   StyledIcons,
   StyledUser,
 } from './styles';
-import { Dropdown, Form, Modal } from 'semantic-ui-react';
+import { Dropdown, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Logo from '../../media/img/logotipo.png';
 import UserDefault from '../../media/img/userDefault.png';
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import MobileCategories from '../mobile/categories';
-import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
-
-import ChangeProfile from '../change-profile';
 
 const TopBar: React.FC = () => {
   const [value, setValue] = useState('');
   const history = useHistory();
-  const token = useSelector((state: any) => state.token);
-
-  const trigger = <StyledUser src={UserDefault} alt="user" />;
+  const session = useSelector((state: any) => state.session)
+  const token = session.token
+  const userImage = session.currentUser.userImage
+  const user = session.currentUser.name
+  const trigger = <StyledUser src={userImage !== undefined ? userImage : UserDefault} alt="user" />;
 
   const handleSubmit = () => {
     history.push(`/user-search/${value}`);
@@ -57,7 +55,7 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {localStorage.length !== 0 ? ( // Condicional para quando o usuário estiver logado
+        {token !== '' ? (
           <StyledMenuRight>
             <StyledButton className="web" onClick={() => history.push('/new-product')}>
               Anunciar
@@ -66,12 +64,6 @@ const TopBar: React.FC = () => {
             <StyledIcons>
               <Dropdown trigger={trigger} icon={null}>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    icon="edit"
-                    text="Alterar informações"
-                    onClick={() => history.push('/change-profile')}
-                  />
-
                   <Dropdown.Item
                     icon="briefcase"
                     text="Meus anúncios"
@@ -82,7 +74,7 @@ const TopBar: React.FC = () => {
                     text="Sair"
                     onClick={() => {
                       Swal.fire({
-                        title: `Volte logo!`,
+                        title: `Volte logo ${user}!`,
                         confirmButtonText: `Sair`,
                       }).then((result) => {
                         if (result.isConfirmed) {
@@ -96,9 +88,9 @@ const TopBar: React.FC = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <AiOutlineHeart className="web favorite" onClick={() => history.push('/favorites')} />
+              <AiOutlineHeart className="favorite" onClick={() => history.push('/favorites')} />
 
-              <AiOutlineMail className="message" onClick={() => history.push('/')} />
+              <AiOutlineMail className="web message" onClick={() => history.push('/')} />
             </StyledIcons>
           </StyledMenuRight>
         ) : (
