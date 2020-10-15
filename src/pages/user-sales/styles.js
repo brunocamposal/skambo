@@ -22,6 +22,11 @@ export const UserInfo = styled.div`
   flex-direction: column;
   align-items: center;
   align-self: flex-start;
+
+  position: relative;
+    top: 16px;
+    left: -139px;
+
   img {
     width: 124px;
     height: 118px;
@@ -36,6 +41,9 @@ export const UserInfo = styled.div`
   section {
     margin:12px 0 15px 0;
     font-size:13px;
+  }
+  @media (max-width:1240px) {
+    position: static;
   }
 `;
 export const ProfileButton = styled.button`
@@ -103,15 +111,15 @@ export const CardWrapper = styled.div`
 `;
 
 export const Empty = styled.div`
-
-  padding-top: 5%;
+    width:100%;
+    padding-top: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
   
   img {
     margin-top:20px;
-    width: 65%;
+    width: 100%;
     height: 65%;
   }
 `;
@@ -126,7 +134,6 @@ export const TableContainer = styled.div`
 `;
 export const Table = styled(SemanticTable)`    
  border:none !important;
- width:65% !important;
  margin-left: 20px!important;
    img {
      width:50px;
