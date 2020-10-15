@@ -1,4 +1,4 @@
-import { LOGIN } from '../actions/types';
+import { USER_INFO } from '../actions/types';
 
 interface ActionTypes {
   type: string;
@@ -15,7 +15,7 @@ const defaultState = {
 
 const session = (state = defaultState, action: ActionTypes) => {
   switch (action.type) {
-    case LOGIN:
+    case USER_INFO:
       return { ...state, token: action.token, currentUser: action.currentUser };
     default:
       return state;

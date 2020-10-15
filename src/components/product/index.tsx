@@ -21,7 +21,7 @@ import { RootState } from '../../redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from './loading';
 import Swal from 'sweetalert2';
-import { requestLogin } from '../../redux/actions/session';
+import { requestUserInfo } from '../../redux/actions/session';
 
 
 const Product: React.FC = () => {
@@ -91,7 +91,6 @@ const Product: React.FC = () => {
           }
         )
         .then(() => {
-          dispatch(requestLogin(token));
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -99,6 +98,7 @@ const Product: React.FC = () => {
             showConfirmButton: false,
             timer: 1300,
           });
+          dispatch(requestUserInfo(token));
         })
         .catch((err) => console.log(err));
     }
