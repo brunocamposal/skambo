@@ -5,7 +5,7 @@ export const StyledMenu = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 85px;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 0;
   display: flex;

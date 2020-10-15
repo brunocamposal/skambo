@@ -405,7 +405,11 @@ Array [
   width: 100%;
   max-width: 1200px;
   height: 85px;
+<<<<<<< HEAD
   position: fixed;
+=======
+  position: absolute;
+>>>>>>> Dev
   z-index: 1;
   top: 0;
   display: -webkit-box;
