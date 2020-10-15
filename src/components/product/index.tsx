@@ -13,19 +13,24 @@ import {
   ProductInfoIntr,
   InterestButton,
   FavButton,
+  SharePoint
 } from './styles';
 import { Icon } from 'semantic-ui-react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { RootState } from '../../redux/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from './loading';
+import Swal from 'sweetalert2';
+import { requestUserInfo } from '../../redux/actions/session';
+import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa'
 
 import OfferExchange from '../offer-exchange';
 
 const Product: React.FC = () => {
   const history = useHistory();
   const [products, setProducts] = useState({
+    id: '',
     name: '',
     description: '',
     usability: '',
@@ -35,11 +40,17 @@ const Product: React.FC = () => {
     interests: [],
   });
 
+
   const { id }: any = useParams();
+
+  const location = useLocation()
   const url = `https://capstone-q2.herokuapp.com/products/`;
-  const token = useSelector((session: any) => session.token);
+  const token = useSelector(({ session }: RootState) => session.token);
+  const user = useSelector(({ session }: RootState) => session.currentUser);
+  const userFavorites = useSelector(({ session }: RootState) => session.currentUser.favorites);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -50,16 +61,56 @@ const Product: React.FC = () => {
       })
       .then((res) => {
         const product = res.data[id - 1];
+        console.log(res.data)
         setProducts(product);
         setLoading(false);
-
         setImage(product.thumbnail);
       })
       .catch((err) => console.log(err));
-  }, [setProducts]);
+  }, []);
 
+  const favoritesJSON: any = [...userFavorites, products];
+
+  const actualUrl = `http://localhost:3000${location.pathname}`
+  console.log(actualUrl)
   const handleFavorite = () => {
-    history.push('/favorites');
+    const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
+
+    const alreadyAdd = Object.values(userFavorites).some(
+      (favorite: any) => favorite.id === products.id
+    );
+
+    if (alreadyAdd) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Produto já adicionado aos favoritos!',
+        showConfirmButton: false,
+        timer: 1300,
+      });
+    } else {
+      axios
+        .patch(
+          url,
+          { favorites: favoritesJSON },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Produto adicionado aos favoritos!',
+            showConfirmButton: false,
+            timer: 1300,
+          });
+          dispatch(requestUserInfo(token));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -109,6 +160,21 @@ const Product: React.FC = () => {
               <Icon name="heart" />
               Adicionar aos favoritos
             </FavButton>
+
+            <SharePoint>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${actualUrl}`} target='_blank' rel='noopener noreferrer'>
+                <FaFacebook />
+              </a>
+              
+              <a href={`https://twitter.com/intent/tweet?url=${actualUrl}&text=${products.name}`} target='_blank' rel='noopener noreferrer'>
+                <FaTwitter />
+              </a>
+                          
+              <a href={`https://api.whatsapp.com/send?text=${products.name}-${actualUrl}`} target='_blank' rel='noopener noreferrer'>
+                <FaWhatsapp />
+              </a>
+            </SharePoint>
+
           </CardInfo>
         </ProductCard>
       )}
