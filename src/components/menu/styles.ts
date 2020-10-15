@@ -48,7 +48,6 @@ export const StyledMenuRight = styled.div`
   font-size: 32px;
   display: flex;
   justify-content: flex-end;
-  margin-right: 50px;
 
   .favorite {
       width: 30px;
@@ -122,9 +121,6 @@ export const StyledSearch = styled(Input)`
     color: var(--primary-dark) !important;
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;
-  }
-  @media (max-width: 700px) {
-    width: 95%;
   }
   @media (max-width: 480px) {
     width: 90%;

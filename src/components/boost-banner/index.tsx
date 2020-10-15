@@ -13,6 +13,7 @@ const BoostBanner = ({ image, textHeader, subheader, info }: BoostBanner) => {
   const infos = info.split('-');
   const headInfo = infos.shift();
 
+  console.log(infos)
   return (
     <MainBanner>
       <Infos>

@@ -18,13 +18,15 @@ const Banner = () => {
     
     return (
         <BannerContainer>
-            <Slider {...settings}>
-                {covers && covers.map(({ title, imgUrl }, index) => {
-                    return (
-                        <CoverBanner key={index} alt={title} src={imgUrl} />
-                    )
-                })}
-            </Slider>
+            <div>
+                <Slider {...settings}>
+                    {covers && covers.map(({ title, imgUrl }, index) => {
+                        return (
+                            <CoverBanner key={index} alt={title} src={imgUrl} />
+                        )
+                    })}
+                </Slider>
+            </div>            
         </BannerContainer>
     )
 }
