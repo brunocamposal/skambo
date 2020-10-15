@@ -35,6 +35,7 @@ const Login: React.FC = () => {
         dispatch(requestUserInfo(data.accessToken));
         localStorage.setItem('token', data.accessToken);
         history.push('/');
+        
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
@@ -45,7 +46,7 @@ const Login: React.FC = () => {
 
 
   };
-
+  
   return (
     <>
       <FormContainer

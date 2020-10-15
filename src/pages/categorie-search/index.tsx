@@ -55,13 +55,7 @@ const CategorieSearch: React.FC = () => {
 
   useEffect(() => {
     const filterRes = productsList.filter(({ category }) => {
-      const arrCategory = category.map((value: any) => value.toLocaleLowerCase());
-
-      for (let i = 0; i <= arrCategory.length; i++) {
-        if (arrCategory.includes(String(categoryProducts))) {
           return category;
-        }
-      }
     });
 
     if (filterRes.length === 0) {
@@ -80,7 +74,7 @@ const CategorieSearch: React.FC = () => {
   };
 
   const subcategorias = filterCategory.map((product: any, key) => {
-    return { key, text: product.category[1], value: product.category[1] };
+    return { key, text: product.subCategory, value: product.subCategory };
   });
 
   const goProductPage = (id: string) => {
@@ -113,7 +107,7 @@ const CategorieSearch: React.FC = () => {
                   <Card
                     key={key}
                     title={product.name}
-                    category={product.category.join('/ ')}
+                    category={`${product.category} / ${product.subCategory}`}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
                   />
@@ -124,7 +118,7 @@ const CategorieSearch: React.FC = () => {
                   <Card
                     key={key}
                     title={product.name}
-                    category={product.category.join('/ ')}
+                    category={`${product.category} / ${product.subCategory}`}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
                   />

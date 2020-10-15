@@ -30,7 +30,7 @@ const OfferExchange = () => {
     }
 
     axios
-      .get(`https://capstone-q2.herokuapp.com/products?userId=${user.id}`, {
+      .get(`https://capstone-q2.herokuapp.com/products?userId=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(({ data }) => setUserProduct(data));

@@ -67,7 +67,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join('/ ')}
+                  category={`${product.category} / ${product.subCategory}`}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />
@@ -83,7 +83,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join('/ ')}
+                  category={`${product.category} / ${product.subCategory}`}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />
