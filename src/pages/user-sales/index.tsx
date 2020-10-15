@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import Lootie from 'react-lottie';
 import animationData from '../../media/animations/10800-retail-exchange.json';
 import { Table } from 'semantic-ui-react';
+
 import { Container as LayoutContainer } from '../../components/layout/styles';
 import Menu from '../../components/menu';
 import EditModal from '../../components/edit-modal';
