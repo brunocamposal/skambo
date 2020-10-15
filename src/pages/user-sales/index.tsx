@@ -36,6 +36,7 @@ const UserSales: React.FC = () => {
   const [userInfo, setUserInfo]: any = useState()
   console.log(userInfo?.name)
   const decoded: { sub: string } = jwt_decode(session.token)
+  console.log(session.token);
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -112,7 +113,7 @@ const UserSales: React.FC = () => {
                 <div>Curitiba/PR</div>
                 <div>0 Trocas</div>
               </section>
-              <Styled.ProfileButton >Meu perfil</Styled.ProfileButton>
+              <Styled.ProfileButton >Meus anúncios</Styled.ProfileButton>
               <Styled.SettingsButton>Configurações</Styled.SettingsButton>
             </Styled.UserInfo>
             {user?.userSales?.length > 0 ?
@@ -132,7 +133,7 @@ const UserSales: React.FC = () => {
                         <Table.Row>
                           <Table.Cell><img src={product.thumbnail} alt="" /></Table.Cell>
                           <Table.Cell>{product.name}</Table.Cell>
-                          <Table.Cell>{product.category[0]}</Table.Cell>
+                          <Table.Cell>{product.category}</Table.Cell>
                           <Table.Cell>{product.usability}</Table.Cell>
                           <Table.Cell>R$ {product.value},00</Table.Cell>
                           <Table.Cell> <EditModal saleId={product.id} /> </Table.Cell>

@@ -54,11 +54,11 @@ export const ProfileButton = styled.button`
     height: 34px;
     color: white;
     font-weight: 700;
-    font-size:13px;    /* margin-top:35px; */
+    font-size:13px;
     &:hover {
       box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.75);
       transition:background-color 0.3s;
-      background-color: var(--primary-dark);
+      background-color: #7252f2;
     }
 `;
 
