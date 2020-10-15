@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Table as SemanticTable } from 'semantic-ui-react'
 
 export const Container = styled.div`
-  margin-top: 135px;
+  margin-top:10%;
   margin-left: 50px;
   display: flex;
   flex-direction:row;
@@ -10,8 +10,15 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content:center;
   @media(max-width: 601px ) {
-    margin-top: 30px;
+    margin-top: 60px;
     margin-left:0;
+
+  }
+  @media(max-width:1200px) {
+    margin-top:10%;
+    align-content: center;
+    flex-direction: column;
+    text-align: -webkit-center;
   }
 `;
 
@@ -21,7 +28,8 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: flex-start;
+  align-self: center;
+
 
   position: relative;
     top: 16px;
@@ -45,6 +53,9 @@ export const UserInfo = styled.div`
   @media (max-width:1240px) {
     position: static;
   }
+ @media(max-width:750px) {
+    margin-top:8%;
+  } 
 `;
 export const ProfileButton = styled.button`
     background: var(--primary);
@@ -116,9 +127,18 @@ export const Empty = styled.div`
   
   img {
     margin-top:20px;
-    width: 100%;
+    width: 60%;
     height: 65%;
+    
   }
+@media(max-width:700px) {
+  img {
+    width:100%;
+  }
+    h2 {
+      font-size: 19px;
+    }
+    }
 `;
 
 export const LoadingContainer = styled.div`
