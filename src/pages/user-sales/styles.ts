@@ -22,6 +22,11 @@ export const UserInfo = styled.div`
   flex-direction: column;
   align-items: center;
   align-self: flex-start;
+
+  position: relative;
+    top: 16px;
+    left: -139px;
+
   img {
     width: 124px;
     height: 118px;
@@ -37,6 +42,9 @@ export const UserInfo = styled.div`
     margin:12px 0 15px 0;
     font-size:13px;
   }
+  @media (max-width:1240px) {
+    position: static;
+  }
 `;
 export const ProfileButton = styled.button`
     background: var(--primary);
@@ -46,11 +54,11 @@ export const ProfileButton = styled.button`
     height: 34px;
     color: white;
     font-weight: 700;
-    font-size:13px;    /* margin-top:35px; */
+    font-size:13px;
     &:hover {
       box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.75);
       transition:background-color 0.3s;
-      background-color: var(--primary-dark);
+      background-color: #7252f2;
     }
 `;
 
@@ -64,9 +72,6 @@ color:#000;
 
     }
 `;
-
-
-
 export const ButtonsWrapper = styled.div`
     display:flex;
     width: 100%;
@@ -103,15 +108,15 @@ export const CardWrapper = styled.div`
 `;
 
 export const Empty = styled.div`
-
-  padding-top: 5%;
+    width: 70%;
+    padding-top: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
   
   img {
     margin-top:20px;
-    width: 65%;
+    width: 100%;
     height: 65%;
   }
 `;
@@ -126,7 +131,6 @@ export const TableContainer = styled.div`
 `;
 export const Table = styled(SemanticTable)`    
  border:none !important;
- width:65% !important;
  margin-left: 20px!important;
    img {
      width:50px;
