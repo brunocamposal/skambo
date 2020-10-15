@@ -42,8 +42,6 @@ const Product: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
 
-  console.log(id)
-
   useEffect(() => {
     axios
       .get(url, {
@@ -53,7 +51,6 @@ const Product: React.FC = () => {
       })
       .then((res) => {
         const product = res.data;
-        console.log(product)
         setProducts(product);
         setLoading(false);
 

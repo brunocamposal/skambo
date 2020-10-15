@@ -29,7 +29,6 @@ const MostViewedProducts = () => {
           return parseInt(b.views) - parseInt(a.views)
         })
         setProducts(sortedProducts)
-        console.log(sortedProducts)
       })
       .catch(({ response }) => {
         if (response?.status === 401 && session.token != "") {
@@ -80,8 +79,6 @@ const MostViewedProducts = () => {
     ],
   };
 
-  
-
   const goProductPage = (id: string) => {
     {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
   }
@@ -100,7 +97,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join("/ ")}
+                  category={product.category}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />
@@ -116,7 +113,7 @@ const MostViewedProducts = () => {
                 <Card
                   key={key}
                   title={product.name}
-                  category={product.category.join("/ ")}
+                  category={product.category}
                   imgUrl={product.thumbnail}
                   onClick={() => goProductPage(product.id)}
                 />

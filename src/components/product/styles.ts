@@ -82,19 +82,29 @@ export const ProductInfoName = styled.h1`
     }
 `
 export const ProductInfoValue = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     width: 70%;
     margin: 0;
-    color: var(--primary);
+    margin-bottom: 10px;
+    padding: 2px 0px 0px 15px;
+    background-image: linear-gradient(to right, #8D70FB, white);
+    color: #fff;
+    border-radius: 15px 0 0 15px;
 `
 export const ProductInfoDesc = styled.p`
     font-size: 14px;
-    width: 70%;
+    width: 100%;
+    padding-left: 30%;
+    border-top: 1px solid lightgrey;
+    border-radius: 5px;
 `
 export const ProductInfoIntr = styled.p`
     font-size: 14px;
-    width: 70%;
+    width: 100%;
+    padding-left: 30%;
+    border-top: 1px solid lightgrey;
+    border-radius: 5px;
 `
 export const InterestButton = styled(StyledButton)`
     width: 300px;
