@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from 'semantic-ui-react';
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   width: 950px;
 
   h4 {
-      text-align: center;
+    text-align: center;
   }
 
   @media (max-width: 480px) {
@@ -26,5 +27,32 @@ export const ResultSearch = styled.div`
 
   @media (max-width: 480px) {
     justify-content: start;
+  }
+`;
+
+export const CardContainer = styled.div`
+  position: relative;
+`;
+
+export const StyledHeart = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  color: #d13a1e;
+  font-size: 25px;
+  cursor: pointer;
+
+  .iconDisfavor{
+    display: none;
+  }
+
+  &:hover {
+    .iconFavored {
+      display: none;
+    }
+
+    .iconDisfavor {
+        display: block;
+    }
   }
 `;

@@ -18,13 +18,16 @@ import { Icon } from 'semantic-ui-react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { RootState } from '../../redux/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from './loading';
 import Swal from 'sweetalert2';
+import { requestLogin } from '../../redux/actions/session';
+
 
 const Product: React.FC = () => {
   const history = useHistory();
   const [products, setProducts] = useState({
+    id: '',
     name: '',
     description: '',
     usability: '',
@@ -38,10 +41,10 @@ const Product: React.FC = () => {
   const url = `https://capstone-q2.herokuapp.com/products/`;
   const token = useSelector(({ session }: RootState) => session.token);
   const user = useSelector(({ session }: RootState) => session.currentUser);
+  const userFavorites = useSelector(({ session }: RootState) => session.currentUser.favorites);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
-
-  console.log(user.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -57,28 +60,48 @@ const Product: React.FC = () => {
         setImage(product.thumbnail);
       })
       .catch((err) => console.log(err));
-  }, [setProducts]);
+  }, []);
 
-  const favoritesJSON = { favorites: products };
+  const favoritesJSON: any = [...userFavorites, products];
 
   const handleFavorite = () => {
     const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
-    axios
-      .patch(url, favoritesJSON, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(() => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Produto adicionado aos favoritos!',
-          showConfirmButton: false,
-          timer: 1300,
-        });
-      })
-      .catch((err) => console.log(err));
+
+    const alreadyAdd = Object.values(userFavorites).some(
+      (favorite: any) => favorite.id === products.id
+    );
+
+    if (alreadyAdd) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Produto já adicionado aos favoritos!',
+        showConfirmButton: false,
+        timer: 1300,
+      });
+    } else {
+      axios
+        .patch(
+          url,
+          { favorites: favoritesJSON },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          dispatch(requestLogin(token));
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Produto adicionado aos favoritos!',
+            showConfirmButton: false,
+            timer: 1300,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

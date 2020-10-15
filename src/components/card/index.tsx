@@ -6,11 +6,12 @@ import { Popup } from 'semantic-ui-react';
 interface PropTypes {
   title: string;
   category: string;
-  imgUrl: string;
+  imgUrl?: string;
   onClick?: () => void
+  children?: any;
 }
 
-const Card = ({ title, category, imgUrl, onClick }: PropTypes) => {
+const Card = ({ title, category, imgUrl, onClick, children }: PropTypes) => {
   return (
     <motion.div
       whileHover={{
@@ -22,7 +23,7 @@ const Card = ({ title, category, imgUrl, onClick }: PropTypes) => {
         <img src={imgUrl} alt="card" />
         <div>
           <Popup content={title} trigger={<strong>{title}</strong>} />
-          <p>{category}</p>
+          <p>{category}</p>   
         </div>
       </Styled.Card>
     </motion.div>

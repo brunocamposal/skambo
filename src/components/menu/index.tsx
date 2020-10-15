@@ -16,8 +16,6 @@ import { useHistory } from 'react-router-dom';
 import Logo from '../../media/img/logotipo.png';
 import UserDefault from '../../media/img/userDefault.png';
 import { AiOutlineHeart, AiOutlineMail } from 'react-icons/ai';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { VscSettingsGear } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
 import MobileCategories from '../mobile/categories';
 import { RootState } from '../../redux/reducers';

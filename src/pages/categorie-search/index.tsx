@@ -16,10 +16,6 @@ interface ProductsProps {
   search: string;
 }
 
-interface stateProps {
-  session: { token: string };
-}
-
 const CategorieSearch: React.FC = () => {
   const [productsList, setProductsList] = useState<ProductsProps[]>([]);
   const [filterCategory, setFilterCategory] = useState<ProductsProps[]>([]);
@@ -30,7 +26,6 @@ const CategorieSearch: React.FC = () => {
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { name } = useParams<ProductsProps>();
   const history = useHistory();
-
 
   const categoryProducts = name;
 
@@ -89,8 +84,10 @@ const CategorieSearch: React.FC = () => {
   });
 
   const goProductPage = (id: string) => {
-    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
-  }
+    {
+      id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`);
+    }
+  };
 
   return (
     <div>
@@ -115,7 +112,7 @@ const CategorieSearch: React.FC = () => {
                 return (
                   <Card
                     key={key}
-                    title="teste"
+                    title={product.name}
                     category={product.category.join('/ ')}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
@@ -126,7 +123,7 @@ const CategorieSearch: React.FC = () => {
                 return (
                   <Card
                     key={key}
-                    title="teste"
+                    title={product.name}
                     category={product.category.join('/ ')}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
