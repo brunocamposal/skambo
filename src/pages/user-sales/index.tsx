@@ -31,6 +31,7 @@ interface productProps {
   thumbnail: string;
 }
 const UserSales: React.FC = () => {
+  const [active, setActive] = useState('mySales')
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
@@ -72,94 +73,125 @@ const UserSales: React.FC = () => {
     <LayoutContainer>
       <Menu></Menu>
       <Styled.Container>
-        {Object.keys(user).length === 0 ? (
-          <Styled.LoadingContainer>
-            <Lootie options={defaultOptions} height={200} width={200} />
-          </Styled.LoadingContainer>
-        ) : (
-          <>
-            <Styled.UserInfo>
-              {userInfo?.userImage !== undefined ?
-                <img src={userInfo.userImage} />
-                :
-                <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
+        {
+          active === 'mySales'
+            ?
+            Object.keys(user).length === 0 ? (
+              <Styled.LoadingContainer>
+                <Lootie options={defaultOptions} height={200} width={200} />
+              </Styled.LoadingContainer>
+            ) : (
+                <>
+                  <Styled.UserInfo>
+                    {userInfo?.userImage !== undefined ?
+                      <img src={userInfo.userImage} />
+                      :
+                      <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
 
-              }
-              <strong>
-                {userInfo?.name !== undefined ?
-                  userInfo.name
-                  :
-                  "Skambista"
-                }
-              </strong>
-              <section>
-                <div>Curitiba/PR</div>
-                <div>0 Trocas</div>
-              </section>
-              <Styled.ProfileButton>Meus Anúncios</Styled.ProfileButton>
-              <Styled.SettingsButton onClick={() => history.push('/change-profile')}>
-              Alterar informações
-              </Styled.SettingsButton>
-            </Styled.UserInfo>
-            {user?.userSales?.length > 0 ? (
-              <Styled.TableContainer>
-                <Styled.Table unstackable>
-                  <Table.Body>
-                    <Table.Row>
-                      <Table.Cell></Table.Cell>
-                      <Table.Cell>
-                        <strong>Nome</strong>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <strong>Categoria</strong>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <strong>Condição</strong>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <strong>Valor aprox</strong>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <strong></strong>
-                      </Table.Cell>
-                    </Table.Row>
-                    {user.userSales &&
-                      user.userSales.map((product: any) => {
-                        return (
+                    }
+                    <strong>
+                      {userInfo?.name !== undefined ?
+                        userInfo.name
+                        :
+                        "Skambista"
+                      }
+                    </strong>
+                    <section>
+                      <div>Curitiba/PR</div>
+                      <div>0 Trocas</div>
+                    </section>
+                    <Styled.ProfileButton onClick={() => setActive('mySales')}>Meus Anúncios</Styled.ProfileButton>
+                    <Styled.SettingsButton onClick={() => setActive('settings')}>
+                      Alterar informações
+                  </Styled.SettingsButton>
+                  </Styled.UserInfo>
+                  {user?.userSales?.length > 0 ? (
+                    <Styled.TableContainer>
+                      <Styled.Table unstackable>
+                        <Table.Body>
                           <Table.Row>
+                            <Table.Cell></Table.Cell>
                             <Table.Cell>
-                              <img src={product.thumbnail} alt="" />
-                            </Table.Cell>
-                            <Table.Cell>{product.name}</Table.Cell>
-                            <Table.Cell>{product.category[0]}</Table.Cell>
-                            <Table.Cell>{product.usability}</Table.Cell>
-                            <Table.Cell>R$ {product.value},00</Table.Cell>
-                            <Table.Cell>
-                              {' '}
-                              <EditModal saleId={product.id} />{' '}
+                              <strong>Nome</strong>
                             </Table.Cell>
                             <Table.Cell>
-                              <Styled.RemoveButton
-                                onClick={() => {
-                                  handleRemove(product.id);
-                                }}>
-                                Apagar
-                              </Styled.RemoveButton>
+                              <strong>Categoria</strong>
+                            </Table.Cell>
+                            <Table.Cell>
+                              <strong>Condição</strong>
+                            </Table.Cell>
+                            <Table.Cell>
+                              <strong>Valor aprox</strong>
+                            </Table.Cell>
+                            <Table.Cell>
+                              <strong></strong>
                             </Table.Cell>
                           </Table.Row>
-                        );
-                      })}
-                  </Table.Body>
-                </Styled.Table>
-              </Styled.TableContainer>
-            ) : (
-              <Styled.Empty>
-                <h2>Você ainda não tem nenhum anúncio!</h2>
-                <img src={empty} />
-              </Styled.Empty>
-            )}
-          </>
-        )}
+                          {user.userSales &&
+                            user.userSales.map((product: any) => {
+                              return (
+                                <Table.Row>
+                                  <Table.Cell>
+                                    <img src={product.thumbnail} alt="" />
+                                  </Table.Cell>
+                                  <Table.Cell>{product.name}</Table.Cell>
+                                  <Table.Cell>{product.category[0]}</Table.Cell>
+                                  <Table.Cell>{product.usability}</Table.Cell>
+                                  <Table.Cell>R$ {product.value},00</Table.Cell>
+                                  <Table.Cell>
+                                    {' '}
+                                    <EditModal saleId={product.id} />{' '}
+                                  </Table.Cell>
+                                  <Table.Cell>
+                                    <Styled.RemoveButton
+                                      onClick={() => {
+                                        handleRemove(product.id);
+                                      }}>
+                                      Apagar
+                                  </Styled.RemoveButton>
+                                  </Table.Cell>
+                                </Table.Row>
+                              );
+                            })}
+                        </Table.Body>
+                      </Styled.Table>
+                    </Styled.TableContainer>
+                  ) : (
+                      <Styled.Empty>
+                        <h2>Você ainda não tem nenhum anúncio!</h2>
+                        <img src={empty} />
+                      </Styled.Empty>
+                    )}
+                </>
+              )
+            :
+            <>
+              <Styled.UserInfo>
+                {userInfo?.userImage !== undefined ?
+                  <img src={userInfo.userImage} />
+                  :
+                  <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
+
+                }
+                <strong>
+                  {userInfo?.name !== undefined ?
+                    userInfo.name
+                    :
+                    "Skambista"
+                  }
+                </strong>
+                <section>
+                  <div>Curitiba/PR</div>
+                  <div>0 Trocas</div>
+                </section>
+                <Styled.ProfileButton onClick={() => setActive('mySales')}>Meus Anúncios</Styled.ProfileButton>
+                <Styled.SettingsButton onClick={() => setActive('settings')}>
+                  Alterar informações
+                  </Styled.SettingsButton>
+              </Styled.UserInfo>
+              <h2>ALTERAR INFORMAÇÕES</h2>
+            </>
+        }
       </Styled.Container>
     </LayoutContainer>
   );
