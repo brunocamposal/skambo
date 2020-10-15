@@ -7,7 +7,7 @@ interface PropTypes {
   title: string;
   category: string;
   imgUrl?: string;
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 const Card = ({ title, category, imgUrl, onClick }: PropTypes) => {

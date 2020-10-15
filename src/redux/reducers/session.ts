@@ -13,7 +13,7 @@ const defaultState = {
   currentUser: userInfo != null ? JSON.parse(userInfo) : {},
 };
 
-const session = (state = defaultState, action: ActionTypes): any => {
+const session = (state = defaultState, action: ActionTypes) => {
   switch (action.type) {
     case USER_INFO:
       return { ...state, token: action.token, currentUser: action.currentUser };
