@@ -49,13 +49,8 @@ const EditModal = (saleId: any) => {
       open={open}
       trigger={<Styled.EditButton>Editar</Styled.EditButton>}
     >
-      <Modal.Header>Editar informaçõconstes</Modal.Header>
+      <Modal.Header>Editar informações</Modal.Header>
       <Modal.Content>
-
-        <Modal.Description>
-          <Header>Mude as informações desejadas</Header>
-        </Modal.Description>
-
         <Form>
           <Form.Field>
             <label>Nome</label>
