@@ -76,7 +76,6 @@ const OfferExchange = () => {
                       <Modal.Content key={index}>
                         <h3>{name}</h3>
                       </Modal.Content>
-
                       <input type="checkbox" name="checkItem" value={name} ref={register} />
                     </Form>
                   </Styled.ProdBox>
