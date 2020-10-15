@@ -17,9 +17,9 @@ export const BoxContent = styled.div`
   align-items: center;
   margin: 10vh auto;
 
-  @media (max-width: 480px){
+  @media (max-width: 480px) {
     margin: 0;
-  } 
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -49,7 +49,9 @@ export const FormContainer = styled.div`
     width: 70%;
     margin-top: 40px;
   }
-
+  .ui.form select {
+    height: 38px;
+  }
 `;
 
 export const Header = styled.div`
@@ -66,10 +68,10 @@ export const Header = styled.div`
     /* color: #fff; */
   }
 
-  @media (max-width: 480px){
-    margin-top:40px;
+  @media (max-width: 480px) {
+    margin-top: 40px;
     height: 60px;
-  } 
+  }
 `;
 
 export const MsgError = styled.p`
@@ -85,7 +87,7 @@ export const ButtonForm = styled.button`
   background-color: var(--primary);
   border-radius: 7px;
   height: 35px;
-  width: 275px;
+  width: 255px;
   float: right;
   cursor: pointer;
 `;
