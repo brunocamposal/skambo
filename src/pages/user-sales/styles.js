@@ -72,9 +72,6 @@ color:#000;
 
     }
 `;
-
-
-
 export const ButtonsWrapper = styled.div`
     display:flex;
     width: 100%;
@@ -111,7 +108,7 @@ export const CardWrapper = styled.div`
 `;
 
 export const Empty = styled.div`
-    width:100%;
+    width: 70%;
     padding-top: 5%;
     display: flex;
     flex-direction: column;

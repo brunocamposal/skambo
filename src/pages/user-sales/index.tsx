@@ -15,6 +15,7 @@ import { Table } from 'semantic-ui-react'
 import { Container as LayoutContainer } from '../../components/layout/styles';
 import Menu from '../../components/menu'
 import EditModal from '../../components/edit-modal';
+import axios from 'axios';
 interface stateProps {
   session: { token: string }
 }
@@ -32,7 +33,8 @@ const UserSales: React.FC = () => {
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
   const user = useSelector((state: { user: any }) => state.user)
-  console.log('user', user)
+  const [userInfo, setUserInfo]: any = useState()
+  console.log(userInfo?.name)
   const decoded: { sub: string } = jwt_decode(session.token)
   const defaultOptions = {
     loop: true,
@@ -46,6 +48,13 @@ const UserSales: React.FC = () => {
     setTimeout(() => {
       dispatch(fetchUserSales(decoded.sub, session.token))
     }, 1300)
+    axios.get(`https://capstone-q2.herokuapp.com/users/${decoded.sub}`, {
+      headers: {
+        Authorization: `Bearer ${session.token}`
+      }
+    })
+      .then(res => setUserInfo(res.data))
+      .catch(err => console.log(err))
   }, [])
 
   const handleRemove = (saleId: string) => {
@@ -86,8 +95,19 @@ const UserSales: React.FC = () => {
           :
           <>
             <Styled.UserInfo>
-              <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
-              <strong>Arlindo Anomalia</strong>
+              {userInfo?.userImage !== undefined ?
+                <img src={userInfo.userImage} />
+                :
+                <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
+
+              }
+              <strong>
+                {userInfo?.name !== undefined ?
+                  userInfo.name
+                  :
+                  "Skambista"
+                }
+              </strong>
               <section>
                 <div>Curitiba/PR</div>
                 <div>0 Trocas</div>
