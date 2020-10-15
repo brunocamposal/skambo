@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { requestLogin  } from '../../redux/actions/session';
+import { requestUserInfo  } from '../../redux/actions/session';
 import { Form } from 'semantic-ui-react';
 
 import FormField from '../../components/form-field';
@@ -32,9 +32,10 @@ const Login: React.FC = () => {
     axios
       .post('https://capstone-q2.herokuapp.com/login', values)
       .then(({ data }) => {
-        dispatch(requestLogin(data.accessToken));
+        dispatch(requestUserInfo(data.accessToken));
         localStorage.setItem('token', data.accessToken);
         history.push('/');
+        
       })
       .catch(({ response }) => {
         if (response?.status === 400) {
@@ -42,8 +43,10 @@ const Login: React.FC = () => {
         }
         return setRequestError('Ops, aconteceu algo de errado!');
       });
-  };
 
+
+  };
+  
   return (
     <>
       <FormContainer

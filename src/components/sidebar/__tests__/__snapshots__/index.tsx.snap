@@ -247,7 +247,7 @@ exports[`Sidebar Should render sidebar 1`] = `
       />
     </svg>
      
-    Intrumentos Musicais
+    Instrumentos Musicais
   </div>
   <div
     className="c1 furniture"

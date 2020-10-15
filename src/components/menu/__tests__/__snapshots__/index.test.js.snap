@@ -28,7 +28,7 @@ Array [
   top: 0px;
   left: 0px;
   margin: 20px;
-  font-size: 35px;
+  font-size: 32px;
   cursor: pointer;
 }
 
@@ -42,9 +42,8 @@ Array [
   -ms-flex-align: center;
   align-items: center;
   width: 200px;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px;
-  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -60,11 +59,7 @@ Array [
 
 }
 
-@media (max-width:880px) {
-
-}
-
-@media (max-width:480px) {
+@media (max-width:1300px) {
 
 }
 
@@ -100,10 +95,6 @@ Array [
 
 }
 
-@media (max-width:880px) {
-
-}
-
 @media (max-width:480px) {
 
 }
@@ -111,6 +102,16 @@ Array [
 @media (max-width:480px) {
   .c0 {
     display: block;
+  }
+}
+
+@media (max-width:480px) {
+  .c4 {
+    font-size: 20px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
 }
 
@@ -174,6 +175,7 @@ Array [
           >
             <div
               className="c4 games"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -222,6 +224,7 @@ Array [
             </div>
             <div
               className="c4 books"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -252,6 +255,7 @@ Array [
             </div>
             <div
               className="c4 clothes"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -284,6 +288,7 @@ Array [
             </div>
             <div
               className="c4 bike"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -309,6 +314,7 @@ Array [
             </div>
             <div
               className="c4 sports"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -337,6 +343,7 @@ Array [
             </div>
             <div
               className="c4 instruments"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -362,6 +369,7 @@ Array [
             </div>
             <div
               className="c4 furniture"
+              onClick={[Function]}
             >
               <svg
                 className="icon-style"
@@ -396,8 +404,12 @@ Array [
   .c0 {
   width: 100%;
   max-width: 1200px;
-  height: 60px;
+  height: 85px;
+<<<<<<< HEAD
   position: fixed;
+=======
+  position: absolute;
+>>>>>>> Dev
   z-index: 1;
   top: 0;
   display: -webkit-box;
@@ -428,22 +440,27 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-right: 50px;
 }
 
-.c7 {
-  margin: 10px 12px;
-  width: 60%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+.c5 .favorite {
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.c5 .message {
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .c2 {
@@ -459,7 +476,7 @@ Array [
 }
 
 .c4 input {
-  background: #F4F4F6 !important;
+  background: #f4f4f6 !important;
   color: var(--primary-dark) !important;
   border-radius: 30px !important;
   border: 1px solid darkgrey !important;
@@ -478,11 +495,10 @@ Array [
   cursor: pointer;
 }
 
-.c8 {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
+.c7 {
+  margin-left: 5px;
+  color: var(--primary);
+  background: #ffffff;
   cursor: pointer;
 }
 
@@ -496,7 +512,6 @@ Array [
 @media (max-width:480px) {
   .c1 {
     width: 40%;
-    height: 50px;
     position: absolute;
     top: 0;
     left: 30%;
@@ -522,6 +537,12 @@ Array [
     position: absolute;
     top: 50px;
     left: 0;
+  }
+}
+
+@media (max-width:1300px) {
+  .c5 {
+    font-size: 20px;
   }
 }
 
@@ -551,22 +572,11 @@ Array [
     -ms-flex-align: center;
     align-items: center;
     font-size: 32px;
+    margin-right: 0px;
   }
 
   .c5 .web {
     display: none;
-  }
-}
-
-@media (max-width:880px) {
-  .c7 {
-    margin-top: 20px;
-  }
-}
-
-@media (max-width:480px) {
-  .c7 {
-    margin: 10px 15px;
   }
 }
 
@@ -614,18 +624,14 @@ Array [
   }
 }
 
-@media (max-width:880px) {
-  .c8 {
-    width: 20px;
-    height: 20px;
+@media (max-width:480px) {
+  .c7 {
+    display: none;
   }
 }
 
 @media (max-width:480px) {
-  .c8 {
-    width: 32px;
-    height: 32px;
-  }
+
 }
 
 @media (max-width:480px) {
@@ -673,153 +679,17 @@ Array [
       className="c5"
     >
       <button
-        className="c6 web"
+        className="c6"
         onClick={[Function]}
       >
-        Anunciar
+        Entrar
       </button>
-      <div
-        className="c7"
+      <button
+        className="c6 c7"
+        onClick={[Function]}
       >
-        <div
-          aria-expanded={false}
-          className="ui dropdown"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onMouseDown={[Function]}
-          role="listbox"
-          tabIndex={0}
-        >
-          <img
-            alt="user"
-            className="c8"
-            src="userDefault.png"
-          />
-          <div
-            className="menu transition"
-          >
-            <div
-              className="item"
-              onClick={[Function]}
-              role="option"
-            >
-              <i
-                aria-hidden="true"
-                className="edit icon"
-                onClick={[Function]}
-              />
-              <span
-                className="text"
-              >
-                Alterar informações
-              </span>
-            </div>
-            <div
-              className="item"
-              onClick={[Function]}
-              role="option"
-            >
-              <i
-                aria-hidden="true"
-                className="sign-out icon"
-                onClick={[Function]}
-              />
-              <span
-                className="text"
-              >
-                Sair
-              </span>
-            </div>
-          </div>
-        </div>
-        <svg
-          className="web"
-          fill="currentColor"
-          height="1em"
-          onClick={[Function]}
-          stroke="currentColor"
-          strokeWidth="0"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-          viewBox="0 0 24 24"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clipRule="evenodd"
-            d="M19.85 8.75l4.15.83v4.84l-4.15.83 2.35 3.52-3.43 3.43-3.52-2.35-.83 4.15H9.58l-.83-4.15-3.52 2.35-3.43-3.43 2.35-3.52L0 14.42V9.58l4.15-.83L1.8 5.23 5.23 1.8l3.52 2.35L9.58 0h4.84l.83 4.15 3.52-2.35 3.43 3.43-2.35 3.52zm-1.57 5.07l4-.81v-2l-4-.81-.54-1.3 2.29-3.43-1.43-1.43-3.43 2.29-1.3-.54-.81-4h-2l-.81 4-1.3.54-3.43-2.29-1.43 1.43L6.38 8.9l-.54 1.3-4 .81v2l4 .81.54 1.3-2.29 3.43 1.43 1.43 3.43-2.29 1.3.54.81 4h2l.81-4 1.3-.54 3.43 2.29 1.43-1.43-2.29-3.43.54-1.3zm-8.186-4.672A3.43 3.43 0 0 1 12 8.57 3.44 3.44 0 0 1 15.43 12a3.43 3.43 0 1 1-5.336-2.852zm.956 4.274c.281.188.612.288.95.288A1.7 1.7 0 0 0 13.71 12a1.71 1.71 0 1 0-2.66 1.422z"
-            fillRule="evenodd"
-          />
-        </svg>
-        <svg
-          className="web"
-          fill="currentColor"
-          height="1em"
-          onClick={[Function]}
-          stroke="currentColor"
-          strokeWidth="0"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
-          />
-        </svg>
-        <svg
-          className="web"
-          fill="currentColor"
-          height="1em"
-          onClick={[Function]}
-          stroke="currentColor"
-          strokeWidth="0"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"
-          />
-        </svg>
-        <svg
-          fill="none"
-          height="1em"
-          onClick={[Function]}
-          stroke="currentColor"
-          strokeWidth="0"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-          viewBox="0 0 24 24"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          />
-        </svg>
-      </div>
+        Registrar-se
+      </button>
     </div>
   </div>,
 ]
