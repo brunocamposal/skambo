@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
-import { Container, ResultSearch } from './styles';
+import { Container, ResultSearch } from './styles.js';
 import Swal from 'sweetalert2';
 import Card from '../../components/card';
 
@@ -25,19 +25,19 @@ const UserFavorites: React.FC = () => {
     <Container>
       <h3> Favoritos </h3>
       <ResultSearch>
-      {productsList &&
-        productsList.map((product: any, key) => {
-          return (
-            <Card
-              key={key}
-              title="teste"
-              category={product.category.join('/ ')}
-              imgUrl={product.thumbnail}
-              onClick={() => goProductPage(product.id)}
-            />
-          );
-        })}
-         </ResultSearch>
+        {productsList &&
+          productsList.map((product: any, key) => {
+            return (
+              <Card
+                key={key}
+                title="teste"
+                category={product.category.join('/ ')}
+                imgUrl={product.thumbnail}
+                onClick={() => goProductPage(product.id)}
+              />
+            );
+          })}
+      </ResultSearch>
     </Container>
   );
 };

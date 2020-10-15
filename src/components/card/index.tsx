@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from './styles';
+import * as Styled from './styles.js';
 import { motion } from 'framer-motion';
 import { Popup } from 'semantic-ui-react';
 

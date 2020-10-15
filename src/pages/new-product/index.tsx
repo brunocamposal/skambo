@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error, FormDiv } from './styles';
 import { defaultProduct, formatNumber, categorias } from './helper';
@@ -21,6 +21,7 @@ const NewProduct: React.FC = () => {
   const token = useSelector((state: Session) => state.session.token);
   const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
   const user = useSelector(({ session }: RootState) => session.currentUser);
+  const history = useHistory();
 
   console.log({ user });
 
@@ -59,7 +60,7 @@ const NewProduct: React.FC = () => {
 
   const onSubmit = (data: Data): void => {
     console.log({ data });
-    const { boost, usability, value, name, description, category } = data;
+    const { boost, usability, value, name, description, category, subCategory } = data;
     const sendData: Product = {
       userId: user.id,
       views: 0,
@@ -68,7 +69,8 @@ const NewProduct: React.FC = () => {
       value,
       name,
       description,
-      category,
+      subCategory:
+        category,
       images: formValue.images,
       thumbnail: formValue.thumbnail,
     };
@@ -78,7 +80,7 @@ const NewProduct: React.FC = () => {
       },
     };
     console.log({ sendData });
-    /* axios
+    axios
       .post('https://capstone-q2.herokuapp.com/products', sendData, headers)
       .then((res) => {
         console.log(res);
@@ -91,7 +93,19 @@ const NewProduct: React.FC = () => {
         setFormValue(defaultProduct);
       })
       .catch(({ response }) => {
-        if (!!response) {
+        if (response.data === "jwt_expired") {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Não foi possível enviar os dados.',
+          }).then(res => {
+            if (res.isConfirmed) {
+              history.push('/login');
+              window.localStorage.clear();
+            }
+          });
+        }
+        else if (!!response) {
           Swal.fire({
             icon: 'error',
             title: 'Erro',
@@ -101,7 +115,7 @@ const NewProduct: React.FC = () => {
           reset(defaultProduct);
           setFormValue(defaultProduct);
         }
-      }); */
+      });
   };
 
   return (
@@ -127,7 +141,7 @@ const NewProduct: React.FC = () => {
           <Form.Field>
             <label htmlFor="category">Categoria</label>
             <select
-              defaultValue="Outros"
+              defaultValue={[]}
               name="category"
               id="category"
               ref={register}

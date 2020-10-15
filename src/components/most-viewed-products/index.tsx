@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import * as Styled from './styles';
+import * as Styled from './styles.js';
 import Card from '../../components/card';
 import Slider from 'react-slick';
 import '../../../node_modules/slick-carousel/slick/slick.css';
@@ -79,10 +79,10 @@ const MostViewedProducts = () => {
     ],
   };
 
-  
+
 
   const goProductPage = (id: string) => {
-    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
+    { id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`) }
   }
 
   return (

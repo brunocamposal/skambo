@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import * as Styled from './styles'
+import * as Styled from './styles.js'
 import { AiFillDelete } from 'react-icons/ai';
 import { MdModeEdit } from 'react-icons/md';
 import jwt_decode from "jwt-decode";
