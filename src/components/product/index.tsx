@@ -41,8 +41,6 @@ const Product: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
 
-  const [modalExchange, setModalExchange] = useState(false);
-
   useEffect(() => {
     axios
       .get(url, {
@@ -106,8 +104,7 @@ const Product: React.FC = () => {
                 return <li key={index}>{interest}</li>;
               })}
             </ProductInfoIntr>
-            <InterestButton onClick={() => setModalExchange(true)}>Tenho Interesse</InterestButton>
-            <OfferExchange props={modalExchange} />
+            <OfferExchange />
             <FavButton onClick={handleFavorite}>
               <Icon name="heart" />
               Adicionar aos favoritos

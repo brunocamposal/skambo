@@ -56,14 +56,14 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  height: 100px;
+  margin-top: 30px;
+  height: 70px;
   width: 70%;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   border-radius: 7px;
 
   h1 {
-    color: #fff;
+    /* color: #fff; */
   }
 
   @media (max-width: 480px){

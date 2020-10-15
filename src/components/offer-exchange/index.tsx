@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Header, Form } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import * as Styled from './styles';
+import { InterestButton } from '../product/styles';
 
 import axios from 'axios';
 
-const OfferExchange = ({ props }: any) => {
+interface IFormInputs {
+  checkItem?: any;
+}
+
+const OfferExchange = () => {
   const [userProducts, setUserProduct] = useState([]);
+  const { register, handleSubmit } = useForm<IFormInputs>();
+  const [openModal, setOpenModal] = useState(false);
+
   console.log(userProducts);
 
   const userId = useSelector(({ session }: any) => session.currentUser.id);
@@ -20,31 +29,55 @@ const OfferExchange = ({ props }: any) => {
       .then(({ data }) => setUserProduct(data));
   }, []);
 
-  return (
-    <>
-      <Modal open={props} closeOnEscape >
-        <>
-          {localStorage.length === 0 ? ( <>
-            <Modal.Header > Você não está logado </Modal.Header> </>
-          ) : (
-            <>
-              <Modal.Header> Oferecer Produtos para Troca </Modal.Header>
+  const onSubmit = (values: IFormInputs) => {
+    setOpenModal(false);
+  };
 
-              {userProducts.length === 0 ? (
-                <Styled.MsgError> Você não tem produtos cadastrados</Styled.MsgError>
-              ) : (
-                userProducts.map(({ name }, index) => (
-                  <Modal.Content key={index} >
-                    {name}
-                    <Styled.ButtonOffer onClick={() => ''}>Ofertar</Styled.ButtonOffer>
-                  </Modal.Content>
-                ))
-              )}
-            </>
-          )}
-        </>
+  return (
+    <Styled.Container>
+      <Modal
+        trigger={<InterestButton>Tenho interesse</InterestButton>}
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onOpen={() => setOpenModal(true)}>
+        {localStorage.length === 0 ? (
+          <Header as="h2" textAlign="center">
+            Você não está logado
+          </Header>
+        ) : (
+          <>
+            <Header as="h2" textAlign="center">
+              Oferecer Produtos para Troca
+            </Header>
+            {userProducts.length === 0 ? (
+              <Styled.MsgError> Você não tem produtos cadastrados</Styled.MsgError>
+            ) : (
+              userProducts.map(({ name, images }, index) => (
+                <>
+                  <Styled.ProdBox>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                      <Styled.ProdImage src={images[0]} />
+                      <Modal.Content key={index}>
+                        <h3>{name}</h3>
+                      </Modal.Content>
+
+                      <input type="checkbox" name="checkItem" value={name} ref={register} />
+                    </Form>
+                  </Styled.ProdBox>
+                </>
+              ))
+            )}
+          </>
+        )}
+        {localStorage.length !== 0 && userProducts.length !== 0 ? (
+          <Styled.ButtonOffer type="submit" onClick={handleSubmit(onSubmit)}>
+            Ofertar
+          </Styled.ButtonOffer>
+        ) : null}
+
+        <Styled.ButtonCancel onClick={() => setOpenModal(false)}>Cancelar</Styled.ButtonCancel>
       </Modal>
-    </>
+    </Styled.Container>
   );
 };
 
