@@ -90,7 +90,7 @@ const UserSales: React.FC = () => {
                 ) : (
                   <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
                 )}
-                <strong>{userInfo?.name !== undefined ? userInfo.name : 'Skambista'}</strong>
+                <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
                 <section>
                   <div>Curitiba/PR</div>
                   <div>0 Trocas</div>
@@ -164,8 +164,8 @@ const UserSales: React.FC = () => {
         ) : (
           <>
             <Styled.UserInfo>
-              {userInfo?.userImage !== undefined ? (
-                <img src={userInfo.userImage} />
+              {currentUser.userImage !== undefined ? (
+                <img src={currentUser.userImage} />
               ) : (
                 <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
               )}

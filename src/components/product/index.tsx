@@ -28,7 +28,6 @@ import { Modal, Header, Form } from 'semantic-ui-react';
 import * as Styled from '../offer-exchange/styles';
 import OfferExchange from '../offer-exchange';
 
-
 interface Params {
   id: any;
 }
@@ -57,7 +56,6 @@ const Product: React.FC = () => {
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const url = `https://capstone-q2.herokuapp.com/products/${id}`;
 
@@ -78,7 +76,7 @@ const Product: React.FC = () => {
 
   const favoritesJSON: any = userFavorites != undefined ? [...userFavorites, products] : [products];
 
-  const actualUrl = `http://localhost:3000${location.pathname}`;
+  const actualUrl = window.location.href;
 
   const handleFavorite = () => {
     const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
@@ -149,101 +147,106 @@ const Product: React.FC = () => {
       {loading ? (
         <Loading />
       ) : (
-          <ProductCard>
-            <CardImg>
-              <CardThumb>
-                <ProductThumb
-                  src={products.thumbnail}
-                  alt="thumb"
-                  onMouseOver={() => setImage(products.thumbnail)}
-                />
-                {products.images.map((image, index) => {
-                  return (
-                    <ProductThumb
-                      key={index}
-                      src={image}
-                      alt="thumbnail"
-                      onMouseOver={() => setImage(products.images[index])}
-                    />
-                  );
-                })}
-              </CardThumb>
-              <CardProduct>
-                <ProductShow src={image} alt="destak" />
-              </CardProduct>
-            </CardImg>
-            <CardInfo>
-              <ProductInfoName>{products.name}</ProductInfoName>
-              <ProductInfoValue>R$ {products.value}</ProductInfoValue>
-              <ProductInfoDesc>{products.description}</ProductInfoDesc>
-              <ProductInfoDesc>
-                <b>CONDIÇÃO: </b>
-                {products.usability}
-              </ProductInfoDesc>
-              <ProductInfoIntr>
-                Interesses:
+        <ProductCard>
+          <CardImg>
+            <CardThumb>
+              <ProductThumb
+                src={products.thumbnail}
+                alt="thumb"
+                onMouseOver={() => setImage(products.thumbnail)}
+              />
+              {products.images.map((image, index) => {
+                return (
+                  <ProductThumb
+                    key={index}
+                    src={image}
+                    alt="thumbnail"
+                    onMouseOver={() => setImage(products.images[index])}
+                  />
+                );
+              })}
+            </CardThumb>
+            <CardProduct>
+              <ProductShow src={image} alt="destak" />
+            </CardProduct>
+          </CardImg>
+          <CardInfo>
+            <ProductInfoName>{products.name}</ProductInfoName>
+            <ProductInfoValue>R$ {products.value}</ProductInfoValue>
+            <ProductInfoDesc>{products.description}</ProductInfoDesc>
+            <ProductInfoDesc>
+              <b> SKAMBISTA: </b>
+              {products.owner}
+            </ProductInfoDesc>
+
+            <ProductInfoDesc>
+              <b>CONDIÇÃO: </b>
+              {products.usability}
+            </ProductInfoDesc>
+            <ProductInfoIntr>
+              Interesses:
               {products.interests.map((interest, index) => {
                 return <li key={index}>{interest}</li>;
               })}
-              </ProductInfoIntr>
-              <OfferExchange />
-              {localStorage.length === 0 ? (
-                <Modal
-                  trigger={
-                    <FavButton>
-                      <Icon name="heart" />
+            </ProductInfoIntr>
+            <OfferExchange />
+            {localStorage.length === 0 ? (
+              <Modal
+                trigger={
+                  <FavButton>
+                    <Icon name="heart" />
                     Adicionar aos favoritos
                   </FavButton>
-                  }
-                  open={openModal}
-                  onClose={() => setOpenModal(false)}
-                  onOpen={() => setOpenModal(true)}>
-                  <Header as="h2" textAlign="center">
-                    Você não está logado
+                }
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                onOpen={() => setOpenModal(true)}>
+                <Header as="h2" textAlign="center">
+                  Você não está logado
                 </Header>
-                  <Styled.ButtonConfirm
-                    onClick={() => {
-                      setOpenModal(false);
-                      history.push('/login');
-                    }}>
-                    Entrar
+                <Styled.ButtonConfirm
+                  onClick={() => {
+                    setOpenModal(false);
+                    history.push('/login');
+                  }}>
+                  Entrar
                 </Styled.ButtonConfirm>
-                  <Styled.ButtonCancel onClick={() => setOpenModal(false)}>
-                    Cancelar
+                <Styled.ButtonCancel onClick={() => setOpenModal(false)}>
+                  Cancelar
                 </Styled.ButtonCancel>
-                </Modal>
-              ) : (
-                  <FavButton onClick={handleFavorite}>
-                    <Icon name="heart" />
+              </Modal>
+            ) : (
+              <FavButton onClick={handleFavorite}>
+                <Icon name="heart" />
                 Adicionar aos favoritos
-                  </FavButton>
-                )}
+              </FavButton>
+            )}
 
-              <SharePoint>
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${actualUrl}`}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <FaFacebook />
-                </a>
+            <SharePoint>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${actualUrl}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <FaFacebook />
+              </a>
 
-                <a
-                  href={`https://twitter.com/intent/tweet?url=${actualUrl}&text=${products.name}`}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <FaTwitter />
-                </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${actualUrl}&text=${products.name}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <FaTwitter />
+              </a>
 
-                <a
-                  href={`https://api.whatsapp.com/send?text=${products.name}-${actualUrl}`}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <FaWhatsapp />
-                </a>
-              </SharePoint>
-            </CardInfo>
-          </ProductCard>
-        )}
+              <a
+                href={`https://api.whatsapp.com/send?text=${products.name}-${actualUrl}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <FaWhatsapp />
+              </a>
+            </SharePoint>
+          </CardInfo>
+        </ProductCard>
+      )}
     </>
   );
 };
