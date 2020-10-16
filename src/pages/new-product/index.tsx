@@ -56,7 +56,7 @@ const NewProduct: React.FC = () => {
   const onSubmit = (data: Data): void => {
     console.log({ data });
     const interestArr = data.interests.split(",").map(interest => interest.trim());
-    const { boost, usability, value, name, description, category, subCategory, interests } = data;
+    const { boost, value, name, description, category, subCategory } = data;
     const sendData: Product = {
       userId,
       views: 0,
@@ -68,8 +68,8 @@ const NewProduct: React.FC = () => {
       subCategory,
       category,
       interests: interestArr,
-      images: formValue.images,
-      thumbnail: formValue.thumbnail,
+      images: formValue.images.map((_: string) => 'https://www.tibs.org.tw/images/default.jpg'),
+      thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
     };
     const headers = {
       headers: {
@@ -135,13 +135,12 @@ const NewProduct: React.FC = () => {
             {errors.name && <Error>{errors.name.message}</Error>}
           </Form.Field>
 
-          <Form.Field>
+          <Form.Field required>
             <label htmlFor="category">Categoria</label>
             <select
-              defaultValue={[]}
               name="category"
               id="category"
-              ref={register}
+              ref={register({required: 'Escolha uma categoria!'})}
               placeholder="Escolha uma categoria">
               {subcategorias.map(({ name, content }, key) => (
                 <optgroup label={name} key={key}>
@@ -151,6 +150,7 @@ const NewProduct: React.FC = () => {
                 </optgroup>
               ))}
             </select>
+            {errors.category && <Error>{errors.category.message}</Error>}
           </Form.Field>
 
           <Form.Field required>

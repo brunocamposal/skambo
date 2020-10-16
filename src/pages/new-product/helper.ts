@@ -1,4 +1,4 @@
-import { Product, Categoria, Subcategoria } from './types';
+import { Product, Subcategoria } from './types';
 
 export const defaultProduct: Product = {
   userId: 0,
@@ -10,7 +10,7 @@ export const defaultProduct: Product = {
   description: '',
   category: 'Outros',
   subCategory: '',
-  images: ['https://www.tibs.org.tw/images/default.jpg'],
+  images: [],
   thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
   interests: '',
 };
