@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const BoxContent = styled.div`
   display: flex;
   justify-content: center;
+
   @media (max-width: 480px) {
     margin: 0;
   }
@@ -24,6 +25,7 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 80%;
+
   label {
     font-weight: 700;
     font-size: 14px;

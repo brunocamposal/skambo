@@ -154,6 +154,7 @@ export const Empty = styled.div`
 `;
 
 export const LoadingContainer = styled.div`
+  width: 100%;
   padding-top: 100px;
   width: 100%;
 `;
