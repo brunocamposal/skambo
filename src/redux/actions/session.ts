@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 export const requestUserInfo = (token: string) => (dispatch: any) => {
   const decoded: { sub: string } = jwt_decode(token);
   const url = `https://capstone-q2.herokuapp.com/users/${decoded.sub}`;
+
   axios
     .get(url, {
       headers: {
