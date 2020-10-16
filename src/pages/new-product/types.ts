@@ -1,8 +1,8 @@
 export interface Product {
-  [x: string]: any ;
+  [x: string]: any;
 }
 export interface Data {
-  [x: string]: any ;
+  [x: string]: any;
 }
 
 export interface TokenDecoded {

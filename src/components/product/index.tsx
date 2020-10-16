@@ -28,6 +28,10 @@ import { Modal, Header, Form } from 'semantic-ui-react';
 import * as Styled from '../offer-exchange/styles';
 import OfferExchange from '../offer-exchange';
 
+interface Params {
+  id: any;
+}
+
 const Product: React.FC = () => {
   const history = useHistory();
   const [products, setProducts] = useState({
@@ -41,8 +45,8 @@ const Product: React.FC = () => {
     interests: [],
   });
 
-  const location = useLocation()
-  const token = useSelector(({session}: any) => session.token);
+  const location = useLocation();
+  const token = useSelector(({ session }: any) => session.token);
   const { id }: any = useParams();
 
   const [openModal, setOpenModal] = useState(false);
@@ -51,8 +55,6 @@ const Product: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
-
- 
 
   useEffect(() => {
     const url = `https://capstone-q2.herokuapp.com/products/${id}`;
@@ -72,30 +74,14 @@ const Product: React.FC = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const favoritesJSON: any = userFavorites != undefined && [...userFavorites, products];
+  const favoritesJSON: any = userFavorites != undefined ? [...userFavorites, products] : [products];
 
-  console.log(favoritesJSON);
-
-  const actualUrl = `http://localhost:3000${location.pathname}`;
+  const actualUrl = window.location.href;
 
   const handleFavorite = () => {
     const url = `https://capstone-q2.herokuapp.com/users/${user.id}`;
 
-    console.log(url)
-
-    const alreadyAdd = Object.values(userFavorites).some(
-      (favorite: any) => favorite.id === products.id
-    );
-
-    if (alreadyAdd) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Produto já adicionado aos favoritos!',
-        showConfirmButton: false,
-        timer: 1300,
-      });
-    } else {
+    if (userFavorites === undefined) {
       axios
         .patch(
           url,
@@ -117,6 +103,42 @@ const Product: React.FC = () => {
           dispatch(requestUserInfo(token));
         })
         .catch((err) => console.log(err));
+    } else {
+      const alreadyAdd = Object.values(userFavorites).some(
+        (favorite: any) => favorite.id === products.id
+      );
+
+      if (alreadyAdd) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Produto já adicionado aos favoritos!',
+          showConfirmButton: false,
+          timer: 1300,
+        });
+      } else {
+        axios
+          .patch(
+            url,
+            { favorites: favoritesJSON },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then(() => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Produto adicionado aos favoritos!',
+              showConfirmButton: false,
+              timer: 1300,
+            });
+            dispatch(requestUserInfo(token));
+          })
+          .catch((err) => console.log(err));
+      }
     }
   };
 
@@ -152,6 +174,11 @@ const Product: React.FC = () => {
             <ProductInfoName>{products.name}</ProductInfoName>
             <ProductInfoValue>R$ {products.value}</ProductInfoValue>
             <ProductInfoDesc>{products.description}</ProductInfoDesc>
+            <ProductInfoDesc>
+              <b> SKAMBISTA: </b>
+              {products.owner}
+            </ProductInfoDesc>
+
             <ProductInfoDesc>
               <b>CONDIÇÃO: </b>
               {products.usability}

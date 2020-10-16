@@ -1,10 +1,5 @@
 import { USER_INFO } from '../actions/types';
 
-interface ActionTypes {
-  type: string;
-  token: string;
-  currentUser: any;
-}
 
 const userInfo = localStorage.getItem('currentUser');
 
@@ -13,9 +8,10 @@ const defaultState = {
   currentUser: userInfo != null ? JSON.parse(userInfo) : {},
 };
 
-const session = (state = defaultState, action: ActionTypes) => {
+const session = (state = defaultState, action: any) => {
   switch (action.type) {
     case USER_INFO:
+      console.log(action.currentUser)
       return { ...state, token: action.token, currentUser: action.currentUser };
     default:
       return state;

@@ -140,6 +140,12 @@ export const FavButton = styled(InterestButton)`
   @media (max-width: 480px) {
     font-size: 13px;
   }
+
+  &:hover {
+    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: background-color 0.3s;
+    background-color: red;
+  } 
 `;
 export const ImageLoading = styled(Image)`
   width: 100vw;
