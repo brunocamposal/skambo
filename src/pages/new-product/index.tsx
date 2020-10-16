@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error, FormDiv } from './styles';
 import { defaultProduct, formatNumber, categorias } from './helper';
@@ -10,36 +10,40 @@ import Swal from 'sweetalert2';
 import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session, Data } from './types';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
 
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
-  const [estado, setEstado] = useState('selecione');
+  const [estado, setEstado] = useState('Marcas de Uso');
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: defaultProduct,
   });
   const token = useSelector((state: Session) => state.session.token);
-  const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
+  const user = useSelector(({ session }: RootState) => session.currentUser);
+  const history = useHistory();
+
+  console.log({ user });
 
   useEffect(() => {
     let es;
     switch (formValue.usability) {
       case '1':
-        es = 'não funciona / quebrado / necessita reforma';
+        es = 'Com defeito';
         break;
       case '2':
-        es = 'usado, danificado, mas ainda útil ';
+        es = 'Bem Usado';
         break;
       case '3':
-        es = 'bastante usado, mas ok';
+        es = 'Marcas de Uso';
         break;
       case '4':
-        es = 'algumas marcas de uso';
+        es = 'Semi Novo';
         break;
       case '5':
-        es = 'como novo';
+        es = 'Novo';
         break;
       default:
-        es = 'selecione';
+        es = 'Semi Novo';
         break;
     }
     setEstado(es);
@@ -51,21 +55,21 @@ const NewProduct: React.FC = () => {
     }
   }, [formValue.images]);
 
-  if (JSON.stringify(errors) !== '{}') console.log(errors);
-
   const onSubmit = (data: Data): void => {
-    console.log(data);
-    const { boost, usability, value, name, description, category } = data;
+    console.log({ data });
+    const interestArr = data.interests.split(",").map(interest => interest.trim());
+    const { boost, usability, value, name, description, category, subCategory, interests } = data;
     const sendData: Product = {
-      userId,
+      userId: user.id,
       views: 0,
-      usersAccess: 0,
-      boost,
-      usability,
+      boostPlan: boost,
+      usability: estado,
       value,
       name,
       description,
+      subCategory,
       category,
+      interests: interestArr,
       images: formValue.images,
       thumbnail: formValue.thumbnail,
     };
@@ -74,7 +78,7 @@ const NewProduct: React.FC = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(sendData);
+    console.log({ sendData });
     axios
       .post('https://capstone-q2.herokuapp.com/products', sendData, headers)
       .then((res) => {
@@ -88,7 +92,19 @@ const NewProduct: React.FC = () => {
         setFormValue(defaultProduct);
       })
       .catch(({ response }) => {
-        if (!!response) {
+        if (response.data === "jwt expired") {
+          Swal.fire({
+            icon: 'info',
+            title: 'Que pena',
+            text: 'Sua sessão expirou',
+          }).then(res => {
+            if (res.isConfirmed) {
+              history.push('/login');
+              window.localStorage.clear();
+            }
+          });
+        }
+        else if (!!response) {
           Swal.fire({
             icon: 'error',
             title: 'Erro',
@@ -103,9 +119,6 @@ const NewProduct: React.FC = () => {
 
   return (
     <FormContainer style={{ width: '100%', marginTop: 80 }}>
-      <Link to="/">
-        <h3> Voltar </h3>
-      </Link>
       <h1>Novo Produto</h1>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -127,7 +140,7 @@ const NewProduct: React.FC = () => {
           <Form.Field>
             <label htmlFor="category">Categoria</label>
             <select
-              defaultValue="Outros"
+              defaultValue={[]}
               name="category"
               id="category"
               ref={register}

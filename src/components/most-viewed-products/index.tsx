@@ -19,8 +19,6 @@ const MostViewedProducts = () => {
   const session = useSelector((state: stateProps) => state.session);
   const history = useHistory();
 
-  console.log(session);
-
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios

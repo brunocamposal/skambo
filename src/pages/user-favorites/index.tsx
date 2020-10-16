@@ -8,7 +8,6 @@ import { Container, ResultSearch, CardContainer, StyledHeart } from './styles';
 import Swal from 'sweetalert2';
 import * as Styled from '../../components/card/styles';
 import { Popup } from 'semantic-ui-react';
-import './user-favorites.css';
 import axios from 'axios';
 import { requestUserInfo } from '../../redux/actions/session';
 
@@ -48,12 +47,14 @@ const UserFavorites: React.FC = () => {
   };
 
   useEffect(() => {
-    if (currentUser.favorites.length === 0) {
+    if (currentUser.favorites === undefined || currentUser.favorites.length == 0) {
       setMessage(true);
-    }else{
+    } else {
       setMessage(false);
     }
-  }, [currentUser]);
+  }, []);
+
+  console.log(currentUser.favorites)
 
   const goProductPage = (id: string) => {
     {

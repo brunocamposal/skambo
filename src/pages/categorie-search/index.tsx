@@ -8,6 +8,7 @@ import Card from '../../components/card';
 import Swal from 'sweetalert2';
 
 import axios from 'axios';
+import { filter } from 'cypress/types/bluebird';
 
 interface ProductsProps {
   name: string;
@@ -53,9 +54,13 @@ const CategorieSearch: React.FC = () => {
       });
   }, []);
 
+  const formataNome = (str) => {
+    return str.toLowerCase().replace(/(?:^|\s)(?!da|de|do)\S/g, (l) => l.toUpperCase());
+  };
+
   useEffect(() => {
     const filterRes = productsList.filter(({ category }) => {
-          return category;
+      return category === formataNome(categoryProducts);
     });
 
     if (filterRes.length === 0) {
@@ -73,7 +78,20 @@ const CategorieSearch: React.FC = () => {
     setSelected(value);
   };
 
-  const subcategorias = filterCategory.map((product: any, key) => {
+  const filterDuplicate = [];
+
+  filterCategory.forEach((product) => {
+    const duplicated =
+      filterDuplicate.findIndex((redItem) => {
+        return product.subCategory == redItem.subCategory;
+      }) > -1;
+
+    if (!duplicated) {
+      filterDuplicate.push(product);
+    }
+  });
+
+  const subcategorias = filterDuplicate.map((product: any, key) => {
     return { key, text: product.subCategory, value: product.subCategory };
   });
 
@@ -113,7 +131,7 @@ const CategorieSearch: React.FC = () => {
                   />
                 );
               }
-              if (selected.includes(product.category[1])) {
+              if (selected.includes(product.subCategory)) {
                 return (
                   <Card
                     key={key}
