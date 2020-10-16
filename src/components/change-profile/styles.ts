@@ -1,21 +1,27 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 56%;
+  /* height: 100vh; */
   background-color: #fff;
   a {
     &:hover {
       cursor: pointer;
     }
   }
+
+  @media (max-width: 1000px) {
+    margin: 0;
+    width: 80% ;
+  }
+
 `;
 
 export const BoxContent = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10vh auto;
+  margin: 10vh auto; */
 
   @media (max-width: 480px) {
     margin: 0;
@@ -26,7 +32,7 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 96%;
+  width: 100%;
 
   label {
     font-weight: 700;
@@ -46,27 +52,27 @@ export const FormContainer = styled.div`
   }
 
   .ui.form {
-    width: 70%;
+    width: 95%;
     margin-top: 40px;
   }
   .ui.form select {
     height: 38px;
   }
 
-  .ui.card {
-    width: 200px;
-  }
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 40px;
-  width: 70%;
+  margin-top: 20px;
+  width: 95%;
 
   @media (max-width: 480px) {
-    margin-top: 40px;
-    height: 60px;
+    margin-top: 0px;
+    height: 20px;
+    h1{
+      font-size: 23px;
+    }
   }
 `;
 
