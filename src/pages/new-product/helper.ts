@@ -4,26 +4,26 @@ export const defaultProduct: Product = {
   userId: 0,
   views: 0,
   boostPlan: '',
-  usability: "Semi Novo",
+  usability: 'Semi Novo',
   value: '0',
-  name: "",
-  description: "",
-  category: "Outros",
-  subCategory: "",
-  images: [],
-  thumbnail: '',
+  name: '',
+  description: '',
+  category: 'Outros',
+  subCategory: '',
+  images: ['https://www.tibs.org.tw/images/default.jpg'],
+  thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
   interests: '',
 };
 
 export const formatNumber = (n: string): string => {
   return n
     .replace(/(^0)/, '')
-    .replace(/\D/g, "")
-    .replace(/(\d{1,})(\d{2})$/g, "$1,$2")
-    .replace(/(0)(.{?})(\d{?})$/g, "$3")
-    .replace(/(\d{1,})(\d{3}),/g, "$1.$2,")
-    .replace(/(\d{1,})(\d{3})\./g, "$1.$2.")
-}
+    .replace(/\D/g, '')
+    .replace(/(\d{1,})(\d{2})$/g, '$1,$2')
+    .replace(/(0)(.{?})(\d{?})$/g, '$3')
+    .replace(/(\d{1,})(\d{3}),/g, '$1.$2,')
+    .replace(/(\d{1,})(\d{3})\./g, '$1.$2.');
+};
 
 export const categorias: Categoria[] = [
   { key: 1, value: 'Vestuarios', text: 'Vestuário' },

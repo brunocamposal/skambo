@@ -170,6 +170,11 @@ export const StyledReverseButton = styled(StyledButton)`
   @media (max-width: 480px) {
     display: none;
   }
+
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    background: rgba(128, 128, 128, 0.178);
+  }
 `;
 
 export const StyledUser = styled.img`
