@@ -62,7 +62,33 @@ const TopBar: React.FC = () => {
             </StyledButton>
 
             <StyledIcons>
-              <Dropdown trigger={trigger} icon={null}>
+              <Dropdown trigger={trigger} icon={null} className="dropdown-desktop">
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    icon="user"
+                    text="Meu Perfil"
+                    onClick={() => history.push('/my-sales')}
+                  />
+                  <Dropdown.Item
+                    icon="sign-out"
+                    text="Sair"
+                    onClick={() => {
+                      Swal.fire({
+                        title: `Volte logo ${user}!`,
+                        confirmButtonText: `Sair`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          document.location.reload();
+                          window.localStorage.clear();
+                        }
+                      });
+                      history.push('/');
+                    }}
+                  />
+                </Dropdown.Menu>
+              </Dropdown>
+
+              <Dropdown trigger={trigger} icon={null} direction="left" className="dropdown-mobile">
                 <Dropdown.Menu>
                   <Dropdown.Item
                     icon="user"

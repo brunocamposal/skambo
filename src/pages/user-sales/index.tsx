@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Styled from './styles';
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineHome, AiOutlineUser } from 'react-icons/ai';
+import { FiPackage, FiSettings } from 'react-icons/fi';
 import { MdModeEdit } from 'react-icons/md';
 import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
@@ -41,8 +42,6 @@ const UserSales: React.FC = () => {
   const decoded: { sub: string } = jwt_decode(session.token);
   const history = useHistory();
 
-  console.log(currentUser)
-
   const defaultOptions = {
     loop: true,
     animationData: animationData,
@@ -79,7 +78,7 @@ const UserSales: React.FC = () => {
       <Styled.Container>
         {active === 'mySales' ? (
           Object.keys(user).length === 0 ? (
-            <Styled.LoadingContainer>
+            <Styled.LoadingContaine>
               <Lootie options={defaultOptions} height={200} width={200} />
             </Styled.LoadingContainer>
           ) : (
@@ -92,14 +91,19 @@ const UserSales: React.FC = () => {
                 )}
                 <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
                 <section>
-                  <div>Curitiba/PR</div>
-                  <div>0 Trocas</div>
+                  <div>
+                    <AiOutlineHome /> Curitiba/PR
+                  </div>
+                  <div>
+                    {' '}
+                    <FiPackage /> {currentUser.trades !== undefined ? currentUser.trades : 0} Trocas
+                  </div>
                 </section>
                 <Styled.ProfileButtonActive onClick={() => setActive('mySales')}>
-                  Meus Anúncios
+                  <AiOutlineUser/> Meus Anúncios
                 </Styled.ProfileButtonActive>
                 <Styled.SettingsButton onClick={() => setActive('settings')}>
-                  Alterar informações
+                <FiSettings/>  Alterar informações
                 </Styled.SettingsButton>
               </Styled.UserInfo>
               {user?.userSales?.length > 0 ? (
@@ -132,12 +136,11 @@ const UserSales: React.FC = () => {
                                 <img src={product.thumbnail} alt="" />
                               </Table.Cell>
                               <Table.Cell>{product.name}</Table.Cell>
-                              <Table.Cell>{product.category[0]}</Table.Cell>
+                              <Table.Cell>{product.category}</Table.Cell>
                               <Table.Cell>{product.usability}</Table.Cell>
-                              <Table.Cell>R$ {product.value},00</Table.Cell>
+                              <Table.Cell>R$ {product.value}</Table.Cell>
                               <Table.Cell>
-                                {' '}
-                                <EditModal saleId={product.id} />{' '}
+                                <EditModal saleId={product.id} />
                               </Table.Cell>
                               <Table.Cell>
                                 <Styled.RemoveButton
@@ -169,16 +172,22 @@ const UserSales: React.FC = () => {
               ) : (
                 <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
               )}
-              <strong>{userInfo?.name !== undefined ? userInfo.name : 'Skambista'}</strong>
+              <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
               <section>
-                <div>Curitiba/PR</div>
-                <div>0 Trocas</div>
+                <div>
+                  {' '}
+                  <AiOutlineHome /> Curitiba/PR
+                </div>
+                <div>
+                  {' '}
+                  <FiPackage /> {currentUser.trades !== undefined ? currentUser.trades : 0} Trocas
+                </div>
               </section>
               <Styled.ProfileButton onClick={() => setActive('mySales')}>
-                Meus Anúncios
+              <AiOutlineUser/>  Meus Anúncios
               </Styled.ProfileButton>
               <Styled.SettingsButtonActive onClick={() => setActive('settings')}>
-                Alterar informações
+                <FiSettings/> Alterar informações
               </Styled.SettingsButtonActive>
             </Styled.UserInfo>
 

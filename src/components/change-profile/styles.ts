@@ -1,37 +1,30 @@
 import styled from 'styled-components';
-
 export const Container = styled.div`
-  width: 56%;
+  width: 75%;
   background-color: #fff;
   a {
     &:hover {
       cursor: pointer;
     }
   }
-
   @media (max-width: 1000px) {
     margin: 0;
     width: 80% ;
   }
-
 `;
-
 export const BoxContent = styled.div`
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 10vh auto; */
 
   @media (max-width: 480px) {
     margin: 0;
   }
 `;
-
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 80%;
 
   label {
     font-weight: 700;
@@ -49,7 +42,6 @@ export const FormContainer = styled.div`
       opacity: 64%;
     }
   }
-
   .ui.form {
     width: 95%;
     margin-top: 40px;
@@ -57,15 +49,12 @@ export const FormContainer = styled.div`
   .ui.form select {
     height: 38px;
   }
-
 `;
-
 export const Header = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20px;
   width: 95%;
-
   @media (max-width: 480px) {
     margin-top: 0px;
     height: 20px;
@@ -74,12 +63,10 @@ export const Header = styled.div`
     }
   }
 `;
-
 export const MsgError = styled.p`
   color: red;
   font-size: 0.9rem;
 `;
-
 export const ButtonForm = styled.button`
   font-weight: 700;
   margin-top: 20px;

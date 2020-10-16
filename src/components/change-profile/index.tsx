@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Form, Icon, Card, Image } from 'semantic-ui-react';
+import { Form, Icon } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
-
 import * as Styled from './styles';
-
+import { requestUserInfo } from '../../redux/actions/session';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
@@ -39,6 +38,8 @@ const ChangeProfile = () => {
   const [neighborhood, setNeighborhood] = useState('');
   const [street, setStreet] = useState('');
 
+  const dispatch = useDispatch();
+
   const token = useSelector(({ session }: any) => session.token);
   let userId: any = jwt_decode(token);
 
@@ -54,14 +55,13 @@ const ChangeProfile = () => {
   const onSubmit = (values: ChangeFormInputs) => {
     axios
       .patch(
+
         `https://capstone-q2.herokuapp.com/users/${userId.sub}`,
         {
-          firstName: values.firstName,
+          name: values.firstName,
           lastName: values.lastName,
           cpf: values.cpf,
           phoneNumber: values.phoneNumber,
-          // ownProducts: [''],
-          // favorites: [''],
           userImage: values.userImage,
           adress: {
             cep: values.cep,
@@ -77,7 +77,9 @@ const ChangeProfile = () => {
         {
           headers: { Authorization: `Bearer ${token}` },
         }
-      )
+      ).then(() => {
+        dispatch(requestUserInfo(token));
+      })
       .catch((error) => {
         if (error.response.status === 400) {
           setErrorMessage('Ops! Aconteceu um erro inesperado!');

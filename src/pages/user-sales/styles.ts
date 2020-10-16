@@ -6,8 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 98%;
-  justify-content: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -42,7 +41,7 @@ export const UserInfo = styled.div`
     height: 118px;
     display: block;
     margin: 10px;
-    border: 4px solid black;
+    border:3px solid black;
     border-radius: 500px;
     -webkit-border-radius: 500px;
     -moz-border-radius: 500px;
@@ -134,34 +133,40 @@ export const CardWrapper = styled.div`
 `;
 
 export const Empty = styled.div`
-  width: 70%;
-  padding-top: 5%;
+  width: 80%;
+  margin-top: 27px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   img {
-    margin-top: 20px;
+    margin-top: 60px;
     width: 60%;
-    height: 65%;
   }
   @media (max-width: 700px) {
     img {
-      width: 100%;
+      width: 300px;
     }
     h2 {
-      font-size: 19px;
+      font-size: 16px;
     }
   }
 `;
 
 export const LoadingContainer = styled.div`
+  width: 100%;
   padding-top: 100px;
+  width: 100%;
 `;
 
 export const TableContainer = styled.div`
-  overflow-x: scroll;
+  
+  @media(max-width:1200px) {
+    width:100vw;
+    overflow-x:scroll;
+  }
 `;
+
 export const Table = styled(SemanticTable)`
   border: none !important;
   margin-left: 20px !important;
@@ -169,4 +174,5 @@ export const Table = styled(SemanticTable)`
     width: 50px;
     height: 50px;
   }
+  
 `;

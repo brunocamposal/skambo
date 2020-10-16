@@ -70,7 +70,8 @@ const NewProduct: React.FC = () => {
     const { boost, value, name, description, subCategory } = data;
 
     const sendData: Product = {
-      userId,
+      owner: user.name,
+      userId: user.id,
       views: 0,
       boostPlan: boost,
       usability: estado,
