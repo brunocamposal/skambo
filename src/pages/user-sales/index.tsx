@@ -78,7 +78,7 @@ const UserSales: React.FC = () => {
       <Styled.Container>
         {active === 'mySales' ? (
           Object.keys(user).length === 0 ? (
-            <Styled.LoadingContaine>
+            <Styled.LoadingContainer>
               <Lootie options={defaultOptions} height={200} width={200} />
             </Styled.LoadingContainer>
           ) : (

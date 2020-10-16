@@ -19,6 +19,7 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct,
   });
   const token = useSelector((state: Session) => state.session.token);
+  const currentUser = useSelector(({ session }: RootState) => session.currentUser);
   const userId = useSelector(({ session }: RootState) => session.currentUser.id);
   const [category, setCategory] = useState<SetStateAction<string>>();
   const history = useHistory();
@@ -70,8 +71,8 @@ const NewProduct: React.FC = () => {
     const { boost, value, name, description, subCategory } = data;
 
     const sendData: Product = {
-      owner: user.name,
-      userId: user.id,
+      owner: currentUser.name,
+      userId,
       views: 0,
       boostPlan: boost,
       usability: estado,
