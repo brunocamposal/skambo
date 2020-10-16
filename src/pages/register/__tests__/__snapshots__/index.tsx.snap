@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Should render register 1`] = `
+.c0 {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.c0 a:hover {
+  cursor: pointer;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 55%;
+  margin: 15vh auto;
+  height: 553px;
+  justify-self: center;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.25);
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #ffffff;
+  width: 45%;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 h1 {
+  margin: 35px;
+}
+
+.c3 label {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.c3 input {
+  font-weight: 700;
+  background-color: #f4f4f6;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.c3 input::-webkit-input-placeholder {
+  opacity: 64%;
+}
+
+.c3 input::-moz-placeholder {
+  opacity: 64%;
+}
+
+.c3 input:-ms-input-placeholder {
+  opacity: 64%;
+}
+
+.c3 input::placeholder {
+  opacity: 64%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: var(--primary);
+  width: 55%;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 img {
+  margin: 20px;
+}
+
+.c4 {
+  font-weight: 700;
+  margin-top: 54px;
+  color: #fff;
+  background-color: var(--primary);
+  border-radius: 7px;
+  height: 35px;
+  width: 293px;
+  cursor: pointer;
+}
+
+@media (max-width:1368px) {
+  .c1 {
+    width: 60%;
+  }
+}
+
+@media (max-width:1200px) {
+  .c1 {
+    width: 75%;
+  }
+}
+
+@media (max-width:992px) {
+  .c1 {
+    width: 93%;
+  }
+}
+
+@media (max-width:768px) {
+  .c1 {
+    width: 96%;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 880px;
+  }
+}
+
+@media (max-width:480px) {
+  .c1 {
+    width: 90%;
+    height: 553px;
+    box-shadow: 0px 0px 0px #ffffff;
+  }
+}
+
+@media (max-width:768px) {
+  .c3 {
+    width: 96%;
+  }
+
+  .c3 h1 {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width:480px) {
+  .c3 {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width:768px) {
+  .c2 {
+    width: 96%;
+    margin-top: 64px;
+  }
+}
+
+@media (max-width:480px) {
+  .c2 {
+    display: none;
+  }
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <img
+        alt="card"
+        src="register-icon.svg"
+      />
+    </div>
+    <div
+      className="c3"
+    >
+      <h1>
+        Cadastrar-se
+      </h1>
+      <form
+        className="ui form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="required field"
+        >
+          <label>
+            <div>
+              E-mail
+            </div>
+            <input
+              name="email"
+              placeholder="Digite seu e-mail"
+            />
+          </label>
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            <div>
+              Senha
+            </div>
+            <input
+              name="password"
+              placeholder="Digite sua Senha"
+              type="password"
+            />
+          </label>
+        </div>
+        <div
+          className="required field"
+        >
+          <label>
+            <div>
+              Confirme sua senha
+            </div>
+            <input
+              name="passwordRepeat"
+              placeholder="Digite sua Senha"
+              type="password"
+            />
+          </label>
+        </div>
+        
+        <div>
+          <button
+            className="c4"
+            type="submit"
+          >
+            Cadastrar!
+          </button>
+          <a />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

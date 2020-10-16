@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewProduct Should render NewProduct 1`] = `
+<div
+  className="sc-pNWxx fiictK"
+  style={
+    Object {
+      "marginTop": 80,
+      "width": "100%",
+    }
+  }
+>
+  <a />
+  <h1>
+    Novo Produto
+  </h1>
+  <form
+    className="ui form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="sc-gtssRu bcSNFp"
+    >
+      <div
+        className="required field"
+      >
+        <label
+          htmlFor="name"
+        >
+          Produto
+        </label>
+        <input
+          id="name"
+          name="name"
+          placeholder="Nome do Produto"
+          type="text"
+        />
+      </div>
+      <div
+        className="field"
+      >
+        <label
+          htmlFor="category"
+        >
+          Categoria
+        </label>
+        <select
+          defaultValue="Outros"
+          id="category"
+          name="category"
+          placeholder="Escolha uma categoria"
+        >
+          <option
+            value="Vestuarios"
+          >
+            Vestuário
+          </option>
+          <option
+            value="Bicicletas"
+          >
+            Bicicletas
+          </option>
+          <option
+            value="Esportes"
+          >
+            Esportes
+          </option>
+          <option
+            value="Instrumentos_Musicais"
+          >
+            Instrumentos Musicais
+          </option>
+          <option
+            value="Jogos"
+          >
+            Jogos
+          </option>
+          <option
+            value="Livros"
+          >
+            Livros
+          </option>
+          <option
+            value="Moveis"
+          >
+            Móveis
+          </option>
+          <option
+            value="Outros"
+          >
+            Outros
+          </option>
+        </select>
+      </div>
+      <div
+        className="required field"
+      >
+        <label
+          htmlFor="images"
+        >
+          Imagens
+        </label>
+        <input
+          accept="image/x-png,image/gif,image/jpeg"
+          defaultValue={Array []}
+          id="images"
+          multiple={true}
+          name="images"
+          onChange={[Function]}
+          placeholder="Inserir imagem"
+          type="file"
+        />
+        <p
+          className="sc-eCApGN gmYAkM"
+        >
+          Insira ao menos uma imagem!
+        </p>
+      </div>
+      <div
+        className="field"
+      >
+        <label
+          htmlFor="usability"
+        >
+          Estado de conservação
+        </label>
+        <input
+          id="usability"
+          max={5}
+          min={1}
+          name="usability"
+          onChange={[Function]}
+          style={
+            Object {
+              "width": "75%",
+            }
+          }
+          type="range"
+        />
+        <div
+          style={
+            Object {
+              "marginTop": -20,
+              "padding": 0,
+            }
+          }
+        >
+          selecione
+        </div>
+      </div>
+      <div
+        className="field"
+      >
+        <label
+          htmlFor="interests"
+        >
+          Interesses para troca 
+          <em
+            style={
+              Object {
+                "color": "grey",
+              }
+            }
+          >
+            (opcional)
+          </em>
+        </label>
+        <input
+          id="interests"
+          name="interests"
+          placeholder="Interesses para troca, separados por vírgula"
+          type="text"
+        />
+      </div>
+      <div
+        className="required field"
+      >
+        <label
+          htmlFor="description"
+        >
+          Detalhes
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Detalhes como possíveis sinais de uso,  manchas, partes faltantes ou estragadas, para que os  visitantes saibam o que esperar do seu produto."
+          rows={4}
+        />
+      </div>
+      <div
+        className="required field"
+      >
+        <label
+          htmlFor="value"
+        >
+          Valor de referência para Skambo
+        </label>
+        <input
+          id="value"
+          maxLength={11}
+          name="value"
+          onChange={[Function]}
+          placeholder="1,00"
+          type="tel"
+          value="0"
+        />
+      </div>
+      <div
+        className="field"
+      >
+        <label
+          htmlFor="boost"
+        >
+          Plano de Impulsinamento
+        </label>
+        <select
+          defaultValue="None"
+          id="boost"
+          name="boost"
+          placeholder="Plano de impulsionamento"
+        >
+          <option
+            value="None"
+          >
+            Nenhum
+          </option>
+          <option
+            value="Plan1"
+          >
+            1 Semana = R$ 15,00
+          </option>
+          <option
+            value="Plan2"
+          >
+            2 Semanas = R$ 22,00
+          </option>
+          <option
+            value="Plan3"
+          >
+            1 Mês = R$ 30,00
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="field"
+    >
+      <div
+        className="sc-gKAblj fVisAX"
+      >
+        <button
+          className="sc-bdnylx sc-dlnjPT fHFSIS gjYSHt"
+          onClick={[Function]}
+          type="reset"
+        >
+          Limpar
+        </button>
+        <button
+          className="sc-bdnylx sc-hKFyIo fHFSIS fdrzLg"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
