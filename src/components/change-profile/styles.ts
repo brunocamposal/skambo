@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 56%;
+  width: 75%;
   background-color: #fff;
   a {
     &:hover {
@@ -17,10 +17,8 @@ export const Container = styled.div`
 `;
 
 export const BoxContent = styled.div`
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 10vh auto; */
 
   @media (max-width: 480px) {
     margin: 0;
@@ -31,7 +29,7 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 80%;
 
   label {
     font-weight: 700;
