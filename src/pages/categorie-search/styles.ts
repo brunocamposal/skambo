@@ -10,7 +10,7 @@ export const Container = styled.div`
   @media (max-width: 480px) {
     margin-top: 30px;
     width: 100vw;
-
+    
     h3 {
       text-align: center;
     }
@@ -22,17 +22,16 @@ export const ResultSearch = styled.div`
   flex-wrap: wrap;
 
   @media (max-width: 480px) {
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  width: 450px!important;
+  width: 450px !important;
   margin-bottom: 10px;
   @media (max-width: 480px) {
-    width: 90vw!important;
-    margin: 0 auto!important;
+    width: 90vw !important;
+    margin: 0 auto !important;
   }
 `;
-
-

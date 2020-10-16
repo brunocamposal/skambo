@@ -6,7 +6,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 98%;
-  justify-content: center;
   justify-content: space-between;
 
   @media (max-width: 1000px) {
@@ -142,8 +141,7 @@ export const Empty = styled.div`
 
   img {
     margin-top: 60px;
-    width: 65%;
-
+    width: 60%;
   }
   @media (max-width: 700px) {
     img {
@@ -158,6 +156,7 @@ export const Empty = styled.div`
 export const LoadingContainer = styled.div`
   width: 100%;
   padding-top: 100px;
+  width: 100%;
 `;
 
 export const TableContainer = styled.div`

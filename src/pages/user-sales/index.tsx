@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Styled from './styles';
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineHome, AiOutlineUser } from 'react-icons/ai';
+import { FiPackage, FiSettings } from 'react-icons/fi';
 import { MdModeEdit } from 'react-icons/md';
 import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
@@ -90,14 +91,19 @@ const UserSales: React.FC = () => {
                 )}
                 <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
                 <section>
-                  <div>Curitiba/PR</div>
-                  <div>{currentUser.trades} Trocas</div>
+                  <div>
+                    <AiOutlineHome /> Curitiba/PR
+                  </div>
+                  <div>
+                    {' '}
+                    <FiPackage /> {currentUser.trades !== undefined ? currentUser.trades : 0} Trocas
+                  </div>
                 </section>
                 <Styled.ProfileButtonActive onClick={() => setActive('mySales')}>
-                  Meus Anúncios
+                  <AiOutlineUser/> Meus Anúncios
                 </Styled.ProfileButtonActive>
                 <Styled.SettingsButton onClick={() => setActive('settings')}>
-                  Alterar informações
+                <FiSettings/>  Alterar informações
                 </Styled.SettingsButton>
               </Styled.UserInfo>
               {user?.userSales?.length > 0 ? (
@@ -168,14 +174,20 @@ const UserSales: React.FC = () => {
               )}
               <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
               <section>
-                <div>Curitiba/PR</div>
-                <div>{currentUser.trades} Trocas</div>
+                <div>
+                  {' '}
+                  <AiOutlineHome /> Curitiba/PR
+                </div>
+                <div>
+                  {' '}
+                  <FiPackage /> {currentUser.trades !== undefined ? currentUser.trades : 0} Trocas
+                </div>
               </section>
               <Styled.ProfileButton onClick={() => setActive('mySales')}>
-                Meus Anúncios
+              <AiOutlineUser/>  Meus Anúncios
               </Styled.ProfileButton>
               <Styled.SettingsButtonActive onClick={() => setActive('settings')}>
-                Alterar informações
+                <FiSettings/> Alterar informações
               </Styled.SettingsButtonActive>
             </Styled.UserInfo>
 

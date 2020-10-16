@@ -21,6 +21,7 @@ export const ResultSearch = styled.div`
   flex-wrap: wrap;
 
   @media (max-width: 480px) {
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
   }
 `;

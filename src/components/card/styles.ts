@@ -36,8 +36,8 @@ export const Card = styled.div`
 
   @media (max-width: 480px) {
     img {
-      width: 130px;
-      height: 160px;
+      width: 230px;
+      height: 230px;
     }
   }
 
