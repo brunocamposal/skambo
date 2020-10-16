@@ -8,7 +8,7 @@ export const defaultProduct: Product = {
   value: '0',
   name: '',
   description: '',
-  category: 'Outros',
+  category: '',
   subCategory: '',
   images: [],
   thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
