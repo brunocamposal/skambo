@@ -28,6 +28,7 @@ export const Title = styled.div`
 export const CarouselContainer = styled.div`
   width: 900px;
   height: 300px;
+  margin-bottom: 85px;
 
   @media (max-width: 1024px) {
     width: 100%;

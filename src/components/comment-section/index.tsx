@@ -133,7 +133,7 @@ const CommentSection: React.FC = () => {
           onChange={(evt) => handleOnChange(evt)}
           value={newComment}
         />
-        <Button content="Comentar" labelPosition="left" icon="edit" primary style={{ backgroundColor: "#8d70fb" }} />
+        <Button content="Comentar" labelPosition="left" icon="edit" primary style={{ backgroundColor: "#8d70fb", marginBottom: "35px", }} />
       </Form>
     </Comment.Group>
   );

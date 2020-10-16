@@ -35,10 +35,13 @@ const UserSales: React.FC = () => {
   const [active, setActive] = useState('mySales');
   const dispatch = useDispatch();
   const session = useSelector((state: stateProps) => state.session);
+  const currentUser = useSelector(({ session }: RootState) => session.currentUser);
   const user = useSelector((state: { user: any }) => state.user);
   const [userInfo, setUserInfo]: any = useState();
   const decoded: { sub: string } = jwt_decode(session.token);
   const history = useHistory();
+
+  console.log(currentUser)
 
   const defaultOptions = {
     loop: true,
@@ -82,8 +85,8 @@ const UserSales: React.FC = () => {
           ) : (
             <>
               <Styled.UserInfo>
-                {userInfo?.userImage !== undefined ? (
-                  <img src={userInfo.userImage} />
+                {currentUser.userImage !== undefined ? (
+                  <img src={currentUser.userImage} />
                 ) : (
                   <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
                 )}
@@ -92,9 +95,9 @@ const UserSales: React.FC = () => {
                   <div>Curitiba/PR</div>
                   <div>0 Trocas</div>
                 </section>
-                <Styled.ProfileButton onClick={() => setActive('mySales')}>
+                <Styled.ProfileButtonActive onClick={() => setActive('mySales')}>
                   Meus Anúncios
-                </Styled.ProfileButton>
+                </Styled.ProfileButtonActive>
                 <Styled.SettingsButton onClick={() => setActive('settings')}>
                   Alterar informações
                 </Styled.SettingsButton>
@@ -174,9 +177,9 @@ const UserSales: React.FC = () => {
               <Styled.ProfileButton onClick={() => setActive('mySales')}>
                 Meus Anúncios
               </Styled.ProfileButton>
-              <Styled.SettingsButton onClick={() => setActive('settings')}>
+              <Styled.SettingsButtonActive onClick={() => setActive('settings')}>
                 Alterar informações
-              </Styled.SettingsButton>
+              </Styled.SettingsButtonActive>
             </Styled.UserInfo>
 
             <ChangeProfile />

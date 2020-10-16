@@ -154,6 +154,12 @@ export const StyledButton = styled.button`
     margin: 0;
     width: 100px;
   }
+
+  &:hover {
+    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: background-color 0.3s;
+    background-color: #7252f2;
+  } 
 `;
 
 export const StyledReverseButton = styled(StyledButton)`

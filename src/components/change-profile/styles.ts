@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 56%;
-  /* height: 100vh; */
   background-color: #fff;
   a {
     &:hover {

@@ -54,7 +54,10 @@ export const UserInfo = styled.div`
   }
 
 `;
-export const ProfileButton = styled.button`
+
+
+
+export const ProfileButtonActive = styled.button`
   background: var(--primary);
   display: block;
   width: 100%;
@@ -66,6 +69,7 @@ export const ProfileButton = styled.button`
   font-weight: 700;
   font-size: 13px;
   margin-bottom: 7px;
+  cursor: pointer;
   &:hover {
     box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
     transition: background-color 0.3s;
@@ -73,14 +77,30 @@ export const ProfileButton = styled.button`
   } 
 `;
 
+
+export const ProfileButton = styled(ProfileButtonActive)`
+  background-color: #fff;
+  /* margin-top:0; */
+  color: #000;
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    background: rgba(128, 128, 128, 0.178);
+  }
+`;
+
 export const SettingsButton = styled(ProfileButton)`
   background-color: #fff;
   /* margin-top:0; */
   color: #000;
   &:hover {
-    border: 1px solid #f7f7f7;
-    background-color: #efeded;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    background: rgba(128, 128, 128, 0.178);
   }
+`;
+
+
+export const SettingsButtonActive = styled(ProfileButtonActive)`
+  
 `;
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -135,7 +155,9 @@ export const Empty = styled.div`
   }
 `;
 
-export const LoadingContainer = styled.div``;
+export const LoadingContainer = styled.div`
+  padding-top: 100px;
+`;
 
 export const TableContainer = styled.div`
   overflow-x: scroll;
