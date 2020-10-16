@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import { ResetButton, SendButton, ButtonsDiv, DeleteImg, Error, FormDiv } from './styles';
-import { defaultProduct, formatNumber, categorias } from './helper';
+import { defaultProduct, formatNumber, categorias, subcategorias } from './helper';
 import { FormContainer } from '../../components/form-container/styles';
+import { RootState } from '../../redux/reducers';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session, Data } from './types';
 import { useSelector } from 'react-redux';
 
@@ -18,7 +19,8 @@ const NewProduct: React.FC = () => {
     defaultValues: defaultProduct,
   });
   const token = useSelector((state: Session) => state.session.token);
-  const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
+  const userId = useSelector(({ session }: RootState) => session.currentUser.id);
+  // const userId: number = ~~(jwtDecode<TokenDecoded>(token).sub, 10);
 
   useEffect(() => {
     let es;
@@ -61,7 +63,7 @@ const NewProduct: React.FC = () => {
       views: 0,
       usersAccess: 0,
       boost,
-      usability,
+      usability: estado,
       value,
       name,
       description,
@@ -132,10 +134,12 @@ const NewProduct: React.FC = () => {
               id="category"
               ref={register}
               placeholder="Escolha uma categoria">
-              {categorias.map(({ key, value, text }) => (
-                <option key={key} value={value}>
-                  {text}
-                </option>
+              {subcategorias.map(({ name, content }, key) => (
+                <optgroup label={name} key={key}>
+                  {content.map((opt) => (
+                    <option value={opt}>{opt}</option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           </Form.Field>

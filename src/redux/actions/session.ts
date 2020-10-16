@@ -18,7 +18,6 @@ export const requestLogin = (token: string) => (dispatch: any) => {
       },
     })
     .then((res) => {
-      dispatch(login(token, res.data))
-      localStorage.setItem('currentUser', JSON.stringify(res.data));
+      dispatch(login(token, res.data));
     });
 };

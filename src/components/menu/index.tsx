@@ -59,7 +59,7 @@ const TopBar: React.FC = () => {
           </Form>
         </StyledMenuCenter>
 
-        {localStorage.length !== 0 ? ( // Condicional para quando o usuário estiver logado
+        {localStorage.token && localStorage.token !== '' ? ( // Condicional para quando o usuário estiver logado
           <StyledMenuRight>
             <StyledButton className="web" onClick={() => history.push('/new-product')}>
               Anunciar
