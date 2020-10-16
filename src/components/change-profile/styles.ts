@@ -1,32 +1,37 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 56%;
   background-color: #fff;
   a {
     &:hover {
       cursor: pointer;
     }
   }
+
+  @media (max-width: 1000px) {
+    margin: 0;
+    width: 80% ;
+  }
+
 `;
 
 export const BoxContent = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10vh auto;
+  margin: 10vh auto; */
 
-  @media (max-width: 480px){
+  @media (max-width: 480px) {
     margin: 0;
-  } 
+  }
 `;
 
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 96%;
+  width: 100%;
 
   label {
     font-weight: 700;
@@ -46,30 +51,28 @@ export const FormContainer = styled.div`
   }
 
   .ui.form {
-    width: 70%;
+    width: 95%;
     margin-top: 40px;
+  }
+  .ui.form select {
+    height: 38px;
   }
 
 `;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  height: 100px;
-  width: 70%;
-  background-color: var(--primary);
-  border-radius: 7px;
+  margin-top: 20px;
+  width: 95%;
 
-  h1 {
-    color: #fff;
+  @media (max-width: 480px) {
+    margin-top: 0px;
+    height: 20px;
+    h1{
+      font-size: 23px;
+    }
   }
-
-  @media (max-width: 480px){
-    margin-top:40px;
-    height: 60px;
-  } 
 `;
 
 export const MsgError = styled.p`
@@ -80,11 +83,12 @@ export const MsgError = styled.p`
 export const ButtonForm = styled.button`
   font-weight: 700;
   margin-top: 20px;
+  margin-bottom: 75px;
   color: #fff;
   background-color: var(--primary);
   border-radius: 7px;
   height: 35px;
-  width: 275px;
+  width: 255px;
   float: right;
   cursor: pointer;
 `;

@@ -8,16 +8,13 @@ import Card from '../../components/card';
 import Swal from 'sweetalert2';
 
 import axios from 'axios';
+import { filter } from 'cypress/types/bluebird';
 
 interface ProductsProps {
   name: string;
   category: any;
   thumbnail: string;
   search: string;
-}
-
-interface stateProps {
-  session: { token: string };
 }
 
 const CategorieSearch: React.FC = () => {
@@ -30,7 +27,6 @@ const CategorieSearch: React.FC = () => {
   const url = 'https://capstone-q2.herokuapp.com/products';
   const { name } = useParams<ProductsProps>();
   const history = useHistory();
-
 
   const categoryProducts = name;
 
@@ -58,15 +54,13 @@ const CategorieSearch: React.FC = () => {
       });
   }, []);
 
+  const formataNome = (str) => {
+    return str.toLowerCase().replace(/(?:^|\s)(?!da|de|do)\S/g, (l) => l.toUpperCase());
+  };
+
   useEffect(() => {
     const filterRes = productsList.filter(({ category }) => {
-      const arrCategory = category.map((value: any) => value.toLocaleLowerCase());
-
-      for (let i = 0; i <= arrCategory.length; i++) {
-        if (arrCategory.includes(String(categoryProducts))) {
-          return category;
-        }
-      }
+      return category === formataNome(categoryProducts);
     });
 
     if (filterRes.length === 0) {
@@ -84,13 +78,28 @@ const CategorieSearch: React.FC = () => {
     setSelected(value);
   };
 
-  const subcategorias = filterCategory.map((product: any, key) => {
-    return { key, text: product.category[1], value: product.category[1] };
+  const filterDuplicate = [];
+
+  filterCategory.forEach((product) => {
+    const duplicated =
+      filterDuplicate.findIndex((redItem) => {
+        return product.subCategory == redItem.subCategory;
+      }) > -1;
+
+    if (!duplicated) {
+      filterDuplicate.push(product);
+    }
+  });
+
+  const subcategorias = filterDuplicate.map((product: any, key) => {
+    return { key, text: product.subCategory, value: product.subCategory };
   });
 
   const goProductPage = (id: string) => {
-    {id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`)}
-  }
+    {
+      id === 'unique_id' ? history.push('/') : history.push(`/products/${id}`);
+    }
+  };
 
   return (
     <div>
@@ -115,19 +124,19 @@ const CategorieSearch: React.FC = () => {
                 return (
                   <Card
                     key={key}
-                    title="teste"
-                    category={product.category.join('/ ')}
+                    title={product.name}
+                    category={`${product.category} / ${product.subCategory}`}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
                   />
                 );
               }
-              if (selected.includes(product.category[1])) {
+              if (selected.includes(product.subCategory)) {
                 return (
                   <Card
                     key={key}
-                    title="teste"
-                    category={product.category.join('/ ')}
+                    title={product.name}
+                    category={`${product.category} / ${product.subCategory}`}
                     imgUrl={product.thumbnail}
                     onClick={() => goProductPage(product.id)}
                   />

@@ -5,7 +5,7 @@ export const StyledMenu = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 85px;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 0;
   display: flex;
@@ -48,7 +48,6 @@ export const StyledMenuRight = styled.div`
   font-size: 32px;
   display: flex;
   justify-content: flex-end;
-  margin-right: 50px;
 
   .favorite {
       width: 30px;
@@ -123,9 +122,6 @@ export const StyledSearch = styled(Input)`
     border-radius: 30px !important;
     border: 1px solid darkgrey !important;
   }
-  @media (max-width: 700px) {
-    width: 95%;
-  }
   @media (max-width: 480px) {
     width: 90%;
     left: 5%;
@@ -158,6 +154,12 @@ export const StyledButton = styled.button`
     margin: 0;
     width: 100px;
   }
+
+  &:hover {
+    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: background-color 0.3s;
+    background-color: #7252f2;
+  } 
 `;
 
 export const StyledReverseButton = styled(StyledButton)`
@@ -167,6 +169,11 @@ export const StyledReverseButton = styled(StyledButton)`
   cursor: pointer;
   @media (max-width: 480px) {
     display: none;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    background: rgba(128, 128, 128, 0.178);
   }
 `;
 

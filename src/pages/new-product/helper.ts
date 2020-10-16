@@ -3,15 +3,15 @@ import { Product, Categoria, Subcategoria } from './types';
 export const defaultProduct: Product = {
   userId: 0,
   views: 0,
-  usersAccess: 0,
-  boost: '',
-  usability: '3',
+  boostPlan: '',
+  usability: 'Semi Novo',
   value: '0',
   name: '',
   description: '',
   category: 'Outros',
-  images: [],
-  thumbnail: '',
+  subCategory: '',
+  images: ['https://www.tibs.org.tw/images/default.jpg'],
+  thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
   interests: '',
 };
 
@@ -24,17 +24,6 @@ export const formatNumber = (n: string): string => {
     .replace(/(\d{1,})(\d{3}),/g, '$1.$2,')
     .replace(/(\d{1,})(\d{3})\./g, '$1.$2.');
 };
-
-export const categorias: Categoria[] = [
-  { value: 'Vestuarios', text: 'Vestuário' },
-  { value: 'Bicicletas', text: 'Bicicletas' },
-  { value: 'Esportes', text: 'Esportes' },
-  { value: 'Instrumentos_Musicais', text: 'Instrumentos Musicais' },
-  { value: 'Jogos', text: 'Jogos' },
-  { value: 'Livros', text: 'Livros' },
-  { value: 'Moveis', text: 'Móveis' },
-  { value: 'Outros', text: 'Outros' },
-];
 
 export const subcategorias: Subcategoria[] = [
   { name: 'Jogos', content: ['PS4', 'Xbox One'] },

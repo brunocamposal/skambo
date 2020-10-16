@@ -6,7 +6,7 @@ import { Popup } from 'semantic-ui-react';
 interface PropTypes {
   title: string;
   category: string;
-  imgUrl: string;
+  imgUrl?: string;
   onClick?: () => void;
 }
 

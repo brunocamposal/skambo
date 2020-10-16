@@ -25,22 +25,25 @@ export const FormDiv = styled.div`
 `;
 
 export const ResetButton = styled(Button)`
-  background: var(--primary-light);
+  background: #ffffff;
   color: var(--primary-dark);
-  :hover {
-    background: var(--secondary-light);
-    color: var(--secondary-dark);
+
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    background: rgba(128, 128, 128, 0.178);
   }
 `;
 
 export const SendButton = styled(Button)`
   background: var(--primary);
-  color: var(--secondary-light);
+  color: #ffffff;
   margin-left: 12px;
-  :hover {
-    background: var(--secondary-light);
-    color: var(--secondary-dark);
-  }
+
+  &:hover {
+    box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    transition: background-color 0.3s;
+    background-color: #7252f2;
+  } 
 `;
 
 export const Error = styled.p`

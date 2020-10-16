@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Form, Icon} from 'semantic-ui-react';
+import { Form, Icon, Card, Image } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 
 import * as Styled from './styles';
@@ -17,7 +17,7 @@ interface ChangeFormInputs {
   phoneNumber?: number | string;
   ownProducts?: string;
   favorites?: string;
-  userImage?: any;
+  userImage?: string;
   adress?: any;
   cep?: number | string;
   state?: string;
@@ -62,7 +62,7 @@ const ChangeProfile = () => {
           phoneNumber: values.phoneNumber,
           // ownProducts: [''],
           // favorites: [''],
-          userImage: '',
+          userImage: values.userImage,
           adress: {
             cep: values.cep,
             state: values.state,
@@ -93,15 +93,33 @@ const ChangeProfile = () => {
     });
   };
 
+  const currentUser = localStorage.getItem('currentUser');
+  let user: any;
+  if (typeof currentUser === 'string') {
+    user = JSON.parse(currentUser);
+  }
+  console.log(user);
+
   return (
     <>
       <Styled.Container>
         <Styled.BoxContent>
           <Styled.FormContainer>
             <Styled.Header>
-              <h1>Cadastro</h1>
+              <h1>Alterar Informações</h1>
             </Styled.Header>
+
             <Form onSubmit={handleSubmit(onSubmit)}>
+              <Form.Field>
+              <label>Avatar (url)</label>
+                <input
+                  name="userImage"
+                  type="text"
+                  placeholder="Insira uma URL"
+                  ref={register}
+                  defaultValue={user.userImage}
+                />
+              </Form.Field>
               <Form.Group widths={2}>
                 <Form.Field required>
                   <label>Nome</label>
@@ -112,10 +130,11 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Digite seu primeiro nome!',
                       pattern: {
-                        value: /[A-Z]{2,}$/i,
-                        message: 'Isso não se parece com um e-mail!',
+                        value: /[A-Za-zÀ-ü]{2,}$/i,
+                        message: 'Isso não se parece com um nome!',
                       },
                     })}
+                    defaultValue={user.firstName}
                   />
                   {errors.firstName && (
                     <Styled.MsgError>{errors.firstName.message}</Styled.MsgError>
@@ -130,10 +149,11 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Digite seu sobrenome!',
                       pattern: {
-                        value: /[A-Z]{2,}$/i,
-                        message: 'Isso não se parece com um e-mail!',
+                        value: /[A-Za-zÀ-ü]{2,}$/i,
+                        message: 'Isso não se parece com um sobrenome!',
                       },
                     })}
+                    defaultValue={user.lastName}
                   />
                   {errors.lastName && <Styled.MsgError>{errors.lastName.message}</Styled.MsgError>}
                 </Form.Field>
@@ -149,10 +169,11 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Campo obrigatório!',
                       pattern: {
-                        value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i,
-                        message: 'Formato invalido!',
+                        value: /^[0-9]{11}$/,
+                        message: 'Digite somente os 11 números de seu CPF',
                       },
                     })}
+                    defaultValue={user.cpf}
                   />
                   {errors.cpf && <Styled.MsgError>{errors.cpf.message}</Styled.MsgError>}
                 </Form.Field>
@@ -165,6 +186,7 @@ const ChangeProfile = () => {
                     ref={register({
                       required: 'Campo obrigatório!',
                     })}
+                    defaultValue={user.phoneNumber}
                   />
                   {errors.phoneNumber && (
                     <Styled.MsgError>{errors.phoneNumber.message}</Styled.MsgError>
@@ -187,6 +209,7 @@ const ChangeProfile = () => {
                       },
                     })}
                     onBlur={({ target }) => autoFillCep(target.value)}
+                    defaultValue={user.adress ? user.adress.cep : ''}
                   />
                   {errors.cep && <Styled.MsgError>{errors.cep.message}</Styled.MsgError>}
                 </Form.Field>
@@ -310,8 +333,8 @@ const ChangeProfile = () => {
                 )}
               </Form.Field>
 
-              <Form.Group widths={2}> 
-                <Form.Field required width={10} >
+              <Form.Group widths={2}>
+                <Form.Field required width={10}>
                   <label>Rua</label>
                   <input
                     name="street"
@@ -330,7 +353,7 @@ const ChangeProfile = () => {
                 </Form.Field>
               </Form.Group>
 
-              <Form.Field >
+              <Form.Field>
                 <label>Referência</label>
                 <input
                   name="referencePoint"
