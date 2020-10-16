@@ -50,19 +50,19 @@ export const StyledMenuRight = styled.div`
   justify-content: flex-end;
 
   .favorite {
-      width: 30px;
-      height: 30px;
-      margin-top: 2px;
-      margin-left: 5px;
-      cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    margin-left: 5px;
+    cursor: pointer;
   }
 
   .message {
-      width: 30px;
-      height: 30px;
-      margin-top: 2px;
-      margin-left: 5px;
-      cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    margin-left: 5px;
+    cursor: pointer;
   }
 
   @media (max-width: 1300px) {
@@ -93,12 +93,25 @@ export const StyledIcons = styled.div`
   margin: 10px 12px;
   display: flex;
   flex-direction: row;
+
+  .dropdown-mobile {
+    display: none;
+  }
+
   @media (max-width: 880px) {
     margin-top: 20px;
   }
 
   @media (max-width: 480px) {
     margin: 10px 15px;
+
+    .dropdown-desktop {
+      display: none;
+    }
+
+    .dropdown-mobile {
+      display: block;
+    }
   }
 `;
 
@@ -159,7 +172,7 @@ export const StyledButton = styled.button`
     box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.75);
     transition: background-color 0.3s;
     background-color: #7252f2;
-  } 
+  }
 `;
 
 export const StyledReverseButton = styled(StyledButton)`

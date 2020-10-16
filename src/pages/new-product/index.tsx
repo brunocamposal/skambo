@@ -60,6 +60,7 @@ const NewProduct: React.FC = () => {
     const interestArr = data.interests.split(",").map(interest => interest.trim());
     const { boost, usability, value, name, description, category, subCategory, interests } = data;
     const sendData: Product = {
+      owner: user.name,
       userId: user.id,
       views: 0,
       boostPlan: boost,

@@ -6,8 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 98%;
-  justify-content: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -134,29 +133,29 @@ export const CardWrapper = styled.div`
 `;
 
 export const Empty = styled.div`
-  width: 70%;
-  padding-top: 5%;
+  width: 80%;
+  margin-top: 27px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   img {
-    margin-top: 20px;
+    margin-top: 60px;
     width: 60%;
-    height: 65%;
   }
   @media (max-width: 700px) {
     img {
-      width: 100%;
+      width: 300px;
     }
     h2 {
-      font-size: 19px;
+      font-size: 16px;
     }
   }
 `;
 
 export const LoadingContainer = styled.div`
   padding-top: 100px;
+  width: 100%;
 `;
 
 export const TableContainer = styled.div`
