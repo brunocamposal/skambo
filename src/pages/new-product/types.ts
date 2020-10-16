@@ -1,6 +1,7 @@
 export interface Product {
   [x: string]: any;
 }
+
 export interface Data {
   [x: string]: any;
 }
@@ -11,10 +12,9 @@ export interface TokenDecoded {
   exp: Date;
 }
 
-export interface Categoria {
-  key: number;
-  value: string;
-  text: string;
+export interface Subcategoria {
+  name: string;
+  content: string[];
 }
 
 export interface Session {

@@ -84,6 +84,7 @@
     "eslint-config-universe": "^5.0.0",
     "eslint-plugin-cypress": "^2.11.2",
     "jest-styled-components": "^7.0.3",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

@@ -1,4 +1,4 @@
-import { Product, Categoria } from './types';
+import { Product, Subcategoria } from './types';
 
 export const defaultProduct: Product = {
   userId: 0,
@@ -8,9 +8,9 @@ export const defaultProduct: Product = {
   value: '0',
   name: '',
   description: '',
-  category: 'Outros',
+  category: '',
   subCategory: '',
-  images: ['https://www.tibs.org.tw/images/default.jpg'],
+  images: [],
   thumbnail: 'https://www.tibs.org.tw/images/default.jpg',
   interests: '',
 };
@@ -25,13 +25,13 @@ export const formatNumber = (n: string): string => {
     .replace(/(\d{1,})(\d{3})\./g, '$1.$2.');
 };
 
-export const categorias: Categoria[] = [
-  { key: 1, value: 'Vestuarios', text: 'Vestuário' },
-  { key: 2, value: 'Bicicletas', text: 'Bicicletas' },
-  { key: 3, value: 'Esportes', text: 'Esportes' },
-  { key: 4, value: 'Instrumentos_Musicais', text: 'Instrumentos Musicais' },
-  { key: 5, value: 'Jogos', text: 'Jogos' },
-  { key: 6, value: 'Livros', text: 'Livros' },
-  { key: 7, value: 'Moveis', text: 'Móveis' },
-  { key: 8, value: 'Outros', text: 'Outros' },
+export const subcategorias: Subcategoria[] = [
+  { name: 'Jogos', content: ['PS4', 'Xbox One'] },
+  { name: 'Livros', content: ['Fantasia', 'Sociologia'] },
+  { name: 'Vestuário', content: ['Moletom', 'Calça'] },
+  { name: 'Bicicletas', content: ['Infantil', 'Adulto'] },
+  { name: 'Esportes', content: ['Futebol', 'Basquete'] },
+  { name: 'Instrumentos Musicais', content: ['Violão', 'Teclado Eletrônico'] },
+  { name: 'Móveis', content: ['Sala de Estar', 'Quarto'] },
+  { name: 'Eletrônicos', content: ['Celular', 'Console'] },
 ];

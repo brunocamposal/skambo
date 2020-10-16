@@ -7,5 +7,4 @@ export const covers = [
     { title: "Banner1", imgUrl: cover1 },
     { title: "Banner2", imgUrl: cover2 },
     { title: "Banner3", imgUrl: cover3 },
-    { title: "Banner4", imgUrl: cover4 },
 ]
