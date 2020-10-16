@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 // import jwtDecode from 'jwt-decode';
 import { Product, TokenDecoded, Session, Data } from './types';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/reducers';
 
 const NewProduct: React.FC = () => {
   const [formValue, setFormValue] = useState(defaultProduct);
@@ -22,8 +21,6 @@ const NewProduct: React.FC = () => {
   const token = useSelector((state: Session) => state.session.token);
   const userId = useSelector(({ session }: RootState) => session.currentUser.id);
   const history = useHistory();
-
-  console.log({ user });
 
   useEffect(() => {
     let es;
@@ -61,7 +58,7 @@ const NewProduct: React.FC = () => {
     const interestArr = data.interests.split(",").map(interest => interest.trim());
     const { boost, usability, value, name, description, category, subCategory, interests } = data;
     const sendData: Product = {
-      userId: user.id,
+      userId,
       views: 0,
       boostPlan: boost,
       usability: estado,
