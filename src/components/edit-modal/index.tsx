@@ -1,13 +1,39 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Header, Input, Modal, Form } from 'semantic-ui-react'
+import { Button, Header, Input, Modal, Form, Select } from 'semantic-ui-react'
 import * as Styled from './styles'
 import axios from 'axios'
 import { changeProductInfo as changeProductInfoAction } from '../../redux/actions/user'
+// import CurrencyInput from 'react-currency-masked-input'
+import MaskedInput from 'react-text-mask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 interface stateProps {
   session: { token: string }
 }
+
+const categoryOptions = [
+  { key: 1, value: 'Vestuarios', text: 'Vestuário' },
+  { key: 2, value: 'Bicicletas', text: 'Bicicletas' },
+  { key: 3, value: 'Esportes', text: 'Esportes' },
+  { key: 4, value: 'Instrumentos_Musicais', text: 'Instrumentos Musicais' },
+  { key: 5, value: 'Jogos', text: 'Jogos' },
+  { key: 6, value: 'Livros', text: 'Livros' },
+  { key: 7, value: 'Moveis', text: 'Móveis' },
+  { key: 8, value: 'Outros', text: 'Outros' },
+  { key: 9, value: 'Eletrônicos', text: 'Eletrônicos' }
+]
+
+const numberMask = createNumberMask({
+  prefix: 'R$ ',
+  suffix: '',
+  decimalSymbol: ',',
+  allowDecimal: true,
+  decimalLimit: 2,
+  thousandsSeparatorSymbol: '.',
+  allowNegative: false,
+  allowLeadingZeroes: false,
+})
 
 const EditModal = (saleId: any) => {
   const dispatch = useDispatch()
@@ -17,7 +43,7 @@ const EditModal = (saleId: any) => {
     category: "",
     usability: "",
     value: "",
-
+    thumbnail: ""
   })
   const [open, setOpen] = useState(false)
   const id = saleId.saleId
@@ -29,8 +55,10 @@ const EditModal = (saleId: any) => {
   }
 
   const changeProductInfo = () => {
+
     axios.patch(`https://capstone-q2.herokuapp.com/products/${id}`, {
-      ...values
+      ...values,
+      value: values.value.replace(/[^0-9,]/g, "")
     }, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -57,8 +85,17 @@ const EditModal = (saleId: any) => {
             <input onChange={(e) => (setValues({ ...values, name: e.target.value }))} value={values.name} placeholder='' />
           </Form.Field>
           <Form.Field>
+            <label>Imagem</label>
+            <input onChange={(e) => (setValues({ ...values, thumbnail: e.target.value }))} value={values.thumbnail} placeholder='' />
+          </Form.Field>
+          <Form.Field>
             <label>Categoria</label>
-            <input onChange={(e) => (setValues({ ...values, category: e.target.value }))} value={values.category} placeholder='' />
+            <Select
+              value={values.category}
+              options={categoryOptions}
+              onChange={(e, { value }) => setValues({ ...values, category: value })}
+            />
+
           </Form.Field>
           <Form.Field>
             <label>Condição</label>
@@ -66,7 +103,12 @@ const EditModal = (saleId: any) => {
           </Form.Field>
           <Form.Field>
             <label>Valor aprox</label>
-            <input onChange={(e) => (setValues({ ...values, value: e.target.value }))} value={values.value} placeholder='' />
+            <MaskedInput
+              onChange={(e: any) => (
+                setValues({ ...values, value: e.target.value })
+              )} value={values.value}
+              mask={numberMask}
+            />
           </Form.Field>
         </Form>
 
@@ -80,7 +122,10 @@ const EditModal = (saleId: any) => {
 
             setOpen(false)
             changeProductInfo()
-            dispatch(changeProductInfoAction(saleId, values))
+            dispatch(changeProductInfoAction(saleId, {
+              ...values,
+              value: values.value.replace(/[^0-9,]/g, "")
+            }))
 
           }}
           positive

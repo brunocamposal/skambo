@@ -41,8 +41,6 @@ const UserSales: React.FC = () => {
   const decoded: { sub: string } = jwt_decode(session.token);
   const history = useHistory();
 
-  console.log(currentUser)
-
   const defaultOptions = {
     loop: true,
     animationData: animationData,
@@ -93,7 +91,7 @@ const UserSales: React.FC = () => {
                 <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
                 <section>
                   <div>Curitiba/PR</div>
-                  <div>0 Trocas</div>
+                  <div>{currentUser.trades} Trocas</div>
                 </section>
                 <Styled.ProfileButtonActive onClick={() => setActive('mySales')}>
                   Meus Anúncios
@@ -132,12 +130,11 @@ const UserSales: React.FC = () => {
                                 <img src={product.thumbnail} alt="" />
                               </Table.Cell>
                               <Table.Cell>{product.name}</Table.Cell>
-                              <Table.Cell>{product.category[0]}</Table.Cell>
+                              <Table.Cell>{product.category}</Table.Cell>
                               <Table.Cell>{product.usability}</Table.Cell>
-                              <Table.Cell>R$ {product.value},00</Table.Cell>
+                              <Table.Cell>R$ {product.value}</Table.Cell>
                               <Table.Cell>
-                                {' '}
-                                <EditModal saleId={product.id} />{' '}
+                                <EditModal saleId={product.id} />
                               </Table.Cell>
                               <Table.Cell>
                                 <Styled.RemoveButton
@@ -169,10 +166,10 @@ const UserSales: React.FC = () => {
               ) : (
                 <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
               )}
-              <strong>{userInfo?.name !== undefined ? userInfo.name : 'Skambista'}</strong>
+              <strong>{currentUser.name !== undefined ? currentUser.name : 'Skambista'}</strong>
               <section>
                 <div>Curitiba/PR</div>
-                <div>0 Trocas</div>
+                <div>{currentUser.trades} Trocas</div>
               </section>
               <Styled.ProfileButton onClick={() => setActive('mySales')}>
                 Meus Anúncios
