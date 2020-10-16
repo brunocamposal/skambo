@@ -40,7 +40,7 @@ export const UserInfo = styled.div`
     height: 118px;
     display:block;
     margin: 10px;
-    border:4px solid black;
+    border:3px solid black;
     border-radius: 500px;
     -webkit-border-radius: 500px;
     -moz-border-radius: 500px;
@@ -147,7 +147,11 @@ export const LoadingContainer = styled.div`
 
 
 export const TableContainer = styled.div`
-  overflow-x:scroll;
+  
+  @media(max-width:1200px) {
+    width:100vw;
+    overflow-x:scroll;
+  }
 `;
 export const Table = styled(SemanticTable)`    
  border:none !important;

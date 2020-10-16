@@ -17,7 +17,7 @@ import { Table } from 'semantic-ui-react';
 import { Container as LayoutContainer } from '../../components/layout/styles';
 import Menu from '../../components/menu';
 import EditModal from '../../components/edit-modal';
-import axios from 'axios';
+import UserDefault from '../../media/img/userDefault.png';
 interface stateProps {
   session: { token: string };
 }
@@ -34,9 +34,11 @@ const UserSales: React.FC = () => {
   const [active, setActive] = useState('mySales')
   const dispatch = useDispatch()
   const session = useSelector((state: stateProps) => state.session)
+  console.log(session.token)
   const user = useSelector((state: { user: any }) => state.user)
   const [userInfo, setUserInfo]: any = useState()
   const decoded: { sub: string } = jwt_decode(session.token)
+  console.log(decoded)
   const history = useHistory();
 
   const defaultOptions = {
@@ -86,7 +88,7 @@ const UserSales: React.FC = () => {
                     {userInfo?.userImage !== undefined ?
                       <img src={userInfo.userImage} />
                       :
-                      <img src="https://avatars1.githubusercontent.com/u/68689560?s=400&v=4" />
+                      <img src={UserDefault} />
 
                     }
                     <strong>
@@ -135,9 +137,9 @@ const UserSales: React.FC = () => {
                                     <img src={product.thumbnail} alt="" />
                                   </Table.Cell>
                                   <Table.Cell>{product.name}</Table.Cell>
-                                  <Table.Cell>{product.category[0]}</Table.Cell>
+                                  <Table.Cell>{product.category}</Table.Cell>
                                   <Table.Cell>{product.usability}</Table.Cell>
-                                  <Table.Cell>R$ {product.value},00</Table.Cell>
+                                  <Table.Cell>R$ {product.value}</Table.Cell>
                                   <Table.Cell>
                                     {' '}
                                     <EditModal saleId={product.id} />{' '}
