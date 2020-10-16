@@ -1,4 +1,17 @@
+import axios from 'axios';
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
 import React, { useState, useEffect } from 'react';
+import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { Icon, Modal, Header } from 'semantic-ui-react';
+import Swal from 'sweetalert2';
+
+import { requestUserInfo } from '../../redux/actions/session';
+import { RootState } from '../../redux/reducers';
+import OfferExchange from '../offer-exchange';
+import * as Styled from '../offer-exchange/styles';
+import { Loading } from './loading';
 import {
   ProductCard,
   CardImg,
@@ -11,26 +24,9 @@ import {
   ProductInfoName,
   ProductInfoDesc,
   ProductInfoIntr,
-  InterestButton,
   FavButton,
   SharePoint,
 } from './styles';
-import { Icon } from 'semantic-ui-react';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { RootState } from '../../redux/reducers';
-import { useDispatch, useSelector } from 'react-redux';
-import { Loading } from './loading';
-import Swal from 'sweetalert2';
-import { requestUserInfo } from '../../redux/actions/session';
-import { FaFacebook, FaWhatsapp, FaTwitter } from 'react-icons/fa';
-import { Modal, Header, Form } from 'semantic-ui-react';
-import * as Styled from '../offer-exchange/styles';
-import OfferExchange from '../offer-exchange';
-
-interface Params {
-  id: any;
-}
 
 const Product: React.FC = () => {
   const history = useHistory();
@@ -43,9 +39,9 @@ const Product: React.FC = () => {
     thumbnail: '',
     images: [],
     interests: [],
+    owner: '',
   });
 
-  const location = useLocation();
   const token = useSelector(({ session }: any) => session.token);
   const { id }: any = useParams();
 
@@ -74,7 +70,8 @@ const Product: React.FC = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const favoritesJSON: any = userFavorites != undefined ? [...userFavorites, products] : [products];
+  const favoritesJSON: any =
+    userFavorites !== undefined ? [...userFavorites, products] : [products];
 
   const actualUrl = window.location.href;
 
