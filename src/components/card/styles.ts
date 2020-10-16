@@ -26,6 +26,7 @@ export const Card = styled.div`
     cursor: pointer;
   }
   div {
+    width: 97%;
     white-space: nowrap;
     overflow: hidden;
     margin-top: 17px;
